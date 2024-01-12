@@ -9,13 +9,18 @@ import {
 import React from 'react';
 
 interface SimpleTableProps {
-  data: { Commits: number; Issues: number };
+  data: { [key: string]: string | number };
 }
 
 const SimpleTable = ({ data }: SimpleTableProps) => {
   return (
     <div>
-      <Table removeWrapper hideHeader aria-label="Github actions">
+      <Table
+        removeWrapper
+        hideHeader
+        aria-label="Github actions"
+        className="w-full"
+      >
         <TableHeader>
           <TableColumn>key</TableColumn>
           <TableColumn>value</TableColumn>
@@ -24,7 +29,7 @@ const SimpleTable = ({ data }: SimpleTableProps) => {
           {Object.entries(data).map(([key, value], index) => (
             <TableRow key={index}>
               <TableCell>{key}</TableCell>
-              <TableCell>{value}</TableCell>
+              <TableCell className="text-end">{value}</TableCell>
             </TableRow>
           ))}
         </TableBody>

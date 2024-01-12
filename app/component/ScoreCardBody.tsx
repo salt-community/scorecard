@@ -1,14 +1,5 @@
 'use client';
-import {
-  Image,
-  Divider,
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-} from '@nextui-org/react';
+import { Image, Divider } from '@nextui-org/react';
 import {} from '@nextui-org/table';
 import React from 'react';
 import ProjectCard from './ProjectCard';
@@ -28,6 +19,7 @@ const ScoreCardBody = () => {
       </div>
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>
+        <ProjectCard />
         <ProjectCard />
       </div>
     </div>
