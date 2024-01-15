@@ -1,5 +1,5 @@
 'use client';
-import { Image, Divider } from '@nextui-org/react';
+import { Image, Divider, Tooltip } from '@nextui-org/react';
 import {} from '@nextui-org/table';
 import React from 'react';
 import ProjectCard from './ProjectCard';
@@ -14,10 +14,18 @@ const ScoreCardBody = () => {
       <Divider className="my-4" />
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Achievements</h4>
-        <Image
-          alt="codewars budge"
-          src={`https://www.codewars.com/users/${userName}/badges/large`}
-        />
+        <Tooltip content="Click to check more on Codewars" placement="top-end">
+          <a
+            href={`https://www.codewars.com/users/${userName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              alt="codewars budge"
+              src={`https://www.codewars.com/users/${userName}/badges/large`}
+            />
+          </a>
+        </Tooltip>
       </div>
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>
