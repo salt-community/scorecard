@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import React from 'react';
 import SimpleTable from './SimpleTable';
 
@@ -13,7 +13,7 @@ const ProjectCard = () => {
               Commits: 10,
               Issues: 50,
               Duration: '2 week',
-              performance: '95%',
+              Performance: '95%',
               TestCoverage: '90%',
             }}
           />
