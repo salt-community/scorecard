@@ -4,12 +4,14 @@ import {} from '@nextui-org/table';
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import SimpleTable from './SimpleTable';
+import ContactsBar from './ContactsBar';
 
 const userName = 'Finns841594';
 
 const ScoreCardBody = () => {
   return (
     <div>
+      {/* <ContactsBar /> */}
       <SimpleTable data={{ Commits: 100, Issues: 500 }} />
       <Divider className="my-4" />
       <div className="my-4">

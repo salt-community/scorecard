@@ -7,8 +7,10 @@ const standout_intro = 'Experienced in various of client projects';
 
 const ScoreCardHeader = () => {
   return (
-    <div className="grid grid-cols-1 md:flex gap-4">
+    <div className="grid grid-cols-1 md:flex gap-4 md:gap-8 md:my-4">
       <Avatar
+        isBordered
+        color="default"
         src={avatar_url}
         className="w-20 h-20 text-large"
         name={developer_name}
