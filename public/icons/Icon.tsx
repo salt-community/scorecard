@@ -1,6 +1,7 @@
-import type { RefObject, SVGProps } from "react";
-import type { tIcon } from "types";
-import svgPaths from "./svgPaths";
+import type { RefObject, SVGProps } from 'react';
+import svgPaths from './svgPaths';
+
+export type tIcon = keyof typeof svgPaths;
 
 type Props = SVGProps<SVGElement> & {
   ref?: RefObject<SVGSVGElement>;
