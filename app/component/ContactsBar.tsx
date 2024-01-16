@@ -8,15 +8,13 @@ const developer = {
 
 const ContactsBar = () => {
   return (
-    <div>
-      <div className="flex gap-2">
-        <a href={developer.gitHubUrl} target="_blank">
-          <Icon icon="github" className="h-8 w-8 fill-black" />
-        </a>
-        <a href={developer.linkedinUrl} target="_blank">
-          <Icon icon="linkedin" className="h-8 w-8 fill-black" />
-        </a>
-      </div>
+    <div className="flex gap-2">
+      <a href={developer.gitHubUrl} target="_blank">
+        <Icon icon="github" className="h-6 w-6 fill-black" />
+      </a>
+      <a href={developer.linkedinUrl} target="_blank">
+        <Icon icon="linkedin" className="h-6 w-6 fill-black" />
+      </a>
     </div>
   );
 };

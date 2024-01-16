@@ -1,4 +1,5 @@
 import { Avatar } from '@nextui-org/react';
+import ContactsBar from './ContactsBar';
 
 const avatar_url = 'https://avatars.githubusercontent.com/u/65496134?v=4';
 const developer_name = 'Feng Yang';
@@ -19,7 +20,10 @@ const ScoreCardHeader = () => {
         <p className="text-tiny uppercase font-bold">
           {programming_language.toUpperCase()} Developer
         </p>
-        <h4 className="font-bold text-large">{developer_name}</h4>
+        <div className="flex flex-row justify-between">
+          <h4 className="font-bold text-large">{developer_name}</h4>
+          <ContactsBar />
+        </div>
         <small className="text-default-500">{standout_intro}</small>
       </div>
     </div>
