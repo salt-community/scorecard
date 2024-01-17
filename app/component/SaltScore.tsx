@@ -23,7 +23,7 @@ const getAverageValue = (data: SimpleTableEntry) => {
   let count = 0;
   for (const key in data) {
     if (typeof data[key] === 'number') {
-      sum += data[key]; // I checked the data type is number
+      sum += data[key] as number;
       count++;
     }
   }
