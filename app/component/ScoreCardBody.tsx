@@ -4,14 +4,13 @@ import {} from '@nextui-org/table';
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import SimpleTable from './SimpleTable';
-import ContactsBar from './ContactsBar';
+import SaltScore from './SaltScore';
 
 const userName = 'Finns841594';
 
 const ScoreCardBody = () => {
   return (
     <div>
-      {/* <ContactsBar /> */}
       <SimpleTable data={{ Commits: 100, Issues: 500 }} />
       <Divider className="my-4" />
       <div className="my-4">
@@ -29,10 +28,12 @@ const ScoreCardBody = () => {
           </a>
         </Tooltip>
       </div>
+      <h4 className="font-bold text-large my-2">Salts Scores</h4>
+      <SaltScore />
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>
         <ProjectCard />
-        <ProjectCard />
+        <ProjectCard />s
       </div>
     </div>
   );
