@@ -10,12 +10,48 @@ import SimpleTable from './SimpleTable';
 import { SimpleTableEntry } from '../types';
 
 const scoreData: { scoreName: string; data: SimpleTableEntry }[] = [
-  { scoreName: 'weekend test', data: { Week1: 90, Week2: 95 } },
-  { scoreName: 'on site tests', data: { One: 50, Two: 95 } },
-  { scoreName: 'test interviews', data: { One: 20, Two: 30 } },
-  { scoreName: 'communication skills', data: { One: 90, Two: 95 } },
-  { scoreName: 'planning skills', data: { One: 90, Two: 95 } },
-  { scoreName: 'coding skills', data: { One: 90, Two: 95 } },
+  {
+    scoreName: 'Communication',
+    data: {
+      'On site demo 1': 88,
+      'On site demo 2': 86,
+      'On site demo 3': 81,
+      'Personal interview 1': 70,
+      'Personal interview 2': 94,
+      'Tech interview 1': 89,
+      'Tech interview 2': 80,
+      'Repository documentation': 79,
+      'Tech article': 96,
+      'Video demo 1': 70,
+      'Video demo 2': 93,
+      'Video demo 3': 89,
+    },
+  },
+  {
+    scoreName: 'Planning',
+    data: {
+      Microsteps: 62,
+      'Test cases': 65,
+      'Project board': 63,
+      Figma: 69,
+    },
+  },
+  {
+    scoreName: 'Coding',
+    data: {
+      'Weekend Assignment 1': 90,
+      'Weekend Assignment 2': 94,
+      'Weekend Assignment 3': 100,
+      'On site test 1': 87,
+      'On site test 2': 90,
+      'On site test 3': 91,
+      'Hackday 1': 95,
+      'Hackday 2': 96,
+      'Hackday 3': 99,
+      'Project 1': 97,
+      'Project 2': 99,
+    },
+  },
 ];
 
 const getAverageValue = (data: SimpleTableEntry) => {
@@ -31,9 +67,9 @@ const getAverageValue = (data: SimpleTableEntry) => {
 };
 
 const colorVariant = (value: number) => {
-  if (value > 75) {
+  if (value > 90) {
     return 'success';
-  } else if (value > 25) {
+  } else if (value > 70) {
     return 'warning';
   } else {
     return 'danger';
