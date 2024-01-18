@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: ${DB.URL}
+    username: ${DB.USERNAME}
+    password: ${DB.PASSWORD}
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      platform: postgresql
+      mode: always
+  config:
+    import: optional:secret.yml
