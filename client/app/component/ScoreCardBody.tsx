@@ -1,12 +1,12 @@
-'use client';
-import { Image, Divider, Tooltip } from '@nextui-org/react';
-import {} from '@nextui-org/table';
-import React from 'react';
-import ProjectCard from './ProjectCard';
-import SimpleTable from './SimpleTable';
-import SaltScore from './SaltScore';
+"use client";
+import { Image, Divider, Tooltip } from "@nextui-org/react";
+import {} from "@nextui-org/table";
+import React from "react";
+import ProjectCard from "./ProjectCard";
+import SimpleTable from "./SimpleTable";
+import SaltScore from "./SaltScore";
 
-const userName = 'Finns841594';
+const userName = "Finns841594";
 
 const ScoreCardBody = () => {
   return (
@@ -33,7 +33,7 @@ const ScoreCardBody = () => {
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>
         <ProjectCard />
-        <ProjectCard />s
+        <ProjectCard />
       </div>
     </div>
   );
