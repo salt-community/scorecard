@@ -15,7 +15,7 @@ const data = [
     fullMark: 100,
   },
   {
-    subject: 'communication',
+    subject: 'charismatic',
     A: 86,
     fullMark: 100,
   },
