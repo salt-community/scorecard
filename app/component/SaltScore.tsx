@@ -8,6 +8,7 @@ import {
 } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
 import { SimpleTableEntry } from '../types';
+import { RradarGraphic } from './RradarGraphic';
 
 const scoreData: { scoreName: string; data: SimpleTableEntry }[] = [
   {
@@ -99,6 +100,7 @@ const SaltScore = () => {
         <h4 className="text-large">He is great!</h4>
       </CardHeader>
       <CardBody className="text-small">
+        <RradarGraphic />
         <Accordion>
           {scoreData.map(item => (
             <AccordionItem
