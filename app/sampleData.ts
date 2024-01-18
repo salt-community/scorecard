@@ -4,7 +4,7 @@ export const sampleDeveloper = {
   githubUrl: 'https://github.com/Finns841594',
   linkedinUrl: 'https://www.linkedin.com/in/feng-yang-511361166/',
   selectedProjectUrls: [],
-  educationInfors: '',
+  educationInfos: '',
   spokenLanguages: '',
 };
 
