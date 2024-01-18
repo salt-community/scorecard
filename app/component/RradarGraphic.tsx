@@ -1,10 +1,7 @@
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-} from 'recharts';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 
 const data = [
   {
@@ -40,7 +37,20 @@ const data = [
 ];
 
 export const RradarGraphic = () => {
-  const isMobile = window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up event listener on unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <RadarChart
       cx={isMobile ? 150 : 200}
