@@ -36,7 +36,7 @@ const data = [
   },
 ];
 
-export const RradarGraphic = () => {
+export const RadarGraphic = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
