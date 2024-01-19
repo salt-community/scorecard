@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB.URL}
-    username: ${DB.USERNAME}
-    password: ${DB.PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -15,4 +15,4 @@ spring:
       platform: postgresql
       mode: always
   config:
-    import: optional:secret.yml
+    import: optional:secret.properties
