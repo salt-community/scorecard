@@ -1,17 +1,17 @@
-"use client";
-import { Image, Divider, Tooltip } from "@nextui-org/react";
-import {} from "@nextui-org/table";
-import React from "react";
-import ProjectCard from "./ProjectCard";
-import SimpleTable from "./SimpleTable";
-import SaltScore from "./SaltScore";
+'use client';
+import { Image, Divider, Tooltip } from '@nextui-org/react';
+import {} from '@nextui-org/table';
+import React from 'react';
+import ProjectCard from './ProjectCard';
+import SaltScore from './SaltScore';
+import Background from './Background';
 
 const userName = "Finns841594";
 
 const ScoreCardBody = () => {
   return (
     <div>
-      <SimpleTable data={{ Commits: 100, Issues: 500 }} />
+      <Background />
       <Divider className="my-4" />
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Achievements</h4>

@@ -6,7 +6,7 @@ import ScoreCardHeader from './ScoreCardHeader';
 const ScoreCard = () => {
   return (
     <div>
-      <Card className="py-4">
+      <Card className="py-4 md:max-w-md ">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <ScoreCardHeader />
         </CardHeader>
