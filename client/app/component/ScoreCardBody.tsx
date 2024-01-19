@@ -6,7 +6,7 @@ import ProjectCard from './ProjectCard';
 import SaltScore from './SaltScore';
 import Background from './Background';
 
-const userName = 'Finns841594';
+const userName = "Finns841594";
 
 const ScoreCardBody = () => {
   return (
@@ -33,7 +33,7 @@ const ScoreCardBody = () => {
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>
         <ProjectCard />
-        <ProjectCard />s
+        <ProjectCard />
       </div>
     </div>
   );
