@@ -9,7 +9,7 @@ const ScoreCard = () => {
     <div>
       <Card
         className={`py-4 md:max-w-md border-8 ${
-          isExcellent ? ' border-8 border-gradient-purple' : ''
+          isExcellent ? 'border-purple-600' : ''
         }`}
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
