@@ -16,8 +16,8 @@ public class Score {
     private UUID id;
     private int score;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
     @ManyToOne
     @JoinColumn(name = "test_id", nullable = false)
     private Test test;

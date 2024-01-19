@@ -1,6 +1,5 @@
 package com.salt.server.user.model;
 
-import com.salt.server.github.Github;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -19,5 +18,5 @@ public class UserDetail {
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
     @OneToOne
-    private User user;
+    private Account account;
 }
