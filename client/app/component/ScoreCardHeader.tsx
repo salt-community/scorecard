@@ -10,7 +10,8 @@ interface ScoreCardHeaderProps {
   };
 }
 
-const ScoreCardHeader = ({ developerInfo }: ScoreCardHeaderProps) => {
+// const ScoreCardHeader = ({ developerInfo }: ScoreCardHeaderProps) => {
+const ScoreCardHeader = () => {
   const avatarUrl = 'https://avatars.githubusercontent.com/u/65496134?v=4';
   const developerName = 'Feng Yang';
   const programmingLanguage = 'javascript';

@@ -1,12 +1,10 @@
 'use client';
 import { Image, Divider, Tooltip } from '@nextui-org/react';
-import {} from '@nextui-org/table';
-import React from 'react';
 import ProjectCard from './ProjectCard';
 import SaltScore from './SaltScore';
 import Background from './Background';
 
-const userName = "Finns841594";
+const userName = 'Finns841594';
 
 const ScoreCardBody = () => {
   return (
@@ -28,7 +26,7 @@ const ScoreCardBody = () => {
           </a>
         </Tooltip>
       </div>
-      <h4 className="font-bold text-large my-2">Salts Scores</h4>
+      <h4 className="font-bold text-large my-2">Salt Scoring</h4>
       <SaltScore />
       <div className="my-4">
         <h4 className="font-bold text-large my-2">Projects</h4>

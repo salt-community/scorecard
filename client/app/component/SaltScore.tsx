@@ -5,6 +5,7 @@ import {
   Accordion,
   AccordionItem,
   CircularProgress,
+  Chip,
 } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
 import { SimpleTableEntry } from '../types';
@@ -69,11 +70,20 @@ const getAverageValue = (data: SimpleTableEntry) => {
 
 const colorVariant = (value: number) => {
   if (value > 90) {
-    return 'success';
+    return 'secondary';
   } else if (value > 70) {
-    return 'warning';
+    return 'primary';
   } else {
-    return 'danger';
+    return 'warning';
+  }
+};
+const levelVariant = (value: number) => {
+  if (value > 90) {
+    return 3;
+  } else if (value > 70) {
+    return 2;
+  } else {
+    return 1;
   }
 };
 
@@ -90,14 +100,27 @@ const SaltScore = () => {
   return (
     <Card shadow="sm" className="my-2">
       <CardHeader className="flex flex-row gap-2">
-        <CircularProgress
-          size="lg"
-          value={getAllAverageValue(scoreData)}
+        <Chip
           color={colorVariant(getAllAverageValue(scoreData))}
-          showValueLabel={true}
-          aria-label="score value"
-        />
-        <h4 className="text-large">He is great!</h4>
+          variant="bordered"
+          classNames={{
+            content: 'drop-shadow shadow-black text-black',
+            base: 'py-6',
+          }}
+          startContent={
+            <CircularProgress
+              size="md"
+              value={getAllAverageValue(scoreData)}
+              color={colorVariant(getAllAverageValue(scoreData))}
+              showValueLabel={true}
+              aria-label="score value"
+            />
+          }
+        >
+          <h4 className="text-large mx-2">
+            Level {levelVariant(getAllAverageValue(scoreData))}
+          </h4>
+        </Chip>
       </CardHeader>
       <CardBody className="text-small">
         <RadarGraphic />
