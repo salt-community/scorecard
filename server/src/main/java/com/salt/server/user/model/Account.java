@@ -6,7 +6,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.List;
 
 @Entity
-public class User {
+public class Account {
     @Id
     @UuidGenerator
     private String id;
@@ -18,6 +18,6 @@ public class User {
     @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<Score> scores;
 }
