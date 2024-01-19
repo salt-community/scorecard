@@ -1,17 +1,18 @@
-package com.salt.server.user.model;
+package com.salt.server.Account.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Account {
     @Id
     @UuidGenerator
-    private String id;
+    private UUID id;
     private String username;
-    private String password;
+    private String password = "saltdeveloper";
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne

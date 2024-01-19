@@ -1,4 +1,4 @@
-package com.salt.server.user.model;
+package com.salt.server.Account.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -11,7 +11,7 @@ public class UserDetail {
     @UuidGenerator
     private UUID id;
     private String name;
-    private String education;
+    private String education = "";
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
     @OneToOne
