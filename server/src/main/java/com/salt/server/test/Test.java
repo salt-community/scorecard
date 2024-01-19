@@ -1,6 +1,6 @@
 package com.salt.server.test;
 
-import com.salt.server.user.model.Score;
+import com.salt.server.Account.model.Score;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
