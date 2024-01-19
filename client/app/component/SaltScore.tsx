@@ -98,53 +98,56 @@ const getAllAverageValue = (
 
 const SaltScore = () => {
   return (
-    <Card shadow="sm" className="my-2">
-      <CardHeader className="flex flex-row gap-2">
-        <Chip
-          color={colorVariant(getAllAverageValue(scoreData))}
-          variant="bordered"
-          classNames={{
-            content: 'drop-shadow shadow-black text-black',
-            base: 'py-6',
-          }}
-          startContent={
-            <CircularProgress
-              size="md"
-              value={getAllAverageValue(scoreData)}
-              color={colorVariant(getAllAverageValue(scoreData))}
-              showValueLabel={true}
-              aria-label="score value"
-            />
-          }
-        >
-          <h4 className="text-large mx-2">
-            Level {levelVariant(getAllAverageValue(scoreData))}
-          </h4>
-        </Chip>
-      </CardHeader>
-      <CardBody className="text-small">
-        <RadarGraphic />
-        <Accordion>
-          {scoreData.map(item => (
-            <AccordionItem
-              key={item.scoreName}
-              title={item.scoreName}
-              startContent={
-                <CircularProgress
-                  size="md"
-                  value={getAverageValue(item.data)}
-                  color={colorVariant(getAverageValue(item.data))}
-                  showValueLabel={true}
-                  aria-label="score value"
-                />
-              }
-            >
-              <SimpleTable data={item.data} />
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </CardBody>
-    </Card>
+    <>
+      <h4 className="font-bold text-large">Salt Scoring</h4>
+      <Card shadow="sm">
+        <CardHeader className="flex flex-row gap-2">
+          <Chip
+            color={colorVariant(getAllAverageValue(scoreData))}
+            variant="bordered"
+            classNames={{
+              content: 'drop-shadow shadow-black text-black',
+              base: 'py-6',
+            }}
+            startContent={
+              <CircularProgress
+                size="md"
+                value={getAllAverageValue(scoreData)}
+                color={colorVariant(getAllAverageValue(scoreData))}
+                showValueLabel={true}
+                aria-label="score value"
+              />
+            }
+          >
+            <h4 className="text-large mx-2">
+              Level {levelVariant(getAllAverageValue(scoreData))}
+            </h4>
+          </Chip>
+        </CardHeader>
+        <CardBody className="text-small">
+          <RadarGraphic />
+          <Accordion>
+            {scoreData.map(item => (
+              <AccordionItem
+                key={item.scoreName}
+                title={item.scoreName}
+                startContent={
+                  <CircularProgress
+                    size="md"
+                    value={getAverageValue(item.data)}
+                    color={colorVariant(getAverageValue(item.data))}
+                    showValueLabel={true}
+                    aria-label="score value"
+                  />
+                }
+              >
+                <SimpleTable data={item.data} />
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardBody>
+      </Card>
+    </>
   );
 };
 
