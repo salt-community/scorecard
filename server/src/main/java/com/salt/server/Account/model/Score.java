@@ -1,4 +1,4 @@
-package com.salt.server.user.model;
+package com.salt.server.Account.model;
 
 import com.salt.server.test.Test;
 import jakarta.persistence.Entity;
