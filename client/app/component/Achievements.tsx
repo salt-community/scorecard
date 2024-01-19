@@ -1,8 +1,7 @@
 import { Tooltip, Image } from '@nextui-org/react';
 
-const userName = 'Finns841594';
-
 const Achievements = () => {
+  const userName = 'Finns841594';
   return (
     <div>
       <h4 className="font-bold text-large my-2">Achievements</h4>

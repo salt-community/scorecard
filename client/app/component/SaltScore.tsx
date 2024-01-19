@@ -17,14 +17,14 @@ const scoreData: { scoreName: string; data: SimpleTableEntry }[] = [
     data: {
       'On site demo 1': 88,
       'On site demo 2': 86,
-      'On site demo 3': 81,
-      'Personal interview 1': 70,
+      'On site demo 3': 91,
+      'Personal interview 1': 80,
       'Personal interview 2': 94,
       'Tech interview 1': 89,
-      'Tech interview 2': 80,
-      'Repository documentation': 79,
+      'Tech interview 2': 90,
+      'Repository documentation': 89,
       'Tech article': 96,
-      'Video demo 1': 70,
+      'Video demo 1': 90,
       'Video demo 2': 93,
       'Video demo 3': 89,
     },
@@ -32,19 +32,19 @@ const scoreData: { scoreName: string; data: SimpleTableEntry }[] = [
   {
     scoreName: 'Planning',
     data: {
-      Microsteps: 62,
-      'Test cases': 65,
-      'Project board': 63,
-      Figma: 69,
+      Microsteps: 82,
+      'Test cases': 85,
+      'Project board': 83,
+      Figma: 89,
     },
   },
   {
     scoreName: 'Coding',
     data: {
-      'Weekend Assignment 1': 90,
-      'Weekend Assignment 2': 94,
+      'Weekend Assignment 1': 100,
+      'Weekend Assignment 2': 100,
       'Weekend Assignment 3': 100,
-      'On site test 1': 87,
+      'On site test 1': 97,
       'On site test 2': 90,
       'On site test 3': 91,
       'Hackday 1': 95,
@@ -69,7 +69,7 @@ const getAverageValue = (data: SimpleTableEntry) => {
 };
 
 const colorVariant = (value: number) => {
-  if (value > 90) {
+  if (value >= 90) {
     return 'secondary';
   } else if (value > 70) {
     return 'primary';
@@ -78,7 +78,7 @@ const colorVariant = (value: number) => {
   }
 };
 const levelVariant = (value: number) => {
-  if (value > 90) {
+  if (value >= 90) {
     return 3;
   } else if (value > 70) {
     return 2;
