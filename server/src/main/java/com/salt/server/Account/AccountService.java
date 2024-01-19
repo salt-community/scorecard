@@ -24,12 +24,12 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    private Account getAccountById(String id) {
+    public Account getAccountById(String id) {
         return accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
     }
 
-    private Account addAccount(Account account) {
+    public Account addAccount(Account account) {
         return accountRepository.save(account);
     }
 }
