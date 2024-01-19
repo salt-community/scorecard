@@ -1,11 +1,11 @@
 package com.salt.server.Account.api;
 
 import com.salt.server.Account.AccountService;
+import com.salt.server.Account.api.dto.AccountRequest;
 import com.salt.server.Account.model.Account;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,5 +27,16 @@ public class AccountController {
     @GetMapping("/{accountId}")
     public Account getAccountById(@PathVariable String accountId) {
         return accountService.getAccountById(accountId);
+    }
+
+//    @PostMapping
+//    public Account createAccount(@RequestBody AccountRequest accountRequest) {
+//        return accountService.createDeveloperAccount(accountRequest);
+//    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createAccount(@RequestParam("file") MultipartFile file) {
+         accountService.createDeveloperAccountCSV(file);
     }
 }
