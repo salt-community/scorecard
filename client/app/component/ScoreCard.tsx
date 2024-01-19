@@ -4,9 +4,14 @@ import ScoreCardBody from './ScoreCardBody';
 import ScoreCardHeader from './ScoreCardHeader';
 
 const ScoreCard = () => {
+  const isExcellent = true;
   return (
     <div>
-      <Card className="py-4 md:max-w-md ">
+      <Card
+        className={`py-4 md:max-w-md border-8 ${
+          isExcellent ? 'border-purple-600' : ''
+        }`}
+      >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <ScoreCardHeader />
         </CardHeader>

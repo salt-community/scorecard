@@ -6,32 +6,32 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 const data = [
   {
     subject: 'frontend',
-    A: 90,
-    fullMark: 100,
-  },
-  {
-    subject: 'backend',
     A: 98,
     fullMark: 100,
   },
   {
+    subject: 'backend',
+    A: 88,
+    fullMark: 100,
+  },
+  {
     subject: 'charismatic',
-    A: 86,
+    A: 75,
     fullMark: 100,
   },
   {
     subject: 'teamwork',
-    A: 99,
+    A: 80,
     fullMark: 100,
   },
   {
     subject: 'design',
-    A: 85,
+    A: 100,
     fullMark: 100,
   },
   {
     subject: 'management',
-    A: 65,
+    A: 95,
     fullMark: 100,
   },
 ];
