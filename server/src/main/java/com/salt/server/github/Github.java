@@ -17,6 +17,5 @@ public class Github {
     private String pictureUrl;
     private int commit;
     private int issue;
-    @OneToOne
-    private Social social;
+
 }

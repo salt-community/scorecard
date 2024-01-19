@@ -18,4 +18,6 @@ public class UserDetail {
     @OneToOne
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
+    @OneToOne
+    private User user;
 }

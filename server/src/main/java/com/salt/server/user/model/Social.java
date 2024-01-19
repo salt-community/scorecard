@@ -19,6 +19,5 @@ public class Social {
     @OneToOne
     @JoinColumn(name = "github_id", referencedColumnName = "id")
     private Github githubId;
-    @OneToOne
-    private UserDetail userDetail;
+
 }

@@ -3,6 +3,8 @@ package com.salt.server.user.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.List;
+
 @Entity
 public class User {
     @Id
@@ -13,6 +15,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne
-    @JoinColumn(name = "social_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
     private UserDetail userDetail;
+
+    @OneToMany(mappedBy = "user")
+    private List<Score> scores;
 }
