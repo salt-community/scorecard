@@ -11,6 +11,7 @@ public class UserDetail {
     @Id
     @UuidGenerator
     private UUID id;
+    private String name;
     private String education;
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;

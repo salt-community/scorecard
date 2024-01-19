@@ -1,9 +1,6 @@
 package com.salt.server.user.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
@@ -15,4 +12,7 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne
+    @JoinColumn(name = "social_id", referencedColumnName = "id")
+    private UserDetail userDetail;
 }
