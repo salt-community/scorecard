@@ -54,7 +54,74 @@ export const sampleGeneratedDeveloperData = {
   githubUserName: 'Finns841594',
   githubProfilePictureUrl:
     'https://avatars.githubusercontent.com/u/65496134?v=4',
-  selectedProjects: [],
+  scores: [
+    {
+      scoreName: 'Communication',
+      data: {
+        'On site demo 1': 88,
+        'On site demo 2': 86,
+        'On site demo 3': 91,
+        'Personal interview 1': 80,
+        'Personal interview 2': 94,
+        'Tech interview 1': 89,
+        'Tech interview 2': 90,
+        'Repository documentation': 89,
+        'Tech article': 96,
+        'Video demo 1': 90,
+        'Video demo 2': 93,
+        'Video demo 3': 89,
+      },
+    },
+    {
+      scoreName: 'Planning',
+      data: {
+        Microsteps: 82,
+        'Test cases': 85,
+        'Project board': 83,
+        Figma: 89,
+      },
+    },
+    {
+      scoreName: 'Coding',
+      data: {
+        'Weekend Assignment 1': 100,
+        'Weekend Assignment 2': 100,
+        'Weekend Assignment 3': 100,
+        'On site test 1': 97,
+        'On site test 2': 90,
+        'On site test 3': 91,
+        'Hackday 1': 95,
+        'Hackday 2': 96,
+        'Hackday 3': 99,
+        'Project 1': 97,
+        'Project 2': 99,
+      },
+    },
+  ],
+  selectedProjects: [
+    {
+      name: 'Moboga',
+      repoUrl: 'https://github.com/Finns841594/moboga',
+      data: {
+        Commits: 79,
+        Issues: 3,
+        Duration: '2 week',
+        Performance: '62%',
+        TestCoverage: '40%',
+      },
+    },
+    {
+      name: 'Talenthub',
+      repoUrl: 'https://github.com/lups-tech/jobMatches',
+      data: {
+        Commits: 306,
+        Issues: 12,
+        Duration: '12 week',
+        Performance: '89%',
+        TestCoverage: '60%',
+      },
+    },
+  ],
   commitsCount: 500,
   issuesCount: 100,
 } as DeveloperData;

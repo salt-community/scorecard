@@ -7,6 +7,10 @@ export type BackgroundInformation = {
   skills: string[];
 };
 
+export type Scores = { scoreName: string; data: SimpleTableEntry };
+
+export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
+
 export type DeveloperData = {
   developerId: string;
   name: string;
@@ -17,7 +21,8 @@ export type DeveloperData = {
   backgroundInformations: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;
-  selectedProjects: string[];
-  commitsCount: number;
-  issuesCount: number;
+  scores: Scores[];
+  selectedProjects: Project[];
+  commitsCount?: number;
+  issuesCount?: number;
 };

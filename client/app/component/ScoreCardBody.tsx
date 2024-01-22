@@ -16,8 +16,8 @@ const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
       <Background developerBackgroud={developerData.backgroundInformations} />
       <Divider />
       <Achievements userName={developerData.githubUserName} />
-      <SaltScore />
-      <Projects />
+      <SaltScore scores={developerData.scores} />
+      <Projects projects={developerData.selectedProjects} />
     </div>
   );
 };
