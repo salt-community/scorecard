@@ -10,11 +10,6 @@ import com.salt.server.github.GithubRepository;
 import com.salt.server.github.Project;
 import com.salt.server.github.ProjectRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
