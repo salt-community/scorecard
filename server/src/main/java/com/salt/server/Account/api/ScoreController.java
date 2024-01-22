@@ -4,11 +4,9 @@ import com.salt.server.Account.api.dto.AccountResponse;
 import com.salt.server.Account.api.dto.ScoreListResponse;
 import com.salt.server.Account.api.dto.ScoreRequest;
 import com.salt.server.Account.api.dto.ScoreResponse;
-import com.salt.server.Account.model.Account;
 import com.salt.server.Account.service.ScoreService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
