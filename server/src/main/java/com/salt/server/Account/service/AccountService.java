@@ -1,4 +1,4 @@
-package com.salt.server.Account;
+package com.salt.server.Account.service;
 
 import com.salt.server.Account.api.dto.AccountRequest;
 import com.salt.server.Account.api.dto.AccountResponse;

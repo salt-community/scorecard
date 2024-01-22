@@ -1,7 +1,6 @@
 package com.salt.server.Account.api;
 
-import com.salt.server.Account.AccountService;
-import com.salt.server.Account.api.dto.AccountRequest;
+import com.salt.server.Account.service.AccountService;
 import com.salt.server.Account.api.dto.AccountResponse;
 import com.salt.server.Account.model.Account;
 import org.springframework.http.HttpStatus;
