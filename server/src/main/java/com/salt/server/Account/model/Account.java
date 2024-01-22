@@ -16,9 +16,9 @@ public class Account {
     @UuidGenerator
     private UUID id;
     private String username;
-    private String password = "saltdeveloper";
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    private String password = "saltdeveloper";
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
     @OneToOne
     @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
     private UserDetail userDetail;

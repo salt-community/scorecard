@@ -13,9 +13,10 @@ public class UserDetail {
     @UuidGenerator
     private UUID id;
     private String name;
-//    private String education = "";
-//    private List<String> nationality;
-//    private List<String> skills;
+    private String education = "";
+    private String nationality;
+    private String skills;
+    private String languages;
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
     @OneToOne
@@ -23,4 +24,12 @@ public class UserDetail {
     private Social social;
     @OneToOne
     private Account account;
+
+    public void setBootcamp(String bootcamp) {
+        this.bootcamp = switch (bootcamp) {
+            case "java" -> Bootcamp.JAVA;
+            case "javascript" -> Bootcamp.JAVASCRIPT;
+            default -> Bootcamp.DOTNET;
+        };
+    }
 }

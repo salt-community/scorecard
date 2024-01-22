@@ -41,20 +41,19 @@ public class AccountService {
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
     }
 
-    public Account createDeveloperAccount(AccountRequest accountRequest) {
-        Account newAccount = new Account();
-        newAccount.setUsername(accountRequest.username());
-        newAccount.setRole(Role.ROLE_DEVELOPER);
-        Account saveAccount = accountRepository.save(newAccount);
-
-        UserDetail userDetail = new UserDetail();
-        userDetail.setAccount(saveAccount);
-        userDetail.setBootcamp(Bootcamp.JAVASCRIPT);
-        userDetail.setName(accountRequest.name());
-
-        saveAccount.setUserDetail(userDetailRepository.save(userDetail));
-        return saveAccount;
-    }
+//    public Account createDeveloperAccount(AccountRequest accountRequest) {
+//        Account newAccount = new Account();
+//        newAccount.setUsername(accountRequest.username());
+//        newAccount.setRole(Role.ROLE_DEVELOPER);
+//        Account saveAccount = accountRepository.save(newAccount);
+//
+//        UserDetail userDetail = new UserDetail();
+//        userDetail.setAccount(saveAccount);
+//        userDetail.setName(accountRequest.name());
+//
+//        saveAccount.setUserDetail(userDetailRepository.save(userDetail));
+//        return saveAccount;
+//    }
 
     public void createDeveloperAccountCSV(MultipartFile file) {
         try {
@@ -71,13 +70,14 @@ public class AccountService {
                     continue;
                 }
 
-                String[] data = line.split(",");
+                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
                 Account account = createAccount(data);
                 UserDetail userDetail = createUserDetail(account, data);
                 Social social = createSocial(userDetail, data);
                 Github github = createGithub(social, data);
             }
+            reader.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,8 +86,8 @@ public class AccountService {
 
     private Github createGithub(Social social, String[] newUser) {
         Github github = new Github();
-        github.setUrl(String.format("https://github.com/%s", newUser[4]));
-        github.setPictureUrl(String.format("https://github.com/%s.png", newUser[4]));
+        github.setUrl(newUser[4]);
+        github.setPictureUrl(newUser[4]);
         Github savedGithub = githubRepository.save(github);
         social.setGithubId(github);
         return savedGithub;
@@ -95,8 +95,8 @@ public class AccountService {
 
     private Social createSocial(UserDetail userDetail, String[] newUser) {
         Social social = new Social();
-        social.setLinkedInUrl(String.format("https://www.linkedin.com/in/%s", newUser[5]));
-        social.setCodewarsUrl(String.format("https://www.codewars.com/users/%s", newUser[6]));
+        social.setLinkedInUrl( newUser[5]);
+        social.setCodewarsUrl(newUser[6]);
         Social savedSocial = socialRepository.save(social);
 
         userDetail.setSocial(social);
@@ -106,16 +106,12 @@ public class AccountService {
     private UserDetail createUserDetail(Account account, String[] newUser) {
         UserDetail userDetail = new UserDetail();
         userDetail.setAccount(account);
-        switch (newUser[1]) {
-            case "java":
-                userDetail.setBootcamp(Bootcamp.JAVA);
-                break;
-            case "javascript":
-                userDetail.setBootcamp(Bootcamp.JAVASCRIPT);
-                break;
-            default: userDetail.setBootcamp(Bootcamp.DOTNET);
-        }
+        userDetail.setBootcamp(newUser[1]);
         userDetail.setName(newUser[2]);
+        userDetail.setEducation(newUser[9]);
+        userDetail.setNationality(newUser[7]);
+        userDetail.setSkills(newUser[10]);
+        userDetail.setLanguages(newUser[8]);
         UserDetail saveUserDetail = userDetailRepository.save(userDetail);
         account.setUserDetail(saveUserDetail);
         return saveUserDetail;
@@ -124,7 +120,6 @@ public class AccountService {
     private Account createAccount(String[] newUser) {
         Account newAccount = new Account();
         newAccount.setUsername(newUser[3]);
-        newAccount.setRole(Role.ROLE_DEVELOPER);
         return accountRepository.save(newAccount);
     }
 }

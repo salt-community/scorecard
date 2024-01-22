@@ -10,15 +10,25 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
 @Entity
 public class Github {
+    @Setter
     @Id
     @UuidGenerator
     private UUID id;
     private String url;
     private String pictureUrl;
+    @Setter
     private int commit;
+    @Setter
     private int issue;
+
+    public void setUrl(String url) {
+        this.url = String.format("https://github.com/%s", url);
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
+    }
 
 }

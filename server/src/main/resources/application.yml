@@ -7,9 +7,6 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
   sql:
     init:
       platform: postgresql

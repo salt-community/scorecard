@@ -12,16 +12,25 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
-@Setter
 @Entity
 public class Social {
+    @Setter
     @Id
     @UuidGenerator
     private UUID id;
     private String linkedInUrl;
     private String codewarsUrl;
+    @Setter
     @OneToOne
     @JoinColumn(name = "github_id", referencedColumnName = "id")
     private Github githubId;
+
+    public void setLinkedInUrl (String linkedInUrl) {
+        this.linkedInUrl = String.format("https://www.linkedin.com/in/%s", linkedInUrl);
+    }
+
+    public void setCodewarsUrl(String codewarsUrl) {
+        this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUrl);
+    }
 
 }
