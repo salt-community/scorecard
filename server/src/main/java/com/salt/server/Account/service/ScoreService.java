@@ -35,8 +35,8 @@ public class ScoreService {
         return new ScoreListResponse( scores.stream().map(score -> new ScoreResponse(score.getId(), score.getTest().getName(),score.getScore())).collect(Collectors.toList()));
     }
 
-    public ScoreResponse addScore(String id, ScoreRequest request) {
-        Account account = accountRepository.findById(UUID.fromString(id))
+    public ScoreResponse addScore(UUID id, ScoreRequest request) {
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         Test test = testService.getTestByName(request.name());
         Score score = new Score();
@@ -46,5 +46,11 @@ public class ScoreService {
         score.setDescription(request.description());
         Score saveScore = scoreRepository.save(score);
         return new ScoreResponse(saveScore.getId(),saveScore.getTest().getName(), saveScore.getScore());
+    }
+
+    public void deleteScore(UUID id) {
+        Score score = scoreRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+        scoreRepository.delete(score);
     }
 }
