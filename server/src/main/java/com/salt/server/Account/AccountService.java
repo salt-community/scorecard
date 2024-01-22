@@ -1,6 +1,7 @@
 package com.salt.server.Account;
 
 import com.salt.server.Account.api.dto.AccountRequest;
+import com.salt.server.Account.api.dto.AccountResponse;
 import com.salt.server.Account.model.*;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.Account.repository.SocialRepository;
@@ -36,24 +37,13 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public Account getAccountById(String id) {
-        return accountRepository.findById(UUID.fromString(id))
+    public AccountResponse getAccountById(String id) {
+        Account account = accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
+        UserDetail userDetail = userDetailRepository.findByAccount_Id(UUID.fromString(id))
+                .orElseThrow(() -> new NoSuchElementException("userDetail not found"));
+        return new AccountResponse(account.getId(), userDetail, userDetail.getSocial(), userDetail.getSocial().getGithubId());
     }
-
-//    public Account createDeveloperAccount(AccountRequest accountRequest) {
-//        Account newAccount = new Account();
-//        newAccount.setUsername(accountRequest.username());
-//        newAccount.setRole(Role.ROLE_DEVELOPER);
-//        Account saveAccount = accountRepository.save(newAccount);
-//
-//        UserDetail userDetail = new UserDetail();
-//        userDetail.setAccount(saveAccount);
-//        userDetail.setName(accountRequest.name());
-//
-//        saveAccount.setUserDetail(userDetailRepository.save(userDetail));
-//        return saveAccount;
-//    }
 
     public void createDeveloperAccountCSV(MultipartFile file) {
         try {
@@ -71,11 +61,10 @@ public class AccountService {
                 }
 
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
                 Account account = createAccount(data);
                 UserDetail userDetail = createUserDetail(account, data);
                 Social social = createSocial(userDetail, data);
-                Github github = createGithub(social, data);
+                createGithub(social, data);
             }
             reader.close();
 
@@ -86,21 +75,21 @@ public class AccountService {
 
     private Github createGithub(Social social, String[] newUser) {
         Github github = new Github();
+        github.setSocial(social);
         github.setUrl(newUser[4]);
         github.setPictureUrl(newUser[4]);
-        Github savedGithub = githubRepository.save(github);
-        social.setGithubId(github);
-        return savedGithub;
+
+        return githubRepository.save(github);
+
     }
 
     private Social createSocial(UserDetail userDetail, String[] newUser) {
         Social social = new Social();
-        social.setLinkedInUrl( newUser[5]);
+        social.setUserDetail(userDetail);
+        social.setLinkedInUrl(newUser[5]);
         social.setCodewarsUrl(newUser[6]);
-        Social savedSocial = socialRepository.save(social);
 
-        userDetail.setSocial(social);
-        return savedSocial;
+        return socialRepository.save(social);
     }
 
     private UserDetail createUserDetail(Account account, String[] newUser) {
@@ -108,18 +97,18 @@ public class AccountService {
         userDetail.setAccount(account);
         userDetail.setBootcamp(newUser[1]);
         userDetail.setName(newUser[2]);
-        userDetail.setEducation(newUser[9]);
         userDetail.setNationality(newUser[7]);
-        userDetail.setSkills(newUser[10]);
         userDetail.setLanguages(newUser[8]);
-        UserDetail saveUserDetail = userDetailRepository.save(userDetail);
-        account.setUserDetail(saveUserDetail);
-        return saveUserDetail;
+        userDetail.setEducation(newUser[9]);
+        userDetail.setSkills(newUser[10]);
+
+        return userDetailRepository.save(userDetail);
     }
 
     private Account createAccount(String[] newUser) {
         Account newAccount = new Account();
         newAccount.setUsername(newUser[3]);
+
         return accountRepository.save(newAccount);
     }
 }

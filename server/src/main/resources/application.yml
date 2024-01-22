@@ -6,7 +6,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
   sql:
     init:
       platform: postgresql

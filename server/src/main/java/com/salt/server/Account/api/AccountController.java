@@ -2,6 +2,7 @@ package com.salt.server.Account.api;
 
 import com.salt.server.Account.AccountService;
 import com.salt.server.Account.api.dto.AccountRequest;
+import com.salt.server.Account.api.dto.AccountResponse;
 import com.salt.server.Account.model.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +26,9 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    public Account getAccountById(@PathVariable String accountId) {
+    public AccountResponse getAccountById(@PathVariable String accountId) {
         return accountService.getAccountById(accountId);
     }
-
-//    @PostMapping
-//    public Account createAccount(@RequestBody AccountRequest accountRequest) {
-//        return accountService.createDeveloperAccount(accountRequest);
-//    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,8 +1,14 @@
 package com.salt.server.github;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salt.server.Account.model.Social;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -11,6 +17,8 @@ import java.util.UUID;
 
 @Getter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Github {
     @Setter
     @Id
@@ -19,9 +27,10 @@ public class Github {
     private String url;
     private String pictureUrl;
     @Setter
-    private int commit;
-    @Setter
-    private int issue;
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "social_id", referencedColumnName = "id")
+    private Social social;
 
     public void setUrl(String url) {
         this.url = String.format("https://github.com/%s", url);
