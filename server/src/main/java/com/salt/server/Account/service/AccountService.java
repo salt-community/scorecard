@@ -41,13 +41,45 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-//    public AccountDto.AccountResponse getAccountById(String id) {
-//        Account account = accountRepository.findById(UUID.fromString(id))
-//                .orElseThrow(() -> new NoSuchElementException("Account not found"));
-//        UserDetail userDetail = userDetailRepository.findByAccount_Id(UUID.fromString(id))
-//                .orElseThrow(() -> new NoSuchElementException("userDetail not found"));
-//        return new AccountDto.AccountResponse(account.getId(), userDetail, userDetail.getSocial(), userDetail.getSocial().getGithubId());
-//    }
+    public AccountDto.AccountResponse getAccountById(String id) {
+        Account account = accountRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+
+        AccountDto.BackgroudInformations backgroudInformations = new AccountDto.BackgroudInformations(
+                account.getUserDetail().getNationality(),
+                account.getUserDetail().getLanguages(),
+                account.getUserDetail().getEducation(),
+                account.getUserDetail().getSkills()
+        );
+
+        List<AccountDto.ProjectDto> projects = projectRepository.findAllByGithubId(account.getUserDetail().getSocial().getGithubId().getId()).stream()
+                .map(data -> new AccountDto.ProjectDto(
+                        data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
+                        data.getUrl(),
+                        new AccountDto.Data(
+                                data.getCommit(),
+                                data.getIssue(),
+                                data.getDuration(),
+                                data.getPerformance(),
+                                data.getTestCoverage()
+                        ))).collect(Collectors.toList());
+
+        return new AccountDto.AccountResponse(
+                account.getId().toString(),
+                account.getUsername(),
+                account.getUserDetail().getName(),
+                account.getUserDetail().getIntroduction(),
+                account.getUserDetail().getBootcamp().toString(),
+                account.getUserDetail().getSocial().getGithubId().getUrl(),
+                account.getUserDetail().getSocial().getGithubId().getUrl().substring(account.getUserDetail().getSocial().getGithubId().getUrl().lastIndexOf("/")+1),
+                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
+                account.getUserDetail().getSocial().getLinkedInUrl(),
+                account.getUserDetail().getSocial().getCodewarsUrl(),
+                projects,
+                backgroudInformations
+
+        );
+    }
 
     public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
@@ -117,72 +149,5 @@ public class AccountService {
                 projects,
                 backgroudInformations
         );
-    }
-
-    public void createDeveloperAccountCSV(MultipartFile file) {
-        try {
-            InputStream inputStream = file.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            int index = 1;
-            boolean isFirstLine = true;
-
-            while ((line = reader.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
-
-                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                Account account = createAccount(data);
-                UserDetail userDetail = createUserDetail(account, data);
-                Social social = createSocial(userDetail, data);
-                createGithub(social, data);
-            }
-            reader.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Github createGithub(Social social, String[] newUser) {
-        Github github = new Github();
-        github.setSocial(social);
-        github.setUrl(newUser[4]);
-        github.setPictureUrl(newUser[4]);
-
-        return githubRepository.save(github);
-
-    }
-
-    private Social createSocial(UserDetail userDetail, String[] newUser) {
-        Social social = new Social();
-        social.setUserDetail(userDetail);
-        social.setLinkedInUrl(newUser[5]);
-        social.setCodewarsUrl(newUser[6]);
-
-        return socialRepository.save(social);
-    }
-
-    private UserDetail createUserDetail(Account account, String[] newUser) {
-        UserDetail userDetail = new UserDetail();
-        userDetail.setAccount(account);
-        userDetail.setBootcamp(newUser[1]);
-        userDetail.setName(newUser[2]);
-        userDetail.setNationality(newUser[7]);
-        userDetail.setLanguages(newUser[8]);
-        userDetail.setEducation(newUser[9]);
-        userDetail.setSkills(newUser[10]);
-
-        return userDetailRepository.save(userDetail);
-    }
-
-    private Account createAccount(String[] newUser) {
-        Account newAccount = new Account();
-        newAccount.setUsername(newUser[3]);
-
-        return accountRepository.save(newAccount);
     }
 }

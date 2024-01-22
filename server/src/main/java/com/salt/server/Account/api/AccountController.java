@@ -22,10 +22,10 @@ public class AccountController {
         return accountService.getAllAccount();
     }
 
-//    @GetMapping("/{accountId}")
-//    public AccountResponse getAccountById(@PathVariable String accountId) {
-//        return accountService.getAccountById(accountId);
-//    }
+    @GetMapping("/{accountId}")
+    public AccountDto.AccountResponse getAccountById(@PathVariable String accountId) {
+        return accountService.getAccountById(accountId);
+    }
 
     @PostMapping
     public AccountDto.AccountResponse createAccount(@RequestBody AccountDto.AccountRequest request) {
