@@ -8,7 +8,7 @@ const ScoreCard = () => {
   return (
     <div>
       <Card
-        className={`py-4 md:max-w-md border-8 ${
+        className={`py-4 max-w-sm md:max-w-md border-8 ${
           isExcellent ? 'border-purple-600' : ''
         }`}
       >

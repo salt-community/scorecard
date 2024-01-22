@@ -25,10 +25,3 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
-.border-gradient-purple {
-  border: 8px solid transparent;
-  border-radius: 20px;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(45deg, purple, violet);
-}
