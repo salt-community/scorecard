@@ -2,8 +2,13 @@ import { Card, CardHeader, CardBody } from '@nextui-org/react';
 import React from 'react';
 import ScoreCardBody from './ScoreCardBody';
 import ScoreCardHeader from './ScoreCardHeader';
+import { DeveloperData } from '../types';
 
-const ScoreCard = () => {
+interface ScoreCardProps {
+  developerData: DeveloperData;
+}
+
+const ScoreCard = ({ developerData }: ScoreCardProps) => {
   const isExcellent = true;
   return (
     <div>
@@ -13,10 +18,10 @@ const ScoreCard = () => {
         }`}
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <ScoreCardHeader />
+          <ScoreCardHeader developerData={developerData} />
         </CardHeader>
         <CardBody className="overflow-visible py-2">
-          <ScoreCardBody />
+          <ScoreCardBody developerData={developerData} />
         </CardBody>
       </Card>
     </div>

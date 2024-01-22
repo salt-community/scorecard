@@ -1,21 +1,16 @@
 import { Avatar } from '@nextui-org/react';
 import ContactsBar from './ContactsBar';
+import { DeveloperData } from '../types';
 
 interface ScoreCardHeaderProps {
-  developerInfo: {
-    avatarUrl: string;
-    developerName: string;
-    programmingLanguage: string;
-    standoutIntro: string;
-  };
+  developerData: DeveloperData;
 }
 
-// const ScoreCardHeader = ({ developerInfo }: ScoreCardHeaderProps) => {
-const ScoreCardHeader = () => {
-  const avatarUrl = 'https://avatars.githubusercontent.com/u/65496134?v=4';
-  const developerName = 'Feng Yang';
-  const programmingLanguage = 'javascript';
-  const standoutIntro = 'Experienced in various of client projects';
+const ScoreCardHeader = ({ developerData }: ScoreCardHeaderProps) => {
+  const avatarUrl = developerData.githubProfilePictureUrl;
+  const developerName = developerData.name;
+  const programmingLanguage = developerData.mainProgrammingLanguage;
+  const standoutIntro = developerData.standoutIntro;
 
   return (
     <div className="grid grid-cols-1 md:flex md:w-full gap-4 md:gap-8 md:my-4">
