@@ -23,6 +23,8 @@ public class UserDetail {
     @Setter
     private String name;
     @Setter
+    private String introduction;
+    @Setter
     private String education;
     @Setter
     private String nationality;
@@ -45,9 +47,9 @@ public class UserDetail {
 
     public void setBootcamp(String bootcamp) {
         this.bootcamp = switch (bootcamp) {
-            case "java" -> Bootcamp.JAVA;
-            case "javascript" -> Bootcamp.JAVASCRIPT;
-            default -> Bootcamp.DOTNET;
+            case "java" -> Bootcamp.java;
+            case "javascript" -> Bootcamp.javascript;
+            default -> Bootcamp.dotnet;
         };
     }
 }

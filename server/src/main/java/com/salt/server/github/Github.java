@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,8 +29,7 @@ public class Github {
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
-    @OneToMany
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "github")
     private List<Project> projectList;
 
     public void setUrl(String url) {
@@ -37,7 +37,7 @@ public class Github {
     }
 
     public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
+        this.pictureUrl = String.format("%s.png", pictureUrl);
     }
 
 }

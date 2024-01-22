@@ -1,6 +1,5 @@
 package com.salt.server.Account.api;
 
-import com.salt.server.Account.api.dto.AccountResponse;
 import com.salt.server.Account.api.dto.ScoreListResponse;
 import com.salt.server.Account.api.dto.ScoreRequest;
 import com.salt.server.Account.api.dto.ScoreResponse;
