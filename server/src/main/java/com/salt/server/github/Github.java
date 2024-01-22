@@ -2,10 +2,7 @@ package com.salt.server.github;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.Account.model.Social;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +28,9 @@ public class Github {
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
+    @OneToMany
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private List<Project> projectList;
 
     public void setUrl(String url) {
         this.url = String.format("https://github.com/%s", url);

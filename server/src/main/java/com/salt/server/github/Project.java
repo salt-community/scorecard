@@ -1,6 +1,7 @@
 package com.salt.server.github;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -10,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
@@ -29,6 +32,9 @@ public class Project {
     private int performance;
     private int testCoverage;
     @ManyToOne
-    @JoinColumn(name = "github_id", nullable = false)
+    @JoinColumn(name = "project_id", insertable = false, updatable = false)
     private Github githubId;
+
+
+
 }
