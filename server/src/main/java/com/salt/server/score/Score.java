@@ -1,17 +1,19 @@
-package com.salt.server.Account.model;
+package com.salt.server.score;
 
-import com.salt.server.test.Test;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.salt.server.Account.model.Account;
+import com.salt.server.assignment.model.Assignment;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Score {
@@ -19,10 +21,12 @@ public class Score {
     @UuidGenerator
     private UUID id;
     private int score;
+    @Column(columnDefinition = "text")
+    private String description;
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     @ManyToOne
-    @JoinColumn(name = "test_id", nullable = false)
-    private Test test;
+    @JoinColumn(name = "assignment_id", nullable = false)
+    private Assignment assignment;
 }

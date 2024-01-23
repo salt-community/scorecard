@@ -1,7 +1,7 @@
 package com.salt.server.seeder;
 
-import com.salt.server.test.Test;
-import com.salt.server.test.TestRepository;
+import com.salt.server.assignment.model.Assignment;
+import com.salt.server.assignment.repository.AssignmentRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -13,15 +13,15 @@ import java.io.FileReader;
 @Component
 public class DatabaseSeeder implements ApplicationRunner {
 
-    private final TestRepository testRepository;
+    private final AssignmentRepository assignmentRepository;
 
-    public DatabaseSeeder(TestRepository testRepository) {
-        this.testRepository = testRepository;
+    public DatabaseSeeder(AssignmentRepository assignmentRepository) {
+        this.assignmentRepository = assignmentRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        testSeeder();
+//        testSeeder();
     }
 
     private void testSeeder() {
@@ -40,10 +40,10 @@ public class DatabaseSeeder implements ApplicationRunner {
                 }
 
                 String[] data = line.split(",");
-                Test test = new Test();
-                test.setName(data[0]);
-                test.setType(data[1]);
-                testRepository.save(test);
+                Assignment assignment = new Assignment();
+                assignment.setName(data[0]);
+//                assignment.setType(data[1]);
+                assignmentRepository.save(assignment);
 
                 index++;
             }

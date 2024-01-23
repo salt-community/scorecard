@@ -1,4 +1,4 @@
-test,type
+assignment,type
 on site demo 1,communication
 on site demo 2,communication
 on site demo 3,communication
@@ -12,15 +12,15 @@ video demo 1,communication
 video demo 2,communication
 video demo 3,communication
 microsteps,planning
-test cases,planning
+assignment cases,planning
 project board,planning
 figma,planning
 weekend assignment 1,coding
 weekend assignment 2,coding
 weekend assignment 3,coding
-on site test 1,coding
-on site test 2,coding
-on site test 3,coding
+on site assignment 1,coding
+on site assignment 2,coding
+on site assignment 3,coding
 hackday 1,coding
 hackday 2,coding
 hackday 3,coding
