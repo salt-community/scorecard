@@ -1,6 +1,6 @@
-package com.salt.server.test;
+package com.salt.server.assignment;
 
-import com.salt.server.Account.model.Score;
+import com.salt.server.score.Score;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -9,16 +9,17 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
+import java.util.UUID;
 
 @Setter
 @Getter
 @Entity
-public class Test {
+public class Assignment {
     @Id
     @UuidGenerator
-    private String id;
+    private UUID id;
     private String name;
     private String type;
-    @OneToMany(mappedBy = "test")
+    @OneToMany(mappedBy = "assignment")
     private List<Score> scores;
 }
