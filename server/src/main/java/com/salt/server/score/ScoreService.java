@@ -5,7 +5,7 @@ import com.salt.server.Account.api.dto.ScoreRequest;
 import com.salt.server.Account.api.dto.ScoreResponse;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
-import com.salt.server.assignment.Assignment;
+import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.AssignmentService;
 import org.springframework.stereotype.Service;
 

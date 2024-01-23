@@ -1,4 +1,4 @@
-package com.salt.server.assignment;
+package com.salt.server.assignment.model;
 
 import com.salt.server.score.Score;
 import jakarta.persistence.Entity;

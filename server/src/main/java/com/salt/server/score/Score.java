@@ -1,7 +1,7 @@
 package com.salt.server.score;
 
 import com.salt.server.Account.model.Account;
-import com.salt.server.assignment.Assignment;
+import com.salt.server.assignment.model.Assignment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.salt.server.assignment;
+package com.salt.server.assignment.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,7 +1,7 @@
 package com.salt.server.seeder;
 
-import com.salt.server.assignment.Assignment;
-import com.salt.server.assignment.AssignmentRepository;
+import com.salt.server.assignment.model.Assignment;
+import com.salt.server.assignment.repository.AssignmentRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,7 @@ public class DatabaseSeeder implements ApplicationRunner {
                 String[] data = line.split(",");
                 Assignment assignment = new Assignment();
                 assignment.setName(data[0]);
-                assignment.setType(data[1]);
+//                assignment.setType(data[1]);
                 assignmentRepository.save(assignment);
 
                 index++;
