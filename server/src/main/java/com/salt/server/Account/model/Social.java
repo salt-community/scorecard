@@ -23,6 +23,7 @@ public class Social {
     @Id
     @UuidGenerator
     private UUID id;
+    @Setter
     private String linkedInUrl;
     private String codewarsUrl;
     @Setter
@@ -35,10 +36,6 @@ public class Social {
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 
-
-    public void setLinkedInUrl (String linkedInUrl) {
-        this.linkedInUrl = String.format("https://www.linkedin.com/in/%s", linkedInUrl);
-    }
 
     public void setCodewarsUrl(String codewarsUrl) {
         this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUrl);
