@@ -19,7 +19,9 @@ public class Assignment {
     @UuidGenerator
     private UUID id;
     private String name;
-    private String type;
+    private Type type;
     @OneToMany(mappedBy = "assignment")
     private List<Score> scores;
+    @OneToMany(mappedBy = "assignment")
+    private List<Coverage> coverages;
 }
