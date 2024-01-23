@@ -1,6 +1,7 @@
-package com.salt.server.Account.model;
+package com.salt.server.score;
 
-import com.salt.server.test.Test;
+import com.salt.server.Account.model.Account;
+import com.salt.server.assignment.Assignment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,6 @@ public class Score {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     @ManyToOne
-    @JoinColumn(name = "test_id", nullable = false)
-    private Test test;
+    @JoinColumn(name = "assignment_id", nullable = false)
+    private Assignment assignment;
 }
