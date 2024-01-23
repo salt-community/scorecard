@@ -1,5 +1,6 @@
 package com.salt.server.assignment;
 
+import com.salt.server.assignment.model.Assignment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,7 @@
 package com.salt.server.assignment;
 
+import com.salt.server.assignment.model.Assignment;
+import com.salt.server.assignment.repository.AssignmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
