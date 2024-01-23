@@ -4,15 +4,20 @@ import SaltScore from './SaltScore';
 import Background from './Background';
 import Achievements from './Achievements';
 import Projects from './Projects';
+import { DeveloperData } from '../types';
 
-const ScoreCardBody = () => {
+interface ScoreCardBodyProps {
+  developerData: DeveloperData;
+}
+
+const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
   return (
     <div className="flex flex-col gap-4">
-      <Background />
+      <Background developerBackgroud={developerData.backgroundInformations} />
       <Divider />
-      <Achievements />
-      <SaltScore />
-      <Projects />
+      <Achievements userName={developerData.githubUserName} />
+      <SaltScore scores={developerData.scores} />
+      <Projects projects={developerData.selectedProjects} />
     </div>
   );
 };

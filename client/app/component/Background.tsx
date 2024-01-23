@@ -1,41 +1,32 @@
-const SampleData = {
-  nationalities: ['Chinese'],
-  spokenLanguages: ['Chinese', 'English', 'Swedish'],
-  educations: ['Architecture'],
-  skills: [
-    'JavaScript',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'Node.js',
-    'Express',
-    'MongoDB',
-  ],
-};
+import { BackgroundInformation } from '../types';
 
 const valueGeneretor = (values: string[]) => {
   const valueString = values.join(', ');
   return <h5 className="text-end">{valueString}</h5>;
 };
 
-const Background = () => {
+interface BackgroundProps {
+  developerBackgroud: BackgroundInformation;
+}
+
+const Background = ({ developerBackgroud }: BackgroundProps) => {
   return (
     <div className="flex flex-col px-2 md:px-4">
       <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Nationalities</h5>
-        {valueGeneretor(SampleData.nationalities)}
+        {valueGeneretor(developerBackgroud.nationalities)}
       </div>
       <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Languages</h5>
-        {valueGeneretor(SampleData.spokenLanguages)}
+        {valueGeneretor(developerBackgroud.spokenLanguages)}
       </div>
       <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Educations</h5>
-        {valueGeneretor(SampleData.educations)}
+        {valueGeneretor(developerBackgroud.educations)}
       </div>
       <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Skills</h5>
-        {valueGeneretor(SampleData.skills)}
+        {valueGeneretor(developerBackgroud.skills)}
       </div>
     </div>
   );
