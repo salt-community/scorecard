@@ -1,9 +1,8 @@
-package com.salt.server.Account.api;
+package com.salt.server.score;
 
 import com.salt.server.Account.api.dto.ScoreListResponse;
 import com.salt.server.Account.api.dto.ScoreRequest;
 import com.salt.server.Account.api.dto.ScoreResponse;
-import com.salt.server.Account.service.ScoreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
