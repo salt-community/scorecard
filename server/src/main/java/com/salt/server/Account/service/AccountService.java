@@ -1,6 +1,7 @@
 package com.salt.server.Account.service;
 
 import com.salt.server.Account.api.dto.AccountDto;
+import com.salt.server.Account.mapper.AccountMapper;
 import com.salt.server.Account.model.*;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.Account.repository.SocialRepository;
@@ -40,40 +41,7 @@ public class AccountService {
         Account account = accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
 
-        AccountDto.BackgroudInformations backgroudInformations = new AccountDto.BackgroudInformations(
-                account.getUserDetail().getNationality(),
-                account.getUserDetail().getLanguages(),
-                account.getUserDetail().getAcademic(),
-                account.getUserDetail().getSkills()
-        );
-
-        List<AccountDto.ProjectDto> projects = projectRepository.findAllByGithubId(account.getUserDetail().getSocial().getGithubId().getId()).stream()
-                .map(data -> new AccountDto.ProjectDto(
-                        data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
-                        data.getUrl(),
-                        new AccountDto.Data(
-                                data.getCommit(),
-                                data.getIssue(),
-                                data.getDuration(),
-                                data.getPerformance(),
-                                data.getTestCoverage()
-                        ))).collect(Collectors.toList());
-
-        return new AccountDto.AccountResponse(
-                account.getId().toString(),
-                account.getUsername(),
-                account.getUserDetail().getName(),
-                account.getUserDetail().getIntroduction(),
-                account.getUserDetail().getBootcamp().toString(),
-                account.getUserDetail().getSocial().getGithubId().getUrl(),
-                account.getUserDetail().getSocial().getGithubId().getUrl().substring(account.getUserDetail().getSocial().getGithubId().getUrl().lastIndexOf("/")+1),
-                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
-                account.getUserDetail().getSocial().getLinkedInUrl(),
-                account.getUserDetail().getSocial().getCodewarsUrl(),
-                projects,
-                backgroudInformations
-
-        );
+        return AccountMapper.toAccountResponse(account);
     }
 
     public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
@@ -108,39 +76,6 @@ public class AccountService {
             projectRepository.save(newProject);
         }
 
-        AccountDto.BackgroudInformations backgroudInformations = new AccountDto.BackgroudInformations(
-                userDetail.getNationality(),
-                userDetail.getLanguages(),
-                userDetail.getAcademic(),
-                userDetail.getSkills()
-        );
-
-        List<AccountDto.ProjectDto> projects = projectRepository.findAllByGithubId(saveGithub.getId()).stream()
-                .map(data -> new AccountDto.ProjectDto(
-                        data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
-                        data.getUrl(),
-                        new AccountDto.Data(
-                                data.getCommit(),
-                                data.getIssue(),
-                                data.getDuration(),
-                                data.getPerformance(),
-                                data.getTestCoverage()
-                        ))).collect(Collectors.toList());
-
-
-        return new AccountDto.AccountResponse(
-                saveAccount.getId().toString(),
-                saveAccount.getUsername(),
-                saveUserDetail.getName(),
-                saveUserDetail.getIntroduction(),
-                saveUserDetail.getBootcamp().toString(),
-                saveGithub.getUrl(),
-                saveGithub.getUrl().substring(saveGithub.getUrl().lastIndexOf("/")+1),
-                saveGithub.getPictureUrl(),
-                saveSocial.getLinkedInUrl(),
-                saveSocial.getCodewarsUrl(),
-                projects,
-                backgroudInformations
-        );
+        return AccountMapper.toAccountResponse(saveAccount);
     }
 }
