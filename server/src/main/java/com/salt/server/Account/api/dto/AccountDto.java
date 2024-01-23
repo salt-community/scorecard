@@ -18,12 +18,12 @@ public interface AccountDto {
             String linkedinUrl,
             String codewarsUrl,
             List<String> selectedProjectUrls,
-            @JsonProperty("BackgroudInformations")
-            BackgroudInformations backgroudInformations
+            @JsonProperty("BackgroundInformation")
+            BackgroundInformation backgroundInformation
     ) {
     }
 
-    record BackgroudInformations(
+    record BackgroundInformation(
             String nationalities,
             List<Language> spokenLanguages,
             Academic educations,
@@ -43,7 +43,7 @@ public interface AccountDto {
             String linkedinUrl,
             String codewarsUrl,
             List<ProjectDto> selectedProjectUrls,
-            BackgroudInformations backgroudInformations
+            BackgroundInformation backgroundInformation
     ) {
     }
 
