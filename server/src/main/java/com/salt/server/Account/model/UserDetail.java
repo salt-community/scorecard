@@ -35,10 +35,10 @@ public class UserDetail {
     @OneToOne(mappedBy = "userDetail")
     private Academic academic;
     @JsonIgnore
-    @OneToMany(mappedBy = "user_detail")
+    @OneToMany(mappedBy = "userDetail")
     private List<Skill> skills;
     @JsonIgnore
-    @OneToMany(mappedBy = "user_detail")
+    @OneToMany(mappedBy = "userDetail")
     private List<Language> languages;
     @Setter
     @JsonIgnore

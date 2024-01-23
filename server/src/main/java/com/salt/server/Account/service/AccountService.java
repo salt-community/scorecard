@@ -43,7 +43,7 @@ public class AccountService {
         AccountDto.BackgroudInformations backgroudInformations = new AccountDto.BackgroudInformations(
                 account.getUserDetail().getNationality(),
                 account.getUserDetail().getLanguages(),
-                account.getUserDetail().getEducation(),
+                account.getUserDetail().getAcademic(),
                 account.getUserDetail().getSkills()
         );
 
@@ -87,8 +87,6 @@ public class AccountService {
         userDetail.setIntroduction(request.standoutIntro());
         userDetail.setBootcamp(request.bootcamp());
         userDetail.setNationality(request.backgroudInformations().nationalities());
-        userDetail.setEducation(request.backgroudInformations().educations());
-        userDetail.setSkills(request.backgroudInformations().skills());
         UserDetail saveUserDetail = userDetailRepository.save(userDetail);
 
         Social social = new Social();
@@ -113,7 +111,7 @@ public class AccountService {
         AccountDto.BackgroudInformations backgroudInformations = new AccountDto.BackgroudInformations(
                 userDetail.getNationality(),
                 userDetail.getLanguages(),
-                userDetail.getEducation(),
+                userDetail.getAcademic(),
                 userDetail.getSkills()
         );
 

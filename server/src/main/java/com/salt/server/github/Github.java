@@ -30,7 +30,7 @@ public class Github {
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
     @OneToMany(mappedBy = "github")
-    private List<Project> projectList;
+    private List<Project> project;
 
     public void setUrl(String url) {
         this.url = String.format("https://github.com/%s", url);
