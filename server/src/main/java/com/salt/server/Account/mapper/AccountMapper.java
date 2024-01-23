@@ -2,6 +2,8 @@ package com.salt.server.Account.mapper;
 
 import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.model.Account;
+import com.salt.server.Account.model.Language;
+import com.salt.server.Account.model.Skill;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,9 +33,9 @@ public class AccountMapper {
     private static AccountDto.BackgroundInformation createBackgroundInformation(Account account) {
         return new AccountDto.BackgroundInformation(
                 account.getUserDetail().getNationality(),
-                account.getUserDetail().getLanguages(),
+                account.getUserDetail().getLanguages().stream().collect(Collectors.toMap(Language::getLanguage,Language::getFluency)),
                 account.getUserDetail().getAcademic(),
-                account.getUserDetail().getSkills()
+                account.getUserDetail().getSkills().stream().map(Skill::getSkill).toList()
         );
     }
 

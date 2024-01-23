@@ -3,34 +3,25 @@ package com.salt.server.Account.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.score.Score;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.UUID;
 
 
-@Getter
+@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserDetail {
-    @Setter
     @Id
     @UuidGenerator
     private UUID id;
-    @Setter
     private String name;
-    @Setter
     private String introduction;
-    @Setter
     private String nationality;
+    @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
-    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Academic academic;
@@ -40,11 +31,9 @@ public class UserDetail {
     @JsonIgnore
     @OneToMany(mappedBy = "userDetail")
     private List<Language> languages;
-    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Social social;
-    @Setter
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "account_id", referencedColumnName = "id")
