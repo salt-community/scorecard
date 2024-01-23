@@ -1,6 +1,9 @@
 package com.salt.server.Account.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.salt.server.Account.model.Academic;
+import com.salt.server.Account.model.Language;
+import com.salt.server.Account.model.Skill;
 import com.salt.server.github.Project;
 
 import java.util.List;
@@ -22,9 +25,9 @@ public interface AccountDto {
 
     record BackgroudInformations(
             String nationalities,
-            String spokenLanguages,
-            String educations,
-            String skills
+            List<Language> spokenLanguages,
+            Academic educations,
+            List<Skill> skills
     ) {
     }
 
