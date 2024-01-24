@@ -31,7 +31,7 @@ export type DeveloperData = {
   email: string;
   name: string;
   standoutIntro: string;
-  mainProgrammingLanguage: string;
+  bootcamp: string;
   githubUrl: string;
   linkedinUrl: string;
   backgroundInformations: BackgroundInformation;
