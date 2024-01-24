@@ -10,12 +10,9 @@ import com.salt.server.github.Project;
 import com.salt.server.github.ProjectRepository;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountService {

@@ -1,7 +1,6 @@
 package com.salt.server.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.salt.server.score.Score;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
