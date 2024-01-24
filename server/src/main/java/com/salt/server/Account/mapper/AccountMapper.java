@@ -6,17 +6,16 @@ import com.salt.server.Account.model.Language;
 import com.salt.server.Account.model.Nationality;
 import com.salt.server.Account.model.Skill;
 import com.salt.server.assignment.model.Assignment;
+import com.salt.server.assignment.model.Focus;
 import com.salt.server.assignment.model.Type;
 import com.salt.server.score.Score;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountMapper {
 
-    public static AccountDto.AccountResponse toAccountResponse(Account account) {
+    public static AccountDto.AccountResponse toAccountResponse(Account account, List<AccountDto.RadarGraph> radarGraphs) {
         AccountDto.BackgroundInformation backgroundInformation = createBackgroundInformation(account);
         List<AccountDto.ProjectDto> projects = createProjectDto(account);
         List<AccountDto.Scores> scores = createScores(account);
@@ -32,6 +31,7 @@ public class AccountMapper {
                 account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
                 account.getUserDetail().getSocial().getLinkedInUrl(),
                 account.getUserDetail().getSocial().getCodewarsUrl(),
+                radarGraphs,
                 scores,
                 projects,
                 backgroundInformation
@@ -75,4 +75,6 @@ public class AccountMapper {
                                 data.getTestCoverage()
                         ))).toList();
     }
+
+
 }

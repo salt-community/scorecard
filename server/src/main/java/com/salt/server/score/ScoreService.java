@@ -1,5 +1,6 @@
 package com.salt.server.score;
 
+import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.api.dto.ScoreDto;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
@@ -53,22 +54,21 @@ public class ScoreService {
         return scoreResponses;
     }
 
-    public Map<String, Double> calculateRadarGraph(UUID id) {
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account not found"));
-        Map<String, Double> radarGraph = new HashMap<>();
+    public List<AccountDto.RadarGraph> calculateRadarGraph(Account account) {
+
+        List<AccountDto.RadarGraph> radarGraph = new ArrayList<>();
         for(var focus : Focus.values()) {
             List<Score> allScore = account.getScores();
-            double total = 0;
+            double totalScore = 0;
+            double totalPercentage = 0;
             for(var score: allScore) {
                 double percentage = (double) coverageRepository.findByAssignment_IdAndFocus(score.getAssignment().getId(), focus).getPercentage() /100;
-                total += score.getScore() * percentage;
-                System.out.println();
-                System.out.println("score = " + score + " Percentage = " +  percentage);
-                System.out.println(focus +" , " + score.getAssignment().getName() + " with score " + total);
+                totalScore += score.getScore() * percentage;
+                totalPercentage += percentage;
             }
-            radarGraph.put(focus.name(),total);
-            total = 0;
+
+            radarGraph.add(new AccountDto.RadarGraph(focus.name(),totalScore/totalPercentage,100));
+            totalScore = 0;
         }
         return radarGraph;
     }

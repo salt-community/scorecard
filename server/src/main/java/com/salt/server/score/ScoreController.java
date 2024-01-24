@@ -1,5 +1,6 @@
 package com.salt.server.score;
 
+import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.api.dto.ScoreDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +19,9 @@ public class ScoreController {
         this.scoreService = scoreService;
     }
 
-//    @GetMapping("/{accountId}")
-//    public ScoreDto.ScoreListResponse getScoreById(@PathVariable UUID accountId) {
-//        return scoreService.getAllScoreById(accountId);
-//    }
-
     @GetMapping("/{accountId}")
-    public Map<String, Double> getScoreById(@PathVariable UUID accountId) {
-        return scoreService.calculateRadarGraph(accountId);
+    public ScoreDto.ScoreListResponse getScoreById(@PathVariable UUID accountId) {
+        return scoreService.getAllScoreById(accountId);
     }
 
     @PostMapping("/{accountId}/score")

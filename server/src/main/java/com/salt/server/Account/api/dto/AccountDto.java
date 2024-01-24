@@ -44,11 +44,18 @@ public interface AccountDto {
             String githubProfilePictureUrl,
             String linkedinUrl,
             String codewarsUrl,
+            List<RadarGraph> radarGraph,
             List<Scores> scores,
             List<ProjectDto> selectedProjectUrls,
             BackgroundInformation backgroundInformation
     ) {
     }
+
+    record RadarGraph(
+            String subject,
+            Double score,
+            Integer fullmark
+    ){}
 
     record Scores(
             String ScoreName,
