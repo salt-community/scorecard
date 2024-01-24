@@ -3,12 +3,14 @@ package com.salt.server.Account.model;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Language {
     @Id

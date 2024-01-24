@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -17,9 +18,14 @@ public class ScoreController {
         this.scoreService = scoreService;
     }
 
+//    @GetMapping("/{accountId}")
+//    public ScoreDto.ScoreListResponse getScoreById(@PathVariable UUID accountId) {
+//        return scoreService.getAllScoreById(accountId);
+//    }
+
     @GetMapping("/{accountId}")
-    public ScoreDto.ScoreListResponse getScoreById(@PathVariable UUID accountId) {
-        return scoreService.getAllScoreById(accountId);
+    public Map<String, Double> getScoreById(@PathVariable UUID accountId) {
+        return scoreService.calculateRadarGraph(accountId);
     }
 
     @PostMapping("/{accountId}/score")
