@@ -3,25 +3,19 @@ package com.salt.server.Account.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.score.Score;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.UUID;
 
-@Setter
-@Getter
+@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Account {
     @Id
     @UuidGenerator
     private UUID id;
-    private String username;
+    private String email;
     @JsonIgnore
     @OneToOne(mappedBy = "account")
     private UserDetail userDetail;

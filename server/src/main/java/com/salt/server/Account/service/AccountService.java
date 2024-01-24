@@ -26,8 +26,9 @@ public class AccountService {
     private final LanguageRepository languageRepository;
     private final SkillRepository skillRepository;
     private final AcademicRepository academicRepository;
+    private final NationalityRepository nationalityRepository;
 
-    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository, ProjectRepository projectRepository, LanguageRepository languageRepository, SkillRepository skillRepository, AcademicRepository academicRepository) {
+    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository, ProjectRepository projectRepository, LanguageRepository languageRepository, SkillRepository skillRepository, AcademicRepository academicRepository, NationalityRepository nationalityRepository) {
         this.accountRepository = accountRepository;
         this.userDetailRepository = userDetailRepository;
         this.socialRepository = socialRepository;
@@ -36,6 +37,7 @@ public class AccountService {
         this.languageRepository = languageRepository;
         this.skillRepository = skillRepository;
         this.academicRepository = academicRepository;
+        this.nationalityRepository = nationalityRepository;
     }
 
     public List<Account> getAllAccount() {
@@ -51,7 +53,7 @@ public class AccountService {
 
     public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
-        account.setUsername(request.username());
+        account.setEmail(request.email());
         Account saveAccount = accountRepository.save(account);
 
         UserDetail userDetail = new UserDetail();
@@ -59,7 +61,6 @@ public class AccountService {
         userDetail.setName(request.name());
         userDetail.setIntroduction(request.standoutIntro());
         userDetail.setBootcamp(request.bootcamp());
-        userDetail.setNationality(request.backgroundInformation().nationality());
         UserDetail saveUserDetail = userDetailRepository.save(userDetail);
 
         Academic academic = new Academic();
@@ -69,6 +70,12 @@ public class AccountService {
         academic.setSchool(request.backgroundInformation().educations().getSchool());
         academicRepository.save(academic);
 
+        for (var nationality : request.backgroundInformation().nationalities()) {
+            Nationality newNationality = new Nationality();
+            newNationality.setUserDetail(userDetail);
+            newNationality.setNationality(nationality);
+            nationalityRepository.save(newNationality);
+        }
 
         for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
             Language newLanguage = new Language();

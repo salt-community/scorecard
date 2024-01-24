@@ -3,9 +3,11 @@ package com.salt.server.Account.mapper;
 import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.model.Language;
+import com.salt.server.Account.model.Nationality;
 import com.salt.server.Account.model.Skill;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AccountMapper {
@@ -16,7 +18,7 @@ public class AccountMapper {
 
         return new AccountDto.AccountResponse(
                 account.getId().toString(),
-                account.getUsername(),
+                account.getEmail(),
                 account.getUserDetail().getName(),
                 account.getUserDetail().getIntroduction(),
                 account.getUserDetail().getBootcamp().toString(),
@@ -32,7 +34,7 @@ public class AccountMapper {
 
     private static AccountDto.BackgroundInformation createBackgroundInformation(Account account) {
         return new AccountDto.BackgroundInformation(
-                account.getUserDetail().getNationality(),
+                account.getUserDetail().getNationality().stream().map(Nationality::getNationality).toList(),
                 account.getUserDetail().getLanguages().stream().collect(Collectors.toMap(Language::getLanguage,Language::getFluency)),
                 account.getUserDetail().getAcademic(),
                 account.getUserDetail().getSkills().stream().map(Skill::getSkill).toList()
@@ -50,6 +52,6 @@ public class AccountMapper {
                                 data.getDuration(),
                                 data.getPerformance(),
                                 data.getTestCoverage()
-                        ))).collect(Collectors.toList());
+                        ))).toList();
     }
 }

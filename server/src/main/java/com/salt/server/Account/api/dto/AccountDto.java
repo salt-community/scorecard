@@ -13,7 +13,7 @@ import java.util.Set;
 
 public interface AccountDto {
     record AccountRequest(
-            String username,
+            String email,
             String name,
             String standoutIntro,
             String bootcamp,
@@ -27,7 +27,7 @@ public interface AccountDto {
     }
 
     record BackgroundInformation(
-            String nationality,
+            List<String> nationalities,
             Map<String, Fluency> spokenLanguages,
             Academic educations,
             List<String> skills
