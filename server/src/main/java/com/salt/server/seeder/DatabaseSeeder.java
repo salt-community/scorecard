@@ -29,7 +29,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        testSeeder();
+//        testSeeder();
     }
 
     private void testSeeder() {
