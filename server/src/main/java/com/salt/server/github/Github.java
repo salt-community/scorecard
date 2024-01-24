@@ -3,28 +3,22 @@ package com.salt.server.github;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.Account.model.Social;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
+@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Github {
-    @Setter
     @Id
     @UuidGenerator
     private UUID id;
+    @Setter(AccessLevel.NONE)
     private String url;
+    @Setter(AccessLevel.NONE)
     private String pictureUrl;
-    @Setter
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")

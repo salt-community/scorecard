@@ -12,9 +12,6 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class DatabaseSeeder implements ApplicationRunner {
@@ -56,7 +53,7 @@ public class DatabaseSeeder implements ApplicationRunner {
                 Focus[] focusTypes = Focus.values();
                 int count = 2;
 
-                for(Focus focus : focusTypes) {
+                for (Focus focus : focusTypes) {
                     Coverage coverage = new Coverage();
                     coverage.setAssignment(saveAssignment);
                     coverage.setFocus(focus.toString());

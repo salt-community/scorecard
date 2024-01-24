@@ -3,10 +3,10 @@ package com.salt.server.Account.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
+
 @Data
 @Entity
 public class Academic {

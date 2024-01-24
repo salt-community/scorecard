@@ -1,6 +1,5 @@
 package com.salt.server.assignment.model;
 
-import com.salt.server.Account.model.Bootcamp;
 import com.salt.server.score.Score;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

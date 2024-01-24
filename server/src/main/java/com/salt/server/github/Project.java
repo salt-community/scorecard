@@ -1,26 +1,16 @@
 package com.salt.server.github;
 
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
-@Setter
-@Getter
+@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Project {
     @Id
     @UuidGenerator
@@ -34,7 +24,6 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "github_id", nullable = false)
     private Github github;
-
 
 
 }

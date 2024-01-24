@@ -1,6 +1,5 @@
 package com.salt.server.score;
 
-import com.salt.server.score.Score;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
