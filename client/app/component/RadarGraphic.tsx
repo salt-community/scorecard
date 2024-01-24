@@ -2,41 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
+import { RadarGraphicData } from '../types';
 
-const data = [
-  {
-    subject: 'frontend',
-    A: 98,
-    fullMark: 100,
-  },
-  {
-    subject: 'backend',
-    A: 88,
-    fullMark: 100,
-  },
-  {
-    subject: 'charismatic',
-    A: 75,
-    fullMark: 100,
-  },
-  {
-    subject: 'teamwork',
-    A: 80,
-    fullMark: 100,
-  },
-  {
-    subject: 'design',
-    A: 100,
-    fullMark: 100,
-  },
-  {
-    subject: 'management',
-    A: 95,
-    fullMark: 100,
-  },
-];
+interface RadarGraphicProps {
+  data: RadarGraphicData[];
+}
 
-export const RadarGraphic = () => {
+export const RadarGraphic = ({ data }: RadarGraphicProps) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

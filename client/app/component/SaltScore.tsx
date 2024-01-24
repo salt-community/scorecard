@@ -8,7 +8,7 @@ import {
   Chip,
 } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
-import { Scores, SimpleTableEntry } from '../types';
+import { RadarGraphicData, Scores, SimpleTableEntry } from '../types';
 import { RadarGraphic } from './RadarGraphic';
 
 const getAverageValue = (data: SimpleTableEntry) => {
@@ -53,9 +53,10 @@ const getAllAverageValue = (
 
 interface SaltScoreProps {
   scores: Scores[];
+  radarGraphicData: RadarGraphicData[];
 }
 
-const SaltScore = ({ scores }: SaltScoreProps) => {
+const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
   return (
     <>
       <h4 className="font-bold text-large">Salt Scoring</h4>
@@ -84,7 +85,7 @@ const SaltScore = ({ scores }: SaltScoreProps) => {
           </Chip>
         </CardHeader>
         <CardBody className="text-small">
-          <RadarGraphic />
+          <RadarGraphic data={radarGraphicData} />
           <Accordion>
             {scores.map(item => (
               <AccordionItem
