@@ -18,7 +18,7 @@ export type RadarGraphicData = {
 };
 
 export type DeveloperData = {
-  developerId: string;
+  id: string;
   name: string;
   standoutIntro: string;
   mainProgrammingLanguage: string;

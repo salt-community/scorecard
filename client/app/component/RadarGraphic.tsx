@@ -4,6 +4,16 @@ import { useState, useEffect } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
 import { RadarGraphicData } from '../types';
 
+export const useIsServerSide = () => {
+  const [isServerSide, setIsServerSide] = useState(true);
+
+  useEffect(() => {
+    setIsServerSide(false);
+  }, [setIsServerSide]);
+
+  return isServerSide;
+};
+
 interface RadarGraphicProps {
   data: RadarGraphicData[];
 }
@@ -23,6 +33,8 @@ export const RadarGraphic = ({ data }: RadarGraphicProps) => {
     // Clean up event listener on unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const isServerSide = useIsServerSide();
+  if (isServerSide) return null;
   return (
     <RadarChart
       cx={isMobile ? 150 : 200}
@@ -37,13 +49,7 @@ export const RadarGraphic = ({ data }: RadarGraphicProps) => {
         dataKey="subject"
         tick={{ fontSize: isMobile ? 'x-small' : 'small' }}
       />
-      <Radar
-        name="Mike"
-        dataKey="A"
-        stroke="#888888"
-        fill="#999999"
-        fillOpacity={0.6}
-      />
+      <Radar dataKey="A" stroke="#888888" fill="#999999" fillOpacity={0.6} />
     </RadarChart>
   );
 };
