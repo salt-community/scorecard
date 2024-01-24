@@ -9,6 +9,8 @@ import com.salt.server.github.GithubRepository;
 import com.salt.server.github.Project;
 import com.salt.server.github.ProjectRepository;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -65,9 +67,11 @@ public class AccountService {
 
         Academic academic = new Academic();
         academic.setUserDetail(userDetail);
-        academic.setDegree(request.backgroundInformation().educations().getDegree());
-        academic.setYearStudied(request.backgroundInformation().educations().getYearStudied());
-        academic.setSchool(request.backgroundInformation().educations().getSchool());
+        academic.setDegree(request.backgroundInformation().academic().getDegree());
+        academic.setMajor(request.backgroundInformation().academic().getMajor());
+        academic.setStartDate(request.backgroundInformation().academic().getStartDate());
+        academic.setEndDate(request.backgroundInformation().academic().getEndDate());
+        academic.setSchool(request.backgroundInformation().academic().getSchool());
         academicRepository.save(academic);
 
         for (var nationality : request.backgroundInformation().nationalities()) {

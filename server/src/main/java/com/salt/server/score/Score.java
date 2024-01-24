@@ -3,19 +3,13 @@ package com.salt.server.score;
 import com.salt.server.Account.model.Account;
 import com.salt.server.assignment.model.Assignment;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
+@Data
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Score {
     @Id
     @UuidGenerator

@@ -5,7 +5,11 @@ import com.salt.server.Account.model.Account;
 import com.salt.server.Account.model.Language;
 import com.salt.server.Account.model.Nationality;
 import com.salt.server.Account.model.Skill;
+import com.salt.server.assignment.model.Assignment;
+import com.salt.server.assignment.model.Type;
+import com.salt.server.score.Score;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,6 +19,7 @@ public class AccountMapper {
     public static AccountDto.AccountResponse toAccountResponse(Account account) {
         AccountDto.BackgroundInformation backgroundInformation = createBackgroundInformation(account);
         List<AccountDto.ProjectDto> projects = createProjectDto(account);
+        List<AccountDto.Scores> scores = createScores(account);
 
         return new AccountDto.AccountResponse(
                 account.getId().toString(),
@@ -27,9 +32,25 @@ public class AccountMapper {
                 account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
                 account.getUserDetail().getSocial().getLinkedInUrl(),
                 account.getUserDetail().getSocial().getCodewarsUrl(),
+                scores,
                 projects,
                 backgroundInformation
         );
+    }
+
+    private static List<AccountDto.Scores> createScores(Account account) {
+        List<AccountDto.Scores> scoresList = new ArrayList<>();
+
+        for(var type: Type.values()) {
+            AccountDto.Scores scores = new AccountDto.Scores(
+                    type.toString(),
+                    account.getScores().stream()
+                            .filter(score -> score.getAssignment().getType().equals(type) )
+                            .collect(Collectors.toMap(score -> score.getAssignment().getName(), Score::getScore))
+            );
+           scoresList.add(scores);
+        }
+        return  scoresList;
     }
 
     private static AccountDto.BackgroundInformation createBackgroundInformation(Account account) {
@@ -46,7 +67,7 @@ public class AccountMapper {
                 .map(data -> new AccountDto.ProjectDto(
                         data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
                         data.getUrl(),
-                        new AccountDto.Data(
+                        new AccountDto.GithubData(
                                 data.getCommit(),
                                 data.getIssue(),
                                 data.getDuration(),

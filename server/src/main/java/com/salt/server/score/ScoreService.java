@@ -1,8 +1,6 @@
 package com.salt.server.score;
 
-import com.salt.server.Account.api.dto.ScoreListResponse;
-import com.salt.server.Account.api.dto.ScoreRequest;
-import com.salt.server.Account.api.dto.ScoreResponse;
+import com.salt.server.Account.api.dto.ScoreDto;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.assignment.model.Assignment;
@@ -28,12 +26,12 @@ public class ScoreService {
         this.assignmentService = assignmentService;
     }
 
-    public ScoreListResponse getAllScoreById(UUID id) {
+    public ScoreDto.ScoreListResponse getAllScoreById(UUID id) {
         List<Score> scores = scoreRepository.findAllByAccount_Id(id);
-        return new ScoreListResponse( scores.stream().map(score -> new ScoreResponse(score.getId(), score.getAssignment().getName(),score.getScore())).collect(Collectors.toList()));
+        return new ScoreDto.ScoreListResponse( scores.stream().map(score -> new ScoreDto.ScoreResponse(score.getId(), score.getAssignment().getName(),score.getScore())).collect(Collectors.toList()));
     }
 
-    public ScoreResponse addScore(UUID id, ScoreRequest request) {
+    public ScoreDto.ScoreResponse addScore(UUID id, ScoreDto.ScoreRequest request) {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         Assignment assignment = assignmentService.getTestByName(request.name());
@@ -43,11 +41,11 @@ public class ScoreService {
         score.setScore(request.score());
         score.setDescription(request.description());
         Score saveScore = scoreRepository.save(score);
-        return new ScoreResponse(saveScore.getId(),saveScore.getAssignment().getName(), saveScore.getScore());
+        return new ScoreDto.ScoreResponse(saveScore.getId(),saveScore.getAssignment().getName(), saveScore.getScore());
     }
 
-    public List<ScoreResponse> addListOfScores(UUID id, List<ScoreRequest> requests) {
-        List<ScoreResponse> scoreResponses = new ArrayList<>();
+    public List<ScoreDto.ScoreResponse> addListOfScores(UUID id, List<ScoreDto.ScoreRequest> requests) {
+        List<ScoreDto.ScoreResponse> scoreResponses = new ArrayList<>();
         for(var score: requests) {
             scoreResponses.add(addScore(id,score));
         }

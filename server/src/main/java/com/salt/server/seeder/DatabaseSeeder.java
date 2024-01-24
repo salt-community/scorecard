@@ -53,7 +53,7 @@ public class DatabaseSeeder implements ApplicationRunner {
                 assignment.setType(data[1]);
                 Assignment saveAssignment = assignmentRepository.save(assignment);
 
-                List<Focus> focusTypes = Arrays.asList(Focus.values());
+                Focus[] focusTypes = Focus.values();
                 int count = 2;
 
                 for(Focus focus : focusTypes) {

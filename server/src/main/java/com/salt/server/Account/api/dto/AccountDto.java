@@ -21,7 +21,6 @@ public interface AccountDto {
             String linkedinUsername,
             String codewarsUsername,
             List<String> selectedProjectUrls,
-            @JsonProperty("BackgroundInformation")
             BackgroundInformation backgroundInformation
     ) {
     }
@@ -29,14 +28,14 @@ public interface AccountDto {
     record BackgroundInformation(
             List<String> nationalities,
             Map<String, Fluency> spokenLanguages,
-            Academic educations,
+            Academic academic,
             List<String> skills
     ) {
     }
 
     record AccountResponse(
             String id,
-            String username,
+            String email,
             String name,
             String standoutIntro,
             String bootcamp,
@@ -45,22 +44,32 @@ public interface AccountDto {
             String githubProfilePictureUrl,
             String linkedinUrl,
             String codewarsUrl,
+            List<Scores> scores,
             List<ProjectDto> selectedProjectUrls,
             BackgroundInformation backgroundInformation
     ) {
     }
 
+    record Scores(
+            String ScoreName,
+            Map<String, Integer> data
+    ) {
+    }
+
+
     record ProjectDto(
             String name,
             String repoUrl,
-            Data projectDetailDto
-    ) {}
+            GithubData data
+    ) {
+    }
 
-    record Data(
+    record GithubData(
             int commits,
             int issues,
             int duration,
             int performance,
             int testCoverages
-    ) {}
+    ) {
+    }
 }
