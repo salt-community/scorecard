@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 public class ScoreService {
 
     private final ScoreRepository scoreRepository;
+    private final CoverageRepository coverageRepository;
     private final AccountRepository accountRepository;
     private final AssignmentService assignmentService;
-    private final CoverageRepository coverageRepository;
 
     public ScoreService(ScoreRepository scoreRepository, AccountRepository accountRepository, AssignmentService assignmentService, CoverageRepository coverageRepository) {
         this.scoreRepository = scoreRepository;
@@ -57,7 +57,7 @@ public class ScoreService {
     }
 
     public List<AccountDto.RadarGraph> calculateRadarGraph(Account account) {
-        List<AccountDto.RadarGraph> radarGraph = new ArrayList<>();
+        List<AccountDto.RadarGraph> radarGraphs = new ArrayList<>();
         for (var focus : Focus.values()) {
 
             double totalScore = 0;
@@ -69,9 +69,9 @@ public class ScoreService {
                 totalScore += score.getScore() * percentage;
                 totalPercentage += percentage;
             }
-            radarGraph.add(new AccountDto.RadarGraph(focus.name(), totalScore / totalPercentage, 100));
+            radarGraphs.add(new AccountDto.RadarGraph(focus.name(), totalScore / totalPercentage, 100));
         }
-        return radarGraph;
+        return radarGraphs;
     }
 
     public void deleteScore(UUID id) {

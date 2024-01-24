@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/score")
+@RequestMapping("api/scores")
 public class ScoreController {
 
     private final ScoreService scoreService;
@@ -24,13 +24,13 @@ public class ScoreController {
         return scoreService.getAllScoreById(accountId);
     }
 
-    @PostMapping("/{accountId}/score")
-    public ScoreDto.ScoreResponse scoreById(@PathVariable UUID accountId, @RequestBody ScoreDto.ScoreRequest request) {
+    @PostMapping("/{accountId}/add")
+    public ScoreDto.ScoreResponse addScoreById(@PathVariable UUID accountId, @RequestBody ScoreDto.ScoreRequest request) {
         return scoreService.addScore(accountId, request);
     }
 
-    @PostMapping("/{accountId}/scores")
-    public List<ScoreDto.ScoreResponse> listScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreDto.ScoreRequest> request) {
+    @PostMapping("/{accountId}/add-scores")
+    public List<ScoreDto.ScoreResponse> addListScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreDto.ScoreRequest> request) {
         return scoreService.addListOfScores(accountId, request);
     }
 
