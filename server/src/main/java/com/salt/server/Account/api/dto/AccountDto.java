@@ -2,11 +2,14 @@ package com.salt.server.Account.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.salt.server.Account.model.Academic;
+import com.salt.server.Account.model.Fluency;
 import com.salt.server.Account.model.Language;
 import com.salt.server.Account.model.Skill;
 import com.salt.server.github.Project;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface AccountDto {
     record AccountRequest(
@@ -14,20 +17,20 @@ public interface AccountDto {
             String name,
             String standoutIntro,
             String bootcamp,
-            String githubUrl,
-            String linkedinUrl,
-            String codewarsUrl,
+            String githubUsername,
+            String linkedinUsername,
+            String codewarsUsername,
             List<String> selectedProjectUrls,
-            @JsonProperty("BackgroudInformations")
-            BackgroudInformations backgroudInformations
+            @JsonProperty("BackgroundInformation")
+            BackgroundInformation backgroundInformation
     ) {
     }
 
-    record BackgroudInformations(
-            String nationalities,
-            List<Language> spokenLanguages,
+    record BackgroundInformation(
+            String nationality,
+            Map<String, Fluency> spokenLanguages,
             Academic educations,
-            List<Skill> skills
+            List<String> skills
     ) {
     }
 
@@ -43,7 +46,7 @@ public interface AccountDto {
             String linkedinUrl,
             String codewarsUrl,
             List<ProjectDto> selectedProjectUrls,
-            BackgroudInformations backgroudInformations
+            BackgroundInformation backgroundInformation
     ) {
     }
 
