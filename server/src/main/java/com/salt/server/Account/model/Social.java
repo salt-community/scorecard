@@ -17,7 +17,9 @@ public class Social {
     @Id
     @UuidGenerator
     private UUID id;
+    @Setter(AccessLevel.NONE)
     private String linkedInUrl;
+    @Setter(AccessLevel.NONE)
     private String codewarsUrl;
     @JsonIgnore
     @OneToOne(mappedBy = "social")
@@ -28,8 +30,12 @@ public class Social {
     private UserDetail userDetail;
 
 
-    public void setCodewarsUrl(String codewarsUrl) {
-        this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUrl);
+    public void setCodewarsUrl(String codewarsUsername) {
+        this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUsername);
+    }
+
+    public void setLinkedInUrl(String linkedInUsername) {
+        this.linkedInUrl = String.format("https://www.linkedin.com/in/%s", linkedInUsername);
     }
 
 }

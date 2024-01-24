@@ -37,7 +37,7 @@ public class Github {
     }
 
     public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = String.format("%s.png", pictureUrl);
+        this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
     }
 
 }

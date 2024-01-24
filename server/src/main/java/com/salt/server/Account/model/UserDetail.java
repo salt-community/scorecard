@@ -18,10 +18,12 @@ public class UserDetail {
     private UUID id;
     private String name;
     private String introduction;
-    private String nationality;
     @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
+    @JsonIgnore
+    @OneToMany(mappedBy = "userDetail")
+    private List<Nationality> nationality;
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Academic academic;
@@ -34,8 +36,8 @@ public class UserDetail {
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Social social;
-    @OneToOne
     @JsonIgnore
+    @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
