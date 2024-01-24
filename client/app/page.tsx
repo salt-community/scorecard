@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import ScoreCard from './component/ScoreCard';
 import { sampleGeneratedDeveloperData } from './sampleData';
 
