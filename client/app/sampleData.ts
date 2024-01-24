@@ -34,7 +34,7 @@ export const sampleGeneratedDeveloperData = {
   id: '001',
   name: 'feng yang',
   standoutIntro: 'Experienced in various of client projects',
-  mainProgrammingLanguage: 'javascript',
+  bootcamp: 'javascript',
   githubUrl: 'https://github.com/Finns841594',
   linkedinUrl: 'https://www.linkedin.com/in/feng-yang-511361166/',
   backgroundInformations: {
