@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 public class UserDetail {
     @Id

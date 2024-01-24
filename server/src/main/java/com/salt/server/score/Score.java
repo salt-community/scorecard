@@ -8,7 +8,8 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Score {
     @Id

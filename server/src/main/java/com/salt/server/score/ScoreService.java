@@ -5,12 +5,11 @@ import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.AssignmentService;
+import com.salt.server.assignment.model.Focus;
+import com.salt.server.assignment.repository.CoverageRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,11 +18,13 @@ public class ScoreService {
     private final ScoreRepository scoreRepository;
     private final AccountRepository accountRepository;
     private final AssignmentService assignmentService;
+    private final CoverageRepository coverageRepository;
 
-    public ScoreService(ScoreRepository scoreRepository, AccountRepository accountRepository, AssignmentService assignmentService) {
+    public ScoreService(ScoreRepository scoreRepository, AccountRepository accountRepository, AssignmentService assignmentService, CoverageRepository coverageRepository) {
         this.scoreRepository = scoreRepository;
         this.accountRepository = accountRepository;
         this.assignmentService = assignmentService;
+        this.coverageRepository = coverageRepository;
     }
 
     public ScoreDto.ScoreListResponse getAllScoreById(UUID id) {
@@ -50,6 +51,26 @@ public class ScoreService {
             scoreResponses.add(addScore(id,score));
         }
         return scoreResponses;
+    }
+
+    public Map<String, Double> calculateRadarGraph(UUID id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+        Map<String, Double> radarGraph = new HashMap<>();
+        for(var focus : Focus.values()) {
+            List<Score> allScore = account.getScores();
+            double total = 0;
+            for(var score: allScore) {
+                double percentage = (double) coverageRepository.findByAssignment_IdAndFocus(score.getAssignment().getId(), focus).getPercentage() /100;
+                total += score.getScore() * percentage;
+                System.out.println();
+                System.out.println("score = " + score + " Percentage = " +  percentage);
+                System.out.println(focus +" , " + score.getAssignment().getName() + " with score " + total);
+            }
+            radarGraph.put(focus.name(),total);
+            total = 0;
+        }
+        return radarGraph;
     }
 
     public void deleteScore(UUID id) {
