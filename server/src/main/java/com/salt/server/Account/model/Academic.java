@@ -15,7 +15,9 @@ public class Academic {
     private UUID id;
     @Enumerated(EnumType.STRING)
     private Degree degree;
-    private int yearStudied;
+    private String major;
+    private String startDate;
+    private String endDate;
     private String school;
     @OneToOne
     @JsonIgnore

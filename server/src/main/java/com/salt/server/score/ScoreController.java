@@ -1,8 +1,6 @@
 package com.salt.server.score;
 
-import com.salt.server.Account.api.dto.ScoreListResponse;
-import com.salt.server.Account.api.dto.ScoreRequest;
-import com.salt.server.Account.api.dto.ScoreResponse;
+import com.salt.server.Account.api.dto.ScoreDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +18,17 @@ public class ScoreController {
     }
 
     @GetMapping("/{accountId}")
-    public ScoreListResponse getScoreById(@PathVariable UUID accountId) {
+    public ScoreDto.ScoreListResponse getScoreById(@PathVariable UUID accountId) {
         return scoreService.getAllScoreById(accountId);
     }
 
     @PostMapping("/{accountId}/score")
-    public ScoreResponse scoreById(@PathVariable UUID accountId, @RequestBody ScoreRequest request) {
+    public ScoreDto.ScoreResponse scoreById(@PathVariable UUID accountId, @RequestBody ScoreDto.ScoreRequest request) {
         return scoreService.addScore(accountId, request);
     }
 
     @PostMapping("/{accountId}/scores")
-    public List<ScoreResponse> listScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreRequest> request) {
+    public List<ScoreDto.ScoreResponse> listScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreDto.ScoreRequest> request) {
         return scoreService.addListOfScores(accountId, request);
     }
 
