@@ -10,6 +10,7 @@ import com.salt.server.github.Project;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 public interface AccountDto {
     record AccountRequest(
@@ -20,7 +21,7 @@ public interface AccountDto {
             String githubUsername,
             String linkedinUsername,
             String codewarsUsername,
-            List<String> selectedProjectUrls,
+            List<String> selectedProjects,
             BackgroundInformation backgroundInformation
     ) {
     }
@@ -46,7 +47,7 @@ public interface AccountDto {
             String codewarsUrl,
             List<RadarGraph> radarGraph,
             List<Scores> scores,
-            List<ProjectDto> selectedProjectUrls,
+            List<ProjectDto> selectedProjects,
             BackgroundInformation backgroundInformation
     ) {
     }
@@ -79,4 +80,11 @@ public interface AccountDto {
             int testCoverages
     ) {
     }
+
+    record ListAccountsDto(
+            UUID id,
+            String name,
+            String profilePicture,
+            String standoutIntro
+    ){}
 }

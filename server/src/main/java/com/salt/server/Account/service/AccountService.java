@@ -42,8 +42,11 @@ public class AccountService {
         this.scoreService = scoreService;
     }
 
-    public List<Account> getAllAccount() {
-        return accountRepository.findAll();
+    public List<AccountDto.ListAccountsDto> getAllAccount() {
+        return accountRepository.findAll().stream().map(account -> new AccountDto.ListAccountsDto(account.getId(),
+                account.getUserDetail().getName(),
+                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
+                account.getUserDetail().getIntroduction())).toList();
     }
 
     public AccountDto.AccountResponse getAccountById(String id) {
@@ -108,7 +111,7 @@ public class AccountService {
         github.setPictureUrl(request.githubUsername());
         Github saveGithub = githubRepository.save(github);
 
-        for (String project : request.selectedProjectUrls()) {
+        for (String project : request.selectedProjects()) {
             Project newProject = new Project();
             newProject.setGithub(saveGithub);
             newProject.setUrl(project);
