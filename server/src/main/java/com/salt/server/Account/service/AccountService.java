@@ -8,6 +8,7 @@ import com.salt.server.github.Github;
 import com.salt.server.github.GithubRepository;
 import com.salt.server.github.Project;
 import com.salt.server.github.ProjectRepository;
+import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,9 @@ public class AccountService {
     private final SkillRepository skillRepository;
     private final AcademicRepository academicRepository;
     private final NationalityRepository nationalityRepository;
+    private final ScoreService scoreService;
 
-    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository, ProjectRepository projectRepository, LanguageRepository languageRepository, SkillRepository skillRepository, AcademicRepository academicRepository, NationalityRepository nationalityRepository) {
+    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository, ProjectRepository projectRepository, LanguageRepository languageRepository, SkillRepository skillRepository, AcademicRepository academicRepository, NationalityRepository nationalityRepository, ScoreService scoreService) {
         this.accountRepository = accountRepository;
         this.userDetailRepository = userDetailRepository;
         this.socialRepository = socialRepository;
@@ -37,6 +39,7 @@ public class AccountService {
         this.skillRepository = skillRepository;
         this.academicRepository = academicRepository;
         this.nationalityRepository = nationalityRepository;
+        this.scoreService = scoreService;
     }
 
     public List<Account> getAllAccount() {
@@ -46,8 +49,8 @@ public class AccountService {
     public AccountDto.AccountResponse getAccountById(String id) {
         Account account = accountRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
-
-        return AccountMapper.toAccountResponse(account);
+        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+        return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
     public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
@@ -112,6 +115,7 @@ public class AccountService {
             projectRepository.save(newProject);
         }
 
-        return AccountMapper.toAccountResponse(saveAccount);
+        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+        return AccountMapper.toAccountResponse(saveAccount, radarGraphs);
     }
 }
