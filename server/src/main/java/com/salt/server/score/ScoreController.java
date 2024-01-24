@@ -6,6 +6,7 @@ import com.salt.server.Account.api.dto.ScoreResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -23,9 +24,14 @@ public class ScoreController {
         return scoreService.getAllScoreById(accountId);
     }
 
-    @PostMapping("/{accountId}/scoring")
+    @PostMapping("/{accountId}/score")
     public ScoreResponse scoreById(@PathVariable UUID accountId, @RequestBody ScoreRequest request) {
         return scoreService.addScore(accountId, request);
+    }
+
+    @PostMapping("/{accountId}/scores")
+    public List<ScoreResponse> listScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreRequest> request) {
+        return scoreService.addListOfScores(accountId, request);
     }
 
     @DeleteMapping("/{scoreId}")

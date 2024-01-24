@@ -9,6 +9,7 @@ import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.AssignmentService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -43,6 +44,14 @@ public class ScoreService {
         score.setDescription(request.description());
         Score saveScore = scoreRepository.save(score);
         return new ScoreResponse(saveScore.getId(),saveScore.getAssignment().getName(), saveScore.getScore());
+    }
+
+    public List<ScoreResponse> addListOfScores(UUID id, List<ScoreRequest> requests) {
+        List<ScoreResponse> scoreResponses = new ArrayList<>();
+        for(var score: requests) {
+            scoreResponses.add(addScore(id,score));
+        }
+        return scoreResponses;
     }
 
     public void deleteScore(UUID id) {
