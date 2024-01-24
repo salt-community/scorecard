@@ -6,6 +6,7 @@ import com.salt.server.Account.model.Account;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/accounts")
@@ -23,12 +24,12 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    public AccountDto.AccountResponse getAccountById(@PathVariable String accountId) {
+    public AccountDto.AccountResponse getAccountById(@PathVariable UUID accountId) {
         return accountService.getAccountById(accountId);
     }
 
     @PostMapping
-    public AccountDto.AccountResponse createAccount(@RequestBody AccountDto.AccountRequest request) {
+    public AccountDto.AccountResponseTest createAccount(@RequestBody AccountDto.AccountRequest request) {
         return accountService.createAccount(request);
     }
 

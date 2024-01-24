@@ -23,7 +23,7 @@ public class Project {
     private int performance;
     private int testCoverage;
     @ManyToOne
-    @JoinColumn(name = "github_id", nullable = false)
+    @JoinColumn(name = "github_id",nullable = false)
     private Github github;
 
 

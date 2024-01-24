@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,9 +24,9 @@ public class Assignment {
     @Enumerated(EnumType.STRING)
     private Type type;
     @OneToMany(mappedBy = "assignment")
-    private List<Score> scores;
+    private List<Score> scores = new ArrayList<>();
     @OneToMany(mappedBy = "assignment")
-    private List<Coverage> coverages;
+    private List<Coverage> coverages = new ArrayList<>();
 
     public void setType(String type) {
         this.type = switch (type) {
@@ -33,5 +34,13 @@ public class Assignment {
             case "planning" -> Type.planning;
             default -> Type.coding;
         };
+    }
+
+    public void addScore(Score score) {
+        this.scores.add(score);
+    }
+
+    public void addCoverage(Coverage coverage) {
+        this.coverages.add(coverage);
     }
 }

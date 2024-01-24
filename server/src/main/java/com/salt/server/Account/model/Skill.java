@@ -1,5 +1,6 @@
 package com.salt.server.Account.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -19,6 +20,7 @@ public class Skill {
     @UuidGenerator
     private UUID id;
     private String skill;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_detail_id", nullable = false)
     private UserDetail userDetail;

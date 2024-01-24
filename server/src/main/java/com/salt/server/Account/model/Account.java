@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,9 +19,14 @@ public class Account {
     private UUID id;
     private String email;
     @JsonIgnore
-    @OneToOne(mappedBy = "account")
+    @OneToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
-    private List<Score> scores;
+    private List<Score> scores = new ArrayList<>();
+
+    public void addScore(Score score) {
+        this.scores.add(score);
+    }
 }

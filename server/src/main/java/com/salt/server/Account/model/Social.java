@@ -25,8 +25,8 @@ public class Social {
     @JsonIgnore
     @OneToOne(mappedBy = "social")
     private Github githubId;
-    @OneToOne
     @JsonIgnore
+    @OneToOne
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 

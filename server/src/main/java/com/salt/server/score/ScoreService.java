@@ -44,6 +44,8 @@ public class ScoreService {
         score.setAssignment(assignment);
         score.setScore(request.score());
         score.setDescription(request.description());
+        account.addScore(score);
+        assignment.addScore(score);
         Score saveScore = scoreRepository.save(score);
         return new ScoreDto.ScoreResponse(saveScore.getId(), saveScore.getAssignment().getName(), saveScore.getScore());
     }
@@ -62,12 +64,13 @@ public class ScoreService {
 
             double totalScore = 0;
             double totalPercentage = 0;
-
-            for (var score : account.getScores()) {
-                double percentage = (double) coverageRepository
-                        .findByAssignment_IdAndFocus(score.getAssignment().getId(), focus).getPercentage() / 100;
-                totalScore += score.getScore() * percentage;
-                totalPercentage += percentage;
+            if(account.getScores() != null) {
+                for (var score : account.getScores()) {
+                    double percentage = (double) coverageRepository
+                            .findByAssignment_IdAndFocus(score.getAssignment().getId(), focus).getPercentage() / 100;
+                    totalScore += score.getScore() * percentage;
+                    totalPercentage += percentage;
+                }
             }
             radarGraphs.add(new AccountDto.RadarGraph(focus.name(), totalScore / totalPercentage, 100));
         }

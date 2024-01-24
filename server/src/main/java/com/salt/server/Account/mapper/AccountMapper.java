@@ -1,10 +1,7 @@
 package com.salt.server.Account.mapper;
 
 import com.salt.server.Account.api.dto.AccountDto;
-import com.salt.server.Account.model.Account;
-import com.salt.server.Account.model.Language;
-import com.salt.server.Account.model.Nationality;
-import com.salt.server.Account.model.Skill;
+import com.salt.server.Account.model.*;
 import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.model.Focus;
 import com.salt.server.assignment.model.Type;
@@ -15,13 +12,22 @@ import java.util.stream.Collectors;
 
 public class AccountMapper {
 
+    public static AccountDto.ListAccountsDto toListAccountDto(Account account) {
+        return new AccountDto.ListAccountsDto(
+                account.getId(),
+                account.getUserDetail().getName(),
+                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
+                account.getUserDetail().getIntroduction()
+        );
+    }
+
     public static AccountDto.AccountResponse toAccountResponse(Account account, List<AccountDto.RadarGraph> radarGraphs) {
         AccountDto.BackgroundInformation backgroundInformation = createBackgroundInformation(account);
         List<AccountDto.ProjectDto> projects = createProjectDto(account);
         List<AccountDto.Scores> scores = createScores(account);
 
         return new AccountDto.AccountResponse(
-                account.getId().toString(),
+                account.getId(),
                 account.getEmail(),
                 account.getUserDetail().getName(),
                 account.getUserDetail().getIntroduction(),
@@ -44,11 +50,13 @@ public class AccountMapper {
         for(var type: Type.values()) {
             AccountDto.Scores scores = new AccountDto.Scores(
                     type.toString(),
-                    account.getScores().stream()
-                            .filter(score -> score.getAssignment().getType().equals(type) )
-                            .collect(Collectors.toMap(score -> score.getAssignment().getName(), Score::getScore))
+                    account.getScores()!=null?
+                            account.getScores().stream()
+                                    .filter(score -> score.getAssignment().getType().equals(type) )
+                                    .collect(Collectors.toMap(score -> score.getAssignment().getName(), Score::getScore))
+                            : null
             );
-           scoresList.add(scores);
+            scoresList.add(scores);
         }
         return  scoresList;
     }
@@ -63,7 +71,7 @@ public class AccountMapper {
     }
 
     private static List<AccountDto.ProjectDto> createProjectDto(Account account) {
-        return account.getUserDetail().getSocial().getGithubId().getProject().stream()
+        return account.getUserDetail().getSocial().getGithubId().getProjects().stream()
                 .map(data -> new AccountDto.ProjectDto(
                         data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
                         data.getUrl(),

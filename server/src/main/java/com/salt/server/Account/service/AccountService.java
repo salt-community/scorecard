@@ -4,16 +4,20 @@ import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.mapper.AccountMapper;
 import com.salt.server.Account.model.*;
 import com.salt.server.Account.repository.*;
+import com.salt.server.assignment.model.Type;
 import com.salt.server.github.Github;
 import com.salt.server.github.GithubRepository;
 import com.salt.server.github.Project;
 import com.salt.server.github.ProjectRepository;
+import com.salt.server.score.Score;
 import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -43,31 +47,94 @@ public class AccountService {
     }
 
     public List<AccountDto.ListAccountsDto> getAllAccount() {
-        return accountRepository.findAll().stream().map(account -> new AccountDto.ListAccountsDto(account.getId(),
-                account.getUserDetail().getName(),
-                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
-                account.getUserDetail().getIntroduction())).toList();
+        return accountRepository.findAll().stream().map(AccountMapper::toListAccountDto).toList();
     }
 
-    public AccountDto.AccountResponse getAccountById(String id) {
-        Account account = accountRepository.findById(UUID.fromString(id))
+    public AccountDto.AccountResponse getAccountById(UUID id) {
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
         return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
-    public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
+    public AccountDto.AccountResponseTest createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
         account.setEmail(request.email());
         Account saveAccount = accountRepository.save(account);
 
+        UserDetail userDetail = createUserDetail(request, saveAccount);
+        saveAccount.setUserDetail(userDetail);
+        createAcademic(request, userDetail);
+        createNationality(request, userDetail);
+        createLanguage(request, userDetail);
+        createSkill(request,userDetail);
+        Social social = createSocial(request, userDetail);
+        Github github = createGithub(request, social);
+        createProject(request, github);
+
+        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+        List<AccountDto.Scores> scoresList = new ArrayList<>();
+
+        for(var type: Type.values()) {
+
+            AccountDto.Scores scores = new AccountDto.Scores(
+                    type.toString(),
+                    account.getScores()!=null?
+                    account.getScores().stream()
+                            .filter(score -> score.getAssignment().getType().equals(type) )
+                            .collect(Collectors.toMap(score -> score.getAssignment().getName(), Score::getScore))
+                            : null
+            );
+            scoresList.add(scores);
+        }
+
+        Github git = githubRepository.findById(github.getId())
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+
+
+        return new AccountDto.AccountResponseTest(
+                saveAccount.getId(),
+                saveAccount.getEmail(),
+                userDetail.getName(),
+                userDetail.getIntroduction(),
+                userDetail.getBootcamp().name(),
+                github.getUrl(),
+                github.getUrl().substring(github.getUrl().lastIndexOf("/")+1),
+                github.getPictureUrl(),
+                social.getLinkedInUrl(),
+                social.getCodewarsUrl(),
+                radarGraphs,
+                scoresList,
+                git.getProjects().stream()
+                        .map(data -> new AccountDto.ProjectDto(
+                                data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
+                                data.getUrl(),
+                                new AccountDto.GithubData(
+                                        data.getCommit(),
+                                        data.getIssue(),
+                                        data.getDuration(),
+                                        data.getPerformance(),
+                                        data.getTestCoverage()
+                                ))).toList(),
+                new AccountDto.BackgroundInformation(
+                        account.getUserDetail().getNationality().stream().map(Nationality::getNationality).toList(),
+                        account.getUserDetail().getLanguages().stream().collect(Collectors.toMap(Language::getLanguage,Language::getFluency)),
+                        account.getUserDetail().getAcademic(),
+                        account.getUserDetail().getSkills().stream().map(Skill::getSkill).toList()
+                )
+        );
+    }
+
+    private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {
         UserDetail userDetail = new UserDetail();
-        userDetail.setAccount(saveAccount);
+        userDetail.setAccount(account);
         userDetail.setName(request.name());
         userDetail.setIntroduction(request.standoutIntro());
         userDetail.setBootcamp(request.bootcamp());
-        UserDetail saveUserDetail = userDetailRepository.save(userDetail);
+        return userDetailRepository.save(userDetail);
+    }
 
+    private void createAcademic(AccountDto.AccountRequest request, UserDetail userDetail) {
         Academic academic = new Academic();
         academic.setUserDetail(userDetail);
         academic.setDegree(request.backgroundInformation().academic().getDegree());
@@ -76,49 +143,62 @@ public class AccountService {
         academic.setEndDate(request.backgroundInformation().academic().getEndDate());
         academic.setSchool(request.backgroundInformation().academic().getSchool());
         academicRepository.save(academic);
+    }
 
+    private Social createSocial(AccountDto.AccountRequest request, UserDetail userDetail) {
+        Social social = new Social();
+        social.setUserDetail(userDetail);
+        social.setLinkedInUrl(request.linkedinUsername());
+        social.setCodewarsUrl(request.codewarsUsername());
+        return socialRepository.save(social);
+    }
+
+    private void createNationality(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var nationality : request.backgroundInformation().nationalities()) {
             Nationality newNationality = new Nationality();
             newNationality.setUserDetail(userDetail);
             newNationality.setNationality(nationality);
+            userDetail.addNationality(newNationality);
             nationalityRepository.save(newNationality);
         }
+    }
 
+    private void createLanguage(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
             Language newLanguage = new Language();
             newLanguage.setUserDetail(userDetail);
             newLanguage.setLanguage(language.getKey());
             newLanguage.setFluency(language.getValue().toString());
+            userDetail.addLanguage(newLanguage);
             languageRepository.save(newLanguage);
         }
+    }
 
+    private void createSkill(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var skill : request.backgroundInformation().skills()) {
             Skill newSkill = new Skill();
             newSkill.setUserDetail(userDetail);
             newSkill.setSkill(skill);
+            userDetail.addSkill(newSkill);
             skillRepository.save(newSkill);
         }
+    }
 
-        Social social = new Social();
-        social.setUserDetail(saveUserDetail);
-        social.setLinkedInUrl(request.linkedinUsername());
-        social.setCodewarsUrl(request.codewarsUsername());
-        Social saveSocial = socialRepository.save(social);
-
+    private Github createGithub(AccountDto.AccountRequest request, Social social) {
         Github github = new Github();
-        github.setSocial(saveSocial);
+        github.setSocial(social);
         github.setUrl(request.githubUsername());
         github.setPictureUrl(request.githubUsername());
-        Github saveGithub = githubRepository.save(github);
+        return githubRepository.save(github);
+    }
 
+    private void createProject(AccountDto.AccountRequest request, Github github) {
         for (String project : request.selectedProjects()) {
             Project newProject = new Project();
-            newProject.setGithub(saveGithub);
+            newProject.setGithub(github);
             newProject.setUrl(project);
+            github.addProject(newProject);
             projectRepository.save(newProject);
         }
-
-        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-        return AccountMapper.toAccountResponse(saveAccount, radarGraphs);
     }
 }

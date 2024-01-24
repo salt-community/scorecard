@@ -1,10 +1,12 @@
 package com.salt.server.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salt.server.github.Project;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,24 +23,22 @@ public class UserDetail {
     @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
-    @JsonIgnore
     @OneToMany(mappedBy = "userDetail")
-    private List<Nationality> nationality;
+    private List<Nationality> nationality = new ArrayList<>();
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Academic academic;
     @JsonIgnore
     @OneToMany(mappedBy = "userDetail")
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "userDetail")
-    private List<Language> languages;
+    private List<Language> languages = new ArrayList<>();
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Social social;
     @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "userDetail")
     private Account account;
 
 
@@ -48,5 +48,17 @@ public class UserDetail {
             case "javascript" -> Bootcamp.javascript;
             default -> Bootcamp.dotnet;
         };
+    }
+
+    public void addNationality(Nationality nationality){
+        this.nationality.add(nationality);
+    }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
+    }
+
+    public void addLanguage(Language language) {
+        this.languages.add(language);
     }
 }

@@ -1,5 +1,6 @@
 package com.salt.server.Account.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Language {
     @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Fluency fluency;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_detail_id", nullable = false)
     private UserDetail userDetail;

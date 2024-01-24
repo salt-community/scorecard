@@ -22,8 +22,8 @@ public class Academic {
     private String startDate;
     private String endDate;
     private String school;
-    @OneToOne
     @JsonIgnore
+    @OneToOne
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 }
