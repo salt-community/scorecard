@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/account")
+@RequestMapping("api/accounts")
 public class AccountController {
 
     private final AccountService accountService;
@@ -18,7 +18,7 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<Account> getAllAccount() {
+    public List<AccountDto.ListAccountsDto> getAllAccount() {
         return accountService.getAllAccount();
     }
 
