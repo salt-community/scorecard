@@ -12,6 +12,11 @@ public interface ScoreDto {
     ) {
     }
 
+    record ScoresListResponse(
+            List<ScoreResponse> scoreResponses
+    ) {
+    }
+
     record ScoreResponse(
             UUID id,
             String name,
