@@ -10,46 +10,12 @@ import {
 import SimpleTable from './SimpleTable';
 import { RadarGraphicData, Scores, SimpleTableEntry } from '../types';
 import { RadarGraphic } from './RadarGraphic';
-
-const getAverageValue = (data: SimpleTableEntry) => {
-  let sum = 0;
-  let count = 0;
-  for (const key in data) {
-    if (typeof data[key] === 'number') {
-      sum += data[key] as number;
-      count++;
-    }
-  }
-  return sum / count;
-};
-
-const colorVariant = (value: number) => {
-  if (value >= 90) {
-    return 'secondary';
-  } else if (value > 70) {
-    return 'primary';
-  } else {
-    return 'warning';
-  }
-};
-const levelVariant = (value: number) => {
-  if (value >= 90) {
-    return 3;
-  } else if (value > 70) {
-    return 2;
-  } else {
-    return 1;
-  }
-};
-
-const getAllAverageValue = (
-  scoreData: { scoreName: string; data: SimpleTableEntry }[]
-) => {
-  const allAveNum: number[] = [];
-  scoreData.map(item => allAveNum.push(getAverageValue(item.data)));
-  const sum = allAveNum.reduce((acc, curr) => acc + curr, 0);
-  return sum / allAveNum.length;
-};
+import {
+  colorVariant,
+  getAllAverageValue,
+  levelVariant,
+  getAverageValue,
+} from '../utilities';
 
 interface SaltScoreProps {
   scores: Scores[];

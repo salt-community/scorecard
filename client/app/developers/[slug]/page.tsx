@@ -11,7 +11,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
       <div>
-        <p>Hello developer</p>
         <ScoreCard developerData={developerData} />
       </div>
     </main>
