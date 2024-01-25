@@ -31,4 +31,14 @@ class AssignmentServiceTest {
         assertThat(assignmentService.getAllTest()).containsExactly(assignment1, assignment2);
     }
 
+    @Test
+    void shouldReturnAssignmentById() {
+        Assignment assignment = new Assignment();
+        Assignment assignment2 = new Assignment();
+        when(assignmentRepository.findById(assignment.getId())).thenReturn(java.util.Optional.of(assignment));
+        Assignment returnedAssignment = assignmentService.getTestById(assignment.getId());
+        assertThat(returnedAssignment).isEqualTo(assignment);
+        assertThat(returnedAssignment).isNotEqualTo(assignment2);
+    }
+
 }
