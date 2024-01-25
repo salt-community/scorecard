@@ -37,8 +37,8 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        assignmentSeeder();
-        accountSeeder();
+//        assignmentSeeder();
+//        accountSeeder();
     }
 
     private void assignmentSeeder() {
@@ -84,7 +84,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin);
+        List<String> developers = Arrays.asList(feng, kevin,jacob);
 
         String uri = "http://localhost:8080/api/accounts/developer";
         RestTemplate restTemplate = new RestTemplate();
