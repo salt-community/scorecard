@@ -84,7 +84,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin,jacob);
+        List<String> developers = Arrays.asList(feng, kevin,jacob,ariel);
 
         String uri = "http://localhost:8080/api/accounts/developer";
         RestTemplate restTemplate = new RestTemplate();
@@ -184,10 +184,9 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"major\" : \"architecture\",\n" +
             "        \"startDate\" : \"12-08-2018\",\n" +
             "        \"endDate\" : \"12-08-2020\",\n" +
-            "        \"yearStudied\" : 2,\n" +
             "        \"school\" : \"KTH Royal Institute of Technology\"\n" +
             "        },\n" +
-            "    \"skills\": [\"javaScript\", \"typeScript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\"]\n" +
+            "    \"skills\": [\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\"]\n" +
             "  }\n" +
             "} ";
 
@@ -216,10 +215,9 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"major\" : \"engineering\",\n" +
             "        \"startDate\" : \"14-08-2017\",\n" +
             "        \"endDate\" : \"01-08-2018\",\n" +
-            "        \"yearStudied\" : 1,\n" +
             "        \"school\" : \"Cranfield University\"\n" +
             "        },\n" +
-            "    \"skills\": [\"Java\",\"javaScript\", \"typeScript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\"]\n" +
+            "    \"skills\": [\"Java\",\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\", \"mysql\"]\n" +
             "  }\n" +
             "} ";
 
@@ -248,25 +246,37 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"endDate\" : \"5-05-2023\",\n" +
             "        \"school\" : \"IT-Högskolan\"\n" +
             "        },\n" +
-            "    \"skills\": [\"java\", \"typeScript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
+            "    \"skills\": [\"java\", \"typescript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
             "  }\n" +
             "}";
 
-    String ariel = "{ \n" +
-            "    \"email\" : \"ariel.yumembudi@appliedtechnology.se\",\n" +
-            "    \"name\": \"Ariel Shaka\", \n" +
-            "    \"standoutIntro\": \"problem solving enthusiast\", \n" +
-            "    \"bootcamp\": \"java\", \n" +
-            "    \"githubUsername\": \"ArielShaka\",\n" +
-            "    \"linkedinUsername\": \"Ariel Shaka\",\n" +
-            "    \"codewarsUsername\" : \"YelShaka\", \n" +
-            "    \"selectedProjects\": [\"https://github.com/Nameless-Devs/echoboard\"],\n" +
-            "     \"backgroundInformation\": { \n" +
-            "        \"nationalities\": [\"congolese\"], \n" +
-            "        \"spokenLanguages\": { \n" +
-            "            \"French\":\"natives\",\n" +
-            "             \"english\": \"fluent\",\n" +
-            "              \"swedish\" :\"fluent\"}, \n" +
-            "              \"academic\": { \n" +
-            "                \"degree\" : \"vocationaldiploma\", \"major\" : \"AI Business Consultant\", \"startDate\" : \"10-08-2020\", \"endDate\" : \"01-04-2022\", \"school\" : \"Hyper Island\" }, \"skills\": [\"java\", \"typeScript\", \"Spring Boot\", \"Kafka\",  \"Avro apache\" \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\", \"Postgres\"] } }";
+    String ariel = "{\n" +
+            "  \"email\": \"ariel.yumembudi@appliedtechnology.se\",\n" +
+            "  \"name\": \"ariel shaka\",\n" +
+            "  \"role\" : \"developer\",\n" +
+            "  \"standoutIntro\": \"problem solving enthusiast\",\n" +
+            "  \"bootcamp\": \"java\",\n" +
+            "  \"githubUsername\": \"ArielShaka\",\n" +
+            "  \"linkedinUsername\": \"Ariel Shaka\",\n" +
+            "  \"codewarsUsername\" : \"YelShaka\",\n" +
+            "  \"selectedProjects\": [\n" +
+            "    \"https://github.com/Nameless-Devs/echoboard\"\n" +
+            "  ],\n" +
+            "  \"backgroundInformation\": {\n" +
+            "    \"nationalities\": [\"congonese\"],\n" +
+            "    \"spokenLanguages\": {\n" +
+            "        \"french\":\"natives\",\n" +
+            "        \"english\":\"fluent\",\n" +
+            "        \"swedish\": \"fluent\"\n" +
+            "    },\n" +
+            "    \"academic\": {\n" +
+            "        \"degree\" : \"vocationaldiploma\",\n" +
+            "        \"major\" : \"ai business consultant\",\n" +
+            "        \"startDate\" : \"10-08-2020\",\n" +
+            "        \"endDate\" : \"01-04-2022\",\n" +
+            "        \"school\" : \"Hyper Island\"\n" +
+            "        },\n" +
+            "    \"skills\": [\"java\", \"typescript\", \"spring boot\", \"kafka\", \"avro apache\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\", \"postgres\"]\n" +
+            "  }\n" +
+            "}";
 }
