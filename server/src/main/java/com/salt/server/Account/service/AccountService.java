@@ -82,11 +82,13 @@ public class AccountService {
     }
 
     private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {
-        UserDetail userDetail = new UserDetail();
-        userDetail.setAccount(account);
-        userDetail.setName(request.name());
-        userDetail.setIntroduction(request.standoutIntro());
-        userDetail.setBootcamp(request.bootcamp());
+        UserDetail userDetail = UserDetail.builder()
+                .account(account)
+                .name(request.name())
+                .introduction(request.standoutIntro())
+                .bootcamp(request.bootcamp())
+                .build();
+
         return userDetailRepository.save(userDetail);
     }
 
