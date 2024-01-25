@@ -10,10 +10,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -68,6 +69,13 @@ class AssignmentServiceTest {
         assignment.setName("test");
         when(assignmentRepository.findByName(assignment.getName())).thenReturn(java.util.Optional.empty());
         assertThrows(NoSuchElementException.class, () -> assignmentService.getTestByName(assignment.getName()));
+    }
+
+    @Test
+    void shouldDeleteAssignmentById() {
+        String id = "8a9385a7-c944-43ba-b4aa-a9e9ff1be14e";
+        assignmentService.deleteAssignment(UUID.fromString(id));
+        verify(assignmentRepository, times(1)).deleteById(UUID.fromString(id));
     }
 
 }
