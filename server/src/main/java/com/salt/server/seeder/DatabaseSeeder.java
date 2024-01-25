@@ -68,10 +68,12 @@ public class DatabaseSeeder implements ApplicationRunner {
                 int count = 2;
 
                 for (Focus focus : focusTypes) {
-                    Coverage coverage = new Coverage();
-                    coverage.setAssignment(saveAssignment);
-                    coverage.setFocus(focus.toString());
-                    coverage.setPercentage(Integer.parseInt(data[count]));
+                    Coverage coverage = Coverage.builder()
+                            .assignment(saveAssignment)
+                            .focus(focus.toString())
+                            .percentage(Integer.parseInt(data[count]))
+                            .build();
+
                     saveAssignment.addCoverage(coverage);
                     coverageRepository.save(coverage);
                     count++;
