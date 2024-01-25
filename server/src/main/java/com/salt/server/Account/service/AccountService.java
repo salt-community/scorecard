@@ -66,24 +66,24 @@ public class AccountService {
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
     }
 
-    public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
+    public Account createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
         account.setEmail(request.email());
-        Account saveAccount = accountRepository.save(account);
+        return accountRepository.save(account);
 
-        UserDetail userDetail = createUserDetail(request, saveAccount);
-        saveAccount.setUserDetail(userDetail);
-        createAcademic(request, userDetail);
-        createNationality(request, userDetail);
-        createLanguage(request, userDetail);
-        createSkill(request,userDetail);
-        Social social = createSocial(request, userDetail);
-        Github github = githubService.createGithub(request, social);
-        githubService.createProject(request, github);
+//        UserDetail userDetail = createUserDetail(request, saveAccount);
+//        saveAccount.setUserDetail(userDetail);
+//        createAcademic(request, userDetail);
+//        createNationality(request, userDetail);
+//        createLanguage(request, userDetail);
+//        createSkill(request,userDetail);
+//        Social social = createSocial(request, userDetail);
+//        Github github = githubService.createGithub(request, social);
+//        githubService.createProject(request, github);
+//
+//        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
 
-        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-
-        return AccountMapper.toAccountResponse(account, radarGraphs);
+//        return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
     private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {

@@ -10,6 +10,6 @@ public class StatusController {
 
     @GetMapping("/status")
     public ResponseEntity<String> statusOk() {
-        return new ResponseEntity<>("Server is live! 200 OK. version 0.2",HttpStatus.OK);
+        return new ResponseEntity<>("Server is live! 200 OK. version 0.3",HttpStatus.OK);
     }
 }

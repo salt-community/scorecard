@@ -29,7 +29,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public AccountDto.AccountResponse createAccount(@RequestBody AccountDto.AccountRequest request) {
+    public Account createAccount(@RequestBody AccountDto.AccountRequest request) {
         return accountService.createAccount(request);
     }
 
