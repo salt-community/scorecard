@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
+// should apply TanStack Query for fetching
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const fetchAllUsers = async () => {
-  const res = await fetch('http://localhost:8080/api/accounts');
+  const res = await fetch(`${apiUrl}/accounts`);
   const data = res.json();
   return data;
 };
@@ -21,7 +23,9 @@ export default async function Home() {
       <div>
         {developersData.map((item: developerInList) => (
           <li key={item.id}>
+            <p>---- Card Component ----</p>
             <Link href={`/developers/${item.id}`}>{item.name}</Link>
+            <p>---------------------------</p>
           </li>
         ))}
       </div>
