@@ -8,6 +8,7 @@ import com.salt.server.github.GithubService;
 import com.salt.server.github.model.Github;
 import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -62,8 +63,8 @@ public class DeveloperService {
         return DeveloperMapper.toDeveloperResponse(account, radarGraphs);
     }
 
-
-        public DeveloperDto.Response createDeveloper(DeveloperDto.Request request) {
+    @Transactional
+    public DeveloperDto.Response createDeveloper(DeveloperDto.Request request) {
         Account developerAccount = new Account();
         developerAccount.setEmail(request.email());
         developerAccount.setRole(request.role());
@@ -74,7 +75,7 @@ public class DeveloperService {
         createAcademic(request, userDetail);
         createNationality(request, userDetail);
         createLanguage(request, userDetail);
-        createSkill(request,userDetail);
+        createSkill(request, userDetail);
         Social social = createSocial(request, userDetail);
         Github github = githubService.createGithub(request, social);
         githubService.createProject(request, github);
