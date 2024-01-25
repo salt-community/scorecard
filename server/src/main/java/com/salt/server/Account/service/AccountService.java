@@ -91,13 +91,18 @@ public class AccountService {
     }
 
     private void createAcademic(AccountDto.AccountRequest request, UserDetail userDetail) {
-        Academic academic = new Academic();
-        academic.setUserDetail(userDetail);
-        academic.setDegree(request.backgroundInformation().academic().getDegree());
-        academic.setMajor(request.backgroundInformation().academic().getMajor());
-        academic.setStartDate(request.backgroundInformation().academic().getStartDate());
-        academic.setEndDate(request.backgroundInformation().academic().getEndDate());
-        academic.setSchool(request.backgroundInformation().academic().getSchool());
+        Academic academicDetail = request.backgroundInformation().academic();
+
+        Academic academic = Academic.builder()
+                .userDetail(userDetail)
+                .degree(academicDetail.getDegree())
+                .major(academicDetail.getMajor())
+                .startDate(academicDetail.getStartDate())
+                .endDate(academicDetail.getEndDate())
+                .school(academicDetail.getSchool())
+                .build();
+
+        userDetail.setAcademic(academic);
         academicRepository.save(academic);
     }
 
