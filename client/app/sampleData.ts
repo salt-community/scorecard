@@ -53,8 +53,7 @@ export const sampleGeneratedDeveloperData = {
   },
   // below are generated datas
   githubUserName: 'Finns841594',
-  githubProfilePictureUrl:
-    'https://avatars.githubusercontent.com/u/65496134?v=4',
+  githubProfilePictureUrl: 'Finns841594.png',
   scores: [
     {
       scoreName: 'Communication',
