@@ -57,9 +57,11 @@ public class DatabaseSeeder implements ApplicationRunner {
                 }
 
                 String[] data = line.split(",");
-                Assignment assignment = new Assignment();
-                assignment.setName(data[0]);
-                assignment.setType(data[1]);
+                Assignment assignment = Assignment.builder()
+                        .name(data[0])
+                        .type(data[1])
+                        .build();
+
                 Assignment saveAssignment = assignmentRepository.save(assignment);
 
                 Focus[] focusTypes = Focus.values();
