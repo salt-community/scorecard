@@ -144,9 +144,11 @@ public class AccountService {
 
     private void createSkill(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var skill : request.backgroundInformation().skills()) {
-            Skill newSkill = new Skill();
-            newSkill.setUserDetail(userDetail);
-            newSkill.setSkill(skill);
+            Skill newSkill = Skill.builder()
+                    .userDetail(userDetail)
+                    .skill(skill)
+                    .build();
+
             userDetail.addSkill(newSkill);
             skillRepository.save(newSkill);
         }
