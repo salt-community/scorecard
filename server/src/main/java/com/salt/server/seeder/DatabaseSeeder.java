@@ -57,10 +57,9 @@ public class DatabaseSeeder implements ApplicationRunner {
                 }
 
                 String[] data = line.split(",");
-                Assignment assignment = Assignment.builder()
-                        .name(data[0])
-                        .type(data[1])
-                        .build();
+                Assignment assignment = new Assignment();
+                assignment.setName(data[0]);
+                assignment.setType(data[2]);
 
                 Assignment saveAssignment = assignmentRepository.save(assignment);
 
@@ -68,11 +67,10 @@ public class DatabaseSeeder implements ApplicationRunner {
                 int count = 2;
 
                 for (Focus focus : focusTypes) {
-                    Coverage coverage = Coverage.builder()
-                            .assignment(saveAssignment)
-                            .focus(focus.toString())
-                            .percentage(Integer.parseInt(data[count]))
-                            .build();
+                    Coverage coverage = new Coverage();
+                    coverage.setAssignment(assignment);
+                    coverage.setFocus(focus.toString());
+                    coverage.setPercentage(Integer.parseInt(data[count]));
 
                     saveAssignment.addCoverage(coverage);
                     coverageRepository.save(coverage);
@@ -86,7 +84,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin, jacob);
+        List<String> developers = Arrays.asList(feng, kevin);
 
         String uri = "http://localhost:8080/api/accounts/developer";
         RestTemplate restTemplate = new RestTemplate();
@@ -228,6 +226,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     String jacob = "{\n" +
             "  \"email\": \"jacob.larsson@appliedtechnology.se\",\n" +
             "  \"name\": \"jacob larsson\",\n" +
+            "  \"role\": \"developer\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"JacobLars\",\n" +
@@ -243,14 +242,31 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"english\":\"fluent\"\n" +
             "    },\n" +
             "    \"academic\": {\n" +
-            "        \"degree\" : \"higher vocational education diploma\",\n" +
+            "        \"degree\" : \"vocationaldiploma\",\n" +
             "        \"major\" : \"java developing\",\n" +
             "        \"startDate\" : \"20-08-2021\",\n" +
             "        \"endDate\" : \"5-05-2023\",\n" +
-            "        \"yearStudied\" : 2,\n" +
             "        \"school\" : \"IT-Högskolan\"\n" +
             "        },\n" +
             "    \"skills\": [\"java\", \"typeScript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
             "  }\n" +
             "}";
+
+    String ariel = "{ \n" +
+            "    \"email\" : \"ariel.yumembudi@appliedtechnology.se\",\n" +
+            "    \"name\": \"Ariel Shaka\", \n" +
+            "    \"standoutIntro\": \"problem solving enthusiast\", \n" +
+            "    \"bootcamp\": \"java\", \n" +
+            "    \"githubUsername\": \"ArielShaka\",\n" +
+            "    \"linkedinUsername\": \"Ariel Shaka\",\n" +
+            "    \"codewarsUsername\" : \"YelShaka\", \n" +
+            "    \"selectedProjects\": [\"https://github.com/Nameless-Devs/echoboard\"],\n" +
+            "     \"backgroundInformation\": { \n" +
+            "        \"nationalities\": [\"congolese\"], \n" +
+            "        \"spokenLanguages\": { \n" +
+            "            \"French\":\"natives\",\n" +
+            "             \"english\": \"fluent\",\n" +
+            "              \"swedish\" :\"fluent\"}, \n" +
+            "              \"academic\": { \n" +
+            "                \"degree\" : \"vocationaldiploma\", \"major\" : \"AI Business Consultant\", \"startDate\" : \"10-08-2020\", \"endDate\" : \"01-04-2022\", \"school\" : \"Hyper Island\" }, \"skills\": [\"java\", \"typeScript\", \"Spring Boot\", \"Kafka\",  \"Avro apache\" \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\", \"Postgres\"] } }";
 }

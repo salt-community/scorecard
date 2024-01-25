@@ -20,11 +20,10 @@ public class GithubService {
     }
 
     public Github createGithub(AccountDto.AccountRequest request, Social social) {
-        Github github = Github.builder()
-                .social(social)
-                .url(request.githubUsername())
-                .pictureUrl(request.githubUsername())
-                .build();
+        Github github = new Github();
+        github.setSocial(social);
+        github.setUrl(request.githubUsername());
+        github.setPictureUrl(request.githubUsername());
 
         social.setGithubId(github);
         return githubRepository.save(github);
@@ -32,10 +31,9 @@ public class GithubService {
 
     public void createProject(AccountDto.AccountRequest request, Github github) {
         for (String project : request.selectedProjects()) {
-            Project newProject = Project.builder()
-                    .github(github)
-                    .url(project)
-                    .build();
+            Project newProject = new Project();
+            newProject.setGithub(github);
+            newProject.setUrl(project);
 
             github.addProject(newProject);
             projectRepository.save(newProject);

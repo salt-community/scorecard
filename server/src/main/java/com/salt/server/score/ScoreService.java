@@ -35,16 +35,16 @@ public class ScoreService {
 
     public ScoreDto.ScoreResponse addScore(Account account, ScoreDto.ScoreRequest request) {
         Assignment assignment = assignmentService.getTestByName(request.name());
-        Score score = Score.builder()
-                .account(account)
-                .assignment(assignment)
-                .score(request.score())
-                .description(request.description())
-                .build();
+        Score score = new Score();
+        score.setAccount(account);
+        score.setAssignment(assignment);
+        score.setScore(request.score());
+        score.setDescription(request.description());
 
-        account.addScore(score);
-        assignment.addScore(score);
         Score saveScore = scoreRepository.save(score);
+        account.addScore(saveScore);
+        assignment.addScore(saveScore);
+
         return new ScoreDto.ScoreResponse(
                 saveScore.getId(),
                 saveScore.getAssignment().getName(),

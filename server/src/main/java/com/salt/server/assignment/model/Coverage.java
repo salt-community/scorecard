@@ -7,14 +7,13 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
-@Builder
+@Setter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class Coverage {
     @Id
     @UuidGenerator
     private UUID id;
+    @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Focus focus;
     private int percentage;
@@ -22,8 +21,8 @@ public class Coverage {
     @JoinColumn(name = "assignment_id", nullable = false)
     private Assignment assignment;
 
-    public static class CoverageBuilder {
-        public CoverageBuilder focus(String focus) {
+
+        public void setFocus(String focus) {
             this.focus = switch (focus) {
                 case "frontend" -> Focus.frontend;
                 case "backend" -> Focus.backend;
@@ -32,7 +31,5 @@ public class Coverage {
                 case "design" -> Focus.design;
                 default -> Focus.management;
             };
-            return this;
-        }
     }
 }

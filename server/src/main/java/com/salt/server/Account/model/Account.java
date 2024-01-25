@@ -18,6 +18,7 @@ public class Account {
     @UuidGenerator
     private UUID id;
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
     @JsonIgnore
     @OneToOne( fetch = FetchType.LAZY)
