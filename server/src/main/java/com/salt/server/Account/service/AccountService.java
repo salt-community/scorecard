@@ -61,6 +61,11 @@ public class AccountService {
         return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
+    public Account findAccountById(UUID id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+    }
+
     public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
         account.setEmail(request.email());

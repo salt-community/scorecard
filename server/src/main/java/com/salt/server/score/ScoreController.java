@@ -2,6 +2,8 @@ package com.salt.server.score;
 
 import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.api.dto.ScoreDto;
+import com.salt.server.Account.model.Account;
+import com.salt.server.Account.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +16,11 @@ import java.util.UUID;
 public class ScoreController {
 
     private final ScoreService scoreService;
+    private final AccountService accountService;
 
-    public ScoreController(ScoreService scoreService) {
+    public ScoreController(ScoreService scoreService, AccountService accountService) {
         this.scoreService = scoreService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/{accountId}")
@@ -26,12 +30,14 @@ public class ScoreController {
 
     @PostMapping("/{accountId}/add")
     public ScoreDto.ScoreResponse addScoreById(@PathVariable UUID accountId, @RequestBody ScoreDto.ScoreRequest request) {
-        return scoreService.addScore(accountId, request);
+        Account account = accountService.findAccountById(accountId);
+        return scoreService.addScore(account, request);
     }
 
     @PostMapping("/{accountId}/add-scores")
     public List<ScoreDto.ScoreResponse> addListScoresById(@PathVariable UUID accountId, @RequestBody List<ScoreDto.ScoreRequest> request) {
-        return scoreService.addListOfScores(accountId, request);
+        Account account = accountService.findAccountById(accountId);
+        return scoreService.addListOfScores(account, request);
     }
 
     @DeleteMapping("/{scoreId}")
