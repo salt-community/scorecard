@@ -107,10 +107,12 @@ public class AccountService {
     }
 
     private Social createSocial(AccountDto.AccountRequest request, UserDetail userDetail) {
-        Social social = new Social();
-        social.setUserDetail(userDetail);
-        social.setLinkedInUrl(request.linkedinUsername());
-        social.setCodewarsUrl(request.codewarsUsername());
+        Social social = Social.builder()
+                .userDetail(userDetail)
+                .linkedInUrl(request.linkedinUsername())
+                .codewarsUrl(request.codewarsUsername())
+                .build();
+
         userDetail.setSocial(social);
         return socialRepository.save(social);
     }
