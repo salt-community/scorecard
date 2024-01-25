@@ -1,15 +1,10 @@
 package com.salt.server.Account.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.salt.server.Account.model.Academic;
 import com.salt.server.Account.model.Fluency;
-import com.salt.server.Account.model.Language;
-import com.salt.server.Account.model.Skill;
-import com.salt.server.github.Project;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public interface AccountDto {

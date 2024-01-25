@@ -1,4 +1,4 @@
-package com.salt.server.github;
+package com.salt.server.github.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.Account.model.Social;

@@ -1,7 +1,7 @@
 package com.salt.server.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.salt.server.github.Github;
+import com.salt.server.github.model.Github;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

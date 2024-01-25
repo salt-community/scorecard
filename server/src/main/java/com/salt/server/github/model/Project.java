@@ -1,5 +1,6 @@
-package com.salt.server.github;
+package com.salt.server.github.model;
 
+import com.salt.server.github.model.Github;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

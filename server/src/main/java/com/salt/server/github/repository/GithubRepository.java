@@ -1,5 +1,6 @@
-package com.salt.server.github;
+package com.salt.server.github.repository;
 
+import com.salt.server.github.model.Github;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -4,20 +4,17 @@ import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.mapper.AccountMapper;
 import com.salt.server.Account.model.*;
 import com.salt.server.Account.repository.*;
-import com.salt.server.assignment.model.Type;
-import com.salt.server.github.Github;
-import com.salt.server.github.GithubRepository;
-import com.salt.server.github.Project;
-import com.salt.server.github.ProjectRepository;
-import com.salt.server.score.Score;
+import com.salt.server.github.GithubService;
+import com.salt.server.github.model.Github;
+import com.salt.server.github.repository.GithubRepository;
+import com.salt.server.github.model.Project;
+import com.salt.server.github.repository.ProjectRepository;
 import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -25,20 +22,27 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final UserDetailRepository userDetailRepository;
     private final SocialRepository socialRepository;
-    private final GithubRepository githubRepository;
-    private final ProjectRepository projectRepository;
     private final LanguageRepository languageRepository;
     private final SkillRepository skillRepository;
     private final AcademicRepository academicRepository;
     private final NationalityRepository nationalityRepository;
     private final ScoreService scoreService;
+    private final GithubService githubService;
 
-    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository, ProjectRepository projectRepository, LanguageRepository languageRepository, SkillRepository skillRepository, AcademicRepository academicRepository, NationalityRepository nationalityRepository, ScoreService scoreService) {
+
+    public AccountService(AccountRepository accountRepository,
+                          UserDetailRepository userDetailRepository,
+                          SocialRepository socialRepository,
+                          GithubService githubService,
+                          LanguageRepository languageRepository,
+                          SkillRepository skillRepository,
+                          AcademicRepository academicRepository,
+                          NationalityRepository nationalityRepository,
+                          ScoreService scoreService) {
         this.accountRepository = accountRepository;
         this.userDetailRepository = userDetailRepository;
         this.socialRepository = socialRepository;
-        this.githubRepository = githubRepository;
-        this.projectRepository = projectRepository;
+        this.githubService = githubService;
         this.languageRepository = languageRepository;
         this.skillRepository = skillRepository;
         this.academicRepository = academicRepository;
@@ -57,7 +61,7 @@ public class AccountService {
         return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
-    public AccountDto.AccountResponseTest createAccount(AccountDto.AccountRequest request) {
+    public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
         account.setEmail(request.email());
         Account saveAccount = accountRepository.save(account);
@@ -69,60 +73,12 @@ public class AccountService {
         createLanguage(request, userDetail);
         createSkill(request,userDetail);
         Social social = createSocial(request, userDetail);
-        Github github = createGithub(request, social);
-        createProject(request, github);
+        Github github = githubService.createGithub(request, social);
+        githubService.createProject(request, github);
 
         List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-        List<AccountDto.Scores> scoresList = new ArrayList<>();
 
-        for(var type: Type.values()) {
-
-            AccountDto.Scores scores = new AccountDto.Scores(
-                    type.toString(),
-                    account.getScores()!=null?
-                    account.getScores().stream()
-                            .filter(score -> score.getAssignment().getType().equals(type) )
-                            .collect(Collectors.toMap(score -> score.getAssignment().getName(), Score::getScore))
-                            : null
-            );
-            scoresList.add(scores);
-        }
-
-        Github git = githubRepository.findById(github.getId())
-                .orElseThrow(() -> new NoSuchElementException("Account not found"));
-
-
-        return new AccountDto.AccountResponseTest(
-                saveAccount.getId(),
-                saveAccount.getEmail(),
-                userDetail.getName(),
-                userDetail.getIntroduction(),
-                userDetail.getBootcamp().name(),
-                github.getUrl(),
-                github.getUrl().substring(github.getUrl().lastIndexOf("/")+1),
-                github.getPictureUrl(),
-                social.getLinkedInUrl(),
-                social.getCodewarsUrl(),
-                radarGraphs,
-                scoresList,
-                git.getProjects().stream()
-                        .map(data -> new AccountDto.ProjectDto(
-                                data.getUrl().substring(data.getUrl().lastIndexOf("/")+1),
-                                data.getUrl(),
-                                new AccountDto.GithubData(
-                                        data.getCommit(),
-                                        data.getIssue(),
-                                        data.getDuration(),
-                                        data.getPerformance(),
-                                        data.getTestCoverage()
-                                ))).toList(),
-                new AccountDto.BackgroundInformation(
-                        account.getUserDetail().getNationality().stream().map(Nationality::getNationality).toList(),
-                        account.getUserDetail().getLanguages().stream().collect(Collectors.toMap(Language::getLanguage,Language::getFluency)),
-                        account.getUserDetail().getAcademic(),
-                        account.getUserDetail().getSkills().stream().map(Skill::getSkill).toList()
-                )
-        );
+        return AccountMapper.toAccountResponse(account, radarGraphs);
     }
 
     private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {
@@ -150,6 +106,7 @@ public class AccountService {
         social.setUserDetail(userDetail);
         social.setLinkedInUrl(request.linkedinUsername());
         social.setCodewarsUrl(request.codewarsUsername());
+        userDetail.setSocial(social);
         return socialRepository.save(social);
     }
 
@@ -184,21 +141,5 @@ public class AccountService {
         }
     }
 
-    private Github createGithub(AccountDto.AccountRequest request, Social social) {
-        Github github = new Github();
-        github.setSocial(social);
-        github.setUrl(request.githubUsername());
-        github.setPictureUrl(request.githubUsername());
-        return githubRepository.save(github);
-    }
 
-    private void createProject(AccountDto.AccountRequest request, Github github) {
-        for (String project : request.selectedProjects()) {
-            Project newProject = new Project();
-            newProject.setGithub(github);
-            newProject.setUrl(project);
-            github.addProject(newProject);
-            projectRepository.save(newProject);
-        }
-    }
 }
