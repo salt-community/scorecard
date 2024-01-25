@@ -62,4 +62,12 @@ class AssignmentServiceTest {
         assertThat(returnedAssignment).isNotEqualTo(assignment2);
     }
 
+    @Test
+    void shouldThrowNoSuchElementExceptionWhenAssignmentNotFoundByName() {
+        Assignment assignment = new Assignment();
+        assignment.setName("test");
+        when(assignmentRepository.findByName(assignment.getName())).thenReturn(java.util.Optional.empty());
+        assertThrows(NoSuchElementException.class, () -> assignmentService.getTestByName(assignment.getName()));
+    }
+
 }
