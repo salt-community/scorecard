@@ -1,9 +1,18 @@
 export type SimpleTableEntry = { [key: string]: string | number };
 
+export type academic = {
+  id: string;
+  degree: string;
+  major: string;
+  startDate: string;
+  endDate: string;
+  school: string;
+};
+
 export type BackgroundInformation = {
   nationalities: string[];
-  spokenLanguages: string[];
-  educations: string[];
+  spokenLanguages: SimpleTableEntry;
+  academic: academic;
   skills: string[];
 };
 
@@ -19,6 +28,7 @@ export type RadarGraphicData = {
 
 export type DeveloperData = {
   id: string;
+  email: string;
   name: string;
   standoutIntro: string;
   mainProgrammingLanguage: string;
@@ -29,7 +39,7 @@ export type DeveloperData = {
   githubProfilePictureUrl: string;
   scores: Scores[];
   selectedProjects: Project[];
-  radarGraphicDatas: RadarGraphicData[];
+  radarGraph: RadarGraphicData[];
   commitsCount?: number;
   issuesCount?: number;
 };

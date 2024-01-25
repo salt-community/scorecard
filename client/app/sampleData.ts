@@ -33,14 +33,26 @@ export const sampleRegisteredDeveloperData = {
 export const sampleGeneratedDeveloperData = {
   id: '001',
   name: 'feng yang',
+  email: 'feng.yang@appliedtechnology.se',
   standoutIntro: 'Experienced in various of client projects',
   mainProgrammingLanguage: 'javascript',
   githubUrl: 'https://github.com/Finns841594',
   linkedinUrl: 'https://www.linkedin.com/in/feng-yang-511361166/',
   backgroundInformations: {
     nationalities: ['Chinese'],
-    spokenLanguages: ['Chinese', 'English', 'Swedish'],
-    educations: ['Architecture'],
+    spokenLanguages: {
+      swedish: 'intermediate',
+      chinese: 'natives',
+      english: 'fluent',
+    },
+    academic: {
+      id: 'f41430af-58e6-4895-b523-93004dc828dd',
+      degree: 'master',
+      major: 'architecture',
+      startDate: '12-08-2018',
+      endDate: '12-08-2020',
+      school: 'KTH Royal Institute of Technology',
+    },
     skills: [
       'JavaScript',
       'TypeScript',
@@ -123,7 +135,7 @@ export const sampleGeneratedDeveloperData = {
       },
     },
   ],
-  radarGraphicDatas: [
+  radarGraph: [
     {
       subject: 'frontend',
       A: 98,
