@@ -2,7 +2,6 @@ package com.salt.server.Account.api;
 
 import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.service.AccountService;
-import com.salt.server.Account.model.Account;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,28 +18,17 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<Account> getAllAccount() {
+    public List<AccountDto.Response> getAllAccount() {
         return accountService.getAllAccount();
     }
 
     @GetMapping("/{accountId}")
-    public AccountDto.AccountResponse getAccountById(@PathVariable UUID accountId) {
+    public AccountDto.Response getAccountById(@PathVariable UUID accountId) {
         return accountService.getAccountById(accountId);
     }
 
     @PostMapping
-    public Account createAccount(@RequestBody AccountDto.AccountRequest request) {
+    public AccountDto.Response createAccount(@RequestBody AccountDto.Request request) {
         return accountService.createAccount(request);
     }
-
-    @PostMapping("/developer")
-    public AccountDto.AccountResponse createDeveloper(@RequestBody AccountDto.AccountRequest request) {
-        return accountService.createDeveloper(request);
-    }
-
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void createAccount(@RequestParam("file") MultipartFile file) {
-//         accountService.createDeveloperAccountCSV(file);
-//    }
 }

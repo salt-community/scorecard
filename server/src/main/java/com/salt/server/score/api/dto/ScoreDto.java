@@ -1,32 +1,26 @@
-package com.salt.server.Account.api.dto;
+package com.salt.server.score.api.dto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ScoreDto {
 
-    record ScoreRequest(
+    record Request(
             String name,
             int score,
             String description
     ) {
     }
 
-    record ScoresListResponse(
-            List<ScoreResponse> scoreResponses
-    ) {
-    }
-
-    record ScoreResponse(
+    record Response(
             UUID id,
             String name,
             int score
-
     ) {
     }
 
     record ScoreListResponse(
-            List<ScoreResponse> scoreResponseList
+            List<Response> scoreResponseList
     ) {
     }
 }

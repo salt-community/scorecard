@@ -1,8 +1,7 @@
 package com.salt.server.seeder;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.salt.server.Account.api.dto.AccountDto;
-import com.salt.server.Account.api.dto.ScoreDto;
+import com.salt.server.Account.api.dto.DeveloperDto;
+import com.salt.server.score.api.dto.ScoreDto;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.assignment.model.Assignment;
@@ -86,14 +85,14 @@ public class DatabaseSeeder implements ApplicationRunner {
     public void accountSeeder() {
         List<String> developers = Arrays.asList(feng, kevin,jacob,ariel);
 
-        String uri = "http://localhost:8080/api/accounts/developer";
+        String uri = "http://localhost:8080/api/developer";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         for (String developer : developers) {
             HttpEntity<String> entity = new HttpEntity<>(developer, headers);
-            restTemplate.postForObject(uri, entity, AccountDto.AccountResponse.class);
+            restTemplate.postForObject(uri, entity, DeveloperDto.Response.class);
         }
 
         List<Account> accounts = accountRepository.findAll();
@@ -101,7 +100,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         for (Account account : accounts) {
             String scoreUri = String.format("http://localhost:8080/api/scores/%s/add-scores", account.getId());
             HttpEntity<String> entity = new HttpEntity<>(score, headers);
-            restTemplate.postForObject(scoreUri, entity, ScoreDto.ScoreResponse[].class);
+            restTemplate.postForObject(scoreUri, entity, ScoreDto.Response[].class);
         }
 
     }
