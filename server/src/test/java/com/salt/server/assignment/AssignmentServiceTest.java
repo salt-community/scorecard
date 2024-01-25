@@ -36,11 +36,14 @@ class AssignmentServiceTest {
 
     @Test
     void shouldReturnAssignmentById() {
+        String id = "8a9385a7-c944-43ba-b4aa-a9e9ff1be14e";
         Assignment assignment = new Assignment();
+        assignment.setId(UUID.fromString(id));
         Assignment assignment2 = new Assignment();
         when(assignmentRepository.findById(assignment.getId())).thenReturn(java.util.Optional.of(assignment));
         Assignment returnedAssignment = assignmentService.getTestById(assignment.getId());
         assertThat(returnedAssignment).isEqualTo(assignment);
+        assertThat(returnedAssignment.getId()).isEqualTo(UUID.fromString(id));
         assertThat(returnedAssignment).isNotEqualTo(assignment2);
     }
 
