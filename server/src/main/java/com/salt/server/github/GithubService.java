@@ -20,10 +20,12 @@ public class GithubService {
     }
 
     public Github createGithub(AccountDto.AccountRequest request, Social social) {
-        Github github = new Github();
-        github.setSocial(social);
-        github.setUrl(request.githubUsername());
-        github.setPictureUrl(request.githubUsername());
+        Github github = Github.builder()
+                .social(social)
+                .url(request.githubUsername())
+                .pictureUrl(request.githubUsername())
+                .build();
+
         social.setGithubId(github);
         return githubRepository.save(github);
     }

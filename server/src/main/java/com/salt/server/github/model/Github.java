@@ -11,34 +11,40 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Github {
     @Id
     @UuidGenerator
     private UUID id;
-    @Setter(AccessLevel.NONE)
     private String url;
-    @Setter(AccessLevel.NONE)
     private String pictureUrl;
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
+    @Setter
+    @Builder.Default
     @OneToMany(mappedBy = "github")
     private List<Project> projects = new ArrayList<>();
 
-    public void setUrl(String url) {
-        this.url = String.format("https://github.com/%s", url);
+
+    public static class GithubBuilder {
+        public GithubBuilder url(String url) {
+            this.url = String.format("https://github.com/%s", url);
+            return this;
+        }
+
+        public GithubBuilder pictureUrl(String pictureUrl) {
+            this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
+            return this;
+        }
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
-    }
-
-    public void addProject(Project project){
+    public void addProject(Project project) {
         this.projects.add(project);
     }
-
 
 }
