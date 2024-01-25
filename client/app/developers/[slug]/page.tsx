@@ -7,7 +7,6 @@ const fetchUserByAccountId = async (id: string) => {
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const developerData = await fetchUserByAccountId(params.slug);
-  console.log('developerData: ', developerData);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
