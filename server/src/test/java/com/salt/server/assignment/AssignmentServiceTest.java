@@ -50,4 +50,16 @@ class AssignmentServiceTest {
         assertThrows(NoSuchElementException.class, () -> assignmentService.getTestById(assignment.getId()));
     }
 
+    @Test
+    void shouldReturnAssignmentByName(){
+        Assignment assignment = new Assignment();
+        assignment.setName("test");
+        Assignment assignment2 = new Assignment();
+        when(assignmentRepository.findByName(assignment.getName())).thenReturn(java.util.Optional.of(assignment));
+        Assignment returnedAssignment = assignmentService.getTestByName(assignment.getName());
+        assertThat(returnedAssignment).isEqualTo(assignment);
+        assertThat(returnedAssignment.getName()).isEqualTo("test");
+        assertThat(returnedAssignment).isNotEqualTo(assignment2);
+    }
+
 }
