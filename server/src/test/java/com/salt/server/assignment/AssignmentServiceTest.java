@@ -9,8 +9,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 
@@ -39,6 +41,13 @@ class AssignmentServiceTest {
         Assignment returnedAssignment = assignmentService.getTestById(assignment.getId());
         assertThat(returnedAssignment).isEqualTo(assignment);
         assertThat(returnedAssignment).isNotEqualTo(assignment2);
+    }
+
+    @Test
+    void shouldThrowNoSuchElementExceptionWhenAssignmentNotFound() {
+        Assignment assignment = new Assignment();
+        when(assignmentRepository.findById(assignment.getId())).thenReturn(java.util.Optional.empty());
+        assertThrows(NoSuchElementException.class, () -> assignmentService.getTestById(assignment.getId()));
     }
 
 }
