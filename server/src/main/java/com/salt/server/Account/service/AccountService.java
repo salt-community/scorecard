@@ -119,9 +119,11 @@ public class AccountService {
 
     private void createNationality(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var nationality : request.backgroundInformation().nationalities()) {
-            Nationality newNationality = new Nationality();
-            newNationality.setUserDetail(userDetail);
-            newNationality.setNationality(nationality);
+            Nationality newNationality = Nationality.builder()
+                    .userDetail(userDetail)
+                    .nationality(nationality)
+                    .build();
+
             userDetail.addNationality(newNationality);
             nationalityRepository.save(newNationality);
         }
