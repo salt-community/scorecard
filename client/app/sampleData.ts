@@ -33,14 +33,26 @@ export const sampleRegisteredDeveloperData = {
 export const sampleGeneratedDeveloperData = {
   id: '001',
   name: 'feng yang',
+  email: 'feng.yang@appliedtechnology.se',
   standoutIntro: 'Experienced in various of client projects',
-  mainProgrammingLanguage: 'javascript',
+  bootcamp: 'javascript',
   githubUrl: 'https://github.com/Finns841594',
   linkedinUrl: 'https://www.linkedin.com/in/feng-yang-511361166/',
-  backgroundInformations: {
+  backgroundInformation: {
     nationalities: ['Chinese'],
-    spokenLanguages: ['Chinese', 'English', 'Swedish'],
-    educations: ['Architecture'],
+    spokenLanguages: {
+      swedish: 'intermediate',
+      chinese: 'natives',
+      english: 'fluent',
+    },
+    academic: {
+      id: 'f41430af-58e6-4895-b523-93004dc828dd',
+      degree: 'master',
+      major: 'architecture',
+      startDate: '12-08-2018',
+      endDate: '12-08-2020',
+      school: 'KTH Royal Institute of Technology',
+    },
     skills: [
       'JavaScript',
       'TypeScript',
@@ -53,8 +65,7 @@ export const sampleGeneratedDeveloperData = {
   },
   // below are generated datas
   githubUserName: 'Finns841594',
-  githubProfilePictureUrl:
-    'https://avatars.githubusercontent.com/u/65496134?v=4',
+  githubProfilePictureUrl: 'https://github.com/Finns841594.png',
   scores: [
     {
       scoreName: 'Communication',
@@ -123,35 +134,35 @@ export const sampleGeneratedDeveloperData = {
       },
     },
   ],
-  radarGraphicDatas: [
+  radarGraph: [
     {
       subject: 'frontend',
-      A: 98,
+      score: 98,
       fullMark: 100,
     },
     {
       subject: 'backend',
-      A: 88,
+      score: 88,
       fullMark: 100,
     },
     {
       subject: 'charismatic',
-      A: 75,
+      score: 75,
       fullMark: 100,
     },
     {
       subject: 'teamwork',
-      A: 80,
+      score: 80,
       fullMark: 100,
     },
     {
       subject: 'design',
-      A: 100,
+      score: 100,
       fullMark: 100,
     },
     {
       subject: 'management',
-      A: 95,
+      score: 95,
       fullMark: 100,
     },
   ],
