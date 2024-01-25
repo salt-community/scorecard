@@ -1,9 +1,9 @@
-import ScoreCard from './components/ScoreCard';
-import { sampleGeneratedDeveloperData } from './sampleData';
+import Link from 'next/link';
 
 const fetchAllUsers = async () => {
   const res = await fetch('http://localhost:8080/api/accounts');
-  return res.json();
+  const data = res.json();
+  return data;
 };
 
 export default async function Home() {
@@ -13,7 +13,9 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
       <div>
         {developersData.map(item => (
-          <p>{item.name}</p>
+          <li key={item.id}>
+            <Link href={`/developers/${item.id}`}>{item.name}</Link>
+          </li>
         ))}
       </div>
     </main>

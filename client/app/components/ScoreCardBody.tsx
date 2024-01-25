@@ -13,7 +13,7 @@ interface ScoreCardBodyProps {
 const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
   return (
     <div className="flex flex-col gap-4">
-      <Background developerBackgroud={developerData.backgroundInformations} />
+      <Background developerBackgroud={developerData.backgroundInformation} />
       <Divider />
       <Achievements userName={developerData.githubUserName} />
       <SaltScore

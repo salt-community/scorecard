@@ -38,7 +38,7 @@ export const sampleGeneratedDeveloperData = {
   bootcamp: 'javascript',
   githubUrl: 'https://github.com/Finns841594',
   linkedinUrl: 'https://www.linkedin.com/in/feng-yang-511361166/',
-  backgroundInformations: {
+  backgroundInformation: {
     nationalities: ['Chinese'],
     spokenLanguages: {
       swedish: 'intermediate',
@@ -65,7 +65,7 @@ export const sampleGeneratedDeveloperData = {
   },
   // below are generated datas
   githubUserName: 'Finns841594',
-  githubProfilePictureUrl: 'Finns841594.png',
+  githubProfilePictureUrl: 'https://github.com/Finns841594.png',
   scores: [
     {
       scoreName: 'Communication',
@@ -137,32 +137,32 @@ export const sampleGeneratedDeveloperData = {
   radarGraph: [
     {
       subject: 'frontend',
-      A: 98,
+      score: 98,
       fullMark: 100,
     },
     {
       subject: 'backend',
-      A: 88,
+      score: 88,
       fullMark: 100,
     },
     {
       subject: 'charismatic',
-      A: 75,
+      score: 75,
       fullMark: 100,
     },
     {
       subject: 'teamwork',
-      A: 80,
+      score: 80,
       fullMark: 100,
     },
     {
       subject: 'design',
-      A: 100,
+      score: 100,
       fullMark: 100,
     },
     {
       subject: 'management',
-      A: 95,
+      score: 95,
       fullMark: 100,
     },
   ],

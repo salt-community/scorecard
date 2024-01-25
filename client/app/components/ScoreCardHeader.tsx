@@ -7,8 +7,7 @@ interface ScoreCardHeaderProps {
 }
 
 const ScoreCardHeader = ({ developerData }: ScoreCardHeaderProps) => {
-  const avatarUrl =
-    'https://github.com/' + developerData.githubProfilePictureUrl;
+  const avatarUrl = developerData.githubProfilePictureUrl;
   const developerName = developerData.name;
   const programmingLanguage = developerData.bootcamp;
   const standoutIntro = developerData.standoutIntro;

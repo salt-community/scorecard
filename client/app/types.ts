@@ -22,7 +22,7 @@ export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
 
 export type RadarGraphicData = {
   subject: string;
-  A: number;
+  score: number;
   fullMark: number;
 };
 
@@ -34,7 +34,7 @@ export type DeveloperData = {
   bootcamp: string;
   githubUrl: string;
   linkedinUrl: string;
-  backgroundInformations: BackgroundInformation;
+  backgroundInformation: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;
   scores: Scores[];

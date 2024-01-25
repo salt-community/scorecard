@@ -49,7 +49,12 @@ export const RadarGraphic = ({ data }: RadarGraphicProps) => {
         dataKey="subject"
         tick={{ fontSize: isMobile ? 'x-small' : 'small' }}
       />
-      <Radar dataKey="A" stroke="#888888" fill="#999999" fillOpacity={0.6} />
+      <Radar
+        dataKey="score"
+        stroke="#888888"
+        fill="#999999"
+        fillOpacity={0.6}
+      />
     </RadarChart>
   );
 };
