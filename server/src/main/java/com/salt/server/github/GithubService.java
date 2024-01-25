@@ -32,9 +32,11 @@ public class GithubService {
 
     public void createProject(AccountDto.AccountRequest request, Github github) {
         for (String project : request.selectedProjects()) {
-            Project newProject = new Project();
-            newProject.setGithub(github);
-            newProject.setUrl(project);
+            Project newProject = Project.builder()
+                    .github(github)
+                    .url(project)
+                    .build();
+
             github.addProject(newProject);
             projectRepository.save(newProject);
         }

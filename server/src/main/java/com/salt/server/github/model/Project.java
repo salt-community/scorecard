@@ -11,8 +11,10 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Project {
     @Id
     @UuidGenerator
