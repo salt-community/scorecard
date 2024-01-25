@@ -2,17 +2,16 @@ package com.salt.server.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Language {
     @Id
     @UuidGenerator
@@ -26,12 +25,16 @@ public class Language {
     @JoinColumn(name = "user_detail_id", nullable = false)
     private UserDetail userDetail;
 
-    public void setFluency(String fluency) {
-        this.fluency = switch (fluency) {
-            case "natives" -> Fluency.natives;
-            case "fluent" -> Fluency.fluent;
-            case "intermediate" -> Fluency.intermediate;
-            default -> Fluency.beginner;
-        };
+    public static class LanguageBuilder{
+        public LanguageBuilder fluency(String fluency) {
+            this.fluency = switch (fluency) {
+                case "natives" -> Fluency.natives;
+                case "fluent" -> Fluency.fluent;
+                case "intermediate" -> Fluency.intermediate;
+                default -> Fluency.beginner;
+            };
+            return this;
+        }
     }
+
 }

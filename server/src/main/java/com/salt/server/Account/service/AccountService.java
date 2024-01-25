@@ -131,10 +131,12 @@ public class AccountService {
 
     private void createLanguage(AccountDto.AccountRequest request, UserDetail userDetail) {
         for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
-            Language newLanguage = new Language();
-            newLanguage.setUserDetail(userDetail);
-            newLanguage.setLanguage(language.getKey());
-            newLanguage.setFluency(language.getValue().toString());
+            Language newLanguage = Language.builder()
+                    .userDetail(userDetail)
+                    .language(language.getKey())
+                    .fluency(language.getValue().toString())
+                    .build();
+
             userDetail.addLanguage(newLanguage);
             languageRepository.save(newLanguage);
         }
