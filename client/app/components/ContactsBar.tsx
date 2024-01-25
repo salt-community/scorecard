@@ -12,10 +12,7 @@ const ContactsBar = () => {
       <a href={developer.githubUrl} target="_blank">
         <Icon icon="github" className="h-6 w-6 fill-black" />
       </a>
-      <a
-        href={'https://www.linkedin.com/in/' + developer.linkedinUrl}
-        target="_blank"
-      >
+      <a href={developer.linkedinUrl} target="_blank">
         <Icon icon="linkedin" className="h-6 w-6 fill-black" />
       </a>
     </div>

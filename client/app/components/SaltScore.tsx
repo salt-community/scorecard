@@ -8,7 +8,7 @@ import {
   Chip,
 } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
-import { RadarGraphicData, Scores, SimpleTableEntry } from '../types';
+import { RadarGraphicData, Scores } from '../types';
 import { RadarGraphic } from './RadarGraphic';
 import {
   colorVariant,

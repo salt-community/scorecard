@@ -1,4 +1,5 @@
 import { BackgroundInformation } from '../types';
+import SimpleTable from './SimpleTable';
 
 const valueGeneretor = (values: string[]) => {
   const valueString = values.join(', ');
@@ -16,10 +17,10 @@ const Background = ({ developerBackgroud }: BackgroundProps) => {
         <h5 className="font-bold">Nationalities</h5>
         {valueGeneretor(developerBackgroud.nationalities)}
       </div>
-      {/* <div className="flex flex-row justify-between my-1">
+      <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Languages</h5>
-        {developerBackgroud.spokenLanguages}
-      </div> */}
+        <SimpleTable data={developerBackgroud.spokenLanguages} />
+      </div>
       <div className="flex flex-row justify-between my-1">
         <h5 className="font-bold">Educations</h5>
         {developerBackgroud.academic.major}
