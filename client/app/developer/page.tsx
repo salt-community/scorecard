@@ -1,4 +1,4 @@
-import ScoreCard from '../component/ScoreCard';
+import ScoreCard from '../components/ScoreCard';
 import { sampleGeneratedDeveloperData } from '../sampleData';
 
 // const fetchUserByAccountId = async (id: string) => {

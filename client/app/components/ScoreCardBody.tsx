@@ -18,7 +18,7 @@ const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
       <Achievements userName={developerData.githubUserName} />
       <SaltScore
         scores={developerData.scores}
-        radarGraphicData={developerData.radarGraphicDatas}
+        radarGraphicData={developerData.radarGraph}
       />
       <Projects projects={developerData.selectedProjects} />
     </div>
