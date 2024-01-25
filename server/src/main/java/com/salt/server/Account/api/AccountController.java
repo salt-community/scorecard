@@ -19,7 +19,7 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountDto.ListAccountsDto> getAllAccount() {
+    public List<Account> getAllAccount() {
         return accountService.getAllAccount();
     }
 
@@ -31,6 +31,11 @@ public class AccountController {
     @PostMapping
     public Account createAccount(@RequestBody AccountDto.AccountRequest request) {
         return accountService.createAccount(request);
+    }
+
+    @PostMapping("/developer")
+    public AccountDto.AccountResponse createDeveloper(@RequestBody AccountDto.AccountRequest request) {
+        return accountService.createDeveloper(request);
     }
 
 //    @PostMapping

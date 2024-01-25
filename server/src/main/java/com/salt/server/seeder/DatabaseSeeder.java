@@ -37,8 +37,8 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        assignmentSeeder();
-//        accountSeeder();
+        assignmentSeeder();
+        accountSeeder();
     }
 
     private void assignmentSeeder() {
@@ -86,9 +86,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin);
+        List<String> developers = Arrays.asList(feng, kevin, jacob);
 
-        String uri = "http://localhost:8080/api/accounts";
+        String uri = "http://localhost:8080/api/accounts/developer";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -164,6 +164,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     String feng = "{\n" +
             "  \"email\": \"feng.yang@appliedtechnology.se\",\n" +
             "  \"name\": \"feng yang\",\n" +
+            "  \"role\": \"developer\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"bootcamp\": \"javascript\",\n" +
             "  \"githubUsername\": \"Finns841594\",\n" +
@@ -195,6 +196,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     String kevin = "{\n" +
             "  \"email\": \"kevin.gida@appliedtechnology.se\",\n" +
             "  \"name\": \"kevin gida\",\n" +
+            "  \"role\": \"developer\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"kevingida\",\n" +
@@ -222,4 +224,33 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    \"skills\": [\"Java\",\"javaScript\", \"typeScript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\"]\n" +
             "  }\n" +
             "} ";
+
+    String jacob = "{\n" +
+            "  \"email\": \"jacob.larsson@appliedtechnology.se\",\n" +
+            "  \"name\": \"jacob larsson\",\n" +
+            "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
+            "  \"bootcamp\": \"java\",\n" +
+            "  \"githubUsername\": \"JacobLars\",\n" +
+            "  \"linkedinUsername\": \"jacob-larsson-0a7a69262\",\n" +
+            "  \"codewarsUsername\" : \"LarsMustasch\",\n" +
+            "  \"selectedProjects\": [\n" +
+            "    \"https://github.com/saltify-mob/WardrobeWiz\"\n" +
+            "  ],\n" +
+            "  \"backgroundInformation\": {\n" +
+            "    \"nationalities\": [\"swedish\"],\n" +
+            "    \"spokenLanguages\": {\n" +
+            "        \"swedish\":\"natives\",\n" +
+            "        \"english\":\"fluent\"\n" +
+            "    },\n" +
+            "    \"academic\": {\n" +
+            "        \"degree\" : \"higher vocational education diploma\",\n" +
+            "        \"major\" : \"java developing\",\n" +
+            "        \"startDate\" : \"20-08-2021\",\n" +
+            "        \"endDate\" : \"5-05-2023\",\n" +
+            "        \"yearStudied\" : 2,\n" +
+            "        \"school\" : \"IT-Högskolan\"\n" +
+            "        },\n" +
+            "    \"skills\": [\"java\", \"typeScript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
+            "  }\n" +
+            "}";
 }

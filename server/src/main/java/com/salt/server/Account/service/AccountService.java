@@ -50,8 +50,8 @@ public class AccountService {
         this.scoreService = scoreService;
     }
 
-    public List<AccountDto.ListAccountsDto> getAllAccount() {
-        return accountRepository.findAll().stream().map(AccountMapper::toListAccountDto).toList();
+    public List<Account> getAllAccount() {
+        return accountRepository.findAll();
     }
 
     public AccountDto.AccountResponse getAccountById(UUID id) {
@@ -69,21 +69,29 @@ public class AccountService {
     public Account createAccount(AccountDto.AccountRequest request) {
         Account account = new Account();
         account.setEmail(request.email());
+        account.setRole(request.role());
         return accountRepository.save(account);
+    }
 
-//        UserDetail userDetail = createUserDetail(request, saveAccount);
-//        saveAccount.setUserDetail(userDetail);
-//        createAcademic(request, userDetail);
-//        createNationality(request, userDetail);
-//        createLanguage(request, userDetail);
-//        createSkill(request,userDetail);
-//        Social social = createSocial(request, userDetail);
-//        Github github = githubService.createGithub(request, social);
-//        githubService.createProject(request, github);
-//
-//        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+    public AccountDto.AccountResponse createDeveloper(AccountDto.AccountRequest request) {
+        Account developerAccount = new Account();
+        developerAccount.setEmail(request.email());
+        developerAccount.setRole(request.role());
+        Account saveAccount = accountRepository.save(developerAccount);
 
-//        return AccountMapper.toAccountResponse(account, radarGraphs);
+        UserDetail userDetail = createUserDetail(request, saveAccount);
+        saveAccount.setUserDetail(userDetail);
+        createAcademic(request, userDetail);
+        createNationality(request, userDetail);
+        createLanguage(request, userDetail);
+        createSkill(request,userDetail);
+        Social social = createSocial(request, userDetail);
+        Github github = githubService.createGithub(request, social);
+        githubService.createProject(request, github);
+
+        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(developerAccount);
+
+        return AccountMapper.toAccountResponse(developerAccount, radarGraphs);
     }
 
     private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {

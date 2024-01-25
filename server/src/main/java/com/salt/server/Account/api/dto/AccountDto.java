@@ -11,6 +11,7 @@ public interface AccountDto {
     record AccountRequest(
             String email,
             String name,
+            String role,
             String standoutIntro,
             String bootcamp,
             String githubUsername,
@@ -28,24 +29,6 @@ public interface AccountDto {
             List<String> skills
     ) {
     }
-    record AccountResponseTest(
-            UUID id,
-            String email,
-            String name,
-            String standoutIntro,
-            String bootcamp,
-            String githubUrl,
-            String githubUserName,
-            String githubProfilePictureUrl,
-            String linkedinUrl,
-            String codewarsUrl,
-            List<RadarGraph> radarGraph,
-            List<Scores> scores,
-            List<ProjectDto> selectedProjects,
-            BackgroundInformation backgroundInformation
-            ) {
-    }
-
     record AccountResponse(
             UUID id,
             String email,
