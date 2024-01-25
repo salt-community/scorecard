@@ -71,7 +71,7 @@ public interface AccountDto {
     ){}
 
     record Scores(
-            String ScoreName,
+            String scoreName,
             Map<String, Integer> data
     ) {
     }
