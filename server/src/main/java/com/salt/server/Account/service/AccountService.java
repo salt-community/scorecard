@@ -42,4 +42,9 @@ public class AccountService {
         account.setRole(request.role());
         return AccountMapper.toAccountResponse(accountRepository.save(account));
     }
+
+    public Account getDeveloperById(UUID id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Developer not found"));
+    }
 }

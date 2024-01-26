@@ -2,7 +2,7 @@ package com.salt.server.score;
 
 import com.salt.server.Account.api.dto.DeveloperDto;
 import com.salt.server.Account.model.Account;
-import com.salt.server.Account.service.DeveloperService;
+import com.salt.server.Account.service.AccountService;
 import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.AssignmentService;
 import com.salt.server.assignment.model.Focus;
@@ -16,13 +16,14 @@ import java.util.stream.Collectors;
 public class ScoreService {
 
     private final ScoreRepository scoreRepository;
-    private final DeveloperService developerService;
+    private final AccountService accountService;
     private final AssignmentService assignmentService;
 
-    public ScoreService(ScoreRepository scoreRepository, DeveloperService developerService,
+    public ScoreService(ScoreRepository scoreRepository,
+                        AccountService accountService,
                         AssignmentService assignmentService) {
         this.scoreRepository = scoreRepository;
-        this.developerService = developerService;
+        this.accountService = accountService;
         this.assignmentService = assignmentService;
     }
 
@@ -37,7 +38,7 @@ public class ScoreService {
     }
 
     public ScoreDto.Response addScore(UUID id, ScoreDto.Request request) {
-        Account account = developerService.getDeveloperById(id);
+        Account account = accountService.getDeveloperById(id);
         Assignment assignment = assignmentService.getTestByName(request.name());
         Score score = new Score();
         score.setAccount(account);
