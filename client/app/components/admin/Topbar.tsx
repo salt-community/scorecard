@@ -15,7 +15,7 @@ const Topbar = () => {
 
   return (
     <Card
-      className="w-full h-16 p-2 pl-5 shadow-xl shadow-blue-gray-900/5 border-l-2 border-b-2 border-r-2"
+      className="w-full h-16  pl-4 shadow-xl shadow-blue-gray-900/5 border-l-2 border-b-2 border-r-2"
       placeholder={undefined}
     >
       <Typography

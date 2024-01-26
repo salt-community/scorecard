@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 
 import { Button, Card, Typography } from "@material-tailwind/react";
+import { httpDeleteDeveloper } from "@/app/api/request";
 
 type developerInList = {
   id: string;
@@ -16,6 +17,20 @@ type Props = {
 };
 
 const AllDevelopers = ({ developers }: Props) => {
+  const handleDelete = async (id: string) => {
+    if (id !== undefined) {
+      const serverResponse = await httpDeleteDeveloper(id);
+      console.log("Server Response", serverResponse);
+
+      if (serverResponse.status === 204) {
+        // deleteFigure(id);
+      } else {
+        const responseText = await serverResponse.text();
+        throw new Error(`Server response: ${responseText}`);
+      }
+    }
+  };
+
   return (
     <Card className="p-4" placeholder={undefined}>
       <Typography variant="h5" color="blue-gray" placeholder={undefined}>
@@ -53,6 +68,7 @@ const AllDevelopers = ({ developers }: Props) => {
                     >
                       <Button
                         className="bg-accent2 hover:bg-bannerColor2 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => handleDelete(developer.id)}
                         placeholder={undefined}
                       >
                         delete
