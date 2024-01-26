@@ -29,8 +29,8 @@ const AllDevelopers = ({developers}: Props) => {
 
 
   return (
-    <Card className="absolute right-0 top-[6rem] w-full max-w-[calc(100vw-19rem)]  h-[calc(100vh-6rem)] p-4 shadow-xl shadow-blue-gray-900/5 border-solid border-2 ">
-      <Typography variant="h5" color="blue-gray">
+    <Card className="absolute right-0 top-[6rem] w-full max-w-[calc(100vw-19rem)]  h-[calc(100vh-6rem)] p-4 shadow-xl shadow-blue-gray-900/5 border-solid border-2" placeholder={undefined}>
+      <Typography variant="h5" color="blue-gray" placeholder={undefined}>
         All developers 
       </Typography>
       <div className="overflow-y-auto">
@@ -63,7 +63,7 @@ const AllDevelopers = ({developers}: Props) => {
                         href={`/filteredfigures/review/${developer.id}`}
                         passHref
                       >
-                     <Button className="bg-bannerColor1 hover:bg-bannerColor2 text-white font-bold py-2 px-4 rounded">
+                     <Button className="bg-bannerColor1 hover:bg-bannerColor2 text-white font-bold py-2 px-4 rounded" placeholder={undefined}>
                            delete
                           </Button>
                       </Link>
