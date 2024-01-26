@@ -1,15 +1,10 @@
-import type { Metadata } from 'next';
+
 import { Inter } from 'next/font/google';
-import './globals.css';
-
-
+import './global.css';
+import { Sidebar } from '../components/admin/Sidebar';
+import Topbar from '../components/admin/TopBar';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: 'Score Card Project',
-  description: 'A score card that marks the talents',
-};
 
 export default function AdminLayout({
   children,
@@ -17,11 +12,11 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="light">
-      <body className={inter.className}>
-
+      <div className={inter.className}>
+        <Topbar />
+        <Sidebar />
         {children}
-      </body>
-    </html>
+      </div>
+
   );
 }
