@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface DeveloperDto {
 
     record ShowcaseResponse(
-            UUID id,
+            String id,
             String name,
             String profilePicture,
             String standoutIntro

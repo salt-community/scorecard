@@ -84,7 +84,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     public void accountSeeder() {
         List<String> developers = Arrays.asList(feng, kevin,jacob,ariel);
 
-        String uri = "http://localhost:8080/api/developer";
+        String uri = "http://localhost:8080/api/developers";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

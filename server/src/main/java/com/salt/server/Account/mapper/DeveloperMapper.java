@@ -16,7 +16,7 @@ public class DeveloperMapper {
 
     public static DeveloperDto.ShowcaseResponse toShowcaseResponse(Account account) {
         return new DeveloperDto.ShowcaseResponse(
-                account.getId(),
+                account.getId().toString(),
                 account.getUserDetail().getName(),
                 account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
                 account.getUserDetail().getIntroduction()
