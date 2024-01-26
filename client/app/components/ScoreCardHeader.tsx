@@ -11,7 +11,8 @@ const ScoreCardHeader = ({ developerData }: ScoreCardHeaderProps) => {
   const developerName = developerData.name;
   const programmingLanguage = developerData.bootcamp;
   const standoutIntro = developerData.standoutIntro;
-
+  const github = developerData.githubUrl;
+  const linkedin = developerData.linkedinUrl;
   return (
     <div className="grid grid-cols-1 md:flex md:w-full gap-4 md:gap-8 md:my-4">
       <Avatar
@@ -27,7 +28,7 @@ const ScoreCardHeader = ({ developerData }: ScoreCardHeaderProps) => {
         </p>
         <div className="flex flex-row justify-between">
           <h4 className="font-bold text-large">{developerName}</h4>
-          <ContactsBar />
+          <ContactsBar githubUrl={github} linkedinUrl={linkedin} />
         </div>
         <small className="text-default-500">{standoutIntro}</small>
       </div>
