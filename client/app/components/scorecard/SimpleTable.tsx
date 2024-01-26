@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import React from 'react';
-import { SimpleTableEntry } from '../types';
+import { SimpleTableEntry } from '../../types';
 
 export interface SimpleTableProps {
   data: SimpleTableEntry;

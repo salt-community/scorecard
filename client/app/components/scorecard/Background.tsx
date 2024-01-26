@@ -1,4 +1,4 @@
-import { BackgroundInformation } from '../types';
+import { BackgroundInformation } from '../../types';
 import SimpleTable from './SimpleTable';
 
 const valueGeneretor = (values: string[]) => {

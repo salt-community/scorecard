@@ -1,6 +1,7 @@
 
 import { UUID } from 'crypto';
 import Link from 'next/link';
+import { ShowCard } from './components/ShowCard';
 
 // should apply TanStack Query for fetching
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -9,7 +10,6 @@ const fetchAllUsers = async () => {
     cache: "no-cache"
   });
   const data = await res.json();
-  console.log(res);
   return data;
 };
 
@@ -24,17 +24,13 @@ type developerInList = {
 
 export default async function Home() {
   const developersData = await fetchAllUsers();
-  console.log(developersData);
   return (
     <main className="flex min-h-screen flex-col items-center p-12 md:p-24">
       <div>
-             
          {developersData.map((item: developerInList) => (
-          <li key={item.id}>
-            <p>---- Card Component ----</p>
-            <Link href={`/developers/${item.id}`}>{item.name}</Link>
-            <p>---------------------------</p>
-          </li>
+          <Link href={`/developers/${item.id}`} key={item.id}>
+            <ShowCard id={item.id} name={item.name} profilePicture={item.profilePicture} standoutIntro={item.standoutIntro} />
+          </Link>
         ))} 
       </div>
     </main>

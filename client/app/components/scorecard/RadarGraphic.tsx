@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
-import { RadarGraphicData } from '../types';
+import { RadarGraphicData } from '../../types';
 
 export const useIsServerSide = () => {
   const [isServerSide, setIsServerSide] = useState(true);

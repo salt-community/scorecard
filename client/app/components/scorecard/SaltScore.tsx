@@ -8,14 +8,14 @@ import {
   Chip,
 } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
-import { RadarGraphicData, Scores } from '../types';
+import { RadarGraphicData, Scores } from '../../types';
 import { RadarGraphic } from './RadarGraphic';
 import {
   colorVariant,
   getAllAverageValue,
   levelVariant,
   getAverageValue,
-} from '../utilities';
+} from '../../utilities';
 
 interface SaltScoreProps {
   scores: Scores[];

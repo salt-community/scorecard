@@ -1,6 +1,6 @@
 import { Avatar } from '@nextui-org/react';
 import ContactsBar from './ContactsBar';
-import { DeveloperData } from '../types';
+import { DeveloperData } from '../../types';
 
 interface ScoreCardHeaderProps {
   developerData: DeveloperData;

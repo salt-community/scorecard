@@ -2,8 +2,8 @@ import { Card, CardHeader, CardBody } from '@nextui-org/react';
 import React from 'react';
 import ScoreCardBody from './ScoreCardBody';
 import ScoreCardHeader from './ScoreCardHeader';
-import { DeveloperData } from '../types';
-import { isExcellent } from '../utilities';
+import { DeveloperData } from '../../types';
+import { isExcellent } from '../../utilities';
 
 interface ScoreCardProps {
   developerData: DeveloperData;

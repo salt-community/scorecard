@@ -1,4 +1,4 @@
-import ScoreCard from '../components/ScoreCard';
+import ScoreCard from '../components/scorecard/ScoreCard';
 import { sampleGeneratedDeveloperData } from '../sampleData';
 
 export default async function Page() {

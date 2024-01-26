@@ -4,7 +4,7 @@ import SaltScore from './SaltScore';
 import Background from './Background';
 import Achievements from './Achievements';
 import Projects from './Projects';
-import { DeveloperData } from '../types';
+import { DeveloperData } from '../../types';
 
 interface ScoreCardBodyProps {
   developerData: DeveloperData;

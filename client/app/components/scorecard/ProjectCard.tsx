@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import SimpleTable from './SimpleTable';
-import { Project } from '../types';
+import { Project } from '../../types';
 import Icon from '@/public/icons/Icon';
 
 interface ProjectCardProps {
