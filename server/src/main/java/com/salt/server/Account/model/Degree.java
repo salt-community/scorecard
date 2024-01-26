@@ -1,7 +1,7 @@
 package com.salt.server.Account.model;
 
 public enum Degree {
-    highschool,
+    vocationaldiploma,
     bachelor,
     master,
     doctoral

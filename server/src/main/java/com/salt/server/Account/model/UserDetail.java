@@ -11,42 +11,52 @@ import java.util.UUID;
 
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDetail {
     @Id
     @UuidGenerator
     private UUID id;
     private String name;
     private String introduction;
-    @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
-    @OneToMany(mappedBy = "userDetail")
-    private List<Nationality> nationality = new ArrayList<>();
+    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Academic academic;
-    @JsonIgnore
-    @OneToMany(mappedBy = "userDetail")
-    private List<Skill> skills = new ArrayList<>();
-    @JsonIgnore
-    @OneToMany(mappedBy = "userDetail")
-    private List<Language> languages = new ArrayList<>();
+    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Social social;
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail")
     private Account account;
+    @Setter
+    @Builder.Default
+    @OneToMany(mappedBy = "userDetail")
+    private List<Nationality> nationality = new ArrayList<>();
+    @Setter
+    @Builder.Default
+    @OneToMany(mappedBy = "userDetail")
+    private List<Skill> skills = new ArrayList<>();
+    @Setter
+    @Builder.Default
+    @OneToMany(mappedBy = "userDetail")
+    private List<Language> languages = new ArrayList<>();
 
 
-    public void setBootcamp(String bootcamp) {
-        this.bootcamp = switch (bootcamp) {
-            case "java" -> Bootcamp.java;
-            case "javascript" -> Bootcamp.javascript;
-            default -> Bootcamp.dotnet;
-        };
+    public static class UserDetailBuilder{
+        public UserDetailBuilder bootcamp(String bootcamp) {
+            this.bootcamp = switch (bootcamp) {
+                case "java" -> Bootcamp.java;
+                case "javascript" -> Bootcamp.javascript;
+                default -> Bootcamp.dotnet;
+            };
+            return this;
+        }
     }
 
     public void addNationality(Nationality nationality){

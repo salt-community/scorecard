@@ -1,13 +1,12 @@
 package com.salt.server.score;
 
-import com.salt.server.Account.api.dto.AccountDto;
-import com.salt.server.Account.api.dto.ScoreDto;
+import com.salt.server.Account.api.dto.DeveloperDto;
 import com.salt.server.Account.model.Account;
-import com.salt.server.Account.repository.AccountRepository;
+import com.salt.server.Account.service.AccountService;
 import com.salt.server.assignment.model.Assignment;
 import com.salt.server.assignment.AssignmentService;
 import com.salt.server.assignment.model.Focus;
-import com.salt.server.assignment.repository.CoverageRepository;
+import com.salt.server.score.api.dto.ScoreDto;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,62 +16,71 @@ import java.util.stream.Collectors;
 public class ScoreService {
 
     private final ScoreRepository scoreRepository;
-    private final CoverageRepository coverageRepository;
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
     private final AssignmentService assignmentService;
 
-    public ScoreService(ScoreRepository scoreRepository, AccountRepository accountRepository, AssignmentService assignmentService, CoverageRepository coverageRepository) {
+    public ScoreService(ScoreRepository scoreRepository,
+                        AccountService accountService,
+                        AssignmentService assignmentService) {
         this.scoreRepository = scoreRepository;
-        this.accountRepository = accountRepository;
+        this.accountService = accountService;
         this.assignmentService = assignmentService;
-        this.coverageRepository = coverageRepository;
     }
 
     public ScoreDto.ScoreListResponse getAllScoreById(UUID id) {
         List<Score> scores = scoreRepository.findAllByAccount_Id(id);
         return new ScoreDto.ScoreListResponse(scores.stream()
-                .map(score -> new ScoreDto.ScoreResponse(score.getId(), score.getAssignment().getName(), score.getScore()))
+                .map(score -> new ScoreDto.Response(
+                        score.getId(),
+                        score.getAssignment().getName(),
+                        score.getScore()))
                 .collect(Collectors.toList()));
     }
 
-    public ScoreDto.ScoreResponse addScore(UUID id, ScoreDto.ScoreRequest request) {
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+    public ScoreDto.Response addScore(UUID id, ScoreDto.Request request) {
+        Account account = accountService.getDeveloperById(id);
         Assignment assignment = assignmentService.getTestByName(request.name());
         Score score = new Score();
         score.setAccount(account);
         score.setAssignment(assignment);
         score.setScore(request.score());
         score.setDescription(request.description());
-        account.addScore(score);
-        assignment.addScore(score);
+
         Score saveScore = scoreRepository.save(score);
-        return new ScoreDto.ScoreResponse(saveScore.getId(), saveScore.getAssignment().getName(), saveScore.getScore());
+        account.addScore(saveScore);
+        assignment.addScore(saveScore);
+
+        return new ScoreDto.Response(
+                saveScore.getId(),
+                saveScore.getAssignment().getName(),
+                saveScore.getScore());
     }
 
-    public List<ScoreDto.ScoreResponse> addListOfScores(UUID id, List<ScoreDto.ScoreRequest> requests) {
-        List<ScoreDto.ScoreResponse> scoreResponses = new ArrayList<>();
+    public List<ScoreDto.Response> addListOfScores(UUID id, List<ScoreDto.Request> requests) {
+        List<ScoreDto.Response> scoreResponses = new ArrayList<>();
         for (var score : requests) {
             scoreResponses.add(addScore(id, score));
         }
         return scoreResponses;
     }
 
-    public List<AccountDto.RadarGraph> calculateRadarGraph(Account account) {
-        List<AccountDto.RadarGraph> radarGraphs = new ArrayList<>();
+    public List<DeveloperDto.RadarGraph> calculateRadarGraph(Account account) {
+        List<DeveloperDto.RadarGraph> radarGraphs = new ArrayList<>();
         for (var focus : Focus.values()) {
 
             double totalScore = 0;
             double totalPercentage = 0;
-            if(account.getScores() != null) {
+            if (account.getScores() != null) {
                 for (var score : account.getScores()) {
-                    double percentage = (double) coverageRepository
-                            .findByAssignment_IdAndFocus(score.getAssignment().getId(), focus).getPercentage() / 100;
+                    double percentage = (double) assignmentService
+                            .getCoverageByAssignmentAndFocus(score.getAssignment(), focus)
+                            .getPercentage() / 100;
+
                     totalScore += score.getScore() * percentage;
                     totalPercentage += percentage;
                 }
             }
-            radarGraphs.add(new AccountDto.RadarGraph(focus.name(), totalScore / totalPercentage, 100));
+            radarGraphs.add(new DeveloperDto.RadarGraph(focus.name(), totalScore / totalPercentage, 100));
         }
         return radarGraphs;
     }

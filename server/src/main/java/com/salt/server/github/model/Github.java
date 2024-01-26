@@ -36,9 +36,8 @@ public class Github {
         this.pictureUrl = String.format("https://github.com/%s.png", pictureUrl);
     }
 
-    public void addProject(Project project){
+    public void addProject(Project project) {
         this.projects.add(project);
     }
-
 
 }

@@ -43,3 +43,10 @@ export type DeveloperData = {
   commitsCount?: number;
   issuesCount?: number;
 };
+
+export type DeveloperShowcase = {
+  id: string;
+  email: string;
+  name: string;
+  standoutIntro: string;
+}

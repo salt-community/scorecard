@@ -1339,3 +1339,4 @@ server/src/main/resources/secret.properties
 /data/pgdata/postgresql.auto.conf
 /data/pgdata/postgresql.conf
 /data/pgdata/postmaster.opts
+/data/

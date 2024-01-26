@@ -1,10 +1,7 @@
 package com.salt.server.assignment.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
@@ -24,14 +21,15 @@ public class Coverage {
     @JoinColumn(name = "assignment_id", nullable = false)
     private Assignment assignment;
 
-    public void setFocus(String focus) {
-        this.focus = switch (focus) {
-            case "frontend" -> Focus.frontend;
-            case "backend" -> Focus.backend;
-            case "charismatic" -> Focus.charismatic;
-            case "teamwork" -> Focus.teamwork;
-            case "design" -> Focus.design;
-            default -> Focus.management;
-        };
+
+        public void setFocus(String focus) {
+            this.focus = switch (focus) {
+                case "frontend" -> Focus.frontend;
+                case "backend" -> Focus.backend;
+                case "charismatic" -> Focus.charismatic;
+                case "teamwork" -> Focus.teamwork;
+                case "design" -> Focus.design;
+                default -> Focus.management;
+            };
     }
 }

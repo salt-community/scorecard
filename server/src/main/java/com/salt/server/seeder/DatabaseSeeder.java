@@ -1,8 +1,7 @@
 package com.salt.server.seeder;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.salt.server.Account.api.dto.AccountDto;
-import com.salt.server.Account.api.dto.ScoreDto;
+import com.salt.server.Account.api.dto.DeveloperDto;
+import com.salt.server.score.api.dto.ScoreDto;
 import com.salt.server.Account.model.Account;
 import com.salt.server.Account.repository.AccountRepository;
 import com.salt.server.assignment.model.Assignment;
@@ -37,8 +36,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        assignmentSeeder();
-        accountSeeder();
+
     }
 
     private void assignmentSeeder() {
@@ -59,7 +57,8 @@ public class DatabaseSeeder implements ApplicationRunner {
                 String[] data = line.split(",");
                 Assignment assignment = new Assignment();
                 assignment.setName(data[0]);
-                assignment.setType(data[1]);
+                assignment.setType(data[2]);
+
                 Assignment saveAssignment = assignmentRepository.save(assignment);
 
                 Focus[] focusTypes = Focus.values();
@@ -67,9 +66,10 @@ public class DatabaseSeeder implements ApplicationRunner {
 
                 for (Focus focus : focusTypes) {
                     Coverage coverage = new Coverage();
-                    coverage.setAssignment(saveAssignment);
+                    coverage.setAssignment(assignment);
                     coverage.setFocus(focus.toString());
                     coverage.setPercentage(Integer.parseInt(data[count]));
+
                     saveAssignment.addCoverage(coverage);
                     coverageRepository.save(coverage);
                     count++;
@@ -82,16 +82,16 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin);
+        List<String> developers = Arrays.asList(feng, kevin,jacob,ariel);
 
-        String uri = "http://localhost:8080/api/accounts";
+        String uri = "http://localhost:8080/api/developers";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         for (String developer : developers) {
             HttpEntity<String> entity = new HttpEntity<>(developer, headers);
-            restTemplate.postForObject(uri, entity, AccountDto.AccountResponse.class);
+            restTemplate.postForObject(uri, entity, DeveloperDto.Response.class);
         }
 
         List<Account> accounts = accountRepository.findAll();
@@ -99,7 +99,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         for (Account account : accounts) {
             String scoreUri = String.format("http://localhost:8080/api/scores/%s/add-scores", account.getId());
             HttpEntity<String> entity = new HttpEntity<>(score, headers);
-            restTemplate.postForObject(scoreUri, entity, ScoreDto.ScoreResponse[].class);
+            restTemplate.postForObject(scoreUri, entity, ScoreDto.Response[].class);
         }
 
     }
@@ -160,6 +160,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     String feng = "{\n" +
             "  \"email\": \"feng.yang@appliedtechnology.se\",\n" +
             "  \"name\": \"feng yang\",\n" +
+            "  \"role\": \"developer\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"bootcamp\": \"javascript\",\n" +
             "  \"githubUsername\": \"Finns841594\",\n" +
@@ -181,16 +182,16 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"major\" : \"architecture\",\n" +
             "        \"startDate\" : \"12-08-2018\",\n" +
             "        \"endDate\" : \"12-08-2020\",\n" +
-            "        \"yearStudied\" : 2,\n" +
             "        \"school\" : \"KTH Royal Institute of Technology\"\n" +
             "        },\n" +
-            "    \"skills\": [\"javaScript\", \"typeScript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\"]\n" +
+            "    \"skills\": [\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\"]\n" +
             "  }\n" +
             "} ";
 
     String kevin = "{\n" +
             "  \"email\": \"kevin.gida@appliedtechnology.se\",\n" +
             "  \"name\": \"kevin gida\",\n" +
+            "  \"role\": \"developer\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"kevingida\",\n" +
@@ -212,10 +213,68 @@ public class DatabaseSeeder implements ApplicationRunner {
             "        \"major\" : \"engineering\",\n" +
             "        \"startDate\" : \"14-08-2017\",\n" +
             "        \"endDate\" : \"01-08-2018\",\n" +
-            "        \"yearStudied\" : 1,\n" +
             "        \"school\" : \"Cranfield University\"\n" +
             "        },\n" +
-            "    \"skills\": [\"Java\",\"javaScript\", \"typeScript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\"]\n" +
+            "    \"skills\": [\"Java\",\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\", \"mysql\"]\n" +
             "  }\n" +
             "} ";
+
+    String jacob = "{\n" +
+            "  \"email\": \"jacob.larsson@appliedtechnology.se\",\n" +
+            "  \"name\": \"jacob larsson\",\n" +
+            "  \"role\": \"developer\",\n" +
+            "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
+            "  \"bootcamp\": \"java\",\n" +
+            "  \"githubUsername\": \"JacobLars\",\n" +
+            "  \"linkedinUsername\": \"jacob-larsson-0a7a69262\",\n" +
+            "  \"codewarsUsername\" : \"LarsMustasch\",\n" +
+            "  \"selectedProjects\": [\n" +
+            "    \"https://github.com/saltify-mob/WardrobeWiz\"\n" +
+            "  ],\n" +
+            "  \"backgroundInformation\": {\n" +
+            "    \"nationalities\": [\"swedish\"],\n" +
+            "    \"spokenLanguages\": {\n" +
+            "        \"swedish\":\"natives\",\n" +
+            "        \"english\":\"fluent\"\n" +
+            "    },\n" +
+            "    \"academic\": {\n" +
+            "        \"degree\" : \"vocationaldiploma\",\n" +
+            "        \"major\" : \"java developing\",\n" +
+            "        \"startDate\" : \"20-08-2021\",\n" +
+            "        \"endDate\" : \"5-05-2023\",\n" +
+            "        \"school\" : \"IT-Högskolan\"\n" +
+            "        },\n" +
+            "    \"skills\": [\"java\", \"typescript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
+            "  }\n" +
+            "}";
+
+    String ariel = "{\n" +
+            "  \"email\": \"ariel.yumembudi@appliedtechnology.se\",\n" +
+            "  \"name\": \"ariel shaka\",\n" +
+            "  \"role\" : \"developer\",\n" +
+            "  \"standoutIntro\": \"problem solving enthusiast\",\n" +
+            "  \"bootcamp\": \"java\",\n" +
+            "  \"githubUsername\": \"ArielShaka\",\n" +
+            "  \"linkedinUsername\": \"Ariel Shaka\",\n" +
+            "  \"codewarsUsername\" : \"YelShaka\",\n" +
+            "  \"selectedProjects\": [\n" +
+            "    \"https://github.com/Nameless-Devs/echoboard\"\n" +
+            "  ],\n" +
+            "  \"backgroundInformation\": {\n" +
+            "    \"nationalities\": [\"congonese\"],\n" +
+            "    \"spokenLanguages\": {\n" +
+            "        \"french\":\"natives\",\n" +
+            "        \"english\":\"fluent\",\n" +
+            "        \"swedish\": \"fluent\"\n" +
+            "    },\n" +
+            "    \"academic\": {\n" +
+            "        \"degree\" : \"vocationaldiploma\",\n" +
+            "        \"major\" : \"ai business consultant\",\n" +
+            "        \"startDate\" : \"10-08-2020\",\n" +
+            "        \"endDate\" : \"01-04-2022\",\n" +
+            "        \"school\" : \"Hyper Island\"\n" +
+            "        },\n" +
+            "    \"skills\": [\"java\", \"typescript\", \"spring boot\", \"kafka\", \"avro apache\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\", \"postgres\"]\n" +
+            "  }\n" +
+            "}";
 }

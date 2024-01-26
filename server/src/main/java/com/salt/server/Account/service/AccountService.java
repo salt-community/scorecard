@@ -20,126 +20,31 @@ import java.util.UUID;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private final UserDetailRepository userDetailRepository;
-    private final SocialRepository socialRepository;
-    private final LanguageRepository languageRepository;
-    private final SkillRepository skillRepository;
-    private final AcademicRepository academicRepository;
-    private final NationalityRepository nationalityRepository;
-    private final ScoreService scoreService;
-    private final GithubService githubService;
 
-
-    public AccountService(AccountRepository accountRepository,
-                          UserDetailRepository userDetailRepository,
-                          SocialRepository socialRepository,
-                          GithubService githubService,
-                          LanguageRepository languageRepository,
-                          SkillRepository skillRepository,
-                          AcademicRepository academicRepository,
-                          NationalityRepository nationalityRepository,
-                          ScoreService scoreService) {
+    public AccountService(AccountRepository accountRepository
+    ) {
         this.accountRepository = accountRepository;
-        this.userDetailRepository = userDetailRepository;
-        this.socialRepository = socialRepository;
-        this.githubService = githubService;
-        this.languageRepository = languageRepository;
-        this.skillRepository = skillRepository;
-        this.academicRepository = academicRepository;
-        this.nationalityRepository = nationalityRepository;
-        this.scoreService = scoreService;
     }
 
-    public List<AccountDto.ListAccountsDto> getAllAccount() {
-        return accountRepository.findAll().stream().map(AccountMapper::toListAccountDto).toList();
+    public List<AccountDto.Response> getAllAccount() {
+        return accountRepository.findAll().stream().map(AccountMapper::toAccountResponse).toList();
     }
 
-    public AccountDto.AccountResponse getAccountById(UUID id) {
-        Account account = accountRepository.findById(id)
+    public AccountDto.Response getAccountById(UUID id) {
+         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
-        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-        return AccountMapper.toAccountResponse(account, radarGraphs);
+        return AccountMapper.toAccountResponse(account);
     }
 
-    public AccountDto.AccountResponse createAccount(AccountDto.AccountRequest request) {
+    public AccountDto.Response createAccount(AccountDto.Request request) {
         Account account = new Account();
         account.setEmail(request.email());
-        Account saveAccount = accountRepository.save(account);
-
-        UserDetail userDetail = createUserDetail(request, saveAccount);
-        saveAccount.setUserDetail(userDetail);
-        createAcademic(request, userDetail);
-        createNationality(request, userDetail);
-        createLanguage(request, userDetail);
-        createSkill(request,userDetail);
-        Social social = createSocial(request, userDetail);
-        Github github = githubService.createGithub(request, social);
-        githubService.createProject(request, github);
-
-        List<AccountDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-
-        return AccountMapper.toAccountResponse(account, radarGraphs);
+        account.setRole(request.role());
+        return AccountMapper.toAccountResponse(accountRepository.save(account));
     }
 
-    private UserDetail createUserDetail(AccountDto.AccountRequest request, Account account) {
-        UserDetail userDetail = new UserDetail();
-        userDetail.setAccount(account);
-        userDetail.setName(request.name());
-        userDetail.setIntroduction(request.standoutIntro());
-        userDetail.setBootcamp(request.bootcamp());
-        return userDetailRepository.save(userDetail);
+    public Account getDeveloperById(UUID id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Developer not found"));
     }
-
-    private void createAcademic(AccountDto.AccountRequest request, UserDetail userDetail) {
-        Academic academic = new Academic();
-        academic.setUserDetail(userDetail);
-        academic.setDegree(request.backgroundInformation().academic().getDegree());
-        academic.setMajor(request.backgroundInformation().academic().getMajor());
-        academic.setStartDate(request.backgroundInformation().academic().getStartDate());
-        academic.setEndDate(request.backgroundInformation().academic().getEndDate());
-        academic.setSchool(request.backgroundInformation().academic().getSchool());
-        academicRepository.save(academic);
-    }
-
-    private Social createSocial(AccountDto.AccountRequest request, UserDetail userDetail) {
-        Social social = new Social();
-        social.setUserDetail(userDetail);
-        social.setLinkedInUrl(request.linkedinUsername());
-        social.setCodewarsUrl(request.codewarsUsername());
-        userDetail.setSocial(social);
-        return socialRepository.save(social);
-    }
-
-    private void createNationality(AccountDto.AccountRequest request, UserDetail userDetail) {
-        for (var nationality : request.backgroundInformation().nationalities()) {
-            Nationality newNationality = new Nationality();
-            newNationality.setUserDetail(userDetail);
-            newNationality.setNationality(nationality);
-            userDetail.addNationality(newNationality);
-            nationalityRepository.save(newNationality);
-        }
-    }
-
-    private void createLanguage(AccountDto.AccountRequest request, UserDetail userDetail) {
-        for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
-            Language newLanguage = new Language();
-            newLanguage.setUserDetail(userDetail);
-            newLanguage.setLanguage(language.getKey());
-            newLanguage.setFluency(language.getValue().toString());
-            userDetail.addLanguage(newLanguage);
-            languageRepository.save(newLanguage);
-        }
-    }
-
-    private void createSkill(AccountDto.AccountRequest request, UserDetail userDetail) {
-        for (var skill : request.backgroundInformation().skills()) {
-            Skill newSkill = new Skill();
-            newSkill.setUserDetail(userDetail);
-            newSkill.setSkill(skill);
-            userDetail.addSkill(newSkill);
-            skillRepository.save(newSkill);
-        }
-    }
-
-
 }

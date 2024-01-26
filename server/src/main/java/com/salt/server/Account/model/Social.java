@@ -12,16 +12,17 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Social {
     @Id
     @UuidGenerator
     private UUID id;
-    @Setter(AccessLevel.NONE)
     private String linkedInUrl;
-    @Setter(AccessLevel.NONE)
     private String codewarsUrl;
+    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "social")
     private Github githubId;
@@ -30,13 +31,19 @@ public class Social {
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 
+    public static class SocialBuilder{
+        public SocialBuilder codewarsUrl(String codewarsUsername) {
+            this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUsername);
+            return this;
+        }
 
-    public void setCodewarsUrl(String codewarsUsername) {
-        this.codewarsUrl = String.format("https://www.codewars.com/users/%s", codewarsUsername);
+        public SocialBuilder linkedInUrl(String linkedInUsername) {
+            this.linkedInUrl = String.format("https://www.linkedin.com/in/%s", linkedInUsername);
+            return this;
+        }
     }
 
-    public void setLinkedInUrl(String linkedInUsername) {
-        this.linkedInUrl = String.format("https://www.linkedin.com/in/%s", linkedInUsername);
-    }
+
+
 
 }

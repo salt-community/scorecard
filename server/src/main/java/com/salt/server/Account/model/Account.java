@@ -18,6 +18,8 @@ public class Account {
     @UuidGenerator
     private UUID id;
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @JsonIgnore
     @OneToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
@@ -25,6 +27,13 @@ public class Account {
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     private List<Score> scores = new ArrayList<>();
+
+    public void setRole(String role) {
+        this.role = switch (role) {
+            case "developer" -> Role.developer;
+            default -> Role.salt;
+        };
+    }
 
     public void addScore(Score score) {
         this.scores.add(score);
