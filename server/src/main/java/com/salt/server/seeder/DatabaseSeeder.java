@@ -36,8 +36,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        assignmentSeeder();
-//        accountSeeder();
+
     }
 
     private void assignmentSeeder() {
