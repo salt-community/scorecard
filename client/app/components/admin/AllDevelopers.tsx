@@ -52,7 +52,7 @@ const AllDevelopers = ({developers}: Props) => {
                 >
                   <td className="border px-6 py-4">
                     <Link
-                      href={`/filteredfigures/review/${developer.id}`}
+                      href={`/dashboard/developers/${developer.id}`}
                       className=" underline hover:text-primary"
                     >
                       {developer.name}
