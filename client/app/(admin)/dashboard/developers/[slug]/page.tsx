@@ -10,8 +10,8 @@ const fetchUserByAccountId = async (id: string) => {
   export default async function Page({ params }: { params: { slug: string } }) {
     const developerData = await fetchUserByAccountId(params.slug);
     return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
-        <div>
+      <main className="ml-[300px] absolute right-0 w-full max-w-[calc(100vw-19rem)] top-20 max-h-[calc(100vh-5rem)] p-4 shadow-xl shadow-blue-gray-900/5 border-solid border-2">
+        <div className="overflow-y-auto flex flex-col md:flex-row md:gap-5">
           <ScoreCard
             developerData={
               developerData
