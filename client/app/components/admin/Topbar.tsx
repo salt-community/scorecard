@@ -8,14 +8,21 @@ const Topbar = () => {
   const path = pathname.split("/");
   let label = path[path.length - 1];
 
-  const topLabel = ["dashboard", "unchecked", "posted", "sold"];
+  const topLabel = ["dashboard", "developers"];
   if (!topLabel.includes(label)) {
-    label = "figure";
+    label = "developer";
   }
 
   return (
-    <Card className="absolute top-0 right-0 w-full max-w-[calc(100vw-19rem)] h-16 p-2 shadow-xl shadow-blue-gray-900/5 border-solid border-2" placeholder={undefined}>
-      <Typography variant="h3" className=" my-auto text-primary" placeholder={undefined}>
+    <Card
+      className="w-full h-16 p-2 pl-5 shadow-xl shadow-blue-gray-900/5 border-l-2 border-b-2 border-r-2"
+      placeholder={undefined}
+    >
+      <Typography
+        variant="h2"
+        className=" my-auto text-accent"
+        placeholder={undefined}
+      >
         {label.charAt(0).toUpperCase() + label.slice(1)}
       </Typography>
     </Card>

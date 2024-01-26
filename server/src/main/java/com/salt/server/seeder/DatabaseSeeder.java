@@ -57,7 +57,7 @@ public class DatabaseSeeder implements ApplicationRunner {
                 String[] data = line.split(",");
                 Assignment assignment = new Assignment();
                 assignment.setName(data[0]);
-                assignment.setType(data[2]);
+                assignment.setType(data[1]);
 
                 Assignment saveAssignment = assignmentRepository.save(assignment);
 
