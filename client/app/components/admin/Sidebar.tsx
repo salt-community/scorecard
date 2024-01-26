@@ -36,7 +36,7 @@ export function Sidebar() {
         </Typography>
       </div>
       <List>
-        <a href="/">
+        <a href="/dashboard/developers">
           <ListItem>
             <ListItemPrefix>
               <HomeIcon className="h-5 w-5" />
