@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-0 md:p-24">
       <Banner />
-      <div>
+      <div className='w-full px-2'>
          {developersData.map((item: developerInList) => (
           <Link href={`/developers/${item.id}`} key={item.id}>
             <ShowCard id={item.id} name={item.name} profilePicture={item.profilePicture} standoutIntro={item.standoutIntro} />
