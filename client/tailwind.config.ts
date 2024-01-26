@@ -9,6 +9,12 @@ const config: Config = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    colors: {
+      bannerColor1: '#FF7961',
+      bannerColor2: '#F35C7E',
+      white: "#FFFFFF",
+      black: "#000000",
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

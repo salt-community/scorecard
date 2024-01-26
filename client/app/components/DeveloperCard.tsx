@@ -9,8 +9,7 @@ type showCardProps = {
 
 export const ShowCard = ({name, profilePicture, standoutIntro}:showCardProps) => {
   return (
-    <div>
-      <Card className="max-w-[340px]">
+      <Card className="max-w-[340px] my-3">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar isBordered radius="full" size="md" src={profilePicture} />
@@ -22,6 +21,5 @@ export const ShowCard = ({name, profilePicture, standoutIntro}:showCardProps) =>
 
       </CardHeader>
     </Card>
-    </div>
   )
 }
