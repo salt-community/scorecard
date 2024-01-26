@@ -1,7 +1,7 @@
 
 import { UUID } from 'crypto';
 import Link from 'next/link';
-import { ShowCard } from './components/ShowCard';
+import { ShowCard } from './components/DeveloperCard';
 
 // should apply TanStack Query for fetching
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
