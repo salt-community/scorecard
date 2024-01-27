@@ -26,6 +26,13 @@ public interface DeveloperDto {
     ) {
     }
 
+    record ScoreboardResponse(
+            String id,
+            String name,
+            List<DeveloperDto.RadarGraph> radarGraph
+    ) {
+    }
+
     record Request(
             String email,
             String name,

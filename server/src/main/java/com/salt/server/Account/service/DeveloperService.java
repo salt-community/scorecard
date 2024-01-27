@@ -10,6 +10,7 @@ import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -61,6 +62,20 @@ public class DeveloperService {
                         account.getUserDetail().getPhoneNumber(),
                         account.getRole().toString()
                 )).toList();
+    }
+
+    public List<DeveloperDto.ScoreboardResponse> adminGetAllSaltieScoreboard() {
+        List<Account> accounts = accountRepository.findAllByRole(Role.saltie);
+        List<DeveloperDto.ScoreboardResponse> scoreboardResponses = new ArrayList<>();
+        for(Account account : accounts) {
+            List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+            scoreboardResponses.add(new DeveloperDto.ScoreboardResponse(
+                    account.getId().toString(),
+                    account.getUserDetail().getName(),
+                    radarGraphs
+                    ));
+        }
+        return scoreboardResponses;
     }
 
     public Account getDeveloperById(UUID id) {

@@ -36,4 +36,9 @@ public class DeveloperController {
     public List<DeveloperDto.AdminResponse> adminGetAllDevelopers() {
         return developerService.adminGetAllDevelopers();
     }
+
+    @GetMapping("/admin/scoreboard")
+    public List<DeveloperDto.ScoreboardResponse> adminGetAllSaltieScoreboard() {
+        return developerService.adminGetAllSaltieScoreboard();
+    }
 }

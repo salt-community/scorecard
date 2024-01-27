@@ -193,7 +193,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     String kevin = "{\n" +
             "  \"email\": \"kevin.gida@appliedtechnology.se\",\n" +
             "  \"name\": \"kevin gida\",\n" +
-            "  \"role\": \"pgp\",\n" +
+            "  \"role\": \"saltie\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"phoneNumber\" : \"071234456\",\n" +
             "  \"bootcamp\": \"java\",\n" +
