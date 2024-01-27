@@ -14,6 +14,11 @@ const config: Config = {
       accent2: "#F35C7E",
       white: "#FFFFFF",
       black: "#000000",
+      grading1: "#e20c0c",
+      grading2: "#f2831f",
+      grading3: "#fbdd10",
+      grading4: "#85ef08",
+      grading5: "#1bff00",
     },
     extend: {
       backgroundImage: {

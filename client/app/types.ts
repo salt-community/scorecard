@@ -49,4 +49,4 @@ export type DeveloperShowcase = {
   email: string;
   name: string;
   standoutIntro: string;
-}
+};
