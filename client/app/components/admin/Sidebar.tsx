@@ -11,6 +11,7 @@ import {
   PresentationChartBarIcon,
   UsersIcon,
   PowerIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/solid";
 
 export function Sidebar() {
@@ -41,6 +42,14 @@ export function Sidebar() {
               <UsersIcon className="h-5 w-5" />
             </ListItemPrefix>
             Developers
+          </ListItem>
+        </a>
+        <a href="/dashboard/scoring">
+          <ListItem placeholder={undefined}>
+            <ListItemPrefix placeholder={undefined}>
+              <AcademicCapIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Scoreboard
           </ListItem>
         </a>
         <hr className="my-2 border-blue-gray-50" />

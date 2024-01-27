@@ -1,8 +1,8 @@
-import { BackgroundInformation } from '../../types';
-import SimpleTable from './SimpleTable';
+import { BackgroundInformation } from "../../types";
+import SimpleTable from "./SimpleTable";
 
 const valueGeneretor = (values: string[]) => {
-  const valueString = values.join(', ');
+  const valueString = values.join(", ");
   return <h5 className="text-end">{valueString}</h5>;
 };
 

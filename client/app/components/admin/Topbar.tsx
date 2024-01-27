@@ -8,7 +8,7 @@ const Topbar = () => {
   const path = pathname.split("/");
   let label = path[path.length - 1];
 
-  const topLabel = ["dashboard", "developers"];
+  const topLabel = ["dashboard", "developers", "scoring"];
   if (!topLabel.includes(label)) {
     label = "developer";
   }
