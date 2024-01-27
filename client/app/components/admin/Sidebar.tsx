@@ -44,7 +44,7 @@ export function Sidebar() {
             Developers
           </ListItem>
         </a>
-        <a href="/dashboard/scoring">
+        <a href="/dashboard/scoreboard">
           <ListItem placeholder={undefined}>
             <ListItemPrefix placeholder={undefined}>
               <AcademicCapIcon className="h-5 w-5" />
