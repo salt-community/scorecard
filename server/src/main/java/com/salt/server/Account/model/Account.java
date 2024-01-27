@@ -30,8 +30,10 @@ public class Account {
 
     public void setRole(String role) {
         this.role = switch (role) {
-            case "developer" -> Role.developer;
-            default -> Role.salt;
+            case "saltie" -> Role.saltie;
+            case "pgp" -> Role.pgp;
+            case "consultant" -> Role.consultant;
+            default -> Role.core;
         };
     }
 

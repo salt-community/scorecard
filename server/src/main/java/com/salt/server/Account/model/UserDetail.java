@@ -21,6 +21,7 @@ public class UserDetail {
     private UUID id;
     private String name;
     private String introduction;
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Bootcamp bootcamp;
     @Setter

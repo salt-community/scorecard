@@ -36,7 +36,8 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
+        assignmentSeeder();
+        accountSeeder();
     }
 
     private void assignmentSeeder() {
@@ -82,7 +83,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     public void accountSeeder() {
-        List<String> developers = Arrays.asList(feng, kevin,jacob,ariel);
+        List<String> developers = Arrays.asList(feng, kevin, jacob, ariel);
 
         String uri = "http://localhost:8080/api/developers";
         RestTemplate restTemplate = new RestTemplate();
@@ -160,8 +161,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     String feng = "{\n" +
             "  \"email\": \"feng.yang@appliedtechnology.se\",\n" +
             "  \"name\": \"feng yang\",\n" +
-            "  \"role\": \"developer\",\n" +
+            "  \"role\": \"pgp\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
+            "  \"phoneNumber\" : \"071234456\",\n" +
             "  \"bootcamp\": \"javascript\",\n" +
             "  \"githubUsername\": \"Finns841594\",\n" +
             "  \"linkedinUsername\": \"feng-yang-511361166\",\n" +
@@ -191,8 +193,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     String kevin = "{\n" +
             "  \"email\": \"kevin.gida@appliedtechnology.se\",\n" +
             "  \"name\": \"kevin gida\",\n" +
-            "  \"role\": \"developer\",\n" +
+            "  \"role\": \"pgp\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
+            "  \"phoneNumber\" : \"071234456\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"kevingida\",\n" +
             "  \"linkedinUsername\": \"kevingida\",\n" +
@@ -222,8 +225,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     String jacob = "{\n" +
             "  \"email\": \"jacob.larsson@appliedtechnology.se\",\n" +
             "  \"name\": \"jacob larsson\",\n" +
-            "  \"role\": \"developer\",\n" +
+            "  \"role\": \"pgp\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
+            "  \"phoneNumber\" : \"071234456\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"JacobLars\",\n" +
             "  \"linkedinUsername\": \"jacob-larsson-0a7a69262\",\n" +
@@ -251,8 +255,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     String ariel = "{\n" +
             "  \"email\": \"ariel.yumembudi@appliedtechnology.se\",\n" +
             "  \"name\": \"ariel shaka\",\n" +
-            "  \"role\" : \"developer\",\n" +
+            "  \"role\" : \"pgp\",\n" +
             "  \"standoutIntro\": \"problem solving enthusiast\",\n" +
+            "  \"phoneNumber\" : \"071234456\",\n" +
             "  \"bootcamp\": \"java\",\n" +
             "  \"githubUsername\": \"ArielShaka\",\n" +
             "  \"linkedinUsername\": \"Ariel Shaka\",\n" +

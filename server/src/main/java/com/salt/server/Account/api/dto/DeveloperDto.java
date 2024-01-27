@@ -17,11 +17,21 @@ public interface DeveloperDto {
     ) {
     }
 
+    record AdminResponse(
+            String id,
+            String name,
+            String email,
+            String phoneNumber,
+            String role
+    ) {
+    }
+
     record Request(
             String email,
             String name,
             String role,
             String standoutIntro,
+            String phoneNumber,
             String bootcamp,
             String githubUsername,
             String linkedinUsername,

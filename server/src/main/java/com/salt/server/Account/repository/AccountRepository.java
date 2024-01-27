@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface AccountRepository extends ListCrudRepository<Account, UUID> {
-    List<Account> findAllByRole(Role role);
+    List<Account> findAllByRoleNot(Role role);
 }

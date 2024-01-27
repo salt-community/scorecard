@@ -48,8 +48,19 @@ public class DeveloperService {
     }
 
     public List<DeveloperDto.ShowcaseResponse> getAllDeveloper() {
-        return accountRepository.findAllByRole(Role.developer).stream()
+        return accountRepository.findAllByRoleNot(Role.core).stream()
                 .map(DeveloperMapper::toShowcaseResponse).toList();
+    }
+
+    public List<DeveloperDto.AdminResponse> adminGetAllDevelopers() {
+        return accountRepository.findAllByRoleNot(Role.core).stream()
+                .map(account -> new DeveloperDto.AdminResponse(
+                        account.getId().toString(),
+                        account.getUserDetail().getName(),
+                        account.getEmail(),
+                        account.getUserDetail().getPhoneNumber(),
+                        account.getRole().toString()
+                )).toList();
     }
 
     public Account getDeveloperById(UUID id) {
@@ -90,6 +101,7 @@ public class DeveloperService {
                 .account(account)
                 .name(request.name())
                 .introduction(request.standoutIntro())
+                .phoneNumber(request.phoneNumber())
                 .bootcamp(request.bootcamp())
                 .build();
 

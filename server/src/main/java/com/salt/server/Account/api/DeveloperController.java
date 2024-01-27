@@ -31,4 +31,9 @@ public class DeveloperController {
     public DeveloperDto.Response createDeveloper(@RequestBody DeveloperDto.Request request) {
         return developerService.createDeveloper(request);
     }
+
+    @GetMapping("/admin")
+    public List<DeveloperDto.AdminResponse> adminGetAllDevelopers() {
+        return developerService.adminGetAllDevelopers();
+    }
 }
