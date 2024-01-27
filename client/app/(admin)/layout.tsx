@@ -19,14 +19,12 @@ export default function AdminLayout({
         <aside className="flex-[2]">
           <Sidebar />
         </aside>
-        <div className="flex-[8] h-screen">
-          <div className="flex flex-col gap-4">
-            <div className="flex-[1]">
-              <Topbar />
-            </div>
-            <div className="flex-[8] shadow-xl shadow-blue-gray-900/5 border-2">
-              {children}
-            </div>
+        <div className="flex-[8] h-screen flex flex-col gap-4">
+          <div className="flex-[1]">
+            <Topbar />
+          </div>
+          <div className="flex-[8] shadow-xl shadow-blue-gray-900/5 border-2 min-h-2/3">
+            {children}
           </div>
         </div>
       </body>

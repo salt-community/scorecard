@@ -9,22 +9,20 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      accent: "#FF7961",
-      accent2: "#F35C7E",
-      white: "#FFFFFF",
-      black: "#000000",
-      grading1: "#e20c0c",
-      grading2: "#f2831f",
-      grading3: "#fbdd10",
-      grading4: "#85ef08",
-      grading5: "#1bff00",
-    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        accent: "#FF7961",
+        accent2: "#F35C7E",
+        grading1: "#e20c0c",
+        grading2: "#f2831f",
+        grading3: "#fbdd10",
+        grading4: "#85ef08",
+        grading5: "#1bff00",
       },
     },
   },

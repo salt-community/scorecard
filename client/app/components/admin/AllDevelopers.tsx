@@ -3,8 +3,6 @@ import React from "react";
 import Link from "next/link";
 
 import { Button, Card, Typography } from "@material-tailwind/react";
-import { httpDeleteDeveloper } from "@/app/api/request";
-import { usePathname } from "next/navigation";
 
 type developerAdmin = {
   id: string;
