@@ -32,14 +32,15 @@ public class ScoreService {
         return new ScoreDto.ScoreListResponse(scores.stream()
                 .map(score -> new ScoreDto.Response(
                         score.getId(),
+                        score.getAssignment().getType().toString(),
                         score.getAssignment().getName(),
-                        score.getScore()))
+                        score.getScore(),
+                        score.getDescription()))
                 .collect(Collectors.toList()));
     }
 
     public ScoreDto.Response addScore(UUID id, ScoreDto.Request request) {
         Account account = accountService.getDeveloperById(id);
-        System.out.println(request.name());
         Assignment assignment = assignmentService.getAssignmentByName(request.name());
         if(scoreRepository.findByAccountAndAssignment(account, assignment)!= null) {
             throw new IllegalArgumentException("Score already exist");
@@ -56,8 +57,10 @@ public class ScoreService {
 
         return new ScoreDto.Response(
                 saveScore.getId(),
+                score.getAssignment().getType().toString(),
                 saveScore.getAssignment().getName(),
-                saveScore.getScore());
+                saveScore.getScore(),
+                saveScore.getDescription());
     }
 
     public List<ScoreDto.Response> addListOfScores(UUID id, List<ScoreDto.Request> requests) {

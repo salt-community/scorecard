@@ -2,6 +2,7 @@ package com.salt.server.Account.api.dto;
 
 import com.salt.server.Account.model.Academic;
 import com.salt.server.Account.model.Fluency;
+import com.salt.server.score.Score;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,32 @@ public interface DeveloperDto {
             String id,
             String name,
             List<DeveloperDto.RadarGraph> radarGraph
+    ) {
+    }
+
+    record DeveloperScoreboardResponse(
+            String id,
+            String name,
+            String bootcamp,
+            String githubProfilePictureUrl,
+            String githubUrl,
+            String linkedinUsername,
+            List<DeveloperDto.RadarGraph> radarGraph,
+            List<DeveloperDto.ScoreScoreboard> scores
+    ) {
+    }
+
+    record ScoreScoreboard(
+            String scoreName,
+            List<ScoreDetail> data
+    ) {
+    }
+
+    record ScoreDetail(
+            String id,
+            String assignment,
+            Integer score,
+            String description
     ) {
     }
 

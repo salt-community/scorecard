@@ -7,11 +7,11 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { Scores } from "@/app/types";
-import SimpleTable from "../../scorecard/SimpleTable";
+import { DetailScores, Scores } from "@/app/types";
+import SimpleTable from "./SimpleTableScoreboard";
 
 interface ScoreboardProps {
-  scores: Scores[];
+  scores: DetailScores[];
 }
 
 const ScoreList = ({ scores }: ScoreboardProps) => {
@@ -31,7 +31,7 @@ const ScoreList = ({ scores }: ScoreboardProps) => {
       </TabsHeader>
       <TabsBody
         placeholder={undefined}
-        className=" min-h-fit max-h-[calc(100vh-290px)] overflow-y-auto"
+        className=" min-h-[calc(100vh-290px)] overflow-y-auto"
       >
         {scores.map((item) => (
           <TabPanel key={item.scoreName} value={item.scoreName}>

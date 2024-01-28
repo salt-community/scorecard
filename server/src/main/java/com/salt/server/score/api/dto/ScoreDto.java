@@ -14,8 +14,10 @@ public interface ScoreDto {
 
     record Response(
             UUID id,
-            String name,
-            int score
+            String type,
+            String assignment,
+            Integer score,
+            String description
     ) {
     }
 

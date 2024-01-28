@@ -2,10 +2,10 @@
 
 import { Avatar } from "@nextui-org/react";
 import ContactsBar from "../../scorecard/ContactsBar";
-import { DeveloperData } from "@/app/types";
+import { DeveloperData, SaltieData } from "@/app/types";
 
 interface ScoreboardHeaderProps {
-  developer: DeveloperData;
+  developer: SaltieData;
 }
 
 const ScoreboardId = ({ developer }: ScoreboardHeaderProps) => {

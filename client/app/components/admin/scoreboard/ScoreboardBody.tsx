@@ -2,11 +2,11 @@
 import { Card } from "@nextui-org/react";
 import React from "react";
 import ScoreList from "./ScoreList";
-import { Assignment, DeveloperData, Scores } from "@/app/types";
+import { Assignment, DeveloperData, SaltieData, Scores } from "@/app/types";
 import InputForm from "./InputForm";
 
 interface ScoreboardProps {
-  developer: DeveloperData;
+  developer: SaltieData;
   assignment: Assignment[];
 }
 

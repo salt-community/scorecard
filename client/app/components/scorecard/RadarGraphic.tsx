@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
-import { RadarGraphicData } from '../../types';
+import { useState, useEffect } from "react";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from "recharts";
+import { RadarGraphicData } from "../../types";
 
 export const useIsServerSide = () => {
   const [isServerSide, setIsServerSide] = useState(true);
@@ -28,10 +28,10 @@ export const RadarGraphic = ({ data }: RadarGraphicProps) => {
 
     handleResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Clean up event listener on unmount
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
   const isServerSide = useIsServerSide();
   if (isServerSide) return null;
@@ -47,7 +47,7 @@ export const RadarGraphic = ({ data }: RadarGraphicProps) => {
       <PolarGrid />
       <PolarAngleAxis
         dataKey="subject"
-        tick={{ fontSize: isMobile ? 'x-small' : 'small' }}
+        tick={{ fontSize: isMobile ? "x-small" : "small" }}
       />
       <Radar
         dataKey="score"

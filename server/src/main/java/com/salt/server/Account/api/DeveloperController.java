@@ -42,4 +42,9 @@ public class DeveloperController {
     public List<DeveloperDto.ScoreboardResponse> adminGetAllSaltieScoreboard() {
         return developerService.adminGetAllSaltieScoreboard();
     }
+
+    @GetMapping("/admin/scoreboard/{developerId}")
+    public DeveloperDto.DeveloperScoreboardResponse getDeveloperScoreboardById(@PathVariable UUID developerId) {
+        return developerService.adminGetDeveloperScoreboard(developerId);
+    }
 }

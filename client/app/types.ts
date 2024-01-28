@@ -56,3 +56,31 @@ export type DeveloperShowcase = {
   name: string;
   standoutIntro: string;
 };
+
+export type SaltieData = {
+  id: string;
+  name: string;
+  bootcamp: string;
+  githubProfilePictureUrl: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  radarGraph: RadarGraphicData[];
+  scores: DetailScores[];
+};
+
+export type DetailScores = { scoreName: string; data: Score[] };
+
+export type Score = {
+  id: string;
+  assignment: string;
+  score: number;
+  description: string;
+};
+
+export type ScoreRes = {
+  id: string;
+  type: string;
+  assignment: string;
+  score: number;
+  description: string;
+};

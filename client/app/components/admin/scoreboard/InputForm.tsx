@@ -8,12 +8,12 @@ import {
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import { Assignment, DeveloperData } from "@/app/types";
+import { Assignment, DeveloperData, SaltieData } from "@/app/types";
 import { httpPostScoreById } from "@/app/api/request";
 import { useRouter } from "next/navigation";
 
 interface ScoreboardProps {
-  developer: DeveloperData;
+  developer: SaltieData;
   assignment: Assignment[];
 }
 

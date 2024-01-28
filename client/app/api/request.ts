@@ -31,6 +31,16 @@ export const httpGetAllSaltieScoreboard = async () => {
   return await response.json();
 };
 
+export const httpGetSaltieScoreboard = async (id: string) => {
+  const response = await fetch(
+    "http://localhost:8080/api/developers/admin/scoreboard/" + id,
+    {
+      cache: "no-cache",
+    }
+  );
+  return await response.json();
+};
+
 //ASSIGNMENT URI
 export const httpGetAllAssignment = async () => {
   const response = await fetch(ASSIGNMENT_URI, { cache: "no-cache" });

@@ -1,15 +1,25 @@
 "use client";
-import { httpGetAllAssignment, httpGetDeveloperById } from "@/app/api/request";
+import {
+  httpGetAllAssignment,
+  httpGetDeveloperById,
+  httpGetSaltieScoreboard,
+} from "@/app/api/request";
 import Scoreboard from "@/app/components/admin/scoreboard/Scoreboard";
-import { Assignment, DeveloperData } from "@/app/types";
+import {
+  Assignment,
+  DeveloperData,
+  SaltieData,
+  Score,
+  ScoreRes,
+} from "@/app/types";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const [developer, setDeveloper] = useState<DeveloperData[]>();
+  const [developer, setDeveloper] = useState<SaltieData>();
   const [assignment, setAssignment] = useState<Assignment[]>([]);
 
   const fetchBackend = async () => {
-    const resDeveloper = await httpGetDeveloperById(params.slug);
+    const resDeveloper = await httpGetSaltieScoreboard(params.slug);
     setDeveloper(resDeveloper);
 
     const resAssignment = await httpGetAllAssignment();

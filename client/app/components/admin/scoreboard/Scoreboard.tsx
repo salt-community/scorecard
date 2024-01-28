@@ -1,10 +1,10 @@
 "use client";
-import { Assignment, DeveloperData } from "@/app/types";
+import { Assignment, DeveloperData, SaltieData } from "@/app/types";
 import ScoreboardHeader from "./ScoreboardHeader";
 import ScoreboardBody from "./ScoreboardBody";
 
 interface ScoreboardProps {
-  developer: DeveloperData;
+  developer: SaltieData;
   assignment: Assignment[];
 }
 

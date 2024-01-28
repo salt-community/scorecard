@@ -4,8 +4,10 @@ import com.salt.server.Account.api.dto.DeveloperDto;
 import com.salt.server.Account.mapper.DeveloperMapper;
 import com.salt.server.Account.model.*;
 import com.salt.server.Account.repository.*;
+import com.salt.server.assignment.model.Type;
 import com.salt.server.github.GithubService;
 import com.salt.server.github.model.Github;
+import com.salt.server.score.Score;
 import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DeveloperService {
@@ -67,15 +70,48 @@ public class DeveloperService {
     public List<DeveloperDto.ScoreboardResponse> adminGetAllSaltieScoreboard() {
         List<Account> accounts = accountRepository.findAllByRole(Role.saltie);
         List<DeveloperDto.ScoreboardResponse> scoreboardResponses = new ArrayList<>();
-        for(Account account : accounts) {
+        for (Account account : accounts) {
             List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
             scoreboardResponses.add(new DeveloperDto.ScoreboardResponse(
                     account.getId().toString(),
                     account.getUserDetail().getName(),
                     radarGraphs
-                    ));
+            ));
         }
         return scoreboardResponses;
+    }
+
+    public DeveloperDto.DeveloperScoreboardResponse adminGetDeveloperScoreboard(UUID id) {
+        Account account = getDeveloperById(id);
+        List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+        List<DeveloperDto.ScoreScoreboard> scoreScoreboards = getScoreboardScore(account);
+        return new DeveloperDto.DeveloperScoreboardResponse(
+                account.getId().toString(),
+                account.getUserDetail().getName(),
+                account.getUserDetail().getBootcamp().toString(),
+                account.getUserDetail().getSocial().getGithubId().getPictureUrl(),
+                account.getUserDetail().getSocial().getGithubId().getUrl(),
+                account.getUserDetail().getSocial().getLinkedInUrl(),
+                radarGraphs,
+                scoreScoreboards
+        );
+    }
+
+    public List<DeveloperDto.ScoreScoreboard> getScoreboardScore(Account account) {
+        List<DeveloperDto.ScoreScoreboard> scoresList = new ArrayList<>();
+
+        for (var type : Type.values()) {
+            DeveloperDto.ScoreScoreboard scores = new DeveloperDto.ScoreScoreboard(
+                    type.toString(),
+                    account.getScores() != null ?
+                            account.getScores().stream()
+                                    .filter(score -> score.getAssignment().getType().equals(type))
+                                    .map(score -> new DeveloperDto.ScoreDetail(score.getId().toString(), score.getAssignment().getName(), score.getScore(), score.getDescription())).toList()
+                            : null
+            );
+            scoresList.add(scores);
+        }
+        return scoresList;
     }
 
     public Account getDeveloperById(UUID id) {
