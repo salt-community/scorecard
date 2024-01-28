@@ -6,7 +6,6 @@ import {
   TabsBody,
   Tab,
   TabPanel,
-  TabsStylesType,
 } from "@material-tailwind/react";
 import { Scores } from "@/app/types";
 import SimpleTable from "../../scorecard/SimpleTable";
@@ -30,7 +29,10 @@ const ScoreList = ({ scores }: ScoreboardProps) => {
           </Tab>
         ))}
       </TabsHeader>
-      <TabsBody placeholder={undefined}>
+      <TabsBody
+        placeholder={undefined}
+        className=" min-h-fit max-h-[calc(100vh-290px)] overflow-y-auto"
+      >
         {scores.map((item) => (
           <TabPanel key={item.scoreName} value={item.scoreName}>
             <SimpleTable data={item.data} />

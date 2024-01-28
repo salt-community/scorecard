@@ -5,6 +5,7 @@ import com.salt.server.Account.service.AccountService;
 import com.salt.server.score.ScoreService;
 import com.salt.server.score.api.dto.ScoreDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/scores")
+@CrossOrigin("http://localhost:3000")
 public class ScoreController {
 
     private final ScoreService scoreService;
@@ -26,8 +28,9 @@ public class ScoreController {
     }
 
     @PostMapping("/{developerId}/add-score")
-    public ScoreDto.Response addScoreById(@PathVariable UUID developerId, @RequestBody ScoreDto.Request request) {
-        return scoreService.addScore(developerId, request);
+    public ResponseEntity<ScoreDto.Response> addScoreById(@PathVariable UUID developerId, @RequestBody ScoreDto.Request request) {
+//        return ResponseEntity.ok().body(scoreService.addScore(developerId, request)) ;
+        return new ResponseEntity<>(scoreService.addScore(developerId, request),HttpStatus.OK);
     }
 
     @PostMapping("/{developerId}/add-scores")

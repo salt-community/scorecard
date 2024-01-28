@@ -1,5 +1,5 @@
 import { httpGetAllSaltieScoreboard } from "@/app/api/request";
-import Scoreboard from "@/app/components/admin/Scoreboard";
+import ScoreboardList from "@/app/components/admin/ScoreboardList";
 import { RadarGraphicData } from "@/app/types";
 
 type saltieAdmin = {
@@ -10,7 +10,7 @@ type saltieAdmin = {
 
 const page = async () => {
   const developersData: saltieAdmin[] = await httpGetAllSaltieScoreboard();
-  return <Scoreboard salties={developersData} />;
+  return <ScoreboardList salties={developersData} />;
 };
 
 export default page;

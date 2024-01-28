@@ -16,6 +16,12 @@ export type BackgroundInformation = {
   skills: string[];
 };
 
+export type Assignment = {
+  id: string;
+  name: string;
+  type: string;
+};
+
 export type Scores = { scoreName: string; data: SimpleTableEntry };
 
 export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };

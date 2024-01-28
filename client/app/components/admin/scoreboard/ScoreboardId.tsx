@@ -1,18 +1,19 @@
+"use client";
+
 import { Avatar } from "@nextui-org/react";
 import ContactsBar from "../../scorecard/ContactsBar";
 import { DeveloperData } from "@/app/types";
 
 interface ScoreboardHeaderProps {
-  developerData: DeveloperData;
+  developer: DeveloperData;
 }
 
-const ScoreboardId = ({ developerData }: ScoreboardHeaderProps) => {
-  const avatarUrl = developerData.githubProfilePictureUrl;
-  const developerName = developerData.name;
-  const programmingLanguage = developerData.bootcamp;
-  const standoutIntro = developerData.standoutIntro;
-  const github = developerData.githubUrl;
-  const linkedin = developerData.linkedinUrl;
+const ScoreboardId = ({ developer }: ScoreboardHeaderProps) => {
+  const avatarUrl = developer.githubProfilePictureUrl;
+  const developerName = developer.name;
+  const programmingLanguage = developer.bootcamp;
+  const github = developer.githubUrl;
+  const linkedin = developer.linkedinUrl;
   return (
     <div className="flex w-full gap-8">
       <Avatar
@@ -24,7 +25,8 @@ const ScoreboardId = ({ developerData }: ScoreboardHeaderProps) => {
       />
       <div className="flex flex-col my-auto w-[310px] md:w-72">
         <p className="text-tiny uppercase font-bold">
-          {programmingLanguage.toUpperCase()} Developer
+          {programmingLanguage ? programmingLanguage.toUpperCase() : ""}{" "}
+          Developer
         </p>
         <h4 className="font-bold text-large">{developerName}</h4>
         <ContactsBar githubUrl={github} linkedinUrl={linkedin} />

@@ -1,5 +1,6 @@
 package com.salt.server.assignment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.score.Score;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,8 +21,10 @@ public class Assignment {
     @Setter(AccessLevel.NONE)
     @Enumerated(EnumType.STRING)
     private Type type;
+    @JsonIgnore
     @OneToMany(mappedBy = "assignment")
     private List<Score> scores = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "assignment")
     private List<Coverage> coverages = new ArrayList<>();
 

@@ -31,7 +31,7 @@ public class AssignmentService {
                 .orElseThrow(() -> new NoSuchElementException("test not found"));
     }
 
-    public Assignment getTestByName(String name) {
+    public Assignment getAssignmentByName(String name) {
         return assignmentRepository.findByName(name)
                 .orElseThrow(() -> new NoSuchElementException("test not found"));
     }

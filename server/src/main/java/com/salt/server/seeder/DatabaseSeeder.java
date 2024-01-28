@@ -108,52 +108,52 @@ public class DatabaseSeeder implements ApplicationRunner {
     String score = "[\n" +
             "    {\n" +
             "        \"name\": \"hackday 2\",\n" +
-            "        \"score\": 82,\n" +
+            "        \"score\": \"82\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"on site demo 1\",\n" +
-            "        \"score\": 70,\n" +
+            "        \"score\": \"70\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"tech interview 1\",\n" +
-            "        \"score\": 92,\n" +
+            "        \"score\": \"92\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"repository documentation\",\n" +
-            "        \"score\": 50,\n" +
+            "        \"score\": \"50\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"tech article\",\n" +
-            "        \"score\": 65,\n" +
+            "        \"score\": \"65\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"microsteps\",\n" +
-            "        \"score\": 20,\n" +
+            "        \"score\": \"20\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },{\n" +
             "        \"name\": \"figma\",\n" +
-            "        \"score\": 90,\n" +
+            "        \"score\": \"90\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },{\n" +
             "        \"name\": \"weekend assignment 1\",\n" +
-            "        \"score\": 82,\n" +
+            "        \"score\": \"82\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },{\n" +
             "        \"name\": \"on site test 1\",\n" +
-            "        \"score\": 87,\n" +
+            "        \"score\": \"87\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },{\n" +
             "        \"name\": \"hackday 1\",\n" +
-            "        \"score\": 85,\n" +
+            "        \"score\": \"85\",\n" +
             "        \"description\": \"good application\"\n" +
             "    },{\n" +
             "        \"name\": \"project 1\",\n" +
-            "        \"score\": 95,\n" +
+            "        \"score\": \"95\",\n" +
             "        \"description\": \"good application\"\n" +
             "    }\n" +
             "]";

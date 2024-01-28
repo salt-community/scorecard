@@ -7,7 +7,7 @@ public interface ScoreDto {
 
     record Request(
             String name,
-            int score,
+            String score,
             String description
     ) {
     }

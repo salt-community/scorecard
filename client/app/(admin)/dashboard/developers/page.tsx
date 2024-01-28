@@ -1,4 +1,4 @@
-import { httpGetAllDevelopers } from "@/app/api/request";
+import { httpGetAllAssignment, httpGetAllDevelopers } from "@/app/api/request";
 import AllDevelopers from "@/app/components/admin/AllDevelopers";
 import React from "react";
 
@@ -12,6 +12,7 @@ type developerAdmin = {
 
 const page = async () => {
   const developersData: developerAdmin[] = await httpGetAllDevelopers();
+  const assignment: string[] = await httpGetAllAssignment();
   return <AllDevelopers developers={developersData} />;
 };
 

@@ -8,6 +8,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -20,9 +22,11 @@ public class SecurityConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors().disable()
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("api/account").permitAll()
-                        .requestMatchers("api/account/{accountId}").permitAll()
+                        .requestMatchers("api/").permitAll()
+                        .requestMatchers("api/accounts").permitAll()
+                        .requestMatchers("api/accounts/{accountId}").permitAll()
                         .anyRequest().permitAll()
                 )
                 .httpBasic(withDefaults());
@@ -38,6 +42,14 @@ public class SecurityConfig  {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    @Configuration
+    public class WebConfiguration implements WebMvcConfigurer {
+
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**").allowedMethods("*");
+        }
     }
 
 }

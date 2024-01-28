@@ -18,7 +18,7 @@ public class AssignmentController {
     }
 
     @GetMapping
-    public List<Assignment> getAllTest() {
+    public List<Assignment> getAllAssignment() {
         return assignmentService.getAllTest();
     }
 

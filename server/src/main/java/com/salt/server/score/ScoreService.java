@@ -39,11 +39,15 @@ public class ScoreService {
 
     public ScoreDto.Response addScore(UUID id, ScoreDto.Request request) {
         Account account = accountService.getDeveloperById(id);
-        Assignment assignment = assignmentService.getTestByName(request.name());
+        System.out.println(request.name());
+        Assignment assignment = assignmentService.getAssignmentByName(request.name());
+        if(scoreRepository.findByAccountAndAssignment(account, assignment)!= null) {
+            throw new IllegalArgumentException("Score already exist");
+        };
         Score score = new Score();
         score.setAccount(account);
         score.setAssignment(assignment);
-        score.setScore(request.score());
+        score.setScore(Integer.parseInt(request.score()));
         score.setDescription(request.description());
 
         Score saveScore = scoreRepository.save(score);

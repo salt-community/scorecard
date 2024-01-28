@@ -15,7 +15,7 @@ type Props = {
   salties: saltieAdmin[];
 };
 
-const AllDevelopers = ({ salties }: Props) => {
+const ScoreboardList = ({ salties }: Props) => {
   return (
     <Card className="p-4" placeholder={undefined}>
       <div className="overflow-y-auto">
@@ -95,4 +95,4 @@ const AllDevelopers = ({ salties }: Props) => {
   );
 };
 
-export default AllDevelopers;
+export default ScoreboardList;

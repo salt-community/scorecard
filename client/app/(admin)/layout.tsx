@@ -23,7 +23,7 @@ export default function AdminLayout({
           <div className="flex-[1]">
             <Topbar />
           </div>
-          <div className="flex-[8] shadow-xl shadow-blue-gray-900/5 border-2 min-h-2/3">
+          <div className="flex-[8] shadow-xl shadow-blue-gray-900/5  min-h-2/3">
             {children}
           </div>
         </div>

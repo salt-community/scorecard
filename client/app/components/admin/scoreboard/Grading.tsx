@@ -1,10 +1,10 @@
-import { Avatar, CardHeader, Divider } from "@nextui-org/react";
-import ContactsBar from "../../scorecard/ContactsBar";
-import { DeveloperData } from "@/app/types";
+"use client";
+
+import { CardHeader } from "@nextui-org/react";
 
 const Grading = () => {
   return (
-    <div className="p-4">
+    <div className="p-2">
       <CardHeader>
         <h4 className="font-bold text-large">Grading system</h4>
       </CardHeader>

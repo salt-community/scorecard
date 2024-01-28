@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/developers")
+@CrossOrigin("http://localhost:3000")
 public class DeveloperController {
 
     private final DeveloperService developerService;

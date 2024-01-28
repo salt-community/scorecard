@@ -1,16 +1,18 @@
-import { DeveloperData } from "@/app/types";
+"use client";
+import { Assignment, DeveloperData } from "@/app/types";
 import ScoreboardHeader from "./ScoreboardHeader";
 import ScoreboardBody from "./ScoreboardBody";
 
 interface ScoreboardProps {
-  developerData: DeveloperData;
+  developer: DeveloperData;
+  assignment: Assignment[];
 }
 
-const Scoreboard = ({ developerData }: ScoreboardProps) => {
+const Scoreboard = ({ developer, assignment }: ScoreboardProps) => {
   return (
     <div className="flex flex-col gap-4 h-full">
-      <ScoreboardHeader developerData={developerData} />
-      <ScoreboardBody scores={developerData.scores} />
+      <ScoreboardHeader developer={developer} />
+      <ScoreboardBody developer={developer} assignment={assignment} />
     </div>
   );
 };
