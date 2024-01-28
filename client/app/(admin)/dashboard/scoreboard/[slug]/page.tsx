@@ -1,17 +1,10 @@
 "use client";
 import {
   httpGetAllAssignment,
-  httpGetDeveloperById,
   httpGetSaltieScoreboard,
 } from "@/app/api/request";
 import Scoreboard from "@/app/components/admin/scoreboard/Scoreboard";
-import {
-  Assignment,
-  DeveloperData,
-  SaltieData,
-  Score,
-  ScoreRes,
-} from "@/app/types";
+import { Assignment, SaltieData } from "@/app/types";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -28,7 +21,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     fetchBackend();
-  }, []);
+  });
 
   if (!developer) {
     return (

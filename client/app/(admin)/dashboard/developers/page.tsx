@@ -10,10 +10,9 @@ type developerAdmin = {
   role: string;
 };
 
-const page = async () => {
+const DevelopersPage = async () => {
   const developersData: developerAdmin[] = await httpGetAllDevelopers();
-  const assignment: string[] = await httpGetAllAssignment();
   return <AllDevelopers developers={developersData} />;
 };
 
-export default page;
+export default DevelopersPage;
