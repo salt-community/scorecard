@@ -36,8 +36,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        assignmentSeeder();
-        accountSeeder();
+
     }
 
     private void assignmentSeeder() {
@@ -164,7 +163,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             "  \"role\": \"pgp\",\n" +
             "  \"standoutIntro\": \"experienced in various of client projects\",\n" +
             "  \"phoneNumber\" : \"071234456\",\n" +
-            "  \"bootcamp\": \"javascript\",\n" +   
+            "  \"bootcamp\": \"javascript\",\n" +
             "  \"githubUsername\": \"Finns841594\",\n" +
             "  \"linkedinUsername\": \"feng-yang-511361166\",\n" +
             "  \"codewarsUsername\" : \"Finns841594\",\n" +
