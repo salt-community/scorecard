@@ -6,7 +6,7 @@ import { Banner } from "../components/Banner";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const fetchAllUsers = async () => {
   const res = await fetch(
-    `https://scorecard-l6oa.onrender.com/api/developers`,
+    `https://scorecard-server.onrender.com/api/developers`,
     {
       cache: "no-cache",
     }
