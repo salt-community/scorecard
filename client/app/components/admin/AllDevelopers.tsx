@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-
 import { Button, Card } from "@material-tailwind/react";
 
 type developerAdmin = {
@@ -16,7 +15,7 @@ type Props = {
   developers: developerAdmin[];
 };
 
-const AllDevelopers = ({ developers }: Props) => {
+export const AllDevelopers = ({ developers }: Props) => {
   return (
     <Card className="p-4" placeholder={undefined}>
       <div className="overflow-y-auto">
@@ -74,5 +73,3 @@ const AllDevelopers = ({ developers }: Props) => {
     </Card>
   );
 };
-
-export default AllDevelopers;

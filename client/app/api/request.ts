@@ -5,6 +5,13 @@ const ADMIN_URI = `${DEVELOPERS_URI}/admin`;
 const SCORE_URI = `${BASIC_URI}/api/scores`;
 
 //DEVELOPER URI
+export const httpGetAllAccounts = async () => {
+  const response = await fetch(DEVELOPERS_URI, {
+    cache: "no-cache",
+  });
+  return await response.json();
+};
+
 export const httpGetDeveloperById = async (id: string) => {
   const response = await fetch(DEVELOPERS_URI + "/" + id, {
     cache: "no-cache",

@@ -10,5 +10,5 @@ type saltieAdmin = {
 
 export default async function ScoreboardPage() {
   const developersData: saltieAdmin[] = await httpGetAllSaltieScoreboard();
-  return <ScoreboardList salties={developersData} />;
+  return <div>{/* <ScoreboardList salties={developersData} /> */}</div>;
 }
