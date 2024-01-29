@@ -23,6 +23,8 @@ export default function Page({ params }: { params: { slug: string } }) {
     fetchBackend();
   });
 
+  console.log(developer);
+
   if (!developer) {
     return (
       <div>

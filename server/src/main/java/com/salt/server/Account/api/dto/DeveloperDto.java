@@ -42,7 +42,7 @@ public interface DeveloperDto {
             String githubUrl,
             String linkedinUsername,
             List<DeveloperDto.RadarGraph> radarGraph,
-            List<DeveloperDto.ScoreScoreboard> scores
+            List<DeveloperDto.ScoreDetail> scores
     ) {
     }
 
@@ -54,6 +54,7 @@ public interface DeveloperDto {
 
     record ScoreDetail(
             String id,
+            String type,
             String assignment,
             Integer score,
             String description

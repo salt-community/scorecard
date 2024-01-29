@@ -84,7 +84,7 @@ public class DeveloperService {
     public DeveloperDto.DeveloperScoreboardResponse adminGetDeveloperScoreboard(UUID id) {
         Account account = getDeveloperById(id);
         List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
-        List<DeveloperDto.ScoreScoreboard> scoreScoreboards = getScoreboardScore(account);
+        List<DeveloperDto.ScoreDetail> scoreScoreboards = getScoreboardScore(account);
         return new DeveloperDto.DeveloperScoreboardResponse(
                 account.getId().toString(),
                 account.getUserDetail().getName(),
@@ -97,21 +97,17 @@ public class DeveloperService {
         );
     }
 
-    public List<DeveloperDto.ScoreScoreboard> getScoreboardScore(Account account) {
-        List<DeveloperDto.ScoreScoreboard> scoresList = new ArrayList<>();
+    public List<DeveloperDto.ScoreDetail> getScoreboardScore(Account account) {
 
-        for (var type : Type.values()) {
-            DeveloperDto.ScoreScoreboard scores = new DeveloperDto.ScoreScoreboard(
-                    type.toString(),
-                    account.getScores() != null ?
-                            account.getScores().stream()
-                                    .filter(score -> score.getAssignment().getType().equals(type))
-                                    .map(score -> new DeveloperDto.ScoreDetail(score.getId().toString(), score.getAssignment().getName(), score.getScore(), score.getDescription())).toList()
-                            : null
-            );
-            scoresList.add(scores);
-        }
-        return scoresList;
+        return account.getScores().stream()
+                .map(score -> new DeveloperDto.ScoreDetail(
+                        score.getId().toString(),
+                        score.getAssignment().getType().toString(),
+                        score.getAssignment().getName(),
+                        score.getScore(),
+                        score.getDescription()))
+                .toList();
+
     }
 
     public Account getDeveloperById(UUID id) {

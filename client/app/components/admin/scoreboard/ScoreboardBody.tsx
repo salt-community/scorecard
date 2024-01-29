@@ -11,10 +11,14 @@ interface ScoreboardProps {
 }
 
 const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
+  // const [];
+
+  // console.log(developer.scores);
+
   return (
     <div className="h-full flex flex-row gap-4">
       <Card className="w-72 block min-h-full p-2">
-        <ScoreList scores={developer.scores} />
+        {/* <ScoreList scores={developer.scores} /> */}
       </Card>
       <Card className="flex-1 min-h-full">
         <InputForm developer={developer} assignment={assignment} />

@@ -65,21 +65,21 @@ export type SaltieData = {
   githubUrl: string;
   linkedinUrl: string;
   radarGraph: RadarGraphicData[];
-  scores: DetailScores[];
+  scores: ScoreRes[];
+};
+
+export type ScoreRes = {
+  id: string;
+  type: string;
+  assignment: string;
+  score: number;
+  description: string;
 };
 
 export type DetailScores = { scoreName: string; data: Score[] };
 
 export type Score = {
   id: string;
-  assignment: string;
-  score: number;
-  description: string;
-};
-
-export type ScoreRes = {
-  id: string;
-  type: string;
   assignment: string;
   score: number;
   description: string;

@@ -1,5 +1,6 @@
 package com.salt.server.score;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.Account.model.Account;
 import com.salt.server.assignment.model.Assignment;
 import jakarta.persistence.*;
@@ -18,9 +19,11 @@ public class Score {
     private int score;
     @Column(columnDefinition = "text")
     private String description;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "assignment_id", nullable = false)
     private Assignment assignment;
