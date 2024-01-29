@@ -8,7 +8,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
-@Builder
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +26,15 @@ public class Academic {
     @OneToOne
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
+
+    public void setDegree(String degree) {
+        this.degree = switch (degree) {
+            case "bachelor" -> Degree.bachelor;
+            case "doctoral" -> Degree.doctoral;
+            case "master" -> Degree.master;
+            case "vocationaldiploma" -> Degree.vocationaldiploma;
+            default -> Degree.highschool;
+        };
+    }
+
 }

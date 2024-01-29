@@ -4,5 +4,6 @@ public enum Degree {
     vocationaldiploma,
     bachelor,
     master,
-    doctoral
+    doctoral,
+    highschool,
 }

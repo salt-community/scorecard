@@ -158,15 +158,14 @@ public class DeveloperService {
     private void createAcademic(DeveloperDto.Request request, UserDetail userDetail) {
         Academic academicDetail = request.backgroundInformation().academic();
 
-        Academic academic = Academic.builder()
-                .userDetail(userDetail)
-                .degree(academicDetail.getDegree())
-                .major(academicDetail.getMajor())
-                .startDate(academicDetail.getStartDate())
-                .endDate(academicDetail.getEndDate())
-                .school(academicDetail.getSchool())
-                .build();
-
+        Academic academic = new Academic();
+        academic.setUserDetail(userDetail);
+        academic.setDegree(academicDetail.getDegree().toString());
+        academic.setMajor(academicDetail.getMajor());
+        academic.setStartDate(academicDetail.getStartDate());
+        academic.setEndDate(academicDetail.getEndDate());
+        academic.setSchool(academicDetail.getSchool());
+  
         userDetail.setAcademic(academic);
         academicRepository.save(academic);
     }

@@ -1,19 +1,8 @@
 import Link from "next/link";
 import { ShowCard } from "../components/DeveloperCard";
 import { Banner } from "../components/Banner";
+import { fetchAllUsers } from "../api/request";
 
-// should apply TanStack Query for fetching
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const fetchAllUsers = async () => {
-  const res = await fetch(
-    `https://scorecard-server.onrender.com/api/developers`,
-    {
-      cache: "no-cache",
-    }
-  );
-  const data = await res.json();
-  return data;
-};
 
 type developerInList = {
   id: string;
