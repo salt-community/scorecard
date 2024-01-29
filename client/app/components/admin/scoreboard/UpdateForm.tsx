@@ -8,8 +8,8 @@ import {
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import { Assignment, DeveloperData, SaltieData, ScoreRes } from "@/app/types";
-import { httpDeleteScoreById, httpPostScoreById } from "@/app/api/request";
+import { Assignment, ScoreRes } from "@/app/types";
+import { httpDeleteScoreById } from "@/app/api/request";
 import { useRouter } from "next/navigation";
 
 interface ScoreboardProps {

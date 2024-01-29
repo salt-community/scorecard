@@ -4,6 +4,7 @@ import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { httpPostDeveloper } from "@/app/api/request";
 import { useRouter } from "next/navigation";
+import { error } from "console";
 
 const Page = () => {
   const [input, setInput] = useState({
@@ -43,11 +44,11 @@ const Page = () => {
     e.preventDefault();
     console.log(input);
     const response = await httpPostDeveloper(input);
-    console.log(response);
-    if (response.status == 500) {
-      alert("Score already exist");
-    } else {
+    console.log(response.status);
+    if (response.status == 200) {
       router.push("/dashboard/developers");
+    } else {
+      throw new Error("something went wrong!!");
     }
   };
   const roles = ["core", "saltie", "pgp", "consultant"];

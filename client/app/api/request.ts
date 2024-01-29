@@ -83,5 +83,5 @@ export const httpPostDeveloper = async (developer: any) => {
       "content-type": "application/json; charset=utf-8",
     },
   });
-  return response.json();
+  return response;
 };
