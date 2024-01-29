@@ -14,11 +14,6 @@ const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
   const [score, setScore] = useState<ScoreRes[]>(developer.scores);
   
 
-  useEffect(() => {
-
-    
-
-  }, []);
   const updateScore = (updatedScore: ScoreRes) => {
     setScore((curr: ScoreRes[]) => [...curr, updatedScore]);
     console.log(score);
