@@ -4,6 +4,13 @@ import React from "react";
 
 export default async function developer() {
   const developersData = await httpGetAllDevelopers();
+  if (!developersData) {
+    return (
+      <div>
+        <h1>Loading ...</h1>
+      </div>
+    );
+  }
   return (
     <div>
       <AllDevelopers developers={developersData} />

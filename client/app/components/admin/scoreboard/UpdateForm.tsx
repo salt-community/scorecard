@@ -53,7 +53,7 @@ const UpdateForm = ({
   return (
     <div className="h-full">
       <CardHeader>
-        <h4 className="font-bold text-large">Input Score</h4>
+        <h4 className="font-bold text-large">{searchedScore.type}</h4>
       </CardHeader>
 
       <form
@@ -86,7 +86,7 @@ const UpdateForm = ({
               step={"1"}
               onChange={inputForm}
               className="w-72"
-              defaultValue={searchedScore.score.toString()}
+              value={searchedScore.score.toString()}
             />
           </div>
           <Textarea
@@ -95,7 +95,7 @@ const UpdateForm = ({
             labelPlacement="outside"
             placeholder="Enter score description"
             onChange={inputForm}
-            defaultValue={searchedScore.description}
+            value={searchedScore.description}
           />
         </div>
         <div className="flex flex-row justify-center gap-20">

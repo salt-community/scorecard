@@ -1,15 +1,15 @@
 import { httpGetAllSaltieScoreboard } from "@/app/api/request";
 import ScoreboardList from "@/app/components/admin/ScoreboardList";
-import { RadarGraphicData } from "@/app/types";
-
-type saltieAdmin = {
-  id: string;
-  name: string;
-  radarGraph: RadarGraphicData[];
-};
 
 export default async function ScoreboardPage() {
-  const developersData: saltieAdmin[] = await httpGetAllSaltieScoreboard();
+  const developersData = await httpGetAllSaltieScoreboard();
+  if (!developersData) {
+    return (
+      <div>
+        <h1>Loading ...</h1>
+      </div>
+    );
+  }
   return (
     <div>
       <ScoreboardList salties={developersData} />
