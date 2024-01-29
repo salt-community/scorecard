@@ -27,7 +27,7 @@ const ScoreList = ({ scores }: ScoreboardProps) => {
     for (let i = 0; i < unique.length; i++) {
       const scoreName = unique[i];
       const data1 = scores.filter(score => score.type === scoreName)
-      .reduce(function(r, e) {
+      .reduce(function(r:any, e) {
         r[e.assignment] = e.score;
         return r;
       }, {});
