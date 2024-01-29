@@ -42,9 +42,7 @@ const Page = () => {
 
   const submitHandler = async (e: any, input: any) => {
     e.preventDefault();
-    console.log(input);
     const response = await httpPostDeveloper(input);
-    console.log(response.status);
     if (response.status == 200) {
       router.push("/dashboard/developers");
     } else {
