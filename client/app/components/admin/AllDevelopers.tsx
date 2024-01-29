@@ -38,7 +38,7 @@ export const AllDevelopers = ({ developers }: Props) => {
                 Action
               </th>
             </tr>
-            {developers &&
+            {developers.length > 0 ?
               developers.map((developer) => {
                 return (
                   <tr
@@ -66,7 +66,7 @@ export const AllDevelopers = ({ developers }: Props) => {
                     </td>
                   </tr>
                 );
-              })}
+              }): null}
           </thead>
         </table>
       </div>

@@ -45,6 +45,7 @@ public class AccountService {
                 .name(request.name())
                 .phoneNumber(request.phoneNumber())
                 .build();
+        account.setUserDetail(userDetail);
         userDetailRepository.save(userDetail);
         return AccountMapper.toAccountResponse(accountRepository.save(account));
     }

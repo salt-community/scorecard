@@ -3,12 +3,16 @@ import React, { useState } from 'react'
 import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem } from '@nextui-org/react';
 import { httpPostDeveloper, httpPostScoreById } from '@/app/api/request';
+import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
 const Page = () => {
     const [input, setInput] = useState({
         email: "",
+        name: "",
+        phoneNumber: "",
         role: ""
       });
-    
+      const router = useRouter();
       const inputForm = (el: any) => {
         const { name, value } = el.target;
         setInput({
@@ -19,13 +23,13 @@ const Page = () => {
     
       const submitHandler = async (e: any, input: any) => {
         e.preventDefault();
-    
+        console.log(input);
         const response = await httpPostDeveloper(input);
         console.log(response);
         if (response.status == 500) {
           alert("Score already exist");
         } else {
-          e.target.reset();
+         router.push('/dashboard/developers');
         }
       };
       const roles = ['core', 'saltie', 'pgp', 'consultant'];
@@ -61,7 +65,7 @@ const Page = () => {
           className="w-72"
         />
                 <Input
-          name="phone-number"
+          name="phoneNumber"
           type="text"
           label="Phone Number:"
           labelPlacement="outside"

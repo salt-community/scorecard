@@ -1,4 +1,4 @@
-const BASIC_URI = "https://scorecard-server.onrender.com";
+const BASIC_URI = "http://localhost:8080";
 const ASSIGNMENT_URI = `${BASIC_URI}/api/assignment`;
 const DEVELOPERS_URI = `${BASIC_URI}/api/developers`;
 const ADMIN_URI = `${DEVELOPERS_URI}/admin`;
@@ -68,7 +68,7 @@ export const httpPostScoreById = async (id: string, score: any) => {
 
 export const httpPostDeveloper = async (developer: any) => {
   const response = await fetch(
-    `https://scorecard-server.onrender.com/api/accounts`,
+    `http://localhost:8080/api/accounts`,
     {
       method: "POST",
       body: JSON.stringify(developer),
