@@ -65,3 +65,17 @@ export const httpPostScoreById = async (id: string, score: any) => {
   );
   return response.json();
 };
+
+export const httpPostDeveloper = async (developer: any) => {
+  const response = await fetch(
+    `https://scorecard-server.onrender.com/api/accounts`,
+    {
+      method: "POST",
+      body: JSON.stringify(developer),
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+      },
+    }
+  );
+  return response.json();
+};

@@ -20,10 +20,11 @@ import java.util.UUID;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final UserDetailRepository userDetailRepository;
 
-    public AccountService(AccountRepository accountRepository
-    ) {
+    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository) {
         this.accountRepository = accountRepository;
+        this.userDetailRepository = userDetailRepository;
     }
 
     public List<AccountDto.Response> getAllAccount() {
@@ -40,6 +41,11 @@ public class AccountService {
         Account account = new Account();
         account.setEmail(request.email());
         account.setRole(request.role());
+        UserDetail userDetail = UserDetail.builder()
+                .name(request.name())
+                .phoneNumber(request.phoneNumber())
+                .build();
+        userDetailRepository.save(userDetail);
         return AccountMapper.toAccountResponse(accountRepository.save(account));
     }
 
