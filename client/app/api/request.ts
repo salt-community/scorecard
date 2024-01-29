@@ -38,7 +38,7 @@ export const httpGetAllSaltieScoreboard = async () => {
 
 export const httpGetSaltieScoreboard = async (id: string) => {
   const response = await fetch(
-    "http://localhost:8080/api/developers/admin/scoreboard/" + id,
+    "https://scorecard-server.onrender.com/api/developers/admin/scoreboard/" + id,
     {
       cache: "no-cache",
     }
@@ -54,7 +54,7 @@ export const httpGetAllAssignment = async () => {
 
 export const httpPostScoreById = async (id: string, score: any) => {
   const response = await fetch(
-    `http://localhost:8080/api/scores/${id}/add-score`,
+    `https://scorecard-server.onrender.com/api/scores/${id}/add-score`,
     {
       method: "POST",
       body: JSON.stringify(score),

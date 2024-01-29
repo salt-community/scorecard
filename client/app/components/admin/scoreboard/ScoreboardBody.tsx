@@ -1,8 +1,8 @@
 "use client";
 import { Card } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ScoreList from "./ScoreList";
-import { Assignment, DeveloperData, SaltieData, Scores } from "@/app/types";
+import { Assignment, DeveloperData, SaltieData, Score, ScoreRes } from "@/app/types";
 import InputForm from "./InputForm";
 
 interface ScoreboardProps {
@@ -11,17 +11,25 @@ interface ScoreboardProps {
 }
 
 const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
-  // const [];
+  const [score, setScore] = useState<ScoreRes[]>(developer.scores);
+  
 
-  // console.log(developer.scores);
+  useEffect(() => {
 
+    
+
+  }, []);
+  const updateScore = (updatedScore: ScoreRes) => {
+    setScore((curr: ScoreRes[]) => [...curr, updatedScore]);
+    console.log(score);
+  };
   return (
     <div className="h-full flex flex-row gap-4">
       <Card className="w-72 block min-h-full p-2">
-        {/* <ScoreList scores={developer.scores} /> */}
+        <ScoreList scores={score!}/>
       </Card>
       <Card className="flex-1 min-h-full">
-        <InputForm developer={developer} assignment={assignment} />
+        <InputForm developer={developer} assignment={assignment} updateScore={updateScore}  />
       </Card>
     </div>
   );

@@ -15,9 +15,10 @@ import { useRouter } from "next/navigation";
 interface ScoreboardProps {
   developer: SaltieData;
   assignment: Assignment[];
+  updateScore: Function
 }
 
-const InputForm = ({ developer, assignment }: ScoreboardProps) => {
+const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
   const router = useRouter();
 
   const [input, setInput] = useState({
@@ -42,7 +43,7 @@ const InputForm = ({ developer, assignment }: ScoreboardProps) => {
       alert("Score already exist");
     } else {
       e.target.reset();
-      router.push("/dashboard/scoreboard/" + developer.id);
+      updateScore(response);
     }
   };
   return (

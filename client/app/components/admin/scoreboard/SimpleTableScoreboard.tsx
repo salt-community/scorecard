@@ -10,10 +10,11 @@ import {
 import React from "react";
 
 export interface SimpleTableProps {
-  data: Score[];
+  data: SimpleTableEntry;
 }
 
 const SimpleTable = ({ data }: SimpleTableProps) => {
+
   return (
     <div>
       <Table
@@ -27,10 +28,10 @@ const SimpleTable = ({ data }: SimpleTableProps) => {
           <TableColumn>value</TableColumn>
         </TableHeader>
         <TableBody>
-          {data.map((a) => (
-            <TableRow key={a.id}>
-              <TableCell>{a.assignment}</TableCell>
-              <TableCell className="text-end">{a.score.toString()}</TableCell>
+        {Object.entries(data).map(([key, value], index) => (
+            <TableRow key={index}>
+              <TableCell>{key}</TableCell>
+              <TableCell className="text-end">{value}</TableCell>
             </TableRow>
           ))}
         </TableBody>

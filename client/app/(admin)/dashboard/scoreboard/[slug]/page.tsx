@@ -21,9 +21,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     fetchBackend();
-  });
-
-  console.log(developer);
+  }, []);
 
   if (!developer) {
     return (
