@@ -7,6 +7,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import type { TabProps } from "@material-tailwind/react";
 import { DetailScores, ScoreRes, Scores, SimpleTableEntry } from "@/app/types";
 import SimpleTable from "./SimpleTableScoreboard";
 
@@ -15,36 +16,36 @@ interface ScoreboardProps {
 }
 
 const ScoreList = ({ scores }: ScoreboardProps) => {
-
   const scoreData = (scores: ScoreRes[]) => {
-     const type: string[] = scores.map((score) => score.type);
-     function onlyUnique(value:any, index:any, array:any) {
+    const type: string[] = scores?.map((score) => score.type);
+    function onlyUnique(value: any, index: any, array: any) {
       return array.indexOf(value) === index;
     }
-    
-    var unique = type.filter(onlyUnique);
+
+    var unique = type?.filter(onlyUnique);
     const data: Scores[] = [];
-    for (let i = 0; i < unique.length; i++) {
+    for (let i = 0; i < unique?.length; i++) {
       const scoreName = unique[i];
-      const data1 = scores.filter(score => score.type === scoreName)
-      .reduce(function(r:any, e) {
-        r[e.assignment] = e.score;
-        return r;
-      }, {});
+      const data1 = scores
+        .filter((score) => score.type === scoreName)
+        .reduce(function (r: any, e) {
+          r[e.assignment] = e.score;
+          return r;
+        }, {});
 
       const x: Scores = {
         scoreName: scoreName,
-        data: data1
+        data: data1,
       };
-      data.push(x); 
+      data.push(x);
     }
 
     return data;
-};
-  const a = scoreData(scores); 
+  };
+  const a = scoreData(scores);
 
   return (
-    <Tabs value="html">
+    <Tabs value="communication">
       <TabsHeader placeholder={undefined}>
         {a.map(({ scoreName }) => (
           <Tab

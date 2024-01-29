@@ -37,7 +37,7 @@ export const httpGetAllSaltieScoreboard = async () => {
 };
 
 export const httpGetSaltieScoreboard = async (id: string) => {
-  const response = await fetch(ADMIN_URI + "/scoreboard" + id, {
+  const response = await fetch(ADMIN_URI + "/scoreboard/" + id, {
     cache: "no-cache",
   });
   return await response.json();
