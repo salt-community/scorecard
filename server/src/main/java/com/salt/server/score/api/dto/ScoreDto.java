@@ -12,6 +12,11 @@ public interface ScoreDto {
     ) {
     }
 
+    record DeleteRequest(
+            String id
+    ) {
+    }
+
     record Response(
             UUID id,
             String type,

@@ -9,22 +9,20 @@ import {
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { Assignment, DeveloperData, SaltieData, ScoreRes } from "@/app/types";
-import { httpPostScoreById } from "@/app/api/request";
+import { httpDeleteScoreById, httpPostScoreById } from "@/app/api/request";
 import { useRouter } from "next/navigation";
 
 interface ScoreboardProps {
-  developer: SaltieData;
   assignment: Assignment[];
-  updateScore: Function;
   deleteSearchedScore: Function;
+  deleteScore: Function;
   searchedScore: ScoreRes;
 }
 
 const UpdateForm = ({
-  developer,
   assignment,
-  updateScore,
   deleteSearchedScore,
+  deleteScore,
   searchedScore,
 }: ScoreboardProps) => {
   const router = useRouter();
@@ -40,7 +38,13 @@ const UpdateForm = ({
   };
 
   const deleteHandler = async () => {
-    console.log(searchedScore.assignment);
+    const response = await httpDeleteScoreById(searchedScore.id);
+    if (response.status === 204) {
+      deleteScore(searchedScore.id);
+      deleteSearchedScore();
+    } else {
+      throw new Error("delete is canceled!!");
+    }
   };
 
   const submitHandler = async (e: any, input: any) => {

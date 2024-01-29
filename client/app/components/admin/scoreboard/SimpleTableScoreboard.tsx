@@ -1,4 +1,4 @@
-import { Score, SimpleTableEntry } from "@/app/types";
+import { SimpleTableEntry } from "@/app/types";
 import {
   Table,
   TableBody,

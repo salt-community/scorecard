@@ -94,7 +94,7 @@ public class ScoreService {
 
     public void deleteScore(UUID id) {
         Score score = scoreRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+                .orElseThrow(() -> new NoSuchElementException("Score not found"));
         scoreRepository.delete(score);
     }
 }

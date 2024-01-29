@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  DeveloperData,
-  RadarGraphicData,
-  SaltieData,
-  ScoreRes,
-  Scores,
-} from "@/app/types";
+import { SaltieData, ScoreRes, Scores } from "@/app/types";
 import {
   colorVariant,
   getAllAverageValue,
-  isExcellent,
   levelVariant,
 } from "@/app/utilities";
 import { Card, CardHeader, Chip, CircularProgress } from "@nextui-org/react";

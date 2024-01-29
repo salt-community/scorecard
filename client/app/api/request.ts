@@ -68,6 +68,13 @@ export const httpPostScoreById = async (id: string, score: any) => {
   return response.json();
 };
 
+export const httpDeleteScoreById = async (id: string) => {
+  const response = await fetch(`${SCORE_URI}/${id}`, {
+    method: "DELETE",
+  });
+  return response;
+};
+
 export const httpPostDeveloper = async (developer: any) => {
   const response = await fetch(`${BASIC_URI}/api/developers`, {
     method: "POST",

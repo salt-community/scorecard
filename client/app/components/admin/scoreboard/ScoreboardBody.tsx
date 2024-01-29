@@ -1,14 +1,8 @@
 "use client";
 import { Card } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ScoreList from "./ScoreList";
-import {
-  Assignment,
-  DeveloperData,
-  SaltieData,
-  Score,
-  ScoreRes,
-} from "@/app/types";
+import { Assignment, SaltieData, ScoreRes } from "@/app/types";
 import InputForm from "./InputForm";
 import UpdateForm from "./UpdateForm";
 
@@ -35,6 +29,9 @@ const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
     );
     setSearchedScore(searchedScore[0]);
   };
+  const deleteScore = (id: string) => {
+    setScore(score.filter((score) => score.id !== id));
+  };
 
   return (
     <div className="h-full flex flex-row gap-4">
@@ -44,10 +41,9 @@ const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
       <Card className="flex-1 min-h-full">
         {searchedScore ? (
           <UpdateForm
-            developer={developer}
             assignment={assignment}
-            updateScore={updateScore}
             deleteSearchedScore={deleteSearchedScore}
+            deleteScore={deleteScore}
             searchedScore={searchedScore}
           />
         ) : (
