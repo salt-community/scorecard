@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { Button, Card, Typography } from "@material-tailwind/react";
+import { Button, Card } from "@material-tailwind/react";
 
 type developerAdmin = {
   id: string;
@@ -39,32 +39,35 @@ const AllDevelopers = ({ developers }: Props) => {
                 Action
               </th>
             </tr>
-            {developers?.map((developer) => {
-              return (
-                <tr
-                  key={developer.id}
-                  className="even:bg-white odd:bg-gray-100"
-                >
-                  <td className="border px-6 py-4">{developer.name}</td>
-                  <td className="border px-6 py-4">{developer.email}</td>
-                  <td className="border px-6 py-4">{developer.phoneNumber}</td>
-                  <td className="border px-6 py-4">{developer.role}</td>
-                  <td className="border px-6 py-4 text-center">
-                    <Link
-                      href={`/dashboard/developers/${developer.id}`}
-                      className=""
-                    >
-                      <Button
-                        className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-                        placeholder={undefined}
+            {developers &&
+              developers.map((developer) => {
+                return (
+                  <tr
+                    key={developer.id}
+                    className="even:bg-white odd:bg-gray-100"
+                  >
+                    <td className="border px-6 py-4">{developer.name}</td>
+                    <td className="border px-6 py-4">{developer.email}</td>
+                    <td className="border px-6 py-4">
+                      {developer.phoneNumber}
+                    </td>
+                    <td className="border px-6 py-4">{developer.role}</td>
+                    <td className="border px-6 py-4 text-center">
+                      <Link
+                        href={`/dashboard/developers/${developer.id}`}
+                        className=""
                       >
-                        Edit
-                      </Button>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
+                        <Button
+                          className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+                          placeholder={undefined}
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
           </thead>
         </table>
       </div>

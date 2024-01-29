@@ -8,9 +8,7 @@ type saltieAdmin = {
   radarGraph: RadarGraphicData[];
 };
 
-const page = async () => {
+export default async function ScoreboardPage() {
   const developersData: saltieAdmin[] = await httpGetAllSaltieScoreboard();
   return <ScoreboardList salties={developersData} />;
-};
-
-export default page;
+}

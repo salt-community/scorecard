@@ -1,7 +1,11 @@
 import { httpGetDeveloperById } from "@/app/api/request";
 import ScoreCard from "@/app/components/scorecard/ScoreCard";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function DeveloperDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const developerData = await httpGetDeveloperById(params.slug);
 
   return (
