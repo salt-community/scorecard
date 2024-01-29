@@ -12,5 +12,9 @@ type developerAdmin = {
 
 export default async function developer() {
   const developersData = await httpGetAllDevelopers();
-  return <div>{/* <AllDevelopers developers={developersData} /> */}</div>;
+  return (
+    <div>
+      <AllDevelopers developers={developersData} />
+    </div>
+  );
 }

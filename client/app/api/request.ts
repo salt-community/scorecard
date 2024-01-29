@@ -1,4 +1,4 @@
-const BASIC_URI = "https://scorecard-l6oa.onrender.com";
+const BASIC_URI = "http://localhost:8080";
 const ASSIGNMENT_URI = `${BASIC_URI}/api/assignment`;
 const DEVELOPERS_URI = `${BASIC_URI}/api/developers`;
 const ADMIN_URI = `${DEVELOPERS_URI}/admin`;
