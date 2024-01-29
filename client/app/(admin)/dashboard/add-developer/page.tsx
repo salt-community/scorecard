@@ -2,14 +2,8 @@
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { httpPostDeveloper, httpPostScoreById } from "@/app/api/request";
-import { Router } from "next/router";
+import { httpPostDeveloper } from "@/app/api/request";
 import { useRouter } from "next/navigation";
-import { SimpleTableEntry } from "@/app/types";
-
-type SimpleEntryString = {
-  [key: string]: string;
-};
 
 const Page = () => {
   const [input, setInput] = useState({
@@ -26,7 +20,6 @@ const Page = () => {
     backgroundInformation: {
       nationalities: [],
       spokenLanguages: {},
-
       academic: {
         degree: "",
         major: "",
@@ -54,7 +47,7 @@ const Page = () => {
     if (response.status == 500) {
       alert("Score already exist");
     } else {
-      //router.push("/dashboard/developers");
+      router.push("/dashboard/developers");
     }
   };
   const roles = ["core", "saltie", "pgp", "consultant"];

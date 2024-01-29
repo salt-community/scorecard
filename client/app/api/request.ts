@@ -12,6 +12,14 @@ export const httpGetAllAccounts = async () => {
   return await response.json();
 };
 
+export const fetchAllUsers = async () => {
+  const res = await fetch(DEVELOPERS_URI, {
+    cache: "no-cache",
+  });
+  const data = await res.json();
+  return data;
+};
+
 export const httpGetDeveloperById = async (id: string) => {
   const response = await fetch(DEVELOPERS_URI + "/" + id, {
     cache: "no-cache",
@@ -69,12 +77,4 @@ export const httpPostDeveloper = async (developer: any) => {
     },
   });
   return response.json();
-};
-
-export const fetchAllUsers = async () => {
-  const res = await fetch(DEVELOPERS_URI, {
-    cache: "no-cache",
-  });
-  const data = await res.json();
-  return data;
 };

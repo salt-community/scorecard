@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ShowCard } from "../components/DeveloperCard";
 import { Banner } from "../components/Banner";
-import { fetchAllUsers } from "../api/request";
-
+import { httpGetAllAccounts } from "../api/request";
 
 type developerInList = {
   id: string;
@@ -12,7 +11,7 @@ type developerInList = {
 };
 
 export default async function Home() {
-  const developersData = await fetchAllUsers();
+  const developersData = await httpGetAllAccounts();
   return (
     <main className="flex min-h-screen flex-col items-center p-0 md:p-24">
       <Banner />

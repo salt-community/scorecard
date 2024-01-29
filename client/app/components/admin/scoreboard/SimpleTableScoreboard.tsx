@@ -7,14 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+import Link from "next/link";
 import React from "react";
 
 export interface SimpleTableProps {
   data: SimpleTableEntry;
+  searchScore: Function;
 }
 
-const SimpleTable = ({ data }: SimpleTableProps) => {
-
+const SimpleTable = ({ data, searchScore }: SimpleTableProps) => {
   return (
     <div>
       <Table
@@ -28,9 +29,13 @@ const SimpleTable = ({ data }: SimpleTableProps) => {
           <TableColumn>value</TableColumn>
         </TableHeader>
         <TableBody>
-        {Object.entries(data).map(([key, value], index) => (
+          {Object.entries(data).map(([key, value], index) => (
             <TableRow key={index}>
-              <TableCell>{key}</TableCell>
+              <TableCell className=" underline">
+                <Link href="" onClick={() => searchScore(key)}>
+                  {key}
+                </Link>
+              </TableCell>
               <TableCell className="text-end">{value}</TableCell>
             </TableRow>
           ))}

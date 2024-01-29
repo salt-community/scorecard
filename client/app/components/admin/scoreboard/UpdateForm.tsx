@@ -16,16 +16,20 @@ interface ScoreboardProps {
   developer: SaltieData;
   assignment: Assignment[];
   updateScore: Function;
+  deleteSearchedScore: Function;
+  searchedScore: ScoreRes;
 }
 
-const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
+const UpdateForm = ({
+  developer,
+  assignment,
+  updateScore,
+  deleteSearchedScore,
+  searchedScore,
+}: ScoreboardProps) => {
   const router = useRouter();
 
-  const [input, setInput] = useState({
-    name: "",
-    score: 0,
-    description: "",
-  });
+  const [input, setInput] = useState(searchedScore);
 
   const inputForm = (el: any) => {
     const { name, value } = el.target;
@@ -35,16 +39,12 @@ const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
     });
   };
 
+  const deleteHandler = async () => {
+    console.log(searchedScore.assignment);
+  };
+
   const submitHandler = async (e: any, input: any) => {
     e.preventDefault();
-
-    const response = await httpPostScoreById(developer.id, input);
-    if (response.status == 500) {
-      alert("Score already exist");
-    } else {
-      e.target.reset();
-      updateScore(response);
-    }
   };
   return (
     <div className="h-full">
@@ -63,7 +63,7 @@ const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
               name="name"
               label="Assignment :"
               labelPlacement="outside"
-              placeholder="Please choose assignment..."
+              placeholder={searchedScore.assignment}
               onChange={inputForm}
             >
               {assignment.map((assignment: Assignment) => (
@@ -82,6 +82,7 @@ const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
               step={"1"}
               onChange={inputForm}
               className="w-72"
+              defaultValue={searchedScore.score.toString()}
             />
           </div>
           <Textarea
@@ -90,15 +91,24 @@ const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
             labelPlacement="outside"
             placeholder="Enter score description"
             onChange={inputForm}
+            defaultValue={searchedScore.description}
           />
         </div>
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row justify-center gap-20">
           <Button
-            className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-accent text-white font-bold py-2 px-4 rounded"
             placeholder={undefined}
             type="submit"
+            onClick={() => deleteHandler()}
           >
-            Submit
+            Delete
+          </Button>
+          <Button
+            className="bg-blue-500 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+            placeholder={undefined}
+            onClick={() => deleteSearchedScore()}
+          >
+            Cancel
           </Button>
         </div>
       </form>
@@ -106,4 +116,4 @@ const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
   );
 };
 
-export default InputForm;
+export default UpdateForm;

@@ -7,15 +7,15 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import type { TabProps } from "@material-tailwind/react";
-import { DetailScores, ScoreRes, Scores, SimpleTableEntry } from "@/app/types";
+import { ScoreRes, Scores } from "@/app/types";
 import SimpleTable from "./SimpleTableScoreboard";
 
 interface ScoreboardProps {
   scores: ScoreRes[];
+  searchScore: Function;
 }
 
-const ScoreList = ({ scores }: ScoreboardProps) => {
+const ScoreList = ({ scores, searchScore }: ScoreboardProps) => {
   const scoreData = (scores: ScoreRes[]) => {
     const type: string[] = scores?.map((score) => score.type);
     function onlyUnique(value: any, index: any, array: any) {
@@ -64,7 +64,7 @@ const ScoreList = ({ scores }: ScoreboardProps) => {
       >
         {a.map((item) => (
           <TabPanel key={item.scoreName} value={item.scoreName}>
-            <SimpleTable data={item.data} />
+            <SimpleTable data={item.data} searchScore={searchScore} />
           </TabPanel>
         ))}
       </TabsBody>
