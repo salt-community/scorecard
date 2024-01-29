@@ -165,7 +165,7 @@ public class DeveloperService {
         academic.setStartDate(academicDetail.getStartDate());
         academic.setEndDate(academicDetail.getEndDate());
         academic.setSchool(academicDetail.getSchool());
-  
+
         userDetail.setAcademic(academic);
         academicRepository.save(academic);
     }
