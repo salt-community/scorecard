@@ -7,9 +7,6 @@ public interface AccountDto {
     record Request(
             String email,
             String name,
-
-            String phoneNumber,
-
             String role
     ) {
     }

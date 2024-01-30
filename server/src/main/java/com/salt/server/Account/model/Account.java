@@ -21,7 +21,7 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role role;
     @JsonIgnore
-    @OneToOne( cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
     @JsonIgnore
@@ -33,6 +33,7 @@ public class Account {
             case "saltie" -> Role.saltie;
             case "pgp" -> Role.pgp;
             case "consultant" -> Role.consultant;
+            case "other" -> Role.other;
             default -> Role.core;
         };
     }

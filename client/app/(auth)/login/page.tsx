@@ -34,7 +34,6 @@ const Page = () => {
     } else {
       router.push("/dashboard");
     }
-    console.log(respone);
   };
 
   return (
@@ -74,7 +73,7 @@ const Page = () => {
       <Card className=" w-96 flex flex-col items-center h-fit py-8">
         <Typography variant="h5" className=" text-md" placeholder={undefined}>
           Don't have an account?{" "}
-          <span className="tex">
+          <span>
             {" "}
             <Link href="/signup">Sign up</Link>
           </span>

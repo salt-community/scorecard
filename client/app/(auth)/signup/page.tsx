@@ -2,18 +2,27 @@
 import React, { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
 import { Card, Input, Link, Select, SelectItem } from "@nextui-org/react";
-import { httpGetAccountByEmail } from "@/app/api/request";
+import { httpCreateAccount, httpGetAccountByEmail } from "@/app/api/request";
 import { Account } from "@/app/types";
 import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
-  const [isNotFound, setIsNotFound] = useState<boolean | undefined>(false);
-  const [isNotFoundMessage, setIsNotFoundMessage] = useState<String>();
   const [input, setInput] = useState({
     email: "",
-    role: "core",
+    name: "",
+    role: "",
   });
   const router = useRouter();
+  const [value, setValue] = useState<string>("");
+
+  const validateEmail = (value: string) =>
+    value.match(/^[A-Z0-9._%+-]+@appliedtechnology.se/i);
+
+  const isInvalid = React.useMemo(() => {
+    if (value === "") return false;
+
+    return validateEmail(value) ? false : true;
+  }, [value]);
 
   const handleOnChange = (event: any) => {
     const { name, value } = event.target;
@@ -23,18 +32,26 @@ const SignupPage = () => {
     });
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+    input: any
+  ) => {
     event.preventDefault();
-    const respone: Account = await httpGetAccountByEmail(input.email);
-    if (respone === null || respone.role !== "core") {
-      setIsNotFound(true);
-      setIsNotFoundMessage(
-        "No core team account found with email: " + input.email
-      );
+    if (input.email.split("@").pop() === "appliedtechnology.se") {
+      input.role = "core";
+      console.log(input);
     } else {
-      router.push("/dashboard");
+      return;
     }
-    console.log(respone);
+    console.log(input);
+
+    const response = await httpCreateAccount(input);
+    if (response.status == 200) {
+      router.push("/dashboard");
+    } else if (response.status == 500) {
+    } else {
+      new Error("Something was wrong!");
+    }
   };
 
   return (
@@ -49,8 +66,22 @@ const SignupPage = () => {
             Scorecard
           </Typography>
         </Link>
+        <Typography
+          variant="h5"
+          className=" text-md w-80 text-center"
+          placeholder={undefined}
+        >
+          Sign up using
+        </Typography>
+        <Typography
+          variant="h5"
+          className=" text-md w-80 text-center pb-4"
+          placeholder={undefined}
+        >
+          @appliedtechnology.se email.
+        </Typography>
         <form
-          onSubmit={(event) => handleSubmit(event)}
+          onSubmit={(event) => handleSubmit(event, input)}
           className="flex flex-col gap-4 items-center"
         >
           <Input
@@ -58,8 +89,18 @@ const SignupPage = () => {
             type="email"
             onChange={handleOnChange}
             placeholder="Email:"
-            isInvalid={isNotFound}
-            errorMessage={isNotFoundMessage}
+            className=" w-80"
+            isInvalid={isInvalid}
+            color={isInvalid ? "danger" : "default"}
+            errorMessage={isInvalid && "Please enter a valid email"}
+            value={value}
+            onValueChange={setValue}
+          />
+          <Input
+            name="name"
+            type="text"
+            onChange={handleOnChange}
+            placeholder="Name:"
             className=" w-80"
           />
           <Button
@@ -67,16 +108,16 @@ const SignupPage = () => {
             placeholder={undefined}
             type="submit"
           >
-            Log in
+            Sign up
           </Button>
         </form>
       </Card>
       <Card className=" w-96 flex flex-col items-center h-fit py-8">
         <Typography variant="h5" className=" text-md" placeholder={undefined}>
-          Don't have an account?{" "}
-          <span className="tex">
+          Have an account?{" "}
+          <span>
             {" "}
-            <Link href="/signup">Sign up</Link>
+            <Link href="/login">Log in</Link>
           </span>
         </Typography>
       </Card>

@@ -4,5 +4,6 @@ public enum Role {
     core,
     saltie,
     pgp,
-    consultant
+    consultant,
+    other
 }

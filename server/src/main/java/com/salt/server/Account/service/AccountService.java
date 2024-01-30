@@ -43,7 +43,6 @@ public class AccountService {
         account.setRole(request.role());
         UserDetail userDetail = UserDetail.builder()
                 .name(request.name())
-                .phoneNumber(request.phoneNumber())
                 .build();
         account.setUserDetail(userDetail);
         userDetailRepository.save(userDetail);

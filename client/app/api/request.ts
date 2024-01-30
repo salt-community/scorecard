@@ -100,14 +100,24 @@ export const httpPostDeveloper = async (developer: any) => {
   return response;
 };
 
-
 export const httpGetAccountByEmail = async (email: string) => {
   const res = await fetch(`${BASIC_URI}/api/accounts/email/${email}`, {
     cache: "no-cache",
   });
-  if(res.status === 500){
+  if (res.status === 500) {
     return null;
   }
   const data = await res.json();
   return data;
+};
+
+export const httpCreateAccount = async (account: any) => {
+  const response = await fetch(`${BASIC_URI}/api/accounts`, {
+    method: "POST",
+    body: JSON.stringify(account),
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+    },
+  });
+  return response;
 };
