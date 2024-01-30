@@ -1,10 +1,13 @@
 "use client";
-import { httpGetDeveloperById } from "@/app/api/request";
+import {
+  httpGetAdmninDeveloperById,
+  httpGetDeveloperById,
+} from "@/app/api/request";
 import SelectNationalities from "@/app/components/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
 import SelectProjects from "@/app/components/admin/SelectProjects";
 import SelectSkills from "@/app/components/admin/SelectSkills";
-import { DeveloperData } from "@/app/types";
+import { developerDetail } from "@/app/types";
 import {
   Avatar,
   Card,
@@ -22,11 +25,11 @@ export default function DeveloperDetailPage({
 }) {
   const roles = ["core", "saltie", "pgp", "consultant"];
   const bootcamps = ["java", "javascript", "dotnet"];
-  const [developer, setDeveloper] = useState<DeveloperData>();
+  const [developer, setDeveloper] = useState<developerDetail>();
   const [input, setInput] = useState(developer!);
 
   const fetchbackend = async () => {
-    const developerData = await httpGetDeveloperById(params.slug);
+    const developerData = await httpGetAdmninDeveloperById(params.slug);
     setDeveloper(developerData);
     console.log(developerData);
   };
@@ -55,146 +58,176 @@ export default function DeveloperDetailPage({
     <form action="">
       <div className="flex flex-row gap-4">
         <Card className={` flex-1`}>
-          <CardHeader>
+          <CardHeader className="pb-0">
             <h4 className="font-bold text-large">Profile</h4>
           </CardHeader>
-          <CardHeader className=" px-4 flex flex-col gap-2">
+          <CardHeader className=" px-4 flex flex-col gap-2 w-full py-0">
             <Avatar
               isBordered
               color="default"
-              src={developer.githubProfilePictureUrl}
+              src={developer.github.pictureUrl}
               className=" w-24 h-24 text-large "
-              name={developer.name}
+              name={developer.userDetail.name}
             />
-            <Input
-              name="name"
-              type="text"
-              label="Name :"
-              labelPlacement="outside-left"
-              placeholder="Enter name"
-              color="default"
-              step={"1"}
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.name}
-            />
-            <Select
-              name="bootcamp"
-              label="Bootcamp :"
-              labelPlacement="outside-left"
-              placeholder="Please choose bootcamp..."
-              onChange={inputForm}
-              defaultSelectedKeys={developer.bootcamp}
-            >
-              {bootcamps.map((bootcamp: string) => (
-                <SelectItem key={bootcamp} value={bootcamp}>
-                  {bootcamp}
-                </SelectItem>
-              ))}
-            </Select>
-            <Select
-              name="role"
-              label="Role :"
-              labelPlacement="outside-left"
-              placeholder="Please choose role..."
-              onChange={inputForm}
-            >
-              {roles.map((roles: string) => (
-                <SelectItem key={roles} value={roles}>
-                  {roles}
-                </SelectItem>
-              ))}
-            </Select>
-            <Input
-              name="email"
-              type="email"
-              label="Email :"
-              labelPlacement="outside-left"
-              placeholder="Enter email"
-              color="default"
-              step={"1"}
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.email}
-            />
-            <Input
-              name="phoneNumber"
-              type="text"
-              label="Phone :"
-              labelPlacement="outside-left"
-              placeholder="Enter phoneNumber"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-            />
-            <SelectNationalities />
-            <SelectLanguages />
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Name :</label>
+              <Input
+                name="name"
+                type="text"
+                placeholder="Enter name"
+                color="default"
+                labelPlacement="outside-left"
+                onChange={inputForm}
+                className="w-2/3 py-0"
+                defaultValue={developer.userDetail.name}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Class :</label>
+              <Select
+                name="bootcamp"
+                labelPlacement="outside-left"
+                placeholder={
+                  developer.userDetail.bootcamp
+                    ? developer.userDetail.bootcamp
+                    : "Please choose bootcamp..."
+                }
+                onChange={inputForm}
+                className="w-2/3 py-0"
+                value={developer.userDetail.bootcamp}
+              >
+                {bootcamps.map((bootcamp, index) => (
+                  <SelectItem key={index} value={bootcamp}>
+                    {bootcamp}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Role :</label>
+              <Select
+                name="role"
+                labelPlacement="outside-left"
+                placeholder={
+                  developer.account.role
+                    ? developer.account.role
+                    : "Please choose bootcamp..."
+                }
+                onChange={inputForm}
+                className="w-2/3 py-0"
+                value={developer.account.role}
+              >
+                {roles.map((roles, index) => (
+                  <SelectItem key={index} value={roles}>
+                    {roles}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Email :</label>
+              <Input
+                name="email"
+                type="email"
+                labelPlacement="outside-left"
+                placeholder="Enter email"
+                color="default"
+                onChange={inputForm}
+                className="w-2/3 py-0"
+                defaultValue={developer.account.email}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Phone :</label>
+              <Input
+                name="phoneNumber"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="Enter phoneNumber"
+                color="default"
+                onChange={inputForm}
+                className="w-2/3 py-0"
+                defaultValue={developer.userDetail.phoneNumber}
+              />
+            </div>
+            <SelectNationalities nationalitiesSet={developer.nationalities} />
+            <SelectLanguages languagesSet={developer.languages} />
           </CardHeader>
         </Card>
-        <Card className={`max-w-72 flex-1`}>
+        <Card className={` flex-1`}>
           <CardHeader>
             <h4 className="font-bold text-large">Academic</h4>
           </CardHeader>
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <Input
-              name="degree"
-              type="text"
-              label="Degree :"
-              labelPlacement="outside-left"
-              placeholder="Enter degree"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.backgroundInformation.academic.degree}
-            />
-            <Input
-              name="major"
-              type="text"
-              label="Major :"
-              labelPlacement="outside-left"
-              placeholder="Enter major"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.backgroundInformation.academic.major}
-            />
-            <Input
-              name="school"
-              type="text"
-              label="School :"
-              labelPlacement="outside-left"
-              placeholder="Enter school"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.backgroundInformation.academic.school}
-            />
-            <Input
-              name="startDate"
-              type="date"
-              label="Start Date :"
-              labelPlacement="outside-left"
-              placeholder="Enter date"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.backgroundInformation.academic.startDate}
-            />
-            <Input
-              name="endDate"
-              type="date"
-              label="End Date :"
-              labelPlacement="outside-left"
-              placeholder="Enter date"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.backgroundInformation.academic.endDate}
-            />
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Degree :</label>
+              <Input
+                name="degree"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="Enter degree"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.academic.degree}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Major :</label>
+              <Input
+                name="major"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="Enter major"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.academic.major}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">School :</label>
+              <Input
+                name="school"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="Enter school"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.academic.school}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Start :</label>
+              <Input
+                name="startDate"
+                type="date"
+                labelPlacement="outside-left"
+                placeholder="Enter date"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.academic.startDate}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">End :</label>
+              <Input
+                name="endDate"
+                type="date"
+                labelPlacement="outside-left"
+                placeholder="Enter date"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.academic.endDate}
+              />
+            </div>
           </CardHeader>
 
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <SelectSkills />
+            <SelectSkills skillsSet={developer.skills} />
           </CardHeader>
         </Card>
         <Card className={` flex-1`}>
@@ -202,39 +235,47 @@ export default function DeveloperDetailPage({
             <h4 className="font-bold text-large">Social</h4>
           </CardHeader>
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <Input
-              name="githubUsername"
-              type="text"
-              label="Github :"
-              labelPlacement="outside-left"
-              placeholder="github username"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-              defaultValue={developer.githubUserName}
-            />
-            <Input
-              name="codewarsUrl"
-              type="text"
-              label="Codewars :"
-              labelPlacement="outside-left"
-              placeholder="codewars username"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-            />
-            <Input
-              name="LinkedinUsername"
-              type="text"
-              label="LinkedIn :"
-              labelPlacement="outside-left"
-              placeholder="linkedIn username"
-              color="default"
-              onChange={inputForm}
-              className="w-72"
-            />
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Github :</label>
+              <Input
+                name="githubUsername"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="github username"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.github.url.split("/").pop()}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Codewars :</label>
+              <Input
+                name="codewarsUrl"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="codewars username"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.social.codewarsUrl.split("/").pop()}
+              />
+            </div>
+            <div className="w-full flex flex-row items-center">
+              <label className="w-1/3">Linked In :</label>
+              <Input
+                name="LinkedinUsername"
+                type="text"
+                labelPlacement="outside-left"
+                placeholder="linkedIn username"
+                color="default"
+                onChange={inputForm}
+                className="w-72"
+                defaultValue={developer.social.linkedInUrl.split("/").pop()}
+              />
+            </div>
+            <SelectProjects projectsSet={developer.projects} />
           </CardHeader>
-          <SelectProjects />
         </Card>
       </div>
     </form>

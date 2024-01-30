@@ -121,6 +121,28 @@ public class DeveloperService {
         return DeveloperMapper.toDeveloperResponse(account, radarGraphs);
     }
 
+    public DeveloperDto.AdminDeveloper adminGetAdminDeveloperById(UUID id) {
+        Account account = getDeveloperById(id);
+        UserDetail userDetail = userDetailRepository.findByAccount(account)
+                .orElseThrow(() -> new NoSuchElementException("Developer not found"));
+        Social social = socialRepository.findByUserDetail(userDetail);
+        List<Skill> skills = skillRepository.findAllByUserDetail(userDetail);
+        List<Language> languages = languageRepository.findAllByUserDetail(userDetail);
+        List<Nationality> nationalities = nationalityRepository.findAllByUserDetail(userDetail);
+        Github github = githubService.findBySocial(social);
+        return new DeveloperDto.AdminDeveloper(
+                account,
+                userDetail,
+                userDetail.getAcademic(),
+                social,
+                github,
+                github.getProjects(),
+                skills,
+                languages,
+                nationalities
+        );
+    }
+
     @Transactional
     public DeveloperDto.Response createDeveloper(DeveloperDto.Request request) {
         Account developerAccount = new Account();
@@ -216,5 +238,9 @@ public class DeveloperService {
             userDetail.addSkill(newSkill);
             skillRepository.save(newSkill);
         }
+    }
+
+    public void deleteDeveloperById(UUID id) {
+        accountRepository.deleteById(id);
     }
 }

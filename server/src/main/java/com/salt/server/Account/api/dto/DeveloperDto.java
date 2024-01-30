@@ -1,7 +1,8 @@
 package com.salt.server.Account.api.dto;
 
-import com.salt.server.Account.model.Academic;
-import com.salt.server.Account.model.Fluency;
+import com.salt.server.Account.model.*;
+import com.salt.server.github.model.Github;
+import com.salt.server.github.model.Project;
 import com.salt.server.score.Score;
 
 import java.util.List;
@@ -93,6 +94,18 @@ public interface DeveloperDto {
             DeveloperDto.BackgroundInformation backgroundInformation
     ) {
     }
+
+    record AdminDeveloper(
+            Account account,
+            UserDetail userDetail,
+            Academic academic,
+            Social social,
+            Github github,
+            List<Project> projects,
+            List<Skill> skills,
+            List<Language> languages,
+            List<Nationality> nationalities
+    ){}
 
     record RadarGraph(
             String subject,

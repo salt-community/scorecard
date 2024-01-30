@@ -26,26 +26,29 @@ public class UserDetail {
     private Bootcamp bootcamp;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "userDetail")
+    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private Academic academic;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "userDetail")
+    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private Social social;
     @JsonIgnore
-    @OneToOne(mappedBy = "userDetail")
+    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private Account account;
     @Setter
+    @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "userDetail")
+    @OneToMany(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private List<Nationality> nationality = new ArrayList<>();
     @Setter
+    @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "userDetail")
+    @OneToMany(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private List<Skill> skills = new ArrayList<>();
     @Setter
+    @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "userDetail")
+    @OneToMany(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private List<Language> languages = new ArrayList<>();
 
 

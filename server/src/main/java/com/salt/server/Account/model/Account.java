@@ -21,11 +21,11 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role role;
     @JsonIgnore
-    @OneToOne( fetch = FetchType.LAZY)
+    @OneToOne( cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE)
     private List<Score> scores = new ArrayList<>();
 
     public void setRole(String role) {

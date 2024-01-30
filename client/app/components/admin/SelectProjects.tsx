@@ -1,14 +1,40 @@
 "use client";
 import { CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
+import { project } from "@/app/types";
 
-const SelectProjects = () => {
-  const [projects, setProjects] = useState([{ skill: "" }]);
+type Props = {
+  projectsSet: project[];
+};
+
+const SelectProjects = ({ projectsSet }: Props) => {
+  const [projects, setProjects] = useState<project[]>([]);
+
+  const populateProject = () => {
+    for (let i = 0; i < projectsSet.length; i++) {
+      updateProject(projectsSet[i]);
+    }
+  };
+
+  const updateProject = (project: project) => {
+    setProjects((curr: project[]) => [...curr, project]);
+  };
 
   const handleAddInput = () => {
-    setProjects([...projects, { skill: "" }]);
+    setProjects([
+      ...projects,
+      {
+        id: "",
+        url: "",
+        commit: "",
+        issue: "",
+        duration: "",
+        performance: "",
+        testCoverage: "",
+      },
+    ]);
   };
 
   const handleChange = (event: any, index: any) => {
@@ -16,7 +42,6 @@ const SelectProjects = () => {
     let onChangeValue = [...projects];
     onChangeValue[index][name] = value;
     setProjects(onChangeValue);
-    console.log(projects);
   };
 
   const handleDeleteInput = (index: any) => {
@@ -24,6 +49,11 @@ const SelectProjects = () => {
     newArray.splice(index, 1);
     setProjects(newArray);
   };
+
+  useEffect(() => {
+    populateProject();
+  }, []);
+
   return (
     <div className="container flex flex-col gap-2">
       <div className="flex flex-row justify-between">
@@ -48,9 +78,10 @@ const SelectProjects = () => {
                 />
               )
             }
-            name="skill"
+            aria-label="enter project"
+            name="project"
             type="text"
-            value={item.skill}
+            value={item.url}
             className=""
             onChange={(event) => handleChange(event, index)}
           />

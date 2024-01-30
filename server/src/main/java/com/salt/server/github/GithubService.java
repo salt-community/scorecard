@@ -29,6 +29,10 @@ public class GithubService {
         return githubRepository.save(github);
     }
 
+    public Github findBySocial(Social social) {
+        return githubRepository.findBySocial(social);
+    }
+
     public void createProject(DeveloperDto.Request request, Github github) {
         for (String project : request.selectedProjects()) {
             Project newProject = new Project();

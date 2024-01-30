@@ -1,14 +1,29 @@
 "use client";
 import { CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
+import { skill } from "@/app/types";
 
-const SelectSkills = () => {
-  const [skills, setskills] = useState([{ skill: "" }]);
+type Props = {
+  skillsSet: skill[];
+};
+
+const SelectSkills = ({ skillsSet }: Props) => {
+  const [skills, setskills] = useState<skill[]>([]);
+
+  const populateSkill = () => {
+    for (let i = 0; i < skillsSet.length; i++) {
+      updateSkill(skillsSet[i]);
+    }
+  };
+
+  const updateSkill = (skill: skill) => {
+    setskills((curr: skill[]) => [...curr, skill]);
+  };
 
   const handleAddInput = () => {
-    setskills([...skills, { skill: "" }]);
+    setskills([...skills, { id: "", skill: "" }]);
   };
 
   const handleChange = (event: any, index: any) => {
@@ -16,7 +31,6 @@ const SelectSkills = () => {
     let onChangeValue = [...skills];
     onChangeValue[index][name] = value;
     setskills(onChangeValue);
-    console.log(skills);
   };
 
   const handleDeleteInput = (index: any) => {
@@ -24,6 +38,11 @@ const SelectSkills = () => {
     newArray.splice(index, 1);
     setskills(newArray);
   };
+
+  useEffect(() => {
+    populateSkill();
+  }, []);
+
   return (
     <div className="container flex flex-col gap-2">
       <div className="flex flex-row justify-between">
@@ -48,6 +67,7 @@ const SelectSkills = () => {
                 />
               )
             }
+            aria-label="enter skill"
             name="skill"
             type="text"
             value={item.skill}

@@ -1,15 +1,30 @@
 "use client";
+import { language } from "@/app/types";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const SelectLanguages = () => {
-  const [languages, setLanguages] = useState([{ language: "", fluency: "" }]);
+type Props = {
+  languagesSet: language[];
+};
+
+const SelectLanguages = ({ languagesSet }: Props) => {
+  const [languages, setLanguages] = useState<language[]>([]);
   const fluency = ["beginer", "intermediate", "fluent", "natives"];
 
+  const populateLanguages = () => {
+    for (let i = 0; i < languagesSet.length; i++) {
+      updateLanguages(languagesSet[i]);
+    }
+  };
+
+  const updateLanguages = (language: language) => {
+    setLanguages((curr: language[]) => [...curr, language]);
+  };
+
   const handleAddInput = () => {
-    setLanguages([...languages, { language: "", fluency: "" }]);
+    setLanguages([...languages, { id: "", language: "", fluency: "" }]);
   };
 
   const handleChange = (event: any, index: any) => {
@@ -24,6 +39,11 @@ const SelectLanguages = () => {
     newArray.splice(index, 1);
     setLanguages(newArray);
   };
+
+  useEffect(() => {
+    populateLanguages();
+  }, []);
+
   return (
     <div className="container flex flex-col gap-2">
       <div className="flex flex-row justify-between">
@@ -51,6 +71,7 @@ const SelectLanguages = () => {
                 />
               )
             }
+            aria-label="enter language"
             name="language"
             type="text"
             value={item.language}
@@ -59,7 +80,8 @@ const SelectLanguages = () => {
           />
           <Select
             name="fluency"
-            placeholder="Level"
+            aria-label="enter fluency level"
+            placeholder={item.fluency ? item.fluency : "level"}
             value={item.fluency}
             onChange={(event) => handleChange(event, index)}
           >

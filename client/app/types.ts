@@ -84,3 +84,67 @@ export type Score = {
   score: number;
   description: string;
 };
+
+export type developerDetail = {
+  account: account;
+  userDetail: userDetail;
+  academic: academic;
+  social: social;
+  github: github;
+  projects: project[];
+  skills: skill[];
+  languages: language[];
+  nationalities: nationality[];
+};
+
+type account = {
+  id: string;
+  email: string;
+  role: string;
+};
+
+type userDetail = {
+  id: string;
+  name: string;
+  introduction: string;
+  phoneNumber: string;
+  bootcamp: string;
+};
+
+type social = {
+  id: string;
+  linkedInUrl: string;
+  codewarsUrl: string;
+};
+
+type github = {
+  id: string;
+  url: string;
+  pictureUrl: string;
+};
+
+export type language = {
+  id: string;
+  language: string;
+  fluency: string;
+};
+
+export type project = {
+  id: string;
+  url: string;
+  commit: string;
+  issue: string;
+  duration: string;
+  performance: string;
+  testCoverage: string;
+};
+
+export type skill = {
+  id: string;
+  skill: string;
+};
+
+export type nationality = {
+  id: string;
+  nationality: string;
+};

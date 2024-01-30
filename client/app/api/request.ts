@@ -31,6 +31,13 @@ export const httpDeleteDeveloper = async (id: string) => {
   return await fetch(DEVELOPERS_URI, { method: "DELETE" });
 };
 
+export const httpDeleteDeveloperById = async (id: string) => {
+  const response = await fetch(`${DEVELOPERS_URI}/${id}`, {
+    method: "DELETE",
+  });
+  return response;
+};
+
 //ADMIN URI
 export const httpGetAllDevelopers = async () => {
   const response = await fetch(ADMIN_URI, { cache: "no-cache" });
@@ -39,6 +46,13 @@ export const httpGetAllDevelopers = async () => {
 
 export const httpGetAllSaltieScoreboard = async () => {
   const response = await fetch(ADMIN_URI + "/scoreboard", {
+    cache: "no-cache",
+  });
+  return await response.json();
+};
+
+export const httpGetAdmninDeveloperById = async (id: string) => {
+  const response = await fetch(ADMIN_URI + "/developer/" + id, {
     cache: "no-cache",
   });
   return await response.json();

@@ -1,14 +1,29 @@
 "use client";
 import { CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
+import { nationality } from "../types";
 
-const SelectNationalities = () => {
-  const [nationalities, setNationalities] = useState([{ skill: "" }]);
+type Props = {
+  nationalitiesSet: nationality[];
+};
+
+const SelectNationalities = ({ nationalitiesSet }: Props) => {
+  const [nationalities, setNationalities] = useState<nationality[]>([]);
+
+  const populateNationalities = () => {
+    for (let i = 0; i < nationalitiesSet?.length; i++) {
+      updateNationality(nationalitiesSet[i]);
+    }
+  };
+
+  const updateNationality = (nationality: nationality) => {
+    setNationalities((curr: nationality[]) => [...curr, nationality]);
+  };
 
   const handleAddInput = () => {
-    setNationalities([...nationalities, { skill: "" }]);
+    setNationalities([...nationalities, { id: "", nationality: "" }]);
   };
 
   const handleChange = (event: any, index: any) => {
@@ -24,6 +39,10 @@ const SelectNationalities = () => {
     newArray.splice(index, 1);
     setNationalities(newArray);
   };
+
+  useEffect(() => {
+    populateNationalities();
+  }, []);
   return (
     <div className="container flex flex-col gap-2">
       <div className="flex flex-row justify-between">
@@ -38,7 +57,7 @@ const SelectNationalities = () => {
       </div>
 
       {nationalities.map((item, index) => (
-        <div className="input_container" key={index}>
+        <div className="w-full " key={index}>
           <Input
             endContent={
               nationalities.length > 1 && (
@@ -48,10 +67,12 @@ const SelectNationalities = () => {
                 />
               )
             }
-            name="skill"
+            aria-label="enter nationality"
+            name="nationality"
             type="text"
-            value={item.skill}
-            className=""
+            labelPlacement="outside-left"
+            value={item.nationality}
+            className="w-full"
             onChange={(event) => handleChange(event, index)}
           />
         </div>

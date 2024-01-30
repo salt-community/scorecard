@@ -25,7 +25,8 @@ public class Github {
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;
-    @OneToMany(mappedBy = "github")
+    @JsonIgnore
+    @OneToMany(mappedBy = "github", cascade = CascadeType.REMOVE)
     private List<Project> projects = new ArrayList<>();
 
     public void setUrl(String url) {

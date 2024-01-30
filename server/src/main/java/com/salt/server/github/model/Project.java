@@ -1,5 +1,6 @@
 package com.salt.server.github.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.github.model.Github;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +25,7 @@ public class Project {
     private int performance;
     private int testCoverage;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "github_id",nullable = false)
     private Github github;
 

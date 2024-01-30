@@ -36,7 +36,8 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
+        assignmentSeeder();
+        accountSeeder();
     }
 
     private void assignmentSeeder() {
@@ -181,8 +182,8 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    \"academic\": {\n" +
             "        \"degree\" : \"master\",\n" +
             "        \"major\" : \"architecture\",\n" +
-            "        \"startDate\" : \"12-08-2018\",\n" +
-            "        \"endDate\" : \"12-08-2020\",\n" +
+            "        \"startDate\" : \"2018-08-12\",\n" +
+            "        \"endDate\" : \"2020-08-12\",\n" +
             "        \"school\" : \"KTH Royal Institute of Technology\"\n" +
             "        },\n" +
             "    \"skills\": [\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\"]\n" +
@@ -213,8 +214,8 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    \"academic\": {\n" +
             "        \"degree\" : \"master\",\n" +
             "        \"major\" : \"engineering\",\n" +
-            "        \"startDate\" : \"14-08-2017\",\n" +
-            "        \"endDate\" : \"01-08-2018\",\n" +
+            "        \"startDate\" : \"2017-08-12\",\n" +
+            "        \"endDate\" : \"2018-08-12\",\n" +
             "        \"school\" : \"Cranfield University\"\n" +
             "        },\n" +
             "    \"skills\": [\"Java\",\"javascript\", \"typescript\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\",\"spring\",\"postgresql\", \"mysql\"]\n" +
@@ -243,8 +244,8 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    \"academic\": {\n" +
             "        \"degree\" : \"vocationaldiploma\",\n" +
             "        \"major\" : \"java developing\",\n" +
-            "        \"startDate\" : \"20-08-2021\",\n" +
-            "        \"endDate\" : \"5-05-2023\",\n" +
+            "        \"startDate\" : \"2021-08-12\",\n" +
+            "        \"endDate\" : \"2023-08-12\",\n" +
             "        \"school\" : \"IT-Högskolan\"\n" +
             "        },\n" +
             "    \"skills\": [\"java\", \"typescript\", \"react\", \"spring\", \"postgresql\", \"mysql\"]\n" +
@@ -274,8 +275,8 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    \"academic\": {\n" +
             "        \"degree\" : \"vocationaldiploma\",\n" +
             "        \"major\" : \"ai business consultant\",\n" +
-            "        \"startDate\" : \"10-08-2020\",\n" +
-            "        \"endDate\" : \"01-04-2022\",\n" +
+            "        \"startDate\" : \"2020-08-12\",\n" +
+            "        \"endDate\" : \"2022-08-12\",\n" +
             "        \"school\" : \"Hyper Island\"\n" +
             "        },\n" +
             "    \"skills\": [\"java\", \"typescript\", \"spring boot\", \"kafka\", \"avro apache\", \"react\", \"next.js\", \"node.js\", \"express\", \"mongodb\", \"postgres\"]\n" +

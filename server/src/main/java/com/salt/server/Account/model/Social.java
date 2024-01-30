@@ -2,10 +2,7 @@ package com.salt.server.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salt.server.github.model.Github;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -24,7 +21,7 @@ public class Social {
     private String codewarsUrl;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "social")
+    @OneToOne(mappedBy = "social", cascade = CascadeType.REMOVE)
     private Github githubId;
     @JsonIgnore
     @OneToOne
