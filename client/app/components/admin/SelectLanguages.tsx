@@ -29,7 +29,7 @@ const SelectLanguages = ({ languagesSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue = [...languages];
+    let onChangeValue:any = [...languages];
     onChangeValue[index][name] = value;
     setLanguages(onChangeValue);
   };

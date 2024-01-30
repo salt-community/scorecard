@@ -28,7 +28,7 @@ const SelectSkills = ({ skillsSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue = [...skills];
+    let onChangeValue:any = [...skills];
     onChangeValue[index][name] = value;
     setskills(onChangeValue);
   };

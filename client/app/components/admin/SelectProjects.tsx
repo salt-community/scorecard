@@ -39,7 +39,7 @@ const SelectProjects = ({ projectsSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue = [...projects];
+    let onChangeValue:any = [...projects];
     onChangeValue[index][name] = value;
     setProjects(onChangeValue);
   };

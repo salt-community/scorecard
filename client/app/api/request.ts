@@ -99,3 +99,15 @@ export const httpPostDeveloper = async (developer: any) => {
   });
   return response;
 };
+
+
+export const httpGetAccountByEmail = async (email: string) => {
+  const res = await fetch(`${BASIC_URI}/api/accounts/email/${email}`, {
+    cache: "no-cache",
+  });
+  if(res.status === 500){
+    return null;
+  }
+  const data = await res.json();
+  return data;
+};

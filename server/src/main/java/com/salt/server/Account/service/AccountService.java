@@ -54,4 +54,10 @@ public class AccountService {
         return accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Developer not found"));
     }
+
+    public AccountDto.Response getAccountByEmail(String email) {
+        Account account = accountRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+        return AccountMapper.toAccountResponse(account);
+    }
 }

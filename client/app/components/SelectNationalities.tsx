@@ -28,7 +28,7 @@ const SelectNationalities = ({ nationalitiesSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue = [...nationalities];
+    let onChangeValue:any = [...nationalities];
     onChangeValue[index][name] = value;
     setNationalities(onChangeValue);
     console.log(nationalities);
