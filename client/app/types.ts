@@ -148,3 +148,11 @@ export type nationality = {
   id: string;
   nationality: string;
 };
+
+export type Account = {
+  id:string;
+  email:string;
+  name: string;
+  role:string
+}
+
