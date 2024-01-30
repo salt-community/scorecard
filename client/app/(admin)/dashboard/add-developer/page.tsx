@@ -4,7 +4,6 @@ import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { httpPostDeveloper } from "@/app/api/request";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 
 const Page = () => {
   const [input, setInput] = useState({

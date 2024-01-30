@@ -45,7 +45,7 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
 
   return (
     <div className="flex flex-row gap-4">
-      <Card className={`w-72         `}>
+      <Card className={`w-72`}>
         <CardHeader className=" px-4">
           <ScoreboardId developer={developer} />
         </CardHeader>
