@@ -37,6 +37,12 @@ public class AccountService {
         return AccountMapper.toAccountResponse(account);
     }
 
+    public AccountDto.Response getAccountByEmail(String email) {
+        Account account = accountRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
+        return AccountMapper.toAccountResponse(account);
+    }
+
     public AccountDto.Response createAccount(AccountDto.Request request) {
         Account account = new Account();
         account.setEmail(request.email());

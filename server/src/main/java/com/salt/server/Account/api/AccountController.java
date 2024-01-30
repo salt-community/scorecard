@@ -28,6 +28,12 @@ public class AccountController {
         return accountService.getAccountById(accountId);
     }
 
+
+    @GetMapping("/email/{email}")
+    public AccountDto.Response getAccountByEmail(@PathVariable String email) {
+        return accountService.getAccountByEmail(email);
+    }
+
     @PostMapping
     public AccountDto.Response createAccount(@RequestBody AccountDto.Request request) {
         return accountService.createAccount(request);
