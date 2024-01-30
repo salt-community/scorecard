@@ -19,24 +19,17 @@ const Topbar = () => {
       className="flex flex-row justify-between p-4 w-full h-16  pl-4 shadow-xl shadow-blue-gray-900/5 border-l-2 border-b-2 border-r-2"
       placeholder={undefined}
     >
-      <Typography
-        variant="h2"
-        className="text-accent"
-        placeholder={undefined}
-      >
+      <Typography variant="h2" className="text-accent" placeholder={undefined}>
         {label.charAt(0).toUpperCase() + label.slice(1)}
       </Typography>
-      <Link
-                        href={`/dashboard/add-developer`}
-                        className=""
-                      >
-                        <Button
-                          className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-                          placeholder={undefined}
-                        >
-                          Add Developer
-                        </Button>
-                      </Link>
+      <Link href={`/dashboard/add-developer`} className="">
+        <Button
+          className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+          placeholder={undefined}
+        >
+          Add Developer
+        </Button>
+      </Link>
     </Card>
   );
 };

@@ -3,7 +3,7 @@ import { CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
-import { nationality } from "../types";
+import { nationality } from "../../types";
 
 type Props = {
   nationalitiesSet: nationality[];
@@ -28,7 +28,7 @@ const SelectNationalities = ({ nationalitiesSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue:any = [...nationalities];
+    let onChangeValue: any = [...nationalities];
     onChangeValue[index][name] = value;
     setNationalities(onChangeValue);
     console.log(nationalities);

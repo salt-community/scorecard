@@ -3,7 +3,7 @@ import {
   httpGetAdmninDeveloperById,
   httpGetDeveloperById,
 } from "@/app/api/request";
-import SelectNationalities from "@/app/components/SelectNationalities";
+import SelectNationalities from "@/app/components/admin/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
 import SelectProjects from "@/app/components/admin/SelectProjects";
 import SelectSkills from "@/app/components/admin/SelectSkills";
