@@ -78,7 +78,7 @@ export const AllDevelopers = ({ developers }: Props) => {
                           </Button>
                         </Link>
                       </td>
-                      <td>
+                      <td className="border px-6 py-4 text-center">
                         <Button
                           className="bg-red-500 hover:bg-accent text-white font-bold py-2 px-4 rounded"
                           placeholder={undefined}

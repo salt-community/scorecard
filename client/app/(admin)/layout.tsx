@@ -14,7 +14,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className=" mx-auto max-w-screen-2xl bg-background">
+    <html lang="en" className=" mx-auto max-w-screen-2xl">
       <body className={`${poppins.className} flex gap-4`}>
         <aside className="flex-[2]">
           <Sidebar />
