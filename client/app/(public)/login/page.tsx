@@ -21,6 +21,7 @@ const page = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
   }
 
   console.log(input);
