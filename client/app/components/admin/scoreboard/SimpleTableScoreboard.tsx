@@ -10,12 +10,15 @@ import {
 import Link from "next/link";
 import React from "react";
 
-export interface SimpleTableProps {
+type SimpleTableScoreboardProps = {
   data: Score;
   searchScore: Function;
-}
+};
 
-const SimpleTableScoreboard = ({ data, searchScore }: SimpleTableProps) => {
+const SimpleTableScoreboard = ({
+  data,
+  searchScore,
+}: SimpleTableScoreboardProps) => {
   const assignment = data.assignment;
   const score = data.score;
   const description = data.description;

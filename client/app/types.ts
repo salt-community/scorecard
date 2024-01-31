@@ -72,32 +72,6 @@ export type Assignment = {
 
 export type SimpleTableEntry = { [key: string]: string | number };
 
-//uncheck type (need more refactor)
-
-export type academic = {
-  id: string;
-  degree: string;
-  major: string;
-  startDate: string;
-  endDate: string;
-  school: string;
-};
-
-// export type DeveloperShowcase = {
-//   id: string;
-//   email: string;
-//   name: string;
-//   standoutIntro: string;
-// };
-// export type Scores = { scoreName: string; data: Score[] };
-
-// export type Score = {
-//   id: string;
-//   assignment: string;
-//   score: number;
-//   description: string;
-// };
-
 export type developerDetail = {
   account: account;
   userDetail: userDetail;
@@ -110,13 +84,13 @@ export type developerDetail = {
   nationalities: nationality[];
 };
 
-type account = {
+export type account = {
   id: string;
   email: string;
   role: string;
 };
 
-type userDetail = {
+export type userDetail = {
   id: string;
   name: string;
   introduction: string;
@@ -124,13 +98,22 @@ type userDetail = {
   bootcamp: string;
 };
 
-type social = {
+export type academic = {
+  id: string;
+  degree: string;
+  major: string;
+  startDate: string;
+  endDate: string;
+  school: string;
+};
+
+export type social = {
   id: string;
   linkedInUrl: string;
   codewarsUrl: string;
 };
 
-type github = {
+export type github = {
   id: string;
   url: string;
   pictureUrl: string;

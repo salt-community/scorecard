@@ -1,6 +1,5 @@
 "use client";
-
-import { SaltieData, Score, Scores } from "@/app/types";
+import { SaltieData } from "@/app/types";
 import { colorVariant, levelVariant } from "@/app/utilities";
 import { Card, CardHeader, Chip, CircularProgress } from "@nextui-org/react";
 import Grading from "./Grading";

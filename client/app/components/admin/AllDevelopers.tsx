@@ -13,17 +13,15 @@ type developerAdmin = {
   role: string;
 };
 
-type Props = {
+type AllDevelopersProps = {
   developers: developerAdmin[];
 };
 
-export const AllDevelopers = ({ developers }: Props) => {
+export const AllDevelopers = ({ developers }: AllDevelopersProps) => {
   const router = useRouter();
   const deleteHandler = async (id: string) => {
     const response = await httpDeleteDeveloperById(id);
     if (response.status === 204) {
-      // deleteScore(searchedScore.id);
-      // deleteSearchedScore();
       router.push("/dashboard/developers");
     } else {
       throw new Error("delete is canceled!!");
@@ -55,43 +53,36 @@ export const AllDevelopers = ({ developers }: Props) => {
                 Delete
               </th>
             </tr>
-            {developers.length > 0
-              ? developers.map((developer) => {
-                  return (
-                    <tr
-                      key={developer.id}
-                      className="even:bg-white odd:bg-gray-100"
+            {developers?.map(({ id, name, email, phoneNumber, role }) => {
+              return (
+                <tr key={id} className="even:bg-white odd:bg-gray-100">
+                  <td className="border px-6 py-4">{name}</td>
+                  <td className="border px-6 py-4">{email}</td>
+                  <td className="border px-6 py-4">{phoneNumber}</td>
+                  <td className="border px-6 py-4">{role}</td>
+                  <td className="border px-6 py-4 text-center">
+                    <Link href={`/dashboard/developers/${id}`}>
+                      <Button
+                        className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+                        placeholder={undefined}
+                      >
+                        Edit
+                      </Button>
+                    </Link>
+                  </td>
+                  <td className="border px-6 py-4 text-center">
+                    <Button
+                      className="bg-red-500 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+                      placeholder={undefined}
+                      type="submit"
+                      onClick={() => deleteHandler(id)}
                     >
-                      <td className="border px-6 py-4">{developer.name}</td>
-                      <td className="border px-6 py-4">{developer.email}</td>
-                      <td className="border px-6 py-4">
-                        {developer.phoneNumber}
-                      </td>
-                      <td className="border px-6 py-4">{developer.role}</td>
-                      <td className="border px-6 py-4 text-center">
-                        <Link href={`/dashboard/developers/${developer.id}`}>
-                          <Button
-                            className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-                            placeholder={undefined}
-                          >
-                            Edit
-                          </Button>
-                        </Link>
-                      </td>
-                      <td className="border px-6 py-4 text-center">
-                        <Button
-                          className="bg-red-500 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-                          placeholder={undefined}
-                          type="submit"
-                          onClick={() => deleteHandler(developer.id)}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })
-              : null}
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
           </thead>
         </table>
       </div>

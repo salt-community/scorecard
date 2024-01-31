@@ -10,11 +10,11 @@ import {
 import { Average, DetailScores, Score } from "@/app/types";
 import SimpleTableScoreboard from "./SimpleTableScoreboard";
 
-interface ScoreListProps {
+type ScoreListProps = {
   scores: Score[];
   averages: Average[];
   searchScore: Function;
-}
+};
 
 const ScoreList = ({ scores, searchScore, averages }: ScoreListProps) => {
   const scoreData = (scores: Score[]) => {

@@ -11,12 +11,12 @@ import { Button } from "@material-tailwind/react";
 import { Assignment, Score } from "@/app/types";
 import { httpDeleteScoreById } from "@/app/api/request";
 
-interface ScoreboardProps {
+type ScoreboardProps = {
   assignment: Assignment[];
   deleteSearchedScore: Function;
   deleteScore: Function;
   searchedScore: Score;
-}
+};
 
 const UpdateForm = ({
   assignment,
