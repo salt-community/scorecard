@@ -29,11 +29,11 @@ export const AllDevelopers = ({ developers }: AllDevelopersProps) => {
   };
 
   return (
-    <Card className="p-4" placeholder={undefined}>
+    <Card className="p-4 shadow-none" placeholder={undefined}>
       <div className="overflow-y-auto">
-        <table className="w-full text-sm text-left text-black mt-10 ">
-          <thead className="border text-xs text-black uppercase bg-slate-300 dark:bg-slate-300 dark:text-black">
-            <tr className=" bg-accent text-text text-center">
+        <table className="w-full text-sm text-left text-black">
+          <thead className="border text-xs text-black uppercase bg-slate-300">
+            <tr className=" text-text text-center">
               <th scope="col" className="border px-6 py-3 w-2/5">
                 Name
               </th>
