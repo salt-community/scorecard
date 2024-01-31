@@ -17,6 +17,7 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { Button } from "@material-tailwind/react";
 
 export default function DeveloperDetailPage({
   params,
@@ -56,8 +57,8 @@ export default function DeveloperDetailPage({
 
   return (
     <form action="">
-      <div className="flex flex-row gap-4">
-        <Card className={` flex-1 py-4 gap-3`}>
+      <Card className="flex flex-row gap-4">
+        <div className={` flex-1 py-4 gap-3`}>
           <CardHeader className="pb-0">
             <h4 className="font-bold text-large">Profile</h4>
           </CardHeader>
@@ -157,8 +158,8 @@ export default function DeveloperDetailPage({
           <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectLanguages languagesSet={developer.languages} />
           </CardHeader>
-        </Card>
-        <Card className={` flex-1 py-4`}>
+        </div>
+        <div className={` flex-1 py-4`}>
           <CardHeader>
             <h4 className="font-bold text-large">Academic</h4>
           </CardHeader>
@@ -233,8 +234,8 @@ export default function DeveloperDetailPage({
           <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectSkills skillsSet={developer.skills} />
           </CardHeader>
-        </Card>
-        <Card className={` flex-1 py-4`}>
+        </div>
+        <div className={` flex-1 py-4`}>
           <CardHeader>
             <h4 className="font-bold text-large">Social</h4>
           </CardHeader>
@@ -282,8 +283,15 @@ export default function DeveloperDetailPage({
           <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectProjects projectsSet={developer.projects} />
           </CardHeader>
-        </Card>
-      </div>
+          <Button
+            className="bg-blue-400 absolute bottom-5 right-5  hover:bg-accent text-white font-bold py-2 px-4 rounded w-24"
+            placeholder={undefined}
+            type="submit"
+          >
+            Save
+          </Button>
+        </div>
+      </Card>
     </form>
   );
 }
