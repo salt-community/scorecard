@@ -67,6 +67,7 @@ const SelectSkills = ({ skillsSet }: Props) => {
                   />
                 )
               }
+              labelPlacement="outside-left"
               aria-label="enter skill"
               name="skill"
               type="text"

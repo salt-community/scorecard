@@ -55,28 +55,29 @@ const SelectNationalities = ({ nationalitiesSet }: Props) => {
           Add
         </Button>
       </div>
-
-      {nationalities.map((item, index) => (
-        <div className="w-full " key={index}>
-          <Input
-            endContent={
-              nationalities.length > 1 && (
-                <TrashIcon
-                  onClick={() => handleDeleteInput(index)}
-                  className="w-8 h-8 text-default-400 flex-shrink-0 cursor-pointer hover:text-red-500"
-                />
-              )
-            }
-            aria-label="enter nationality"
-            name="nationality"
-            type="text"
-            labelPlacement="outside-left"
-            value={item.nationality}
-            className="w-full"
-            onChange={(event) => handleChange(event, index)}
-          />
-        </div>
-      ))}
+      <div className="grid grid-cols-2 gap-2">
+        {nationalities.map((item, index) => (
+          <div className="w-full " key={index}>
+            <Input
+              endContent={
+                nationalities.length > 1 && (
+                  <TrashIcon
+                    onClick={() => handleDeleteInput(index)}
+                    className="w-8 h-8 text-default-400 flex-shrink-0 cursor-pointer hover:text-red-500"
+                  />
+                )
+              }
+              aria-label="enter nationality"
+              name="nationality"
+              type="text"
+              labelPlacement="outside-left"
+              value={item.nationality}
+              className="w-full"
+              onChange={(event) => handleChange(event, index)}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
