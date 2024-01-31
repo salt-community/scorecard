@@ -55,7 +55,7 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
       </Card>
       <Card className=" flex-1 flex-col justify-center items-center">
         <Chip
-          color={colorVariant(getAllAverageValue(formattedScores))}
+          //color={colorVariant(getAllAverageValue(formattedScores))}
           variant="bordered"
           classNames={{
             content: "drop-shadow shadow-black text-black",
@@ -64,16 +64,16 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
           startContent={
             <CircularProgress
               size="lg"
-              value={getAllAverageValue(formattedScores)}
-              color={colorVariant(getAllAverageValue(formattedScores))}
+              // value={getAllAverageValue(formattedScores)}
+              //color={colorVariant(getAllAverageValue(formattedScores))}
               showValueLabel={true}
               aria-label="score value"
             />
           }
         >
-          <h4 className=" text-2xl mx-2">
+          {/*           <h4 className=" text-2xl mx-2">
             Level {levelVariant(getAllAverageValue(formattedScores))}
-          </h4>
+          </h4> */}
         </Chip>
       </Card>
     </div>

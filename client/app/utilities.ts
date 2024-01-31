@@ -1,7 +1,7 @@
 import { DeveloperData, Scores, SimpleTableEntry } from "./types";
 
-export const isExcellent = (developerData: DeveloperData) => {
-  // return levelVariant(getAllAverageValue(developerData.scores)) === 3;
+export const isExcellent = (average: number) => {
+  return levelVariant(average) === 3;
 };
 
 /* export const getAverageValue = (data: SimpleTableEntry) => {
