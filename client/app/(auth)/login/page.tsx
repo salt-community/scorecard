@@ -72,7 +72,7 @@ const Page = () => {
       </Card>
       <Card className=" w-96 flex flex-col items-center h-fit py-8">
         <Typography variant="h5" className=" text-md" placeholder={undefined}>
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <span>
             {" "}
             <Link href="/signup">Sign up</Link>
