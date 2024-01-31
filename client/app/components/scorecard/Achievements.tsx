@@ -1,8 +1,8 @@
-import { Tooltip, Image } from '@nextui-org/react';
+import { Tooltip, Image } from "@nextui-org/react";
 
-interface AchievementsProps {
+type AchievementsProps = {
   userName: string;
-}
+};
 
 const Achievements = ({ userName }: AchievementsProps) => {
   return (

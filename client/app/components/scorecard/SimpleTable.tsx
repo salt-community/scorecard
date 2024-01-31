@@ -5,13 +5,13 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
-import React from 'react';
-import { SimpleTableEntry } from '../../types';
+} from "@nextui-org/react";
+import React from "react";
+import { SimpleTableEntry } from "../../types";
 
-export interface SimpleTableProps {
+type SimpleTableProps = {
   data: SimpleTableEntry;
-}
+};
 
 const SimpleTable = ({ data }: SimpleTableProps) => {
   return (

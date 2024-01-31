@@ -1,37 +1,4 @@
-export type SimpleTableEntry = { [key: string]: string | number };
-
-export type academic = {
-  id: string;
-  degree: string;
-  major: string;
-  startDate: string;
-  endDate: string;
-  school: string;
-};
-
-export type BackgroundInformation = {
-  nationalities: string[];
-  spokenLanguages: SimpleTableEntry;
-  academic: academic;
-  skills: string[];
-};
-
-export type Assignment = {
-  id: string;
-  name: string;
-  type: string;
-};
-
-export type Scores = { scoreName: string; data: ScoreRes[] };
-
-export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
-
-export type RadarGraphicData = {
-  subject: string;
-  score: number;
-  fullMark: number;
-};
-
+//final type
 export type DeveloperData = {
   id: string;
   email: string;
@@ -43,7 +10,7 @@ export type DeveloperData = {
   backgroundInformation: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;
-  scores: ScoreRes[];
+  scores: Score[];
   selectedProjects: Project[];
   radarGraph: RadarGraphicData[];
   commitsCount?: number;
@@ -51,10 +18,60 @@ export type DeveloperData = {
   averages: Average[];
 };
 
+export type BackgroundInformation = {
+  nationalities: string[];
+  spokenLanguages: SimpleTableEntry;
+  academic: academic;
+  skills: string[];
+};
+
+export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
+
+export type RadarGraphicData = {
+  subject: string;
+  score: number;
+  fullMark: number;
+};
+
+export type Score = {
+  id: string;
+  type: string;
+  assignment: string;
+  score: number;
+  description: string;
+};
+
+export type DetailScores = {
+  scoreName: string;
+  average: number;
+  data: Score[];
+};
+
 export type Average = {
   scoreName: string;
   average: number;
 };
+
+export type SimpleTableEntry = { [key: string]: string | number };
+
+//uncheck type (need more refactor)
+
+export type academic = {
+  id: string;
+  degree: string;
+  major: string;
+  startDate: string;
+  endDate: string;
+  school: string;
+};
+
+export type Assignment = {
+  id: string;
+  name: string;
+  type: string;
+};
+
+export type Scores = { scoreName: string; data: Score[] };
 
 export type DeveloperShowcase = {
   id: string;
@@ -72,25 +89,15 @@ export type SaltieData = {
   linkedinUrl: string;
   radarGraph: RadarGraphicData[];
   averages: Average[];
-  scores: ScoreRes[];
+  scores: Score[];
 };
 
-export type ScoreRes = {
-  id: string;
-  type: string;
-  assignment: string;
-  score: number;
-  description: string;
-};
-
-export type DetailScores = { scoreName: string; data: Score[] };
-
-export type Score = {
-  id: string;
-  assignment: string;
-  score: number;
-  description: string;
-};
+// export type Score = {
+//   id: string;
+//   assignment: string;
+//   score: number;
+//   description: string;
+// };
 
 export type developerDetail = {
   account: account;

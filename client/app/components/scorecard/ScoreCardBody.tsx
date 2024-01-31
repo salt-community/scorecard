@@ -11,17 +11,24 @@ interface ScoreCardBodyProps {
 }
 
 const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
+  const backgroundInformation = developerData.backgroundInformation;
+  const githubUserName = developerData.githubUserName;
+  const scores = developerData.scores;
+  const radarGraph = developerData.radarGraph;
+  const averages = developerData.averages;
+  const projects = developerData.selectedProjects;
+
   return (
     <div className="flex flex-col gap-4">
-      <Background developerBackgroud={developerData.backgroundInformation} />
+      <Background developerBackgroud={backgroundInformation} />
       <Divider />
-      <Achievements userName={developerData.githubUserName} />
+      <Achievements userName={githubUserName} />
       <SaltScore
-        scores={developerData.scores}
-        radarGraphicData={developerData.radarGraph}
-        averages={developerData.averages}
+        scores={scores}
+        radarGraphicData={radarGraph}
+        averages={averages}
       />
-      <Projects projects={developerData.selectedProjects} />
+      <Projects projects={projects} />
     </div>
   );
 };

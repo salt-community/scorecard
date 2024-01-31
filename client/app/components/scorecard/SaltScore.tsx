@@ -7,21 +7,8 @@ import {
   CircularProgress,
   Chip,
 } from "@nextui-org/react";
-import SimpleTable from "./SimpleTable";
-import {
-  Average,
-  RadarGraphicData,
-  Score,
-  ScoreRes,
-  Scores,
-} from "../../types";
+import { Average, DetailScores, RadarGraphicData, Score } from "../../types";
 import { RadarGraphic } from "./RadarGraphic";
-/* import {
-  colorVariant,
-  getAllAverageValue,
-  levelVariant,
-  getAverageValue,
-} from "../../utilities"; */
 import ScoreEntry from "./ScoreEntry";
 import {
   capitalizeEveryWord,
@@ -29,48 +16,42 @@ import {
   levelVariant,
 } from "@/app/utilities";
 
-interface SaltScoreProps {
-  scores: ScoreRes[];
+type SaltScoreProps = {
+  scores: Score[];
   radarGraphicData: RadarGraphicData[];
   averages: Average[];
-}
+};
 
 const SaltScore = ({ scores, radarGraphicData, averages }: SaltScoreProps) => {
-  const scoreData = (scores: ScoreRes[]) => {
+  const scoreData = (scores: Score[]) => {
     const type = ["communication", "coding", "planning"];
-
-    function onlyUnique(value: any, index: any, array: any) {
-      return array.indexOf(value) === index;
-    }
-
-    var unique = type?.filter(onlyUnique);
-    const data: any[] = [];
-    for (let i = 0; i < unique?.length; i++) {
-      const scoreName = unique[i];
-      const data1 = scores.filter((score) => score.type === scoreName);
-      const filteredAverage = averages.filter(
+    const detailScores: DetailScores[] = [];
+    for (let i = 0; i < type.length; i++) {
+      const scoreName = type[i];
+      const scoreData = scores.filter((score) => score.type === scoreName);
+      const averageScore = averages.filter(
         (avg) => avg.scoreName === scoreName
-      )[0];
-      const x: any = {
+      )[0].average;
+      const detailScore: DetailScores = {
         scoreName: scoreName,
-        average: filteredAverage.average,
-        data: data1,
+        average: averageScore,
+        data: scoreData,
       };
-      data.push(x);
+      detailScores.push(detailScore);
     }
-
-    return data;
+    return detailScores;
   };
-  const totalAverageNumber = averages.filter((a) => a.scoreName === "total")[0]
+
+  const totalScoreAverage = averages.filter((a) => a.scoreName === "total")[0]
     .average;
-  const data = scoreData(scores);
+  const detailScores = scoreData(scores);
   return (
     <>
       <h4 className="font-bold text-large">Salt Scoring</h4>
       <Card shadow="sm">
         <CardHeader className="flex flex-row gap-2">
           <Chip
-            color={colorVariant(totalAverageNumber)}
+            color={colorVariant(totalScoreAverage)}
             variant="bordered"
             classNames={{
               content: "drop-shadow shadow-black text-black",
@@ -79,37 +60,37 @@ const SaltScore = ({ scores, radarGraphicData, averages }: SaltScoreProps) => {
             startContent={
               <CircularProgress
                 size="md"
-                value={totalAverageNumber}
-                color={colorVariant(totalAverageNumber)}
+                value={totalScoreAverage}
+                color={colorVariant(totalScoreAverage)}
                 showValueLabel={true}
                 aria-label="score value"
               />
             }
           >
             <h4 className="text-large mx-2">
-              Level {levelVariant(totalAverageNumber)}
+              Level {levelVariant(totalScoreAverage)}
             </h4>
           </Chip>
         </CardHeader>
         <CardBody className="text-small">
           <RadarGraphic data={radarGraphicData} />
           <Accordion>
-            {data.map((item) => (
+            {detailScores.map(({ scoreName, average, data }) => (
               <AccordionItem
-                key={item.scoreName}
-                title={capitalizeEveryWord(item.scoreName)}
+                key={scoreName}
+                title={capitalizeEveryWord(scoreName)}
                 startContent={
                   <CircularProgress
                     size="md"
-                    value={item.average}
-                    color={colorVariant(item.average)}
+                    value={average}
+                    color={colorVariant(average)}
                     showValueLabel={true}
                     aria-label="score value"
                   />
                 }
               >
-                {item.data.map((d, index) => (
-                  <ScoreEntry data={d} key={index} />
+                {data.map((data, index) => (
+                  <ScoreEntry data={data} key={index} />
                 ))}
               </AccordionItem>
             ))}

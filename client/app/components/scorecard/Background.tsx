@@ -6,9 +6,9 @@ const valueGeneretor = (values: string[]) => {
   return <h5 className="text-end">{valueString}</h5>;
 };
 
-interface BackgroundProps {
+type BackgroundProps = {
   developerBackgroud: BackgroundInformation;
-}
+};
 
 const Background = ({ developerBackgroud }: BackgroundProps) => {
   return (

@@ -9,14 +9,17 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import React from "react";
-import { ScoreRes } from "../../types";
+import { Score } from "../../types";
 import { capitalizeEveryWord } from "@/app/utilities";
 
-export interface SimpleTableProps {
-  data: ScoreRes;
-}
+type ScoreEntryProps = {
+  data: Score;
+};
 
-const ScoreEntry = ({ data }: SimpleTableProps) => {
+const ScoreEntry = ({ data }: ScoreEntryProps) => {
+  const assignment = data.assignment;
+  const score = data.score;
+  const description = data.description;
   return (
     <div>
       <Table
@@ -31,14 +34,14 @@ const ScoreEntry = ({ data }: SimpleTableProps) => {
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell>{capitalizeEveryWord(data.assignment)}</TableCell>
-            <TableCell className="text-end">{data.score}</TableCell>
+            <TableCell>{capitalizeEveryWord(assignment)}</TableCell>
+            <TableCell className="text-end">{score}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
       <Divider />
       <ScrollShadow hideScrollBar className="h-[50px] px-3">
-        <p className="text-xs text-slate-500">{data.description}</p>
+        <p className="text-xs text-slate-500">{description}</p>
       </ScrollShadow>
     </div>
   );
