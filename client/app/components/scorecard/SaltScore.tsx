@@ -8,7 +8,13 @@ import {
   Chip,
 } from "@nextui-org/react";
 import SimpleTable from "./SimpleTable";
-import { RadarGraphicData, Score, ScoreRes, Scores } from "../../types";
+import {
+  Average,
+  RadarGraphicData,
+  Score,
+  ScoreRes,
+  Scores,
+} from "../../types";
 import { RadarGraphic } from "./RadarGraphic";
 /* import {
   colorVariant,
@@ -17,13 +23,19 @@ import { RadarGraphic } from "./RadarGraphic";
   getAverageValue,
 } from "../../utilities"; */
 import ScoreEntry from "./ScoreEntry";
+import {
+  capitalizeEveryWord,
+  colorVariant,
+  levelVariant,
+} from "@/app/utilities";
 
 interface SaltScoreProps {
   scores: ScoreRes[];
   radarGraphicData: RadarGraphicData[];
+  averages: Average[];
 }
 
-const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
+const SaltScore = ({ scores, radarGraphicData, averages }: SaltScoreProps) => {
   const scoreData = (scores: ScoreRes[]) => {
     const type = ["communication", "coding", "planning"];
 
@@ -32,12 +44,16 @@ const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
     }
 
     var unique = type?.filter(onlyUnique);
-    const data: Scores[] = [];
+    const data: any[] = [];
     for (let i = 0; i < unique?.length; i++) {
       const scoreName = unique[i];
       const data1 = scores.filter((score) => score.type === scoreName);
-      const x: Scores = {
+      const filteredAverage = averages.filter(
+        (avg) => avg.scoreName === scoreName
+      )[0];
+      const x: any = {
         scoreName: scoreName,
+        average: filteredAverage.average,
         data: data1,
       };
       data.push(x);
@@ -45,15 +61,16 @@ const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
 
     return data;
   };
+  const totalAverageNumber = averages.filter((a) => a.scoreName === "total")[0]
+    .average;
   const data = scoreData(scores);
-  console.log(data);
   return (
     <>
       <h4 className="font-bold text-large">Salt Scoring</h4>
       <Card shadow="sm">
         <CardHeader className="flex flex-row gap-2">
           <Chip
-            // color={colorVariant(getAllAverageValue(data))}
+            color={colorVariant(totalAverageNumber)}
             variant="bordered"
             classNames={{
               content: "drop-shadow shadow-black text-black",
@@ -62,16 +79,16 @@ const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
             startContent={
               <CircularProgress
                 size="md"
-                // value={getAllAverageValue(data)}
-                //color={colorVariant(getAllAverageValue(data))}
+                value={totalAverageNumber}
+                color={colorVariant(totalAverageNumber)}
                 showValueLabel={true}
                 aria-label="score value"
               />
             }
           >
-            {/*             <h4 className="text-large mx-2">
-              Level {levelVariant(getAllAverageValue(data))}
-            </h4> */}
+            <h4 className="text-large mx-2">
+              Level {levelVariant(totalAverageNumber)}
+            </h4>
           </Chip>
         </CardHeader>
         <CardBody className="text-small">
@@ -80,12 +97,12 @@ const SaltScore = ({ scores, radarGraphicData }: SaltScoreProps) => {
             {data.map((item) => (
               <AccordionItem
                 key={item.scoreName}
-                title={item.scoreName}
+                title={capitalizeEveryWord(item.scoreName)}
                 startContent={
                   <CircularProgress
                     size="md"
-                    //value={getAverageValue(item.data)}
-                    //color={colorVariant(getAverageValue(item.data))}
+                    value={item.average}
+                    color={colorVariant(item.average)}
                     showValueLabel={true}
                     aria-label="score value"
                   />

@@ -39,11 +39,9 @@ const SignupPage = () => {
     event.preventDefault();
     if (input.email.split("@").pop() === "appliedtechnology.se") {
       input.role = "core";
-      console.log(input);
     } else {
       return;
     }
-    console.log(input);
 
     const response = await httpCreateAccount(input);
     if (response.status == 200) {

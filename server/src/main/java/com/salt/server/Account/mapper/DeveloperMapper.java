@@ -27,7 +27,7 @@ public class DeveloperMapper {
         DeveloperDto.BackgroundInformation backgroundInformation = createBackgroundInformation(account);
         List<DeveloperDto.ProjectDto> projects = createProjectDto(account);
         List<DeveloperDto.ScoreDetail> scores = createScores(account);
-
+        List<DeveloperDto.Average> averages = createAverages(account.getScores());
         return new DeveloperDto.Response(
                 account.getId(),
                 account.getEmail(),
@@ -42,10 +42,30 @@ public class DeveloperMapper {
                 radarGraphs,
                 scores,
                 projects,
-                backgroundInformation
+                backgroundInformation,
+                averages
         );
     }
 
+    private static List<DeveloperDto.Average> createAverages(List<Score> scores) {
+        List<DeveloperDto.Average> averages = new ArrayList<>();
+        for (Type type : Type.values()) {
+            List<Score> filteredScores = scores.stream()
+                    .filter(score -> score.getAssignment().getType().equals(type))
+                    .toList();
+            if (filteredScores.isEmpty()) {
+                averages.add(new DeveloperDto.Average(type.toString(), 0));
+            } else {
+                averages.add(new DeveloperDto.Average(type.toString(), filteredScores.stream()
+                        .mapToInt(Score::getScore)
+                        .sum() / filteredScores.size()));
+            }
+        }
+        averages.add(new DeveloperDto.Average("total", averages.stream()
+                .mapToInt(DeveloperDto.Average::average)
+                .sum() / 3));
+        return averages;
+    }
     private static List<DeveloperDto.ScoreDetail> createScores(Account account) {
         return account.getScores().stream()
                 .map(score -> new DeveloperDto.ScoreDetail(

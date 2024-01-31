@@ -98,7 +98,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         List<Account> accounts = accountRepository.findAll();
 
         for (Account account : accounts) {
-            String scoreUri = String.format("http://localhost:8080/api/scores/%s/add-scores", account.getId());
+            String scoreUri = String.format("http://localhost:8080/api/scores/%s/add-scoresa", account.getId());
             HttpEntity<String> entity = new HttpEntity<>(score, headers);
             restTemplate.postForObject(scoreUri, entity, ScoreDto.Response[].class);
         }

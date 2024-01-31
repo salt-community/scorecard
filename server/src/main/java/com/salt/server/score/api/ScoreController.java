@@ -33,7 +33,7 @@ public class ScoreController {
         return new ResponseEntity<>(scoreService.addScore(developerId, request),HttpStatus.OK);
     }
 
-    @PostMapping("/{developerId}/add-scores")
+    @PostMapping("/{developerId}/add-scoresa")
     public List<ScoreDto.Response> addListScoresById(@PathVariable UUID developerId, @RequestBody List<ScoreDto.Request> request) {
         return scoreService.addListOfScores(developerId, request);
     }

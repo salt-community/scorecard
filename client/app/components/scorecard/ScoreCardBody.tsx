@@ -1,10 +1,10 @@
-'use client';
-import { Divider } from '@nextui-org/react';
-import SaltScore from './SaltScore';
-import Background from './Background';
-import Achievements from './Achievements';
-import Projects from './Projects';
-import { DeveloperData } from '../../types';
+"use client";
+import { Divider } from "@nextui-org/react";
+import SaltScore from "./SaltScore";
+import Background from "./Background";
+import Achievements from "./Achievements";
+import Projects from "./Projects";
+import { DeveloperData } from "../../types";
 
 interface ScoreCardBodyProps {
   developerData: DeveloperData;
@@ -19,6 +19,7 @@ const ScoreCardBody = ({ developerData }: ScoreCardBodyProps) => {
       <SaltScore
         scores={developerData.scores}
         radarGraphicData={developerData.radarGraph}
+        averages={developerData.averages}
       />
       <Projects projects={developerData.selectedProjects} />
     </div>

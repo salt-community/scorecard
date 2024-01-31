@@ -32,7 +32,6 @@ export default function DeveloperDetailPage({
   const fetchbackend = async () => {
     const developerData = await httpGetAdmninDeveloperById(params.slug);
     setDeveloper(developerData);
-    console.log(developerData);
   };
 
   const inputForm = (el: any) => {

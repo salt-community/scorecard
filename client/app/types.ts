@@ -48,6 +48,12 @@ export type DeveloperData = {
   radarGraph: RadarGraphicData[];
   commitsCount?: number;
   issuesCount?: number;
+  averages: Average[];
+};
+
+export type Average = {
+  scoreName: string;
+  average: number;
 };
 
 export type DeveloperShowcase = {

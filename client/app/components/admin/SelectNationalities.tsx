@@ -31,7 +31,6 @@ const SelectNationalities = ({ nationalitiesSet }: Props) => {
     let onChangeValue: any = [...nationalities];
     onChangeValue[index][name] = value;
     setNationalities(onChangeValue);
-    console.log(nationalities);
   };
 
   const handleDeleteInput = (index: any) => {

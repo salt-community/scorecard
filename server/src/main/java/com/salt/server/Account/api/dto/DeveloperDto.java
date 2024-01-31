@@ -91,7 +91,14 @@ public interface DeveloperDto {
             List<DeveloperDto.RadarGraph> radarGraph,
             List<DeveloperDto.ScoreDetail> scores,
             List<DeveloperDto.ProjectDto> selectedProjects,
-            DeveloperDto.BackgroundInformation backgroundInformation
+            DeveloperDto.BackgroundInformation backgroundInformation,
+            List<Average> averages
+    ) {
+    }
+
+    record Average(
+            String scoreName,
+            Integer average
     ) {
     }
 
