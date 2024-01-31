@@ -8,15 +8,14 @@ import {
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import { Assignment, ScoreRes } from "@/app/types";
+import { Assignment, Score } from "@/app/types";
 import { httpDeleteScoreById } from "@/app/api/request";
-import { useRouter } from "next/navigation";
 
 interface ScoreboardProps {
   assignment: Assignment[];
   deleteSearchedScore: Function;
   deleteScore: Function;
-  searchedScore: ScoreRes;
+  searchedScore: Score;
 }
 
 const UpdateForm = ({
@@ -25,8 +24,6 @@ const UpdateForm = ({
   deleteScore,
   searchedScore,
 }: ScoreboardProps) => {
-  const router = useRouter();
-
   const [input, setInput] = useState(searchedScore);
 
   const inputForm = (el: any) => {
@@ -47,20 +44,13 @@ const UpdateForm = ({
     }
   };
 
-  const submitHandler = async (e: any, input: any) => {
-    e.preventDefault();
-  };
   return (
     <div className="h-full">
       <CardHeader>
         <h4 className="font-bold text-large">{searchedScore.type}</h4>
       </CardHeader>
 
-      <form
-        id="form"
-        onSubmit={(e) => submitHandler(e, input)}
-        className="flex flex-col h-full justify-start gap-4"
-      >
+      <form id="form" className="flex flex-col h-full justify-start gap-4">
         <div className=" w-full p-4 flex flex-col gap-4">
           <div className="flex flex-row gap-4 w-full">
             <Select

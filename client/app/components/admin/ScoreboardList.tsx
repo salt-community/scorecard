@@ -1,21 +1,20 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-
 import { Button, Card } from "@material-tailwind/react";
 import { RadarGraphicData } from "@/app/types";
 
-type saltieAdmin = {
+type saltieInList = {
   id: string;
   name: string;
   radarGraph: RadarGraphicData[];
 };
 
-type Props = {
-  salties: saltieAdmin[];
+type ScoreboardListProps = {
+  salties: saltieInList[];
 };
 
-const ScoreboardList = ({ salties }: Props) => {
+const ScoreboardList = ({ salties }: ScoreboardListProps) => {
   return (
     <Card className="p-4" placeholder={undefined}>
       <div className="overflow-y-auto">

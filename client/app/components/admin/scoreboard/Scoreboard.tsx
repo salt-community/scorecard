@@ -1,12 +1,12 @@
 "use client";
-import { Assignment, DeveloperData, SaltieData } from "@/app/types";
+import { Assignment, SaltieData } from "@/app/types";
 import ScoreboardHeader from "./ScoreboardHeader";
 import ScoreboardBody from "./ScoreboardBody";
 
-interface ScoreboardProps {
+type ScoreboardProps = {
   developer: SaltieData;
   assignment: Assignment[];
-}
+};
 
 const Scoreboard = ({ developer, assignment }: ScoreboardProps) => {
   return (

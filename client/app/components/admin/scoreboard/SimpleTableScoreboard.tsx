@@ -1,4 +1,4 @@
-import { SimpleTableEntry } from "@/app/types";
+import { Score, SimpleTableEntry } from "@/app/types";
 import {
   Table,
   TableBody,
@@ -11,11 +11,14 @@ import Link from "next/link";
 import React from "react";
 
 export interface SimpleTableProps {
-  data: SimpleTableEntry;
+  data: Score[];
   searchScore: Function;
 }
 
-const SimpleTable = ({ data, searchScore }: SimpleTableProps) => {
+const SimpleTableScoreboard = ({ data, searchScore }: SimpleTableProps) => {
+  const assignment = data.assignment;
+  const id = data.id;
+  const description = data.description;
   return (
     <div>
       <Table
@@ -45,4 +48,4 @@ const SimpleTable = ({ data, searchScore }: SimpleTableProps) => {
   );
 };
 
-export default SimpleTable;
+export default SimpleTableScoreboard;

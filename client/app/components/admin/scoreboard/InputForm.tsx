@@ -8,19 +8,16 @@ import {
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import { Assignment, DeveloperData, SaltieData, ScoreRes } from "@/app/types";
+import { Assignment, SaltieData } from "@/app/types";
 import { httpPostScoreById } from "@/app/api/request";
-import { useRouter } from "next/navigation";
 
-interface ScoreboardProps {
+type InputFormProps = {
   developer: SaltieData;
   assignment: Assignment[];
   updateScore: Function;
-}
+};
 
-const InputForm = ({ developer, assignment, updateScore }: ScoreboardProps) => {
-  const router = useRouter();
-
+const InputForm = ({ developer, assignment, updateScore }: InputFormProps) => {
   const [input, setInput] = useState({
     name: "",
     score: 0,

@@ -1,46 +1,20 @@
 "use client";
 
-import { SaltieData, ScoreRes, Scores } from "@/app/types";
+import { SaltieData, Score, Scores } from "@/app/types";
 import { colorVariant, levelVariant } from "@/app/utilities";
 import { Card, CardHeader, Chip, CircularProgress } from "@nextui-org/react";
 import Grading from "./Grading";
 import ScoreboardId from "./ScoreboardId";
 
-interface ScoreboardProps {
+type ScoreboardHeaderProps = {
   developer: SaltieData;
-}
+};
 
-const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
-  const scoreData = (scores: ScoreRes[]) => {
-    const type: string[] = scores?.map((score) => score.type);
-    function onlyUnique(value: any, index: any, array: any) {
-      return array.indexOf(value) === index;
-    }
-
-    var unique = type?.filter(onlyUnique);
-    const data: Scores[] = [];
-    for (let i = 0; i < unique?.length; i++) {
-      const scoreName = unique[i];
-      const data1 = scores
-        .filter((score) => score.type === scoreName)
-        .reduce(function (r: any, e) {
-          r[e.assignment] = e.score;
-          return r;
-        }, {});
-
-      const x: Scores = {
-        scoreName: scoreName,
-        data: data1,
-      };
-      data.push(x);
-    }
-
-    return data;
-  };
-  const formattedScores = scoreData(developer.scores);
-  const totalAverageNumber = developer.averages.filter(
-    (a) => a.scoreName === "total"
+const ScoreboardHeader = ({ developer }: ScoreboardHeaderProps) => {
+  const totalScoreAverage = developer.averages.filter(
+    (average) => average.scoreName === "total"
   )[0].average;
+
   return (
     <div className="flex flex-row gap-4">
       <Card className={`w-72`}>
@@ -53,7 +27,7 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
       </Card>
       <Card className=" flex-1 flex-col justify-center items-center">
         <Chip
-          color={colorVariant(totalAverageNumber)}
+          color={colorVariant(totalScoreAverage)}
           variant="bordered"
           classNames={{
             content: "drop-shadow shadow-black text-black",
@@ -62,15 +36,15 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
           startContent={
             <CircularProgress
               size="lg"
-              value={totalAverageNumber}
-              color={colorVariant(totalAverageNumber)}
+              value={totalScoreAverage}
+              color={colorVariant(totalScoreAverage)}
               showValueLabel={true}
               aria-label="score value"
             />
           }
         >
           <h4 className="text-large mx-2">
-            Level {levelVariant(totalAverageNumber)}
+            Level {levelVariant(totalScoreAverage)}
           </h4>
         </Chip>
       </Card>

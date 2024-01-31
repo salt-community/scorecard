@@ -1,14 +1,13 @@
 "use client";
-
 import { Avatar } from "@nextui-org/react";
 import ContactsBar from "../../scorecard/ContactsBar";
 import { SaltieData } from "@/app/types";
 
-interface ScoreboardHeaderProps {
+type ScoreboardIdProps = {
   developer: SaltieData;
-}
+};
 
-const ScoreboardId = ({ developer }: ScoreboardHeaderProps) => {
+const ScoreboardId = ({ developer }: ScoreboardIdProps) => {
   const avatarUrl = developer.githubProfilePictureUrl;
   const developerName = developer.name;
   const programmingLanguage = developer.bootcamp;

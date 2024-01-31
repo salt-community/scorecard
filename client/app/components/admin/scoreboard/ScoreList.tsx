@@ -7,16 +7,16 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { ScoreRes, Scores } from "@/app/types";
+import { Score, Scores } from "@/app/types";
 import SimpleTable from "./SimpleTableScoreboard";
 
-interface ScoreboardProps {
-  scores: ScoreRes[];
+interface ScoreListProps {
+  scores: Score[];
   searchScore: Function;
 }
 
-const ScoreList = ({ scores, searchScore }: ScoreboardProps) => {
-  const scoreData = (scores: ScoreRes[]) => {
+const ScoreList = ({ scores, searchScore }: ScoreListProps) => {
+  const scoreData = (scores: Score[]) => {
     const type: string[] = scores?.map((score) => score.type);
     function onlyUnique(value: any, index: any, array: any) {
       return array.indexOf(value) === index;

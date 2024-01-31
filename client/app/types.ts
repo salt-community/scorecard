@@ -18,6 +18,18 @@ export type DeveloperData = {
   averages: Average[];
 };
 
+export type SaltieData = {
+  id: string;
+  name: string;
+  bootcamp: string;
+  githubProfilePictureUrl: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  radarGraph: RadarGraphicData[];
+  averages: Average[];
+  scores: Score[];
+};
+
 export type BackgroundInformation = {
   nationalities: string[];
   spokenLanguages: SimpleTableEntry;
@@ -52,6 +64,12 @@ export type Average = {
   average: number;
 };
 
+export type Assignment = {
+  id: string;
+  name: string;
+  type: string;
+};
+
 export type SimpleTableEntry = { [key: string]: string | number };
 
 //uncheck type (need more refactor)
@@ -65,12 +83,6 @@ export type academic = {
   school: string;
 };
 
-export type Assignment = {
-  id: string;
-  name: string;
-  type: string;
-};
-
 export type Scores = { scoreName: string; data: Score[] };
 
 export type DeveloperShowcase = {
@@ -78,18 +90,6 @@ export type DeveloperShowcase = {
   email: string;
   name: string;
   standoutIntro: string;
-};
-
-export type SaltieData = {
-  id: string;
-  name: string;
-  bootcamp: string;
-  githubProfilePictureUrl: string;
-  githubUrl: string;
-  linkedinUrl: string;
-  radarGraph: RadarGraphicData[];
-  averages: Average[];
-  scores: Score[];
 };
 
 // export type Score = {

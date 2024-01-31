@@ -2,21 +2,25 @@
 import { Card } from "@nextui-org/react";
 import React, { useState } from "react";
 import ScoreList from "./ScoreList";
-import { Assignment, SaltieData, ScoreRes } from "@/app/types";
+import { Assignment, SaltieData, Score } from "@/app/types";
 import InputForm from "./InputForm";
 import UpdateForm from "./UpdateForm";
 
-interface ScoreboardProps {
+type ScoreboardProps = {
   developer: SaltieData;
   assignment: Assignment[];
-}
+};
 
 const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
-  const [score, setScore] = useState<ScoreRes[]>(developer.scores);
-  const [searchedScore, setSearchedScore] = useState<ScoreRes>();
+  const [score, setScore] = useState<Score[]>(developer.scores);
+  const [searchedScore, setSearchedScore] = useState<Score>();
 
-  const updateScore = (updatedScore: ScoreRes) => {
-    setScore((curr: ScoreRes[]) => [...curr, updatedScore]);
+  const updateScore = (updatedScore: Score) => {
+    setScore((curr: Score[]) => [...curr, updatedScore]);
+  };
+
+  const deleteScore = (id: string) => {
+    setScore(score.filter((score) => score.id !== id));
   };
 
   const deleteSearchedScore = () => {
@@ -28,9 +32,6 @@ const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
       (score) => score.assignment === assignment
     );
     setSearchedScore(searchedScore[0]);
-  };
-  const deleteScore = (id: string) => {
-    setScore(score.filter((score) => score.id !== id));
   };
 
   return (
