@@ -22,7 +22,7 @@ export type Assignment = {
   type: string;
 };
 
-export type Scores = { scoreName: string; data: SimpleTableEntry };
+export type Scores = { scoreName: string; data: ScoreRes[] };
 
 export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
 
@@ -43,7 +43,7 @@ export type DeveloperData = {
   backgroundInformation: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;
-  scores: Scores[];
+  scores: ScoreRes[];
   selectedProjects: Project[];
   radarGraph: RadarGraphicData[];
   commitsCount?: number;
@@ -150,8 +150,8 @@ export type nationality = {
 };
 
 export type Account = {
-  id:string;
-  email:string;
+  id: string;
+  email: string;
   name: string;
-  role:string
-}
+  role: string;
+};

@@ -1,7 +1,7 @@
-import { DeveloperData, SimpleTableEntry } from "./types";
+/* import { DeveloperData, Scores, SimpleTableEntry } from "./types";
 
 export const isExcellent = (developerData: DeveloperData) => {
-  return levelVariant(getAllAverageValue(developerData.scores)) === 3;
+  // return levelVariant(getAllAverageValue(developerData.scores)) === 3;
 };
 
 export const getAverageValue = (data: SimpleTableEntry) => {
@@ -35,9 +35,7 @@ export const levelVariant = (value: number) => {
   }
 };
 
-export const getAllAverageValue = (
-  scoreData: { scoreName: string; data: SimpleTableEntry }[]
-) => {
+export const getAllAverageValue = (scoreData: Scores[]) => {
   const allAveNum: number[] = [];
   scoreData
     ? scoreData.map((item) => allAveNum.push(getAverageValue(item.data)))
@@ -45,3 +43,4 @@ export const getAllAverageValue = (
   const sum = allAveNum.reduce((acc, curr) => acc + curr, 0);
   return sum / allAveNum.length;
 };
+ */

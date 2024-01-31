@@ -3,6 +3,7 @@ import ScoreCard from "../../../components/scorecard/ScoreCard";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const developerData = await httpGetDeveloperById(params.slug);
+  console.log(developerData);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
       <div>

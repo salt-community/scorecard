@@ -36,7 +36,8 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
- 
+        assignmentSeeder();
+        accountSeeder();
     }
 
     private void assignmentSeeder() {
@@ -108,52 +109,52 @@ public class DatabaseSeeder implements ApplicationRunner {
             "    {\n" +
             "        \"name\": \"hackday 2\",\n" +
             "        \"score\": \"82\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"on site demo 1\",\n" +
             "        \"score\": \"70\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"tech interview 1\",\n" +
             "        \"score\": \"92\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"repository documentation\",\n" +
             "        \"score\": \"50\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"tech article\",\n" +
             "        \"score\": \"65\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },\n" +
             "    {\n" +
             "        \"name\": \"microsteps\",\n" +
             "        \"score\": \"20\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience. \"\n" +
             "    },{\n" +
             "        \"name\": \"figma\",\n" +
             "        \"score\": \"90\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },{\n" +
             "        \"name\": \"weekend assignment 1\",\n" +
             "        \"score\": \"82\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },{\n" +
             "        \"name\": \"on site test 1\",\n" +
             "        \"score\": \"87\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },{\n" +
             "        \"name\": \"hackday 1\",\n" +
             "        \"score\": \"85\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"With a flawless combination of creativity and technical prowess, this composition earns a perfect score, delivering a mesmerizing and innovative auditory experience.\"\n" +
             "    },{\n" +
             "        \"name\": \"project 1\",\n" +
             "        \"score\": \"95\",\n" +
-            "        \"description\": \"good application\"\n" +
+            "        \"description\": \"This well-crafted argument showcases exceptional analytical skills and a deep understanding of the subject matter, securing a top-tier score for its compelling logic and articulate presentation.\"\n" +
             "    }\n" +
             "]";
 

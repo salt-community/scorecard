@@ -89,7 +89,7 @@ public interface DeveloperDto {
             String linkedinUrl,
             String codewarsUrl,
             List<DeveloperDto.RadarGraph> radarGraph,
-            List<DeveloperDto.Scores> scores,
+            List<DeveloperDto.ScoreDetail> scores,
             List<DeveloperDto.ProjectDto> selectedProjects,
             DeveloperDto.BackgroundInformation backgroundInformation
     ) {

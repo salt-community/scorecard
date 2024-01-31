@@ -42,6 +42,7 @@ export default function DeveloperDetailPage({
       [name]: value,
     });
   };
+  const handleSubmit = () => {};
 
   useEffect(() => {
     fetchbackend();
