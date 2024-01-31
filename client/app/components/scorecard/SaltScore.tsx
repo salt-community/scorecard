@@ -24,10 +24,15 @@ type SaltScoreProps = {
 
 const SaltScore = ({ scores, radarGraphicData, averages }: SaltScoreProps) => {
   const scoreData = (scores: Score[]) => {
-    const type = ["communication", "coding", "planning"];
+    const type: string[] = scores?.map((score) => score.type);
+    function onlyUnique(value: any, index: any, array: any) {
+      return array.indexOf(value) === index;
+    }
+
+    var unique = type?.filter(onlyUnique);
     const detailScores: DetailScores[] = [];
-    for (let i = 0; i < type.length; i++) {
-      const scoreName = type[i];
+    for (let i = 0; i < unique.length; i++) {
+      const scoreName = unique[i];
       const scoreData = scores.filter((score) => score.type === scoreName);
       const averageScore = averages.filter(
         (avg) => avg.scoreName === scoreName

@@ -1,4 +1,4 @@
-import { Score, SimpleTableEntry } from "@/app/types";
+import { Score } from "@/app/types";
 import {
   Table,
   TableBody,
@@ -11,13 +11,13 @@ import Link from "next/link";
 import React from "react";
 
 export interface SimpleTableProps {
-  data: Score[];
+  data: Score;
   searchScore: Function;
 }
 
 const SimpleTableScoreboard = ({ data, searchScore }: SimpleTableProps) => {
   const assignment = data.assignment;
-  const id = data.id;
+  const score = data.score;
   const description = data.description;
   return (
     <div>
@@ -32,16 +32,14 @@ const SimpleTableScoreboard = ({ data, searchScore }: SimpleTableProps) => {
           <TableColumn>value</TableColumn>
         </TableHeader>
         <TableBody>
-          {Object.entries(data).map(([key, value], index) => (
-            <TableRow key={index}>
-              <TableCell className=" underline">
-                <Link href="" onClick={() => searchScore(key)}>
-                  {key}
-                </Link>
-              </TableCell>
-              <TableCell className="text-end">{value}</TableCell>
-            </TableRow>
-          ))}
+          <TableRow>
+            <TableCell className=" underline">
+              <Link href="" onClick={() => searchScore(assignment)}>
+                {assignment}
+              </Link>
+            </TableCell>
+            <TableCell className="text-end">{score}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>

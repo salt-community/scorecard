@@ -7,15 +7,16 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { Score, Scores } from "@/app/types";
-import SimpleTable from "./SimpleTableScoreboard";
+import { Average, DetailScores, Score } from "@/app/types";
+import SimpleTableScoreboard from "./SimpleTableScoreboard";
 
 interface ScoreListProps {
   scores: Score[];
+  averages: Average[];
   searchScore: Function;
 }
 
-const ScoreList = ({ scores, searchScore }: ScoreListProps) => {
+const ScoreList = ({ scores, searchScore, averages }: ScoreListProps) => {
   const scoreData = (scores: Score[]) => {
     const type: string[] = scores?.map((score) => score.type);
     function onlyUnique(value: any, index: any, array: any) {
@@ -23,31 +24,28 @@ const ScoreList = ({ scores, searchScore }: ScoreListProps) => {
     }
 
     var unique = type?.filter(onlyUnique);
-    const data: Scores[] = [];
-    for (let i = 0; i < unique?.length; i++) {
+    const detailScores: DetailScores[] = [];
+    for (let i = 0; i < unique.length; i++) {
       const scoreName = unique[i];
-      const data1 = scores
-        .filter((score) => score.type === scoreName)
-        .reduce(function (r: any, e) {
-          r[e.assignment] = e.score;
-          return r;
-        }, {});
-
-      const x: Scores = {
+      const scoreData = scores.filter((score) => score.type === scoreName);
+      const averageScore = averages.filter(
+        (avg) => avg.scoreName === scoreName
+      )[0].average;
+      const detailScore: DetailScores = {
         scoreName: scoreName,
-        data: data1,
+        average: averageScore,
+        data: scoreData,
       };
-      data.push(x);
+      detailScores.push(detailScore);
     }
-
-    return data;
+    return detailScores;
   };
-  const a = scoreData(scores);
+  const detailScores = scoreData(scores);
 
   return (
     <Tabs value="communication">
       <TabsHeader placeholder={undefined}>
-        {a.map(({ scoreName }) => (
+        {detailScores.map(({ scoreName }) => (
           <Tab
             placeholder={undefined}
             key={scoreName}
@@ -62,9 +60,15 @@ const ScoreList = ({ scores, searchScore }: ScoreListProps) => {
         placeholder={undefined}
         className=" min-h-[calc(100vh-290px)] overflow-y-auto"
       >
-        {a.map((item) => (
-          <TabPanel key={item.scoreName} value={item.scoreName}>
-            <SimpleTable data={item.data} searchScore={searchScore} />
+        {detailScores.map(({ scoreName, data }) => (
+          <TabPanel key={scoreName} value={scoreName}>
+            {data.map((data, index) => (
+              <SimpleTableScoreboard
+                data={data}
+                searchScore={searchScore}
+                key={index}
+              />
+            ))}
           </TabPanel>
         ))}
       </TabsBody>

@@ -37,7 +37,11 @@ const ScoreboardBody = ({ developer, assignment }: ScoreboardProps) => {
   return (
     <div className="h-full flex flex-row gap-4">
       <Card className="w-72 block min-h-full p-2">
-        <ScoreList scores={score!} searchScore={searchScore} />
+        <ScoreList
+          scores={score!}
+          searchScore={searchScore}
+          averages={developer.averages}
+        />
       </Card>
       <Card className="flex-1 min-h-full">
         {searchedScore ? (

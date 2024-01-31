@@ -83,14 +83,13 @@ export type academic = {
   school: string;
 };
 
-export type Scores = { scoreName: string; data: Score[] };
-
-export type DeveloperShowcase = {
-  id: string;
-  email: string;
-  name: string;
-  standoutIntro: string;
-};
+// export type DeveloperShowcase = {
+//   id: string;
+//   email: string;
+//   name: string;
+//   standoutIntro: string;
+// };
+// export type Scores = { scoreName: string; data: Score[] };
 
 // export type Score = {
 //   id: string;
