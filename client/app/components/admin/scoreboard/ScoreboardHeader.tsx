@@ -42,7 +42,9 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
     return data;
   };
   const formattedScores = scoreData(developer.scores);
-
+  const totalAverageNumber = developer.averages.filter(
+    (a) => a.scoreName === "total"
+  )[0].average;
   return (
     <div className="flex flex-row gap-4">
       <Card className={`w-72`}>
@@ -55,7 +57,7 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
       </Card>
       <Card className=" flex-1 flex-col justify-center items-center">
         <Chip
-          //color={colorVariant(getAllAverageValue(formattedScores))}
+          color={colorVariant(totalAverageNumber)}
           variant="bordered"
           classNames={{
             content: "drop-shadow shadow-black text-black",
@@ -64,16 +66,16 @@ const ScoreboardHeader = ({ developer }: ScoreboardProps) => {
           startContent={
             <CircularProgress
               size="lg"
-              // value={getAllAverageValue(formattedScores)}
-              //color={colorVariant(getAllAverageValue(formattedScores))}
+              value={totalAverageNumber}
+              color={colorVariant(totalAverageNumber)}
               showValueLabel={true}
               aria-label="score value"
             />
           }
         >
-          {/*           <h4 className=" text-2xl mx-2">
-            Level {levelVariant(getAllAverageValue(formattedScores))}
-          </h4> */}
+          <h4 className="text-large mx-2">
+            Level {levelVariant(totalAverageNumber)}
+          </h4>
         </Chip>
       </Card>
     </div>

@@ -71,6 +71,7 @@ export type SaltieData = {
   githubUrl: string;
   linkedinUrl: string;
   radarGraph: RadarGraphicData[];
+  averages: Average[];
   scores: ScoreRes[];
 };
 

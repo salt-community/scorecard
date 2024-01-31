@@ -85,6 +85,23 @@ public class DeveloperService {
         Account account = getDeveloperById(id);
         List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
         List<DeveloperDto.ScoreDetail> scoreScoreboards = getScoreboardScore(account);
+        List<DeveloperDto.Average> averages = new ArrayList<>();
+        for (Type type : Type.values()) {
+            List<Score> filteredScores = account.getScores().stream()
+                    .filter(score -> score.getAssignment().getType().equals(type))
+                    .toList();
+            if (filteredScores.isEmpty()) {
+                averages.add(new DeveloperDto.Average(type.toString(), 0));
+            } else {
+                averages.add(new DeveloperDto.Average(type.toString(), filteredScores.stream()
+                        .mapToInt(Score::getScore)
+                        .sum() / filteredScores.size()));
+            }
+        }
+        averages.add(new DeveloperDto.Average("total", averages.stream()
+                .mapToInt(DeveloperDto.Average::average)
+                .sum() / 3));
+
         return new DeveloperDto.DeveloperScoreboardResponse(
                 account.getId().toString(),
                 account.getUserDetail().getName(),
@@ -93,7 +110,8 @@ public class DeveloperService {
                 account.getUserDetail().getSocial().getGithubId().getUrl(),
                 account.getUserDetail().getSocial().getLinkedInUrl(),
                 radarGraphs,
-                scoreScoreboards
+                scoreScoreboards,
+                averages
         );
     }
 

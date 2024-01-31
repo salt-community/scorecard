@@ -43,7 +43,9 @@ public interface DeveloperDto {
             String githubUrl,
             String linkedinUsername,
             List<DeveloperDto.RadarGraph> radarGraph,
-            List<DeveloperDto.ScoreDetail> scores
+            List<DeveloperDto.ScoreDetail> scores,
+            List<Average> averages
+
     ) {
     }
 
@@ -112,7 +114,8 @@ public interface DeveloperDto {
             List<Skill> skills,
             List<Language> languages,
             List<Nationality> nationalities
-    ){}
+    ) {
+    }
 
     record RadarGraph(
             String subject,
