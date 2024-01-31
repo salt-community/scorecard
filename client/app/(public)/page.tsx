@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ShowCard } from "../components/DeveloperCard";
 import { Banner } from "../components/Banner";
 import { httpGetAllAccounts } from "../api/request";
+import { DeveloperCard } from "../components/DeveloperCard";
 
 type developerInList = {
   id: string;
@@ -18,7 +18,7 @@ export default async function Home() {
       <div className="w-full px-2">
         {developersData.map((item: developerInList) => (
           <Link href={`/developers/${item.id}`} key={item.id}>
-            <ShowCard
+            <DeveloperCard
               id={item.id}
               name={item.name}
               profilePicture={item.profilePicture}
