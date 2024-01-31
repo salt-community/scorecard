@@ -1,10 +1,10 @@
-/* import { DeveloperData, Scores, SimpleTableEntry } from "./types";
+import { DeveloperData, Scores, SimpleTableEntry } from "./types";
 
 export const isExcellent = (developerData: DeveloperData) => {
   // return levelVariant(getAllAverageValue(developerData.scores)) === 3;
 };
 
-export const getAverageValue = (data: SimpleTableEntry) => {
+/* export const getAverageValue = (data: SimpleTableEntry) => {
   let sum = 0;
   let count = 0;
   for (const key in data) {
@@ -14,7 +14,7 @@ export const getAverageValue = (data: SimpleTableEntry) => {
     }
   }
   return sum / count;
-};
+}; */
 
 export const colorVariant = (value: number) => {
   if (value >= 90) {
@@ -35,12 +35,15 @@ export const levelVariant = (value: number) => {
   }
 };
 
-export const getAllAverageValue = (scoreData: Scores[]) => {
+export function capitalizeEveryWord(inputString: string): string {
+  return inputString.replace(/\b\w/g, (match) => match.toUpperCase());
+}
+
+/* export const getAllAverageValue = (scoreData: Scores[]) => {
   const allAveNum: number[] = [];
   scoreData
     ? scoreData.map((item) => allAveNum.push(getAverageValue(item.data)))
     : allAveNum.push(0);
   const sum = allAveNum.reduce((acc, curr) => acc + curr, 0);
   return sum / allAveNum.length;
-};
- */
+}; */

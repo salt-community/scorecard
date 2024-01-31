@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { ScoreRes } from "../../types";
+import { capitalizeEveryWord } from "@/app/utilities";
 
 export interface SimpleTableProps {
   data: ScoreRes;
@@ -22,7 +23,7 @@ const ScoreEntry = ({ data }: SimpleTableProps) => {
         removeWrapper
         hideHeader
         aria-label="Github actions"
-        className="w-full"
+        className="w-full -mb-2"
       >
         <TableHeader>
           <TableColumn>key</TableColumn>
@@ -30,7 +31,7 @@ const ScoreEntry = ({ data }: SimpleTableProps) => {
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell>{data.assignment}</TableCell>
+            <TableCell>{capitalizeEveryWord(data.assignment)}</TableCell>
             <TableCell className="text-end">{data.score}</TableCell>
           </TableRow>
         </TableBody>
