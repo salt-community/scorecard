@@ -29,7 +29,7 @@ const SelectLanguages = ({ languagesSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue:any = [...languages];
+    let onChangeValue: any = [...languages];
     onChangeValue[index][name] = value;
     setLanguages(onChangeValue);
   };
@@ -74,11 +74,13 @@ const SelectLanguages = ({ languagesSet }: Props) => {
             aria-label="enter language"
             name="language"
             type="text"
+            labelPlacement="outside-left"
             value={item.language}
             className=""
             onChange={(event) => handleChange(event, index)}
           />
           <Select
+            labelPlacement="outside-left"
             name="fluency"
             aria-label="enter fluency level"
             placeholder={item.fluency ? item.fluency : "level"}
