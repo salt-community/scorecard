@@ -3,7 +3,7 @@
 import { SaltieData, ScoreRes, Scores } from "@/app/types";
 import {
   colorVariant,
-  getAllAverageValue,
+  //getAllAverageValue,
   levelVariant,
 } from "@/app/utilities";
 import { Card, CardHeader, Chip, CircularProgress } from "@nextui-org/react";
