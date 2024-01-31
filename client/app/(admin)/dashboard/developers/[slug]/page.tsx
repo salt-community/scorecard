@@ -57,7 +57,7 @@ export default function DeveloperDetailPage({
   return (
     <form action="">
       <div className="flex flex-row gap-4">
-        <Card className={` flex-1`}>
+        <Card className={` flex-1 py-4 gap-3`}>
           <CardHeader className="pb-0">
             <h4 className="font-bold text-large">Profile</h4>
           </CardHeader>
@@ -150,11 +150,15 @@ export default function DeveloperDetailPage({
                 defaultValue={developer.userDetail.phoneNumber}
               />
             </div>
+          </CardHeader>
+          <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectNationalities nationalitiesSet={developer.nationalities} />
+          </CardHeader>
+          <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectLanguages languagesSet={developer.languages} />
           </CardHeader>
         </Card>
-        <Card className={` flex-1`}>
+        <Card className={` flex-1 py-4`}>
           <CardHeader>
             <h4 className="font-bold text-large">Academic</h4>
           </CardHeader>
@@ -230,7 +234,7 @@ export default function DeveloperDetailPage({
             <SelectSkills skillsSet={developer.skills} />
           </CardHeader>
         </Card>
-        <Card className={` flex-1`}>
+        <Card className={` flex-1 py-4`}>
           <CardHeader>
             <h4 className="font-bold text-large">Social</h4>
           </CardHeader>
@@ -274,6 +278,8 @@ export default function DeveloperDetailPage({
                 defaultValue={developer.social.linkedInUrl.split("/").pop()}
               />
             </div>
+          </CardHeader>
+          <CardHeader className=" px-4 flex flex-col gap-2">
             <SelectProjects projectsSet={developer.projects} />
           </CardHeader>
         </Card>
