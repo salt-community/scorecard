@@ -28,7 +28,7 @@ const SelectSkills = ({ skillsSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue:any = [...skills];
+    let onChangeValue: any = [...skills];
     onChangeValue[index][name] = value;
     setskills(onChangeValue);
   };
@@ -55,27 +55,28 @@ const SelectSkills = ({ skillsSet }: Props) => {
           Add
         </Button>
       </div>
-
-      {skills.map((item, index) => (
-        <div className="input_container" key={index}>
-          <Input
-            endContent={
-              skills.length > 1 && (
-                <TrashIcon
-                  onClick={() => handleDeleteInput(index)}
-                  className="w-8 h-8 text-default-400 flex-shrink-0 cursor-pointer hover:text-red-500"
-                />
-              )
-            }
-            aria-label="enter skill"
-            name="skill"
-            type="text"
-            value={item.skill}
-            className=""
-            onChange={(event) => handleChange(event, index)}
-          />
-        </div>
-      ))}
+      <div className="grid grid-cols-2 gap-2">
+        {skills.map((item, index) => (
+          <div className="" key={index}>
+            <Input
+              endContent={
+                skills.length > 1 && (
+                  <TrashIcon
+                    onClick={() => handleDeleteInput(index)}
+                    className="w-8 h-8 text-default-400 flex-shrink-0 cursor-pointer hover:text-red-500"
+                  />
+                )
+              }
+              aria-label="enter skill"
+              name="skill"
+              type="text"
+              value={item.skill}
+              className="flex-1"
+              onChange={(event) => handleChange(event, index)}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
