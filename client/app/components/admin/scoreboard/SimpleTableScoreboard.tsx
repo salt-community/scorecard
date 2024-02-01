@@ -21,7 +21,6 @@ const SimpleTableScoreboard = ({
 }: SimpleTableScoreboardProps) => {
   const assignment = data.assignment;
   const score = data.score;
-  const description = data.description;
   return (
     <div>
       <Table

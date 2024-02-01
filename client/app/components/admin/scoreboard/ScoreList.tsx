@@ -7,8 +7,9 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { Average, DetailScores, Score } from "@/app/types";
+import { Average, Score } from "@/app/types";
 import SimpleTableScoreboard from "./SimpleTableScoreboard";
+import { scoreData } from "@/app/utilities";
 
 type ScoreListProps = {
   scores: Score[];
@@ -17,30 +18,7 @@ type ScoreListProps = {
 };
 
 const ScoreList = ({ scores, searchScore, averages }: ScoreListProps) => {
-  const scoreData = (scores: Score[]) => {
-    const type: string[] = scores?.map((score) => score.type);
-    function onlyUnique(value: any, index: any, array: any) {
-      return array.indexOf(value) === index;
-    }
-
-    var unique = type?.filter(onlyUnique);
-    const detailScores: DetailScores[] = [];
-    for (let i = 0; i < unique.length; i++) {
-      const scoreName = unique[i];
-      const scoreData = scores.filter((score) => score.type === scoreName);
-      const averageScore = averages.filter(
-        (avg) => avg.scoreName === scoreName
-      )[0].average;
-      const detailScore: DetailScores = {
-        scoreName: scoreName,
-        average: averageScore,
-        data: scoreData,
-      };
-      detailScores.push(detailScore);
-    }
-    return detailScores;
-  };
-  const detailScores = scoreData(scores);
+  const detailScores = scoreData(scores, averages);
 
   return (
     <Tabs value="communication">

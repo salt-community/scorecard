@@ -7,13 +7,14 @@ import {
   CircularProgress,
   Chip,
 } from "@nextui-org/react";
-import { Average, DetailScores, RadarGraphicData, Score } from "../../types";
+import { Average, RadarGraphicData, Score } from "../../types";
 import { RadarGraphic } from "./RadarGraphic";
 import ScoreEntry from "./ScoreEntry";
 import {
   capitalizeEveryWord,
   colorVariant,
   levelVariant,
+  scoreData,
 } from "@/app/utilities";
 
 type SaltScoreProps = {
@@ -23,33 +24,9 @@ type SaltScoreProps = {
 };
 
 const SaltScore = ({ scores, radarGraphicData, averages }: SaltScoreProps) => {
-  const scoreData = (scores: Score[]) => {
-    const type: string[] = scores?.map((score) => score.type);
-    function onlyUnique(value: any, index: any, array: any) {
-      return array.indexOf(value) === index;
-    }
-
-    var unique = type?.filter(onlyUnique);
-    const detailScores: DetailScores[] = [];
-    for (let i = 0; i < unique.length; i++) {
-      const scoreName = unique[i];
-      const scoreData = scores.filter((score) => score.type === scoreName);
-      const averageScore = averages.filter(
-        (avg) => avg.scoreName === scoreName
-      )[0].average;
-      const detailScore: DetailScores = {
-        scoreName: scoreName,
-        average: averageScore,
-        data: scoreData,
-      };
-      detailScores.push(detailScore);
-    }
-    return detailScores;
-  };
-
   const totalScoreAverage = averages.filter((a) => a.scoreName === "total")[0]
     .average;
-  const detailScores = scoreData(scores);
+  const detailScores = scoreData(scores, averages);
   return (
     <>
       <h4 className="font-bold text-large">Salt Scoring</h4>
