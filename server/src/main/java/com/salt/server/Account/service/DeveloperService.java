@@ -261,4 +261,24 @@ public class DeveloperService {
     public void deleteDeveloperById(UUID id) {
         accountRepository.deleteById(id);
     }
+
+    @Transactional
+    public DeveloperDto.Response updateDeveloper(UUID developerId, DeveloperDto.Request request) {
+        Account developer = getDeveloperById(developerId);
+        developer.setEmail(request.email());
+        developer.setRole(request.role());
+        Account account = accountRepository.save(developer);
+        UserDetail userDetail = createUserDetail(request, developer);
+        account.setUserDetail(userDetail);
+        createAcademic(request, userDetail);
+        createNationality(request, userDetail);
+        createLanguage(request, userDetail);
+        createSkill(request, userDetail);
+        Social social = createSocial(request, userDetail);
+        Github github = githubService.createGithub(request, social);
+        githubService.createProject(request, github);
+        List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(developer);
+        return DeveloperMapper.toDeveloperResponse(developer, radarGraphs);
+    }
+
 }

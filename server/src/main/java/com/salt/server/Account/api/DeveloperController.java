@@ -54,6 +54,11 @@ public class DeveloperController {
         return developerService.adminGetDeveloperScoreboard(developerId);
     }
 
+    @PutMapping("/{developerId}")
+    public DeveloperDto.Response updateDeveloper(@PathVariable UUID developerId, @RequestBody DeveloperDto.Request request) {
+        return developerService.updateDeveloper(developerId ,request);
+    }
+
     @DeleteMapping("/{developerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteScore (@PathVariable UUID developerId) {
