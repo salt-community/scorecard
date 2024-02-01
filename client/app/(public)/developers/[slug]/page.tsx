@@ -1,3 +1,4 @@
+"use client";
 import { httpGetDeveloperById } from "@/app/api/request";
 import ScoreCard from "../../../components/scorecard/ScoreCard";
 
