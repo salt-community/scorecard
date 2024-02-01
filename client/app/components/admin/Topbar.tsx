@@ -27,7 +27,7 @@ const Topbar = () => {
           className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
           placeholder={undefined}
         >
-          Add Developer
+          Add Account
         </Button>
       </Link>
     </Card>

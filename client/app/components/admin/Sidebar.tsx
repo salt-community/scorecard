@@ -36,6 +36,14 @@ export function Sidebar() {
             Dashboard
           </ListItem>
         </a>
+        <a href="/dashboard/core-team">
+          <ListItem placeholder={undefined}>
+            <ListItemPrefix placeholder={undefined}>
+              <UsersIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Core Team
+          </ListItem>
+        </a>
         <a href="/dashboard/developers">
           <ListItem placeholder={undefined}>
             <ListItemPrefix placeholder={undefined}>
