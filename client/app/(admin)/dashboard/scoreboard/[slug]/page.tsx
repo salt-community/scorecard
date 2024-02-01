@@ -1,12 +1,27 @@
+"use client";
 import {
   httpGetAllAssignment,
   httpGetSaltieScoreboard,
 } from "@/app/api/request";
 import Scoreboard from "@/app/components/admin/scoreboard/Scoreboard";
+import { Assignment, SaltieData } from "@/app/types";
+import { useEffect, useState } from "react";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const developer = await httpGetSaltieScoreboard(params.slug);
-  const assignment = await httpGetAllAssignment();
+export default function Page({ params }: { params: { slug: string } }) {
+  const [developer, setDeveloper] = useState<SaltieData>();
+  const [assignment, setAssignment] = useState<Assignment[]>();
+
+  const fetchData = async () => {
+    const developerData = await httpGetSaltieScoreboard(params.slug);
+    setDeveloper(developerData);
+    const assignment = await httpGetAllAssignment();
+    setAssignment(assignment);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   if (!developer) {
     return (
       <div>
@@ -14,5 +29,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
     );
   }
-  return <Scoreboard developer={developer} assignment={assignment} />;
+  return <Scoreboard developer={developer} assignment={assignment!} />;
 }

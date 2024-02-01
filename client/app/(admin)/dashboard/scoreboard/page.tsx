@@ -1,9 +1,20 @@
+"use client";
 import { httpGetAllSaltieScoreboard } from "@/app/api/request";
 import ScoreboardList from "@/app/components/admin/ScoreboardList";
+import { useEffect, useState } from "react";
 
 export default async function ScoreboardPage() {
-  const developersData = await httpGetAllSaltieScoreboard();
-  if (!developersData) {
+  const [developers, setDevelopers] = useState<[]>();
+  const fetchData = async () => {
+    const developersData = await httpGetAllSaltieScoreboard();
+    setDevelopers(developersData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!developers) {
     return (
       <div>
         <h1>Loading ...</h1>
@@ -12,7 +23,7 @@ export default async function ScoreboardPage() {
   }
   return (
     <div>
-      <ScoreboardList salties={developersData} />
+      <ScoreboardList salties={developers} />
     </div>
   );
 }
