@@ -11,7 +11,119 @@ export default async function Page({ params }: { params: { slug: string } }) {
     });
     return await response.json();
   };
-  const developerData = await httpGetDeveloperById(params.slug);
+  // const developerData = await httpGetDeveloperById(params.slug);
+  const developerData = {
+    id: "4389f66b-326a-4400-b0a1-a5dcd6a9b882",
+    email: "feng.yang@appliedtechnology.se",
+    name: "feng yang",
+    standoutIntro: "experienced in various of client projects",
+    bootcamp: "javascript",
+    githubUrl: "https://github.com/Finns841594",
+    githubUserName: "Finns841594",
+    githubProfilePictureUrl: "https://github.com/Finns841594.png",
+    linkedinUrl: "https://www.linkedin.com/in/feng-yang-511361166",
+    codewarsUrl: "https://www.codewars.com/users/Finns841594",
+    radarGraph: [
+      {
+        subject: "frontend",
+        score: "NaN",
+        fullmark: 100,
+      },
+      {
+        subject: "backend",
+        score: "NaN",
+        fullmark: 100,
+      },
+      {
+        subject: "charismatic",
+        score: "NaN",
+        fullmark: 100,
+      },
+      {
+        subject: "teamwork",
+        score: "NaN",
+        fullmark: 100,
+      },
+      {
+        subject: "design",
+        score: "NaN",
+        fullmark: 100,
+      },
+      {
+        subject: "management",
+        score: "NaN",
+        fullmark: 100,
+      },
+    ],
+    scores: [],
+    selectedProjects: [
+      {
+        name: "moboga",
+        repoUrl: "https://github.com/Finns841594/moboga",
+        data: {
+          commits: 0,
+          issues: 0,
+          duration: 0,
+          performance: 0,
+          testCoverages: 0,
+        },
+      },
+      {
+        name: "jobMatches",
+        repoUrl: "https://github.com/lups-tech/jobMatches",
+        data: {
+          commits: 0,
+          issues: 0,
+          duration: 0,
+          performance: 0,
+          testCoverages: 0,
+        },
+      },
+    ],
+    backgroundInformation: {
+      nationalities: ["chinese"],
+      spokenLanguages: {
+        swedish: "intermediate",
+        chinese: "natives",
+        english: "fluent",
+      },
+      academic: {
+        id: "9a081b77-3d41-4ab3-9d31-5099e7c7ee42",
+        degree: "master",
+        major: "architecture",
+        startDate: "2018-08-12",
+        endDate: "2020-08-12",
+        school: "KTH Royal Institute of Technology",
+      },
+      skills: [
+        "javascript",
+        "typescript",
+        "react",
+        "next.js",
+        "node.js",
+        "express",
+        "mongodb",
+      ],
+    },
+    averages: [
+      {
+        scoreName: "communication",
+        average: 0,
+      },
+      {
+        scoreName: "planning",
+        average: 0,
+      },
+      {
+        scoreName: "coding",
+        average: 0,
+      },
+      {
+        scoreName: "total",
+        average: 0,
+      },
+    ],
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">

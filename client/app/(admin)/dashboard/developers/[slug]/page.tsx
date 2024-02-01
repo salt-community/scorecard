@@ -41,7 +41,112 @@ export default function DeveloperDetailPage({
   };
 
   const fetchbackend = async () => {
-    const developerData = await httpGetAdmninDeveloperById(params.slug);
+    // const developerData = await httpGetAdmninDeveloperById(params.slug);
+    const developerData = {
+      account: {
+        id: "4389f66b-326a-4400-b0a1-a5dcd6a9b882",
+        email: "feng.yang@appliedtechnology.se",
+        role: "pgp",
+      },
+      userDetail: {
+        id: "5d475cdf-399f-4ba6-8ea1-4eca63e21ad7",
+        name: "feng yang",
+        introduction: "experienced in various of client projects",
+        phoneNumber: "071234456",
+        bootcamp: "javascript",
+      },
+      academic: {
+        id: "9a081b77-3d41-4ab3-9d31-5099e7c7ee42",
+        degree: "master",
+        major: "architecture",
+        startDate: "2018-08-12",
+        endDate: "2020-08-12",
+        school: "KTH Royal Institute of Technology",
+      },
+      social: {
+        id: "f75b2e41-49b6-4f1c-93a1-ae145cda5b07",
+        linkedInUrl: "https://www.linkedin.com/in/feng-yang-511361166",
+        codewarsUrl: "https://www.codewars.com/users/Finns841594",
+      },
+      github: {
+        id: "1bda28d3-3863-49ba-8e26-59ff219263e8",
+        url: "https://github.com/Finns841594",
+        pictureUrl: "https://github.com/Finns841594.png",
+      },
+      projects: [
+        {
+          id: "50e8141f-f8dd-430c-a0b9-6b0f33a3054a",
+          url: "https://github.com/Finns841594/moboga",
+          commit: 0,
+          issue: 0,
+          duration: 0,
+          performance: 0,
+          testCoverage: 0,
+        },
+        {
+          id: "a909f9cd-f6d7-403c-81a0-330e0982705f",
+          url: "https://github.com/lups-tech/jobMatches",
+          commit: 0,
+          issue: 0,
+          duration: 0,
+          performance: 0,
+          testCoverage: 0,
+        },
+      ],
+      skills: [
+        {
+          id: "315d221d-921d-4e84-9169-ef9b79c963d8",
+          skill: "javascript",
+        },
+        {
+          id: "6a207665-7e00-4bae-9fce-69341b652074",
+          skill: "typescript",
+        },
+        {
+          id: "c329f36c-913c-4ff6-90ba-33fd71105adf",
+          skill: "react",
+        },
+        {
+          id: "0bdf99a6-a12a-4408-b5fd-83dfbb399a1a",
+          skill: "next.js",
+        },
+        {
+          id: "651ba34a-d5ea-4359-a962-17d20b711c7f",
+          skill: "node.js",
+        },
+        {
+          id: "f708d672-f0d6-4b49-a944-f552e06ae0ee",
+          skill: "express",
+        },
+        {
+          id: "199c20c1-d37f-49fa-b88a-eea3a2c7d90f",
+          skill: "mongodb",
+        },
+      ],
+      languages: [
+        {
+          id: "9d06f70b-638a-4b2e-ab74-febb4cab5d00",
+          language: "chinese",
+          fluency: "natives",
+        },
+        {
+          id: "25c65a4b-b16e-4b81-91b7-ced751310702",
+          language: "english",
+          fluency: "fluent",
+        },
+        {
+          id: "d377bd2e-0ccb-4321-a406-144a3c5ce100",
+          language: "swedish",
+          fluency: "intermediate",
+        },
+      ],
+      nationalities: [
+        {
+          id: "68e7c37e-d6d8-49c0-96ca-8a5c7ae136bb",
+          nationality: "chinese",
+        },
+      ],
+    };
     setDeveloper(developerData);
   };
 
