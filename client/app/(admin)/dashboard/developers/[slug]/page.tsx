@@ -2,6 +2,7 @@
 import {
   httpGetAdmninDeveloperById,
   httpGetDeveloperById,
+  httpUpdateDeveloperById,
 } from "@/app/api/request";
 import SelectNationalities from "@/app/components/admin/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
@@ -41,7 +42,6 @@ export default function DeveloperDetailPage({
       [name]: value,
     });
   };
-  const handleSubmit = () => {};
 
   useEffect(() => {
     fetchbackend();
@@ -54,9 +54,14 @@ export default function DeveloperDetailPage({
       </div>
     );
   }
-
+  const handleSubmit = async (event: any, input: any) => {
+    console.log(params.slug);
+    event.preventDefault();
+    const req = await httpUpdateDeveloperById(params.slug, input);
+    console.log(req);
+  };
   return (
-    <form action="">
+    <form onSubmit={(e) => handleSubmit(e, input)}>
       <Card className="flex flex-row gap-4">
         <div className={` flex-1 py-4 gap-3`}>
           <CardHeader className="pb-0">
