@@ -6,20 +6,23 @@ import ScoreCardHeader from "./ScoreCardHeader";
 import { DeveloperData } from "../../types";
 import { isExcellent } from "@/app/utilities";
 
-interface ScoreCardProps {
+type ScoreCardProps = {
   developerData: DeveloperData;
-}
+};
 
 const ScoreCard = ({ developerData }: ScoreCardProps) => {
-  const totalScoreAverage = developerData.averages.filter(
-    (a) => a.scoreName === "total"
-  )[0].average;
-
   return (
     <div>
       <Card
         className={`py-4 max-w-sm md:max-w-md 
-          ${isExcellent(totalScoreAverage) ? "border-8 border-purple-600" : ""}
+          ${
+            isExcellent(
+              developerData.averages.filter((a) => a.scoreName === "total")[0]
+                .average
+            )
+              ? "border-8 border-purple-600"
+              : ""
+          }
         `}
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

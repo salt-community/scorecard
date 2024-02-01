@@ -1,10 +1,20 @@
+"use client";
 import { httpGetAllDevelopers } from "@/app/api/request";
 import { AllDevelopers } from "@/app/components/admin/AllDevelopers";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default async function developer() {
-  const developersData = await httpGetAllDevelopers();
-  if (!developersData) {
+export default function developer() {
+  const [developers, setDevelopers] = useState<[]>();
+  const fetchData = async () => {
+    const developersData = await httpGetAllDevelopers();
+    setDevelopers(developersData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!developers) {
     return (
       <div>
         <h1>Loading ...</h1>
@@ -13,7 +23,7 @@ export default async function developer() {
   }
   return (
     <div>
-      <AllDevelopers developers={developersData} />
+      <AllDevelopers developers={developers} />
     </div>
   );
 }

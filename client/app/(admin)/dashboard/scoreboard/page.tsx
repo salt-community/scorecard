@@ -3,7 +3,7 @@ import { httpGetAllSaltieScoreboard } from "@/app/api/request";
 import ScoreboardList from "@/app/components/admin/ScoreboardList";
 import { useEffect, useState } from "react";
 
-export default async function ScoreboardPage() {
+export default function ScoreboardPage() {
   const [developers, setDevelopers] = useState<[]>();
   const fetchData = async () => {
     const developersData = await httpGetAllSaltieScoreboard();

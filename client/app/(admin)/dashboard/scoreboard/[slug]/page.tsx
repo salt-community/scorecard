@@ -20,6 +20,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     fetchData();
+    console.log(developer);
   }, []);
 
   if (!developer) {
