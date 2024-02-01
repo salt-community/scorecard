@@ -10,7 +10,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.util.Arrays;
 
 
@@ -27,6 +26,7 @@ public class SecurityConfig  {
                         .requestMatchers("api/").permitAll()
                         .requestMatchers("api/accounts").permitAll()
                         .requestMatchers("api/accounts/{accountId}").permitAll()
+                        .requestMatchers("api/developers").permitAll()
                         .anyRequest().permitAll()
                 )
                 .httpBasic(withDefaults());

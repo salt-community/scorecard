@@ -27,41 +27,117 @@ export default function DeveloperDetailPage({
 }) {
   const roles = ["core", "saltie", "pgp", "consultant"];
   const bootcamps = ["java", "javascript", "dotnet"];
-  const [developer, setDeveloper] = useState<developerDetail>();
-  const [input, setInput] = useState(developer!);
+  const [developer, setDeveloper] = useState<developerDetail>({
+    account: {
+      id: "",
+      email: "",
+      role: "",
+    },
+    userDetail: {
+      id: "",
+      name: "",
+      introduction: "",
+      phoneNumber: "",
+      bootcamp: "",
+    },
+    academic: {
+      id: "",
+      degree: "",
+      major: "",
+      startDate: "",
+      endDate: "",
+      school: "",
+    },
+    social: {
+      id: "",
+      linkedInUrl: "",
+      codewarsUrl: "",
+    },
+    github: {
+      id: "",
+      url: "",
+      pictureUrl: "",
+    },
+    projects: [],
+    skills: [],
+    languages: [],
+    nationalities: [],
+  });
 
   const fetchbackend = async () => {
     const developerData = await httpGetAdmninDeveloperById(params.slug);
     setDeveloper(developerData);
   };
 
-  const inputForm = (el: any) => {
-    const { name, value } = el.target;
-    setInput({
-      ...input,
-      [name]: value,
+  function handleUserDetailChange(e: any) {
+    const { name, value } = e.target;
+    setDeveloper({
+      ...developer,
+      userDetail: {
+        ...developer?.userDetail,
+        [name]: value,
+      },
     });
+  }
+
+  function handleAccountChange(e: any) {
+    const { name, value } = e.target;
+    setDeveloper({
+      ...developer,
+      account: {
+        ...developer?.account,
+        [name]: value,
+      },
+    });
+  }
+
+  function handleAcademicChange(e: any) {
+    const { name, value } = e.target;
+    setDeveloper({
+      ...developer,
+      academic: {
+        ...developer?.academic,
+        [name]: value,
+      },
+    });
+  }
+
+  function handleSocialChange(e: any) {
+    const { name, value } = e.target;
+    setDeveloper({
+      ...developer,
+      social: {
+        ...developer?.social,
+        [name]: value,
+      },
+    });
+  }
+  const updateData = (el: any) => {
+    const { name, value } = el.target;
+    const nameSplit = name.split(".")[1];
+    const level: string = name.split(".")[0];
+    console.log(el);
+    developer!.userDetail.name = value;
   };
 
   useEffect(() => {
     fetchbackend();
   }, []);
 
-  if (!developer) {
+  if (developer.account.id === "") {
     return (
       <div>
         <h1>Loading ...</h1>
       </div>
     );
   }
-  const handleSubmit = async (event: any, input: any) => {
-    console.log(params.slug);
+  const handleSubmit = async (event: any, input: developerDetail) => {
+    console.log(input);
     event.preventDefault();
     const req = await httpUpdateDeveloperById(params.slug, input);
-    console.log(req);
   };
   return (
-    <form onSubmit={(e) => handleSubmit(e, input)}>
+    <form onSubmit={(e) => handleSubmit(e, developer)}>
       <Card className="flex flex-row gap-4">
         <div className={` flex-1 py-4 gap-3`}>
           <CardHeader className="pb-0">
@@ -83,52 +159,52 @@ export default function DeveloperDetailPage({
                 placeholder="Enter name"
                 color="default"
                 labelPlacement="outside-left"
-                onChange={inputForm}
+                onChange={handleUserDetailChange}
                 className="w-2/3 py-0"
                 defaultValue={developer.userDetail.name}
               />
             </div>
             <div className="w-full flex flex-row items-center">
               <label className="w-1/3">Class :</label>
-              <Select
+              <select
                 name="bootcamp"
-                labelPlacement="outside-left"
-                placeholder={
+                //labelPlacement="outside-left"
+                /*                 placeholder={
                   developer.userDetail.bootcamp
                     ? developer.userDetail.bootcamp
                     : "Please choose bootcamp..."
-                }
-                onChange={inputForm}
+                } */
+                onChange={handleUserDetailChange}
                 className="w-2/3 py-0"
-                value={developer.userDetail.bootcamp}
+                defaultValue={developer.userDetail.bootcamp}
               >
                 {bootcamps.map((bootcamp, index) => (
-                  <SelectItem key={index} value={bootcamp}>
+                  <option key={index} value={bootcamp}>
                     {bootcamp}
-                  </SelectItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
             </div>
             <div className="w-full flex flex-row items-center">
               <label className="w-1/3">Role :</label>
-              <Select
+              <select
                 name="role"
-                labelPlacement="outside-left"
-                placeholder={
+                //labelPlacement="outside-left"
+                /*      placeholder={
                   developer.account.role
                     ? developer.account.role
                     : "Please choose bootcamp..."
-                }
-                onChange={inputForm}
+                } */
+                onChange={handleAccountChange}
                 className="w-2/3 py-0"
-                value={developer.account.role}
+                defaultValue={developer.account.role}
               >
                 {roles.map((roles, index) => (
-                  <SelectItem key={index} value={roles}>
+                  <option key={index} value={roles}>
                     {roles}
-                  </SelectItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
             </div>
             <div className="w-full flex flex-row items-center">
               <label className="w-1/3">Email :</label>
@@ -138,7 +214,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="Enter email"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAccountChange}
                 className="w-2/3 py-0"
                 defaultValue={developer.account.email}
               />
@@ -151,7 +227,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="Enter phoneNumber"
                 color="default"
-                onChange={inputForm}
+                onChange={handleUserDetailChange}
                 className="w-2/3 py-0"
                 defaultValue={developer.userDetail.phoneNumber}
               />
@@ -177,7 +253,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="Enter degree"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAcademicChange}
                 className="w-72"
                 defaultValue={developer.academic.degree}
               />
@@ -190,7 +266,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="Enter major"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAcademicChange}
                 className="w-72"
                 defaultValue={developer.academic.major}
               />
@@ -203,33 +279,33 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="Enter school"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAcademicChange}
                 className="w-72"
                 defaultValue={developer.academic.school}
               />
             </div>
             <div className="w-full flex flex-row items-center">
-              <label className="w-1/3">Start :</label>
+              <label className="w-1/3">Start date :</label>
               <Input
                 name="startDate"
                 type="date"
                 labelPlacement="outside-left"
                 placeholder="Enter date"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAcademicChange}
                 className="w-72"
                 defaultValue={developer.academic.startDate}
               />
             </div>
             <div className="w-full flex flex-row items-center">
-              <label className="w-1/3">End :</label>
+              <label className="w-1/3">End date :</label>
               <Input
                 name="endDate"
                 type="date"
                 labelPlacement="outside-left"
                 placeholder="Enter date"
                 color="default"
-                onChange={inputForm}
+                onChange={handleAcademicChange}
                 className="w-72"
                 defaultValue={developer.academic.endDate}
               />
@@ -253,7 +329,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="github username"
                 color="default"
-                onChange={inputForm}
+                onChange={handleSocialChange}
                 className="w-72"
                 defaultValue={developer.github.url.split("/").pop()}
               />
@@ -266,7 +342,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="codewars username"
                 color="default"
-                onChange={inputForm}
+                onChange={handleSocialChange}
                 className="w-72"
                 defaultValue={developer.social.codewarsUrl.split("/").pop()}
               />
@@ -279,7 +355,7 @@ export default function DeveloperDetailPage({
                 labelPlacement="outside-left"
                 placeholder="linkedIn username"
                 color="default"
-                onChange={inputForm}
+                onChange={handleSocialChange}
                 className="w-72"
                 defaultValue={developer.social.linkedInUrl.split("/").pop()}
               />

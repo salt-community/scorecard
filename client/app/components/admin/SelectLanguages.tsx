@@ -76,23 +76,23 @@ const SelectLanguages = ({ languagesSet }: Props) => {
             type="text"
             labelPlacement="outside-left"
             value={item.language}
-            className=""
+            className="w-40"
             onChange={(event) => handleChange(event, index)}
           />
-          <Select
-            labelPlacement="outside-left"
+          <select
+            //labelPlacement="outside-left"
             name="fluency"
             aria-label="enter fluency level"
-            placeholder={item.fluency ? item.fluency : "level"}
-            value={item.fluency}
+            //placeholder={item.fluency ? item.fluency : "level"}
+            defaultValue={item.fluency}
             onChange={(event) => handleChange(event, index)}
           >
             {fluency.map((roles: string) => (
-              <SelectItem key={roles} value={roles}>
+              <option key={roles} value={roles}>
                 {roles}
-              </SelectItem>
+              </option>
             ))}
-          </Select>
+          </select>
           {/* 
           {languages.length > 1 && (
             <TrashIcon

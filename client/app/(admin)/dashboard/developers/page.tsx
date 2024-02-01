@@ -3,7 +3,7 @@ import { httpGetAllDevelopers } from "@/app/api/request";
 import { AllDevelopers } from "@/app/components/admin/AllDevelopers";
 import React, { useEffect, useState } from "react";
 
-export default function developer() {
+export default function Developer() {
   const [developers, setDevelopers] = useState<[]>();
   const fetchData = async () => {
     const developersData = await httpGetAllDevelopers();
