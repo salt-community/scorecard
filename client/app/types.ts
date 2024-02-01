@@ -6,16 +6,14 @@ export type DeveloperData = {
   standoutIntro: string;
   bootcamp: string;
   githubUrl: string;
-  linkedinUrl: string;
-  codewarsUrl: string;
-  backgroundInformation: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;
+  linkedinUrl: string;
+  codewarsUrl: string;
+  radarGraph: RadarGraphicData[];
   scores: Score[];
   selectedProjects: Project[];
-  radarGraph: RadarGraphicData[];
-  commitsCount?: number;
-  issuesCount?: number;
+  backgroundInformation: BackgroundInformation;
   averages: Average[];
 };
 

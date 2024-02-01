@@ -1,22 +1,31 @@
+"use client";
 import Link from "next/link";
-import { Banner } from "../components/Banner";
 import { httpGetAllAccounts } from "../api/request";
 import { DeveloperCard } from "../components/DeveloperCard";
+import { useEffect, useState } from "react";
 
-type developerInList = {
+export type developerInList = {
   id: string;
   name: string;
   profilePicture: string;
   standoutIntro: string;
 };
 
-export default async function Home() {
-  const developersData = await httpGetAllAccounts();
+export default function Home() {
+  const [developers, setDevelopers] = useState<developerInList[]>();
+  const fetchData = async () => {
+    const developersData = await httpGetAllAccounts();
+    setDevelopers(developersData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-start justify-start py-12 px-24">
-      <Banner />
       <div className="w-full px-2">
-        {developersData.map((item: developerInList) => (
+        {developers?.map((item: developerInList) => (
           <Link href={`/developers/${item.id}`} key={item.id}>
             <DeveloperCard
               id={item.id}
