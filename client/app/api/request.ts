@@ -129,3 +129,10 @@ export const httpDeleteScoreById = async (id: string) => {
   });
   return response;
 };
+
+export const httpUpdateDeveloperById = async (id: string) => {
+  const response = fetch(`${BASIC_URI}/api/developers/${id}`, {
+    method: "PUT",
+  });
+  return response;
+};
