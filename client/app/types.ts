@@ -43,7 +43,7 @@ export type Project = { name: string; repoUrl: string; data: SimpleTableEntry };
 export type RadarGraphicData = {
   subject: string;
   score: number;
-  fullMark: number;
+  fullmark: number;
 };
 
 export type Score = {
