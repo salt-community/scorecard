@@ -7,6 +7,7 @@ export type DeveloperData = {
   bootcamp: string;
   githubUrl: string;
   linkedinUrl: string;
+  codewarsUrl: string;
   backgroundInformation: BackgroundInformation;
   githubUserName: string;
   githubProfilePictureUrl: string;

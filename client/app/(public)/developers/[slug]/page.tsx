@@ -1,6 +1,7 @@
 "use client";
 import { httpGetDeveloperById } from "@/app/api/request";
 import ScoreCard from "../../../components/scorecard/ScoreCard";
+import { DeveloperData } from "@/app/types";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const BASIC_URI = process.env.NEXT_PUBLIC_API_URL;
@@ -12,7 +13,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return await response.json();
   };
   // const developerData = await httpGetDeveloperById(params.slug);
-  const developerData = {
+  const developerData: DeveloperData = {
     id: "4389f66b-326a-4400-b0a1-a5dcd6a9b882",
     email: "feng.yang@appliedtechnology.se",
     name: "feng yang",
@@ -26,33 +27,33 @@ export default async function Page({ params }: { params: { slug: string } }) {
     radarGraph: [
       {
         subject: "frontend",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
       {
         subject: "backend",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
       {
         subject: "charismatic",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
       {
         subject: "teamwork",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
       {
         subject: "design",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
       {
         subject: "management",
-        score: "NaN",
-        fullmark: 100,
+        score: 0,
+        fullMark: 100,
       },
     ],
     scores: [],
