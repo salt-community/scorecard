@@ -12,6 +12,13 @@ export const httpGetAccountByEmail = async (email: string) => {
   return data;
 };
 
+export const httpGetAllCoreTeam = async () => {
+  const response = await fetch(`${BASIC_URI}/api/accounts/core-team`, {
+    cache: "no-cache",
+  });
+  return await response.json();
+};
+
 export const httpCreateAccount = async (account: any) => {
   const response = await fetch(`${BASIC_URI}/api/accounts`, {
     method: "POST",
@@ -19,6 +26,13 @@ export const httpCreateAccount = async (account: any) => {
     headers: {
       "content-type": "application/json; charset=utf-8",
     },
+  });
+  return response;
+};
+
+export const httpDeleteAccountById = async (id: string) => {
+  const response = await fetch(`${BASIC_URI}/api/accounts/${id}`, {
+    method: "DELETE",
   });
   return response;
 };
@@ -62,7 +76,7 @@ export const httpPostDeveloper = async (developer: any) => {
 };
 
 export const httpDeleteDeveloperById = async (id: string) => {
-  const response = await fetch(`${BASIC_URI}/${id}`, {
+  const response = await fetch(`${BASIC_URI}/api/developers/${id}`, {
     method: "DELETE",
   });
   return response;

@@ -2,6 +2,7 @@ package com.salt.server.Account.api;
 
 import com.salt.server.Account.api.dto.AccountDto;
 import com.salt.server.Account.service.AccountService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +36,16 @@ public class AccountController {
     @PostMapping
     public AccountDto.Response createAccount(@RequestBody AccountDto.Request request) {
         return accountService.createAccount(request);
+    }
+
+    @GetMapping("/core-team")
+    public List<AccountDto.CoreTeamResponse> getCoreTeam() {
+        return accountService.getAllCoreTeam();
+    }
+
+    @DeleteMapping("/{accountId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAccount (@PathVariable UUID accountId) {
+        accountService.deleteAccountById(accountId);
     }
 }

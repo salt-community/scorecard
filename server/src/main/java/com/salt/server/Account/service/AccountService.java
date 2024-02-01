@@ -31,8 +31,12 @@ public class AccountService {
         return accountRepository.findAll().stream().map(AccountMapper::toAccountResponse).toList();
     }
 
+    public List<AccountDto.CoreTeamResponse> getAllCoreTeam() {
+        return accountRepository.findAllByRole(Role.core).stream().map(account -> new AccountDto.CoreTeamResponse(account.getId(), account.getUserDetail().getName(), account.getEmail(), account.getRole().toString())).toList();
+    }
+
     public AccountDto.Response getAccountById(UUID id) {
-         Account account = accountRepository.findById(id)
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         return AccountMapper.toAccountResponse(account);
     }
@@ -58,5 +62,9 @@ public class AccountService {
         Account account = accountRepository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         return AccountMapper.toAccountResponse(account);
+    }
+
+    public void deleteAccountById(UUID id) {
+        accountRepository.deleteById(id);
     }
 }

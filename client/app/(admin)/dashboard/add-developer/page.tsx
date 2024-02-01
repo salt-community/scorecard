@@ -56,7 +56,7 @@ const Page = () => {
       };
       const response = await httpCreateAccount(body);
       if (response.status == 200) {
-        router.push("/dashboard/developers");
+        router.push("/dashboard/core-team");
       } else {
         throw new Error("something went wrong!!");
       }

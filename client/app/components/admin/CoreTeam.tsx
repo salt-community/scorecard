@@ -2,7 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import { Button, Card } from "@material-tailwind/react";
-import { httpDeleteDeveloperById } from "@/app/api/request";
+import {
+  httpDeleteAccountById,
+  httpDeleteDeveloperById,
+} from "@/app/api/request";
 import { useRouter } from "next/navigation";
 import { Account } from "@/app/types";
 
@@ -13,7 +16,7 @@ type AllCoresTeamProps = {
 export const CoreTeam = ({ coresTeam }: AllCoresTeamProps) => {
   const router = useRouter();
   const deleteHandler = async (id: string) => {
-    const response = await httpDeleteDeveloperById(id);
+    const response = await httpDeleteAccountById(id);
     if (response.status === 204) {
       router.push("/dashboard/developers");
     } else {

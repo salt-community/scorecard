@@ -1,5 +1,5 @@
 "use client";
-import { httpGetAllDevelopers } from "@/app/api/request";
+import { httpGetAllCoreTeam, httpGetAllDevelopers } from "@/app/api/request";
 import { AllDevelopers } from "@/app/components/admin/AllDevelopers";
 import { CoreTeam } from "@/app/components/admin/CoreTeam";
 import React, { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 export default function Core() {
   const [coresTeam, setCoresTeam] = useState<[]>();
   const fetchData = async () => {
-    const coresTeam = await httpGetAllDevelopers();
+    const coresTeam = await httpGetAllCoreTeam();
     setCoresTeam(coresTeam);
   };
 
@@ -22,5 +22,10 @@ export default function Core() {
       </div>
     );
   }
-  return <div>{/* <CoreTeam developers={coresTeam} /> */}</div>;
+  return (
+    <div>
+      {" "}
+      <CoreTeam coresTeam={coresTeam} />
+    </div>
+  );
 }

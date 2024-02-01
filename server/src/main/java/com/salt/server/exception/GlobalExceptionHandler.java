@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
-/*
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -28,4 +28,4 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(errorResponse);
     }
-}*/
+}
