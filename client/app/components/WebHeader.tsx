@@ -2,7 +2,7 @@ import { Link, Navbar, NavbarBrand } from "@nextui-org/react";
 
 const WebHeader = () => {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center ">
       <Navbar className="flex flex-row justify-center">
         <Link href={"/"} color="foreground">
           <NavbarBrand>

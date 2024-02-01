@@ -13,7 +13,7 @@ type developerInList = {
 export default async function Home() {
   const developersData = await httpGetAllAccounts();
   return (
-    <main className="flex min-h-screen flex-col items-center p-0 md:p-24">
+    <main className="flex min-h-screen flex-col items-start justify-start py-12 px-24">
       <Banner />
       <div className="w-full px-2">
         {developersData.map((item: developerInList) => (

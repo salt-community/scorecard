@@ -28,6 +28,17 @@ export default function DeveloperDetailPage({
   const bootcamps = ["java", "javascript", "dotnet"];
   const [developer, setDeveloper] = useState<developerDetail>();
   const [input, setInput] = useState(developer!);
+  const BASIC_URI = process.env.NEXT_PUBLIC_API_URL;
+
+  const httpGetAdmninDeveloperById = async (id: string) => {
+    const response = await fetch(
+      `${BASIC_URI}/api/developers/admin/developer/${id}`,
+      {
+        cache: "no-cache",
+      }
+    );
+    return await response.json();
+  };
 
   const fetchbackend = async () => {
     const developerData = await httpGetAdmninDeveloperById(params.slug);
