@@ -13,8 +13,20 @@ import {
   PowerIcon,
   AcademicCapIcon,
 } from "@heroicons/react/24/solid";
+import { useCookies } from "next-client-cookies";
+import { useRouter } from "next/navigation";
 
 export function Sidebar() {
+  const cookies = useCookies();
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    console.log("worksd");
+
+    cookies.remove("salt_role");
+    router.push("/login");
+  };
+
   return (
     <Card
       className="h-screen w-screen max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5 border-r-2 border-l-2"
@@ -61,12 +73,14 @@ export function Sidebar() {
           </ListItem>
         </a>
         <hr className="my-2 border-blue-gray-50" />
-        <ListItem placeholder={undefined}>
-          <ListItemPrefix placeholder={undefined}>
-            <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          <a href=""> Log Out</a>
-        </ListItem>
+        <a onClick={() => handleLogOut}>
+          <ListItem placeholder={undefined}>
+            <ListItemPrefix placeholder={undefined}>
+              <PowerIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Log Out
+          </ListItem>
+        </a>
       </List>
     </Card>
   );

@@ -16,12 +16,14 @@ export type developerInList = {
 
 export default function Home() {
   const [developers, setDevelopers] = useState<developerInList[]>();
+  const [loading, setLoading] = useState(true);
   const cookies = useCookies();
   const router = useRouter();
 
   const fetchData = async () => {
     const developersData = await httpGetAllAccounts();
     setDevelopers(developersData);
+    setLoading(false);
   };
 
   const checkRole = () => {
@@ -36,7 +38,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (!developers && cookies.get("salt_role") != "core") {
+  if (loading == false) {
     return <h1>Loading ...</h1>;
   } else {
     return (

@@ -9,7 +9,7 @@ const WebHeader = () => {
 
   const handleLogOut = () => {
     cookies.remove("salt_role");
-    router.push("/");
+    router.push("/login");
   };
   return (
     <div className="w-full flex justify-center ">
@@ -19,14 +19,24 @@ const WebHeader = () => {
             <h4 className="font-bold text-2xl text-inherit">{"</salt>"}</h4>
           </NavbarBrand>
         </Link>
-        <a href="/login">
-          <button
-            className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-            onClick={() => handleLogOut}
-          >
-            Logout
-          </button>
-        </a>
+        <div className="flex flex-row gap-4">
+          <a href="/dashboard">
+            <button
+              className=" bg-slate-400 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleLogOut}
+            >
+              Dashboard
+            </button>
+          </a>
+          <a href="/login">
+            <button
+              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleLogOut}
+            >
+              Log Out
+            </button>
+          </a>
+        </div>
       </Navbar>
     </div>
   );
