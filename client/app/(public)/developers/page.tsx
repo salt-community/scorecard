@@ -4,6 +4,8 @@ import { DeveloperCard } from "@/app/components/DeveloperCard";
 import WebHeader from "@/app/components/WebHeader";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useCookies } from "next-client-cookies";
+import { useRouter } from "next/navigation";
 
 export type developerInList = {
   id: string;
@@ -14,16 +16,27 @@ export type developerInList = {
 
 export default function Home() {
   const [developers, setDevelopers] = useState<developerInList[]>();
+  const cookies = useCookies();
+  const router = useRouter();
+
   const fetchData = async () => {
     const developersData = await httpGetAllAccounts();
     setDevelopers(developersData);
   };
 
+  const checkRole = () => {
+    const role = cookies.get("salt_role");
+    if (role != "core") {
+      router.push("/");
+    }
+  };
+
   useEffect(() => {
+    checkRole();
     fetchData();
   }, []);
 
-  if (!developers) {
+  if (!developers && cookies.get("salt_role") != "core") {
     return <h1>Loading ...</h1>;
   } else {
     return (
