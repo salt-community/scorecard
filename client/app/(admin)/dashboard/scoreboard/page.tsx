@@ -29,7 +29,7 @@ export default function ScoreboardPage() {
     fetchData();
   }, []);
 
-  if (loading == false) {
+  if (loading == true) {
     return (
       <div>
         <h1>Loading ...</h1>
