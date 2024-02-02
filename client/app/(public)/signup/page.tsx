@@ -76,7 +76,7 @@ const SignupPage = () => {
           className=" text-md w-80 text-center pb-4"
           placeholder={undefined}
         >
-          @appliedtechnology.se email.
+          SALT email.
         </Typography>
         <form
           onSubmit={(event) => handleSubmit(event, input)}
