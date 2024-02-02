@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/developers")
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 public class DeveloperController {
 
     private final DeveloperService developerService;
@@ -55,7 +55,6 @@ public class DeveloperController {
     }
 
     @PutMapping("/{developerId}")
-    @CrossOrigin
     public DeveloperDto.Response updateDeveloper(@PathVariable UUID developerId, @RequestBody DeveloperDto.AdminDeveloper request) {
         return developerService.updateDeveloper(developerId ,request);
     }
