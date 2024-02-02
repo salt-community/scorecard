@@ -7,9 +7,10 @@ import { skill } from "@/app/types";
 
 type Props = {
   skillsSet: skill[];
+  onSkillsChange: Function;
 };
 
-const SelectSkills = ({ skillsSet }: Props) => {
+const SelectSkills = ({ skillsSet, onSkillsChange }: Props) => {
   const [skills, setskills] = useState<skill[]>([]);
 
   const populateSkill = () => {
@@ -31,12 +32,14 @@ const SelectSkills = ({ skillsSet }: Props) => {
     let onChangeValue: any = [...skills];
     onChangeValue[index][name] = value;
     setskills(onChangeValue);
+    onSkillsChange(skills);
   };
 
   const handleDeleteInput = (index: any) => {
     const newArray = [...skills];
     newArray.splice(index, 1);
     setskills(newArray);
+    onSkillsChange(newArray);
   };
 
   useEffect(() => {

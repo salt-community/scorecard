@@ -8,7 +8,7 @@ import SelectNationalities from "@/app/components/admin/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
 import SelectProjects from "@/app/components/admin/SelectProjects";
 import SelectSkills from "@/app/components/admin/SelectSkills";
-import { developerDetail, language, nationality } from "@/app/types";
+import { developerDetail, language, nationality, skill } from "@/app/types";
 import {
   Avatar,
   Card,
@@ -105,7 +105,6 @@ export default function DeveloperDetailPage({
   function handleSocialChange(e: any) {
     const { name, value } = e.target;
     if (name === "") console.log(name + value);
-    console.log(name);
     setDeveloper({
       ...developer,
       social: {
@@ -118,7 +117,6 @@ export default function DeveloperDetailPage({
   function handleGithubChange(e: any) {
     const { name, value } = e.target;
     if (name === "") console.log(name + value);
-    console.log(name + ": " + value);
     setDeveloper({
       ...developer,
       github: {
@@ -136,12 +134,20 @@ export default function DeveloperDetailPage({
   }
 
   function handleLanguagesChange(updatedLanguages: language[]) {
-    console.log(updatedLanguages);
     setDeveloper({
       ...developer,
       languages: updatedLanguages,
     });
   }
+
+  function handleSkillsChange(updatedSkills: skill[]) {
+    console.log(updatedSkills);
+    setDeveloper({
+      ...developer,
+      skills: updatedSkills,
+    });
+  }
+
   const updateData = (el: any) => {
     const { name, value } = el.target;
     const nameSplit = name.split(".")[1];
@@ -349,7 +355,10 @@ export default function DeveloperDetailPage({
           </CardHeader>
 
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <SelectSkills skillsSet={developer.skills} />
+            <SelectSkills
+              skillsSet={developer.skills}
+              onSkillsChange={handleSkillsChange}
+            />
           </CardHeader>
         </div>
         <div className={` flex-1 py-4`}>
