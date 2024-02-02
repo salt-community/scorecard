@@ -1,17 +1,13 @@
 "use client";
 import { Link, Navbar, NavbarBrand } from "@nextui-org/react";
-import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const WebHeader = () => {
-  const cookies = useCookies();
   const router = useRouter();
 
   const handleLogOut = () => {
-    cookies.remove("salt_role", {
-      path: "/",
-      domain: ".https://salt-scorecard.vercel.app",
-    });
+    Cookies.remove("salt_role", { path: "/" });
     router.push("/login");
   };
   return (
@@ -31,14 +27,12 @@ const WebHeader = () => {
               Dashboard
             </button>
           </a>
-          <a href="/login">
-            <button
-              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
-              onClick={() => handleLogOut}
-            >
-              Log Out
-            </button>
-          </a>
+          <button
+            className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleLogOut()}
+          >
+            Log Out
+          </button>
         </div>
       </Navbar>
     </div>

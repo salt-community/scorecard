@@ -13,17 +13,16 @@ import {
   PowerIcon,
   AcademicCapIcon,
 } from "@heroicons/react/24/solid";
-import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export function Sidebar() {
-  const cookies = useCookies();
   const router = useRouter();
 
   const handleLogOut = () => {
     console.log("worksd");
 
-    cookies.remove("salt_role");
+    Cookies.remove("salt_role", { path: "/" });
     router.push("/login");
   };
 

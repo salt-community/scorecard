@@ -4,13 +4,12 @@ import ScoreCard from "../../../components/scorecard/ScoreCard";
 import { DeveloperData } from "@/app/types";
 import { useEffect, useState } from "react";
 import WebHeader from "@/app/components/WebHeader";
-import { useCookies } from "next-client-cookies";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [developer, setDeveloper] = useState<DeveloperData>();
   const [loading, setLoading] = useState(true);
-  const cookies = useCookies();
   const router = useRouter();
 
   const fetchData = async () => {
@@ -20,7 +19,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   };
 
   const checkRole = () => {
-    const role = cookies.get("salt_role");
+    const role = Cookies.get("salt_role");
     if (role != "core") {
       router.push("/login");
     }
@@ -31,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     fetchData();
   }, []);
 
-  if (loading == true || cookies.get("salt_role") != "core") {
+  if (loading == true) {
     return <h1>Loading ...</h1>;
   } else {
     return (

@@ -4,6 +4,8 @@ import { Button, Typography } from "@material-tailwind/react";
 import { Card, Input, Link } from "@nextui-org/react";
 import { httpCreateAccount } from "@/app/api/request";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { Account } from "@/app/types";
 
 const SignupPage = () => {
   const [input, setInput] = useState({
@@ -43,7 +45,9 @@ const SignupPage = () => {
     }
 
     const response = await httpCreateAccount(input);
+    const data: Account = await response.json();
     if (response.status == 200) {
+      Cookies.set("salt_role", data.role, { expires: 7 });
       router.push("/dashboard");
     } else if (response.status == 500) {
     } else {

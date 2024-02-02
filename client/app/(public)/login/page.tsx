@@ -5,7 +5,7 @@ import { Card, Input, Link } from "@nextui-org/react";
 import { httpGetAccountByEmail } from "@/app/api/request";
 import { Account } from "@/app/types";
 import { useRouter } from "next/navigation";
-import { useCookies } from "next-client-cookies";
+import Cookies from "js-cookie";
 
 const Page = () => {
   const [isNotFound, setIsNotFound] = useState<boolean | undefined>(false);
@@ -14,7 +14,6 @@ const Page = () => {
     email: "",
   });
   const router = useRouter();
-  const cookies = useCookies();
 
   const handleOnChange = (event: any) => {
     const { name, value } = event.target;
@@ -26,15 +25,15 @@ const Page = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const respose = await httpGetAccountByEmail(input.email);
-    const data: Account = await respose.json();
-    if (respose.status == 500 || data.role !== "core") {
+    const response = await httpGetAccountByEmail(input.email);
+    const data: Account = await response.json();
+    if (response.status == 500 || data.role !== "core") {
       setIsNotFound(true);
       setIsNotFoundMessage(
         "No core team account found with email: " + input.email
       );
     } else {
-      cookies.set("salt_role", data.role);
+      Cookies.set("salt_role", data.role, { expires: 7 });
       router.push("/developers");
     }
   };
