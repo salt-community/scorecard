@@ -266,7 +266,7 @@ public class DeveloperService {
         developer.setEmail(request.account().getEmail());
         developer.setRole(request.account().getRole().name());
         Account account = accountRepository.save(developer);
-
+        System.out.println();
         Map<String, Fluency> spokenLanguagesMap = request.languages().stream()
                 .collect(Collectors.toMap(
                         Language::getLanguage,

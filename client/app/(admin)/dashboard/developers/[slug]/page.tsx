@@ -408,7 +408,7 @@ export default function DeveloperDetailPage({
             <div className="w-full flex flex-row items-center">
               <label className="w-1/3">Linked In :</label>
               <Input
-                name="LinkedinUsername"
+                name="linkedInUrl"
                 type="text"
                 labelPlacement="outside-left"
                 placeholder="linkedIn username"
