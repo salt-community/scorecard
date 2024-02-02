@@ -10,7 +10,7 @@ const WebHeader = () => {
   const handleLogOut = () => {
     cookies.remove("salt_role", {
       path: "/",
-      domain: ".https://salt-scorecard.vercel.app/",
+      domain: ".https://salt-scorecard.vercel.app",
     });
     router.push("/login");
   };
