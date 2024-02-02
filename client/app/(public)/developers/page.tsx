@@ -27,7 +27,7 @@ export default function Home() {
   const checkRole = () => {
     const role = cookies.get("salt_role");
     if (role != "core") {
-      router.push("/");
+      router.push("/login");
     }
   };
 
