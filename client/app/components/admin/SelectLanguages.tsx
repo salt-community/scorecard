@@ -7,9 +7,10 @@ import React, { useEffect, useState } from "react";
 
 type Props = {
   languagesSet: language[];
+  onLanguageChange: Function;
 };
 
-const SelectLanguages = ({ languagesSet }: Props) => {
+const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
   const [languages, setLanguages] = useState<language[]>([]);
   const fluency = ["beginer", "intermediate", "fluent", "natives"];
 
@@ -32,6 +33,7 @@ const SelectLanguages = ({ languagesSet }: Props) => {
     let onChangeValue: any = [...languages];
     onChangeValue[index][name] = value;
     setLanguages(onChangeValue);
+    onLanguageChange(languages);
   };
 
   const handleDeleteInput = (index: any) => {

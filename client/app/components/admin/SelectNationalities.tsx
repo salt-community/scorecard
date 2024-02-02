@@ -7,9 +7,13 @@ import { nationality } from "../../types";
 
 type Props = {
   nationalitiesSet: nationality[];
+  onNationalityChange: Function;
 };
 
-const SelectNationalities = ({ nationalitiesSet }: Props) => {
+const SelectNationalities = ({
+  nationalitiesSet,
+  onNationalityChange,
+}: Props) => {
   const [nationalities, setNationalities] = useState<nationality[]>([]);
 
   const populateNationalities = () => {
@@ -31,12 +35,14 @@ const SelectNationalities = ({ nationalitiesSet }: Props) => {
     let onChangeValue: any = [...nationalities];
     onChangeValue[index][name] = value;
     setNationalities(onChangeValue);
+    onNationalityChange(nationalities);
   };
 
   const handleDeleteInput = (index: any) => {
     const newArray = [...nationalities];
     newArray.splice(index, 1);
     setNationalities(newArray);
+    onNationalityChange(newArray);
   };
 
   useEffect(() => {

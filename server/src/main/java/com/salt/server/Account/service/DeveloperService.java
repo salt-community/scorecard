@@ -220,6 +220,7 @@ public class DeveloperService {
     }
 
     private void createNationality(DeveloperDto.Request request, UserDetail userDetail) {
+        System.out.println(request.backgroundInformation().nationalities());
         for (var nationality : request.backgroundInformation().nationalities()) {
             Nationality newNationality = Nationality.builder()
                     .userDetail(userDetail)
@@ -232,6 +233,7 @@ public class DeveloperService {
     }
 
     private void createLanguage(DeveloperDto.Request request, UserDetail userDetail) {
+        System.out.println(request.backgroundInformation().spokenLanguages().entrySet());
         for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
             Language newLanguage = Language.builder()
                     .userDetail(userDetail)

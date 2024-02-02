@@ -8,7 +8,7 @@ import SelectNationalities from "@/app/components/admin/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
 import SelectProjects from "@/app/components/admin/SelectProjects";
 import SelectSkills from "@/app/components/admin/SelectSkills";
-import { developerDetail } from "@/app/types";
+import { developerDetail, language, nationality } from "@/app/types";
 import {
   Avatar,
   Card,
@@ -128,6 +128,21 @@ export default function DeveloperDetailPage({
     });
   }
 
+  function handleNationalityChange(updatedNationalities: nationality[]) {
+    console.log(updatedNationalities);
+    setDeveloper({
+      ...developer,
+      nationalities: updatedNationalities,
+    });
+  }
+
+  function handleLanguagesChange(updatedLanguages: language[]) {
+    console.log(updatedLanguages);
+    setDeveloper({
+      ...developer,
+      languages: updatedLanguages,
+    });
+  }
   const updateData = (el: any) => {
     const { name, value } = el.target;
     const nameSplit = name.split(".")[1];
@@ -250,10 +265,16 @@ export default function DeveloperDetailPage({
             </div>
           </CardHeader>
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <SelectNationalities nationalitiesSet={developer.nationalities} />
+            <SelectNationalities
+              nationalitiesSet={developer.nationalities}
+              onNationalityChange={handleNationalityChange}
+            />
           </CardHeader>
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <SelectLanguages languagesSet={developer.languages} />
+            <SelectLanguages
+              languagesSet={developer.languages}
+              onLanguageChange={handleLanguagesChange}
+            />
           </CardHeader>
         </div>
         <div className={` flex-1 py-4`}>
