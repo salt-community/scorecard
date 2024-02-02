@@ -7,9 +7,10 @@ import { project } from "@/app/types";
 
 type Props = {
   projectsSet: project[];
+  onProjectsChange: Function;
 };
 
-const SelectProjects = ({ projectsSet }: Props) => {
+const SelectProjects = ({ projectsSet, onProjectsChange }: Props) => {
   const [projects, setProjects] = useState<project[]>([]);
 
   const populateProject = () => {
@@ -39,15 +40,17 @@ const SelectProjects = ({ projectsSet }: Props) => {
 
   const handleChange = (event: any, index: any) => {
     let { name, value } = event.target;
-    let onChangeValue:any = [...projects];
+    let onChangeValue: any = [...projects];
     onChangeValue[index][name] = value;
     setProjects(onChangeValue);
+    onProjectsChange(projects);
   };
 
   const handleDeleteInput = (index: any) => {
     const newArray = [...projects];
     newArray.splice(index, 1);
     setProjects(newArray);
+    onProjectsChange(newArray);
   };
 
   useEffect(() => {
@@ -68,7 +71,7 @@ const SelectProjects = ({ projectsSet }: Props) => {
       </div>
 
       {projects.map((item, index) => (
-        <div className="input_container" key={index}>
+        <div className="" key={index}>
           <Input
             endContent={
               projects.length > 1 && (
@@ -79,7 +82,7 @@ const SelectProjects = ({ projectsSet }: Props) => {
               )
             }
             aria-label="enter project"
-            name="project"
+            name="url"
             type="text"
             value={item.url}
             className=""

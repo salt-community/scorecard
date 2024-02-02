@@ -8,7 +8,13 @@ import SelectNationalities from "@/app/components/admin/SelectNationalities";
 import SelectLanguages from "@/app/components/admin/SelectLanguages";
 import SelectProjects from "@/app/components/admin/SelectProjects";
 import SelectSkills from "@/app/components/admin/SelectSkills";
-import { developerDetail, language, nationality, skill } from "@/app/types";
+import {
+  developerDetail,
+  language,
+  nationality,
+  project,
+  skill,
+} from "@/app/types";
 import {
   Avatar,
   Card,
@@ -141,10 +147,17 @@ export default function DeveloperDetailPage({
   }
 
   function handleSkillsChange(updatedSkills: skill[]) {
-    console.log(updatedSkills);
     setDeveloper({
       ...developer,
       skills: updatedSkills,
+    });
+  }
+
+  function handleProjectsChange(updatedProjects: project[]) {
+    console.log(updatedProjects);
+    setDeveloper({
+      ...developer,
+      projects: updatedProjects,
     });
   }
 
@@ -407,7 +420,10 @@ export default function DeveloperDetailPage({
             </div>
           </CardHeader>
           <CardHeader className=" px-4 flex flex-col gap-2">
-            <SelectProjects projectsSet={developer.projects} />
+            <SelectProjects
+              projectsSet={developer.projects}
+              onProjectsChange={handleProjectsChange}
+            />
           </CardHeader>
           <Button
             className="bg-blue-400 absolute bottom-5 right-5  hover:bg-accent text-white font-bold py-2 px-4 rounded w-24"
