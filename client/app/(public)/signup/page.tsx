@@ -48,7 +48,7 @@ const SignupPage = () => {
     const data: Account = await response.json();
     if (response.status == 200) {
       Cookies.set("salt_role", data.role, { expires: 7 });
-      router.push("/dashboard");
+      router.push("/developers");
     } else if (response.status == 500) {
     } else {
       new Error("Something was wrong!");
