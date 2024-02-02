@@ -12,7 +12,7 @@ type Props = {
 
 const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
   const [languages, setLanguages] = useState<language[]>([]);
-  const fluency = ["beginer", "intermediate", "fluent", "natives"];
+  const fluency = ["beginner", "intermediate", "fluent", "natives"];
 
   const populateLanguages = () => {
     for (let i = 0; i < languagesSet.length; i++) {
@@ -87,7 +87,7 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
             name="fluency"
             aria-label="enter fluency level"
             //placeholder={item.fluency ? item.fluency : "level"}
-            defaultValue={item.fluency}
+            value={item.fluency}
             onChange={(event) => handleChange(event, index)}
           >
             {fluency.map((roles: string) => (

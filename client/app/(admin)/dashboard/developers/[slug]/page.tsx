@@ -140,6 +140,7 @@ export default function DeveloperDetailPage({
   }
 
   function handleLanguagesChange(updatedLanguages: language[]) {
+    console.log(updatedLanguages);
     setDeveloper({
       ...developer,
       languages: updatedLanguages,
