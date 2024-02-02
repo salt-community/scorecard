@@ -21,7 +21,7 @@ export function Sidebar() {
       placeholder={undefined}
     >
       <div className="mb-4 px-4 font-bold">
-        <a href="/">
+        <a href="/developers">
           <Typography variant="h2" color="blue-gray" placeholder={undefined}>
             {"</salt>"}
           </Typography>
