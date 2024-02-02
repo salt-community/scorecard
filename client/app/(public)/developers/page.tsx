@@ -38,7 +38,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (loading == false) {
+  if (loading == true) {
     return <h1>Loading ...</h1>;
   } else {
     return (

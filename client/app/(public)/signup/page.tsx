@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
-import { Card, Input, Link, Select, SelectItem } from "@nextui-org/react";
-import { httpCreateAccount, httpGetAccountByEmail } from "@/app/api/request";
-import { Account } from "@/app/types";
+import { Card, Input, Link } from "@nextui-org/react";
+import { httpCreateAccount } from "@/app/api/request";
 import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
