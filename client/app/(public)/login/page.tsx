@@ -12,7 +12,6 @@ const Page = () => {
   const [isNotFoundMessage, setIsNotFoundMessage] = useState<String>();
   const [input, setInput] = useState({
     email: "",
-    role: "core",
   });
   const router = useRouter();
   const cookies = useCookies();
@@ -35,7 +34,7 @@ const Page = () => {
         "No core team account found with email: " + input.email
       );
     } else {
-      cookies.set("salt_role", data.role, { expires: 7 });
+      cookies.set("salt_role", data.role);
       router.push("/developers");
     }
   };

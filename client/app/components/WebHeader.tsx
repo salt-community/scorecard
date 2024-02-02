@@ -8,7 +8,10 @@ const WebHeader = () => {
   const router = useRouter();
 
   const handleLogOut = () => {
-    cookies.remove("salt_role");
+    cookies.remove("salt_role", {
+      path: "/",
+      domain: ".https://salt-scorecard.vercel.app/",
+    });
     router.push("/login");
   };
   return (
