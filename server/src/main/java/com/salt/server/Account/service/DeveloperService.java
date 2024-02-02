@@ -232,7 +232,6 @@ public class DeveloperService {
     }
 
     private void createLanguage(DeveloperDto.Request request, UserDetail userDetail) {
-        System.out.println(request.backgroundInformation().spokenLanguages().entrySet());
         for (var language : request.backgroundInformation().spokenLanguages().entrySet()) {
             Language newLanguage = Language.builder()
                     .userDetail(userDetail)
@@ -263,10 +262,6 @@ public class DeveloperService {
 
     @Transactional
     public DeveloperDto.Response updateDeveloper(UUID developerId, DeveloperDto.AdminDeveloper request) {
-
-
-        System.out.println("Github:" + cutUrl(request.github().getUrl()));
-
         Account developer = getDeveloperById(developerId);
         developer.setEmail(request.account().getEmail());
         developer.setRole(request.account().getRole().name());
@@ -277,7 +272,6 @@ public class DeveloperService {
                         Language::getLanguage,
                         Language::getFluency)
                 );
-        System.out.println("spokenLanguagesMap:" + spokenLanguagesMap);
         UserDetail userDetail = userDetailRepository.findByAccount(account)
                 .orElseThrow(() -> new NoSuchElementException("Developer not found"));
         userDetail.setAccount(null);
@@ -316,8 +310,7 @@ public class DeveloperService {
     }
 
     private String cutUrl(String url) {
-        String fixedUrl = url.substring(url.lastIndexOf('/') + 1).trim();
-        return fixedUrl;
+        return url.substring(url.lastIndexOf('/') + 1).trim();
     }
 
 
