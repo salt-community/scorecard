@@ -266,36 +266,12 @@ public class DeveloperService {
         developer.setEmail(request.account().getEmail());
         developer.setRole(request.account().getRole().name());
         Account account = accountRepository.save(developer);
-        System.out.println();
-        Map<String, Fluency> spokenLanguagesMap = request.languages().stream()
-                .collect(Collectors.toMap(
-                        Language::getLanguage,
-                        Language::getFluency)
-                );
         UserDetail userDetail = userDetailRepository.findByAccount(account)
                 .orElseThrow(() -> new NoSuchElementException("Developer not found"));
         userDetail.setAccount(null);
         account.setUserDetail(null);
         userDetailRepository.delete(userDetail);
-        DeveloperDto.Request req = new DeveloperDto.Request(
-                request.account().getEmail(),
-                request.userDetail().getName(),
-                request.account().getRole().name(),
-                request.userDetail().getIntroduction(),
-                request.userDetail().getPhoneNumber(),
-                request.userDetail().getBootcamp().toString(),
-                cutUrl(request.github().getUrl()),
-                cutUrl(request.social().getLinkedInUrl()),
-                cutUrl(request.social().getCodewarsUrl()),
-                request.projects().stream().map(Project::getUrl).toList(),
-                new DeveloperDto.BackgroundInformation(
-                        request.nationalities().stream().map(Nationality::getNationality).toList(),
-                        spokenLanguagesMap,
-                        request.academic(),
-                        request.skills().stream().map(Skill::getSkill).toList()
-                )
-
-        );
+        DeveloperDto.Request req = createDeveloperDtoRequest(request);
         UserDetail newUserDetails = createUserDetail(req, account);
         account.setUserDetail(newUserDetails);
         createAcademic(req, newUserDetails);
@@ -309,6 +285,34 @@ public class DeveloperService {
         return DeveloperMapper.toDeveloperResponse(account, radarGraphs);
     }
 
+    private DeveloperDto.Request createDeveloperDtoRequest(DeveloperDto.AdminDeveloper request){
+        return new DeveloperDto.Request(
+                request.account().getEmail(),
+                request.userDetail().getName(),
+                request.account().getRole().name(),
+                request.userDetail().getIntroduction(),
+                request.userDetail().getPhoneNumber(),
+                request.userDetail().getBootcamp().toString(),
+                cutUrl(request.github().getUrl()),
+                cutUrl(request.social().getLinkedInUrl()),
+                cutUrl(request.social().getCodewarsUrl()),
+                request.projects().stream().map(Project::getUrl).toList(),
+                new DeveloperDto.BackgroundInformation(
+                        request.nationalities().stream().map(Nationality::getNationality).toList(),
+                        languagesToMap(request.languages()),
+                        request.academic(),
+                        request.skills().stream().map(Skill::getSkill).toList()
+                )
+        );
+    }
+
+    private Map<String, Fluency> languagesToMap(List<Language> languages) {
+        return languages.stream()
+                .collect(Collectors.toMap(
+                        Language::getLanguage,
+                        Language::getFluency)
+                );
+    }
     private String cutUrl(String url) {
         return url.substring(url.lastIndexOf('/') + 1).trim();
     }
