@@ -2,7 +2,7 @@
 import { language } from "@/app/types";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
-import { Input, Select, SelectItem } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -83,10 +83,8 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
             onChange={(event) => handleChange(event, index)}
           />
           <select
-            //labelPlacement="outside-left"
             name="fluency"
             aria-label="enter fluency level"
-            //placeholder={item.fluency ? item.fluency : "level"}
             value={item.fluency}
             onChange={(event) => handleChange(event, index)}
           >
@@ -96,13 +94,6 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
               </option>
             ))}
           </select>
-          {/* 
-          {languages.length > 1 && (
-            <TrashIcon
-              onClick={() => handleDeleteInput(index)}
-              className="w-8 h-8 text-default-400 flex-shrink-0 cursor-pointer hover:text-red-500"
-            />
-          )} */}
         </div>
       ))}
     </div>

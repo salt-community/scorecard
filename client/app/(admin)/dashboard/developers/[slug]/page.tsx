@@ -1,7 +1,6 @@
 "use client";
 import {
   httpGetAdmninDeveloperById,
-  httpGetDeveloperById,
   httpUpdateDeveloperById,
 } from "@/app/api/request";
 import SelectNationalities from "@/app/components/admin/SelectNationalities";
@@ -15,17 +14,8 @@ import {
   project,
   skill,
 } from "@/app/types";
-import {
-  Avatar,
-  Card,
-  CardHeader,
-  Input,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Avatar, Card, CardHeader, Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { Button } from "@material-tailwind/react";
-import { useRouter } from "next/navigation";
 
 export default function DeveloperDetailPage({
   params,
@@ -215,12 +205,6 @@ export default function DeveloperDetailPage({
                 <label className="w-1/3">Class :</label>
                 <select
                   name="bootcamp"
-                  //labelPlacement="outside-left"
-                  /*                 placeholder={
-                  developer.userDetail.bootcamp
-                    ? developer.userDetail.bootcamp
-                    : "Please choose bootcamp..."
-                } */
                   onChange={handleUserDetailChange}
                   className="w-2/3 py-0"
                   defaultValue={developer.userDetail.bootcamp}
@@ -236,12 +220,6 @@ export default function DeveloperDetailPage({
                 <label className="w-1/3">Role :</label>
                 <select
                   name="role"
-                  //labelPlacement="outside-left"
-                  /*      placeholder={
-                  developer.account.role
-                    ? developer.account.role
-                    : "Please choose bootcamp..."
-                } */
                   onChange={handleAccountChange}
                   className="w-2/3 py-0"
                   defaultValue={developer.account.role}

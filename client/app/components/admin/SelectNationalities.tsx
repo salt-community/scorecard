@@ -1,5 +1,5 @@
 "use client";
-import { CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
