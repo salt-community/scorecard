@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/developers")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://scorecard-gold.vercel.app", "https://salt-scorecard.vercel.app"})
 public class DeveloperController {
 
     private final DeveloperService developerService;
