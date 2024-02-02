@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 import { Input, Select, SelectItem, divider } from "@nextui-org/react";
 import { httpCreateAccount, httpPostDeveloper } from "@/app/api/request";
 import { useRouter } from "next/navigation";
-import { useCookies } from "next-client-cookies";
+import Cookies from "js-cookie";
 
 const Page = () => {
   const [input, setInput] = useState({
@@ -32,7 +32,6 @@ const Page = () => {
     },
   });
   const router = useRouter();
-  const cookies = useCookies();
 
   const inputForm = (el: any) => {
     const { name, value } = el.target;
@@ -43,7 +42,7 @@ const Page = () => {
   };
 
   const checkRole = () => {
-    const role = cookies.get("salt_role");
+    const role = Cookies.get("salt_role");
     if (role != "core") {
       router.push("/login");
     }
@@ -79,7 +78,7 @@ const Page = () => {
   useEffect(() => {
     checkRole();
   }, []);
-  if (cookies.get("salt_role") != "core") {
+  if (Cookies.get("salt_role") != "core") {
     return <h1>Loading ...</h1>;
   } else {
     return (

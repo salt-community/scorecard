@@ -2,13 +2,12 @@
 import { httpGetAllDevelopers } from "@/app/api/request";
 import { AllDevelopers } from "@/app/components/admin/AllDevelopers";
 import React, { useEffect, useState } from "react";
-import { useCookies } from "next-client-cookies";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function Developer() {
   const [developers, setDevelopers] = useState<[]>();
   const [loading, setLoading] = useState(true);
-  const cookies = useCookies();
   const router = useRouter();
 
   const fetchData = async () => {
@@ -18,7 +17,7 @@ export default function Developer() {
   };
 
   const checkRole = () => {
-    const role = cookies.get("salt_role");
+    const role = Cookies.get("salt_role");
     if (role != "core") {
       router.push("/login");
     }
