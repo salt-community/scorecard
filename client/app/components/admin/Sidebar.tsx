@@ -72,7 +72,7 @@ export function Sidebar() {
           </ListItem>
         </a>
         <hr className="my-2 border-blue-gray-50" />
-        <a onClick={() => handleLogOut}>
+        <a onClick={() => handleLogOut()}>
           <ListItem placeholder={undefined}>
             <ListItemPrefix placeholder={undefined}>
               <PowerIcon className="h-5 w-5" />
