@@ -56,7 +56,7 @@ public class DeveloperController {
 
     @PutMapping("/{developerId}")
     @CrossOrigin
-    public DeveloperDto.Response updateDeveloper(@PathVariable UUID developerId, @RequestBody DeveloperDto.Request request) {
+    public DeveloperDto.Response updateDeveloper(@PathVariable UUID developerId, @RequestBody DeveloperDto.AdminDeveloper request) {
         return developerService.updateDeveloper(developerId ,request);
     }
 

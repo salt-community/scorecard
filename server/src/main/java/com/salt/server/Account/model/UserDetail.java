@@ -32,6 +32,7 @@ public class UserDetail {
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private Social social;
+    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
     private Account account;

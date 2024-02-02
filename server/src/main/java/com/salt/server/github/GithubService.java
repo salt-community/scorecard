@@ -29,7 +29,7 @@ public class GithubService {
         return githubRepository.save(github);
     }
 
-    public Github findBySocial(Social social) {
+    public Github  findBySocial(Social social) {
         return githubRepository.findBySocial(social);
     }
 

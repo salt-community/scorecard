@@ -7,15 +7,13 @@ import com.salt.server.Account.repository.*;
 import com.salt.server.assignment.model.Type;
 import com.salt.server.github.GithubService;
 import com.salt.server.github.model.Github;
+import com.salt.server.github.model.Project;
 import com.salt.server.score.Score;
 import com.salt.server.score.ScoreService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -263,22 +261,62 @@ public class DeveloperService {
     }
 
     @Transactional
-    public DeveloperDto.Response updateDeveloper(UUID developerId, DeveloperDto.Request request) {
+    public DeveloperDto.Response updateDeveloper(UUID developerId, DeveloperDto.AdminDeveloper request) {
+
+
+        System.out.println("Github:" + cutUrl(request.github().getUrl()));
+
         Account developer = getDeveloperById(developerId);
-        developer.setEmail(request.email());
-        developer.setRole(request.role());
+        developer.setEmail(request.account().getEmail());
+        developer.setRole(request.account().getRole().name());
         Account account = accountRepository.save(developer);
-        UserDetail userDetail = createUserDetail(request, developer);
-        account.setUserDetail(userDetail);
-        createAcademic(request, userDetail);
-        createNationality(request, userDetail);
-        createLanguage(request, userDetail);
-        createSkill(request, userDetail);
-        Social social = createSocial(request, userDetail);
-        Github github = githubService.createGithub(request, social);
-        githubService.createProject(request, github);
-        List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(developer);
-        return DeveloperMapper.toDeveloperResponse(developer, radarGraphs);
+
+        Map<String, Fluency> spokenLanguagesMap = request.languages().stream()
+                .collect(Collectors.toMap(
+                        Language::getLanguage,
+                        Language::getFluency)
+                );
+
+        UserDetail userDetail = userDetailRepository.findByAccount(account)
+                .orElseThrow(() -> new NoSuchElementException("Developer not found"));
+        userDetail.setAccount(null);
+        account.setUserDetail(null);
+        userDetailRepository.delete(userDetail);
+        DeveloperDto.Request req = new DeveloperDto.Request(
+                request.account().getEmail(),
+                request.userDetail().getName(),
+                request.account().getRole().name(),
+                request.userDetail().getIntroduction(),
+                request.userDetail().getPhoneNumber(),
+                request.userDetail().getBootcamp().toString(),
+                cutUrl(request.github().getUrl()),
+                cutUrl(request.social().getLinkedInUrl()),
+                cutUrl(request.social().getCodewarsUrl()),
+                request.projects().stream().map(Project::getUrl).toList(),
+                new DeveloperDto.BackgroundInformation(
+                        request.nationalities().stream().map(Nationality::getNationality).toList(),
+                        spokenLanguagesMap,
+                        request.academic(),
+                        request.skills().stream().map(Skill::getSkill).toList()
+                )
+
+        );
+        UserDetail newUserDetails = createUserDetail(req, account);
+        account.setUserDetail(newUserDetails);
+        createAcademic(req, newUserDetails);
+        createNationality(req, newUserDetails);
+        createLanguage(req, newUserDetails);
+        createSkill(req, newUserDetails);
+        Social social = createSocial(req, newUserDetails);
+        Github github = githubService.createGithub(req, social);
+        githubService.createProject(req, github);
+        List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
+        return DeveloperMapper.toDeveloperResponse(account, radarGraphs);
+    }
+
+    private String cutUrl(String url) {
+        String fixedUrl = url.substring(url.lastIndexOf('/') + 1).trim();
+        return fixedUrl;
     }
 
 

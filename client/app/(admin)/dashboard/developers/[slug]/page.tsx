@@ -104,6 +104,8 @@ export default function DeveloperDetailPage({
 
   function handleSocialChange(e: any) {
     const { name, value } = e.target;
+    if (name === "") console.log(name + value);
+    console.log(name);
     setDeveloper({
       ...developer,
       social: {
@@ -112,6 +114,20 @@ export default function DeveloperDetailPage({
       },
     });
   }
+
+  function handleGithubChange(e: any) {
+    const { name, value } = e.target;
+    if (name === "") console.log(name + value);
+    console.log(name + ": " + value);
+    setDeveloper({
+      ...developer,
+      github: {
+        ...developer?.github,
+        [name]: value,
+      },
+    });
+  }
+
   const updateData = (el: any) => {
     const { name, value } = el.target;
     const nameSplit = name.split(".")[1];
@@ -324,12 +340,12 @@ export default function DeveloperDetailPage({
             <div className="w-full flex flex-row items-center">
               <label className="w-1/3">Github :</label>
               <Input
-                name="githubUsername"
+                name="url"
                 type="text"
                 labelPlacement="outside-left"
                 placeholder="github username"
                 color="default"
-                onChange={handleSocialChange}
+                onChange={handleGithubChange}
                 className="w-72"
                 defaultValue={developer.github.url.split("/").pop()}
               />
