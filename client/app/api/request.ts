@@ -2,14 +2,10 @@ const BASIC_URI = process.env.NEXT_PUBLIC_API_URL;
 
 //ACCOUNT URI
 export const httpGetAccountByEmail = async (email: string) => {
-  const res = await fetch(`${BASIC_URI}/api/accounts/email/${email}`, {
+  const response = await fetch(`${BASIC_URI}/api/accounts/email/${email}`, {
     cache: "no-cache",
   });
-  if (res.status === 500) {
-    return null;
-  }
-  const data = await res.json();
-  return data;
+  return response;
 };
 
 export const httpGetAllCoreTeam = async () => {

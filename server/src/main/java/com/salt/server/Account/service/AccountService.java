@@ -58,10 +58,15 @@ public class AccountService {
                 .orElseThrow(() -> new NoSuchElementException("Developer not found"));
     }
 
-    public AccountDto.Response getAccountByEmail(String email) {
-        Account account = accountRepository.findByEmail(email)
+    public AccountDto.CoreTeamResponse getAccountByEmail(String email) {
+        Account account = accountRepository.findByEmailAndRole(email, Role.core)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
-        return AccountMapper.toAccountResponse(account);
+        return new AccountDto.CoreTeamResponse(
+                account.getId(),
+                account.getUserDetail().getName(),
+                account.getEmail(),
+                account.getRole().toString()
+        );
     }
 
     public void deleteAccountById(UUID id) {

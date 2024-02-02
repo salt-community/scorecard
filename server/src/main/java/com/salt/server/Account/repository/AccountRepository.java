@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface AccountRepository extends ListCrudRepository<Account, UUID> {
     List<Account> findAllByRole(Role role);
     List<Account> findAllByRoleNot(Role role);
-    Optional<Account> findByEmail(String email);
+    Optional<Account> findByEmailAndRole(String email, Role role);
 }

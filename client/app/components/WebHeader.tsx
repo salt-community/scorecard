@@ -4,7 +4,7 @@ const WebHeader = () => {
   return (
     <div className="w-full flex justify-center ">
       <Navbar className="flex flex-row justify-center">
-        <Link href={"/"} color="foreground">
+        <Link href={"/developers"} color="foreground">
           <NavbarBrand>
             <h4 className="font-bold text-2xl text-inherit">{"</salt>"}</h4>
           </NavbarBrand>

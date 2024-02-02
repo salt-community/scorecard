@@ -30,7 +30,7 @@ public class AccountController {
     }
 
     @GetMapping("/email/{email}")
-    public AccountDto.Response getAccountByEmail(@PathVariable String email) {
+    public AccountDto.CoreTeamResponse getAccountByEmail(@PathVariable String email) {
         return accountService.getAccountByEmail(email);
     }
     @PostMapping

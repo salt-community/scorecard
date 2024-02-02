@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../providers";
-import WebHeader from "../components/WebHeader";
+import { CookiesProvider } from "next-client-cookies/server";
 
 const poppins = Poppins({
   weight: ["400", "700"],
@@ -22,8 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="light mx-auto max-w-screen-2xl">
       <body className={poppins.className}>
-        <WebHeader />
-        <Providers>{children}</Providers>
+        <CookiesProvider>
+          <Providers>{children}</Providers>
+        </CookiesProvider>
       </body>
     </html>
   );
