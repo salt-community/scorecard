@@ -129,7 +129,6 @@ export default function DeveloperDetailPage({
   }
 
   function handleNationalityChange(updatedNationalities: nationality[]) {
-    console.log(updatedNationalities);
     setDeveloper({
       ...developer,
       nationalities: updatedNationalities,

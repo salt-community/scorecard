@@ -40,6 +40,7 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
     const newArray = [...languages];
     newArray.splice(index, 1);
     setLanguages(newArray);
+    onLanguageChange(newArray);
   };
 
   useEffect(() => {

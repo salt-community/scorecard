@@ -220,7 +220,6 @@ public class DeveloperService {
     }
 
     private void createNationality(DeveloperDto.Request request, UserDetail userDetail) {
-        System.out.println(request.backgroundInformation().nationalities());
         for (var nationality : request.backgroundInformation().nationalities()) {
             Nationality newNationality = Nationality.builder()
                     .userDetail(userDetail)
@@ -278,7 +277,7 @@ public class DeveloperService {
                         Language::getLanguage,
                         Language::getFluency)
                 );
-
+        System.out.println("spokenLanguagesMap:" + spokenLanguagesMap);
         UserDetail userDetail = userDetailRepository.findByAccount(account)
                 .orElseThrow(() -> new NoSuchElementException("Developer not found"));
         userDetail.setAccount(null);
