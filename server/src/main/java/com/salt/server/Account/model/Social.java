@@ -21,10 +21,11 @@ public class Social {
     private String codewarsUrl;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "social", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "social", cascade = CascadeType.ALL)
     private Github githubId;
+    @Setter
     @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 

@@ -21,7 +21,7 @@ public class Github {
     private String url;
     @Setter(AccessLevel.NONE)
     private String pictureUrl;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "social_id", referencedColumnName = "id")
     private Social social;

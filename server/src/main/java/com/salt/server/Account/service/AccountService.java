@@ -10,6 +10,7 @@ import com.salt.server.github.repository.GithubRepository;
 import com.salt.server.github.model.Project;
 import com.salt.server.github.repository.ProjectRepository;
 import com.salt.server.score.ScoreService;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,10 +22,18 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserDetailRepository userDetailRepository;
+    private final SocialRepository socialRepository;
+    private final GithubRepository githubRepository;
+    private final AcademicRepository academicRepository;
 
-    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository) {
+
+    public AccountService(AccountRepository accountRepository, UserDetailRepository userDetailRepository, SocialRepository socialRepository, GithubRepository githubRepository,
+                          AcademicRepository academicRepository) {
         this.accountRepository = accountRepository;
         this.userDetailRepository = userDetailRepository;
+        this.socialRepository = socialRepository;
+        this.githubRepository = githubRepository;
+        this.academicRepository = academicRepository;
     }
 
     public List<AccountDto.Response> getAllAccount() {
@@ -45,9 +54,31 @@ public class AccountService {
         Account account = new Account();
         account.setEmail(request.email());
         account.setRole(request.role());
+
         UserDetail userDetail = UserDetail.builder()
                 .name(request.name())
+                .bootcamp("")
+                .phoneNumber("")
                 .build();
+        Github github =  new Github();
+        github.setUrl("https://github.com/null");
+        Academic academic = new Academic();
+        academic.setDegree("");
+        academic.setMajor("");
+        academic.setSchool("");
+        Social social = Social.builder()
+                .githubId(github)
+                .codewarsUrl("https://www.codewars.com/users/null")
+                .linkedInUrl("https://www.linkedin.com/in/null")
+                .build();
+        github.setSocial(social);
+        userDetail.setSocial(social);
+        userDetail.setAcademic(academic);
+        academic.setUserDetail(userDetail);
+        social.setUserDetail(userDetail);
+        academicRepository.save(academic);
+        githubRepository.save(github);
+        socialRepository.save(social);
         account.setUserDetail(userDetail);
         userDetailRepository.save(userDetail);
         return AccountMapper.toAccountResponse(accountRepository.save(account));

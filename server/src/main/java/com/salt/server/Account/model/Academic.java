@@ -23,7 +23,7 @@ public class Academic {
     private String endDate;
     private String school;
     @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userDetail_id", referencedColumnName = "id")
     private UserDetail userDetail;
 

@@ -26,11 +26,11 @@ public class UserDetail {
     private Bootcamp bootcamp;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.ALL)
     private Academic academic;
     @Setter
     @JsonIgnore
-    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "userDetail", cascade = CascadeType.ALL)
     private Social social;
     @Setter
     @JsonIgnore

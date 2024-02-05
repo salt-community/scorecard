@@ -35,7 +35,7 @@ export default function DeveloperDetailPage({
       name: "",
       introduction: "",
       phoneNumber: "",
-      bootcamp: "",
+      bootcamp: "java",
     },
     academic: {
       id: "",
@@ -68,6 +68,7 @@ export default function DeveloperDetailPage({
 
   function handleUserDetailChange(e: any) {
     const { name, value } = e.target;
+    console.log(value);
     setDeveloper({
       ...developer,
       userDetail: {
@@ -170,6 +171,7 @@ export default function DeveloperDetailPage({
       setIsLoading(false);
     }, 1000);
   };
+  console.log(developer.userDetail.bootcamp);
   return (
     <form onSubmit={(e) => handleSubmit(e, developer)}>
       {isLoading ? (
