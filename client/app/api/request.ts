@@ -140,18 +140,6 @@ export const httpDeleteScoreById = async (id: string) => {
   return response;
 };
 
-/* export const httpUpdateDeveloperById = async (id: string, requestBody: any) => {
-  console.log(id);
-  const response = fetch(`${BASIC_URI}/api/developers/${id}`, {
-    method: "POST",
-    body: JSON.stringify(requestBody),
-    headers: {
-      "content-type": "application/json;",
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
-  return response;
-}; */
 
 export const httpUpdateDeveloperById = async (id: string, developer: any) => {
   const response = await fetch(`${BASIC_URI}/api/developers/${id}`, {
