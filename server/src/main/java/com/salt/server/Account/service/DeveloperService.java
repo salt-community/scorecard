@@ -165,19 +165,8 @@ public class DeveloperService {
         developerAccount.setEmail(request.email());
         developerAccount.setRole(request.role());
         Account saveAccount = accountRepository.save(developerAccount);
-
-        UserDetail userDetail = createUserDetail(request, saveAccount);
-        saveAccount.setUserDetail(userDetail);
-        createAcademic(request, userDetail);
-        createNationality(request, userDetail);
-        createLanguage(request, userDetail);
-        createSkill(request, userDetail);
-        Social social = createSocial(request, userDetail);
-        Github github = githubService.createGithub(request, social);
-        githubService.createProject(request, github);
-
+        createAllAccountProperties(request, saveAccount);
         List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(developerAccount);
-
         return DeveloperMapper.toDeveloperResponse(developerAccount, radarGraphs);
     }
 
@@ -195,7 +184,6 @@ public class DeveloperService {
 
     private void createAcademic(DeveloperDto.Request request, UserDetail userDetail) {
         Academic academicDetail = request.backgroundInformation().academic();
-
         Academic academic = new Academic();
         academic.setUserDetail(userDetail);
         academic.setDegree(academicDetail.getDegree().toString());
@@ -271,16 +259,7 @@ public class DeveloperService {
         userDetail.setAccount(null);
         account.setUserDetail(null);
         userDetailRepository.delete(userDetail);
-        DeveloperDto.Request req = createDeveloperDtoRequest(request);
-        UserDetail newUserDetails = createUserDetail(req, account);
-        account.setUserDetail(newUserDetails);
-        createAcademic(req, newUserDetails);
-        createNationality(req, newUserDetails);
-        createLanguage(req, newUserDetails);
-        createSkill(req, newUserDetails);
-        Social social = createSocial(req, newUserDetails);
-        Github github = githubService.createGithub(req, social);
-        githubService.createProject(req, github);
+        createAllAccountProperties(createDeveloperDtoRequest(request), account);
         List<DeveloperDto.RadarGraph> radarGraphs = scoreService.calculateRadarGraph(account);
         return DeveloperMapper.toDeveloperResponse(account, radarGraphs);
     }
@@ -306,6 +285,18 @@ public class DeveloperService {
         );
     }
 
+    private void createAllAccountProperties(DeveloperDto.Request request, Account account){
+        UserDetail newUserDetails = createUserDetail(request, account);
+        account.setUserDetail(newUserDetails);
+        createAcademic(request, newUserDetails);
+        createNationality(request, newUserDetails);
+        createLanguage(request, newUserDetails);
+        createSkill(request, newUserDetails);
+        Social social = createSocial(request, newUserDetails);
+        Github github = githubService.createGithub(request, social);
+        githubService.createProject(request, github);
+    }
+
     private Map<String, Fluency> languagesToMap(List<Language> languages) {
         return languages.stream()
                 .collect(Collectors.toMap(
@@ -313,6 +304,7 @@ public class DeveloperService {
                         Language::getFluency)
                 );
     }
+
     private String cutUrl(String url) {
         return url.substring(url.lastIndexOf('/') + 1).trim();
     }
