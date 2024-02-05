@@ -25,7 +25,7 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
   };
 
   const handleAddInput = () => {
-    setLanguages([...languages, { id: "", language: "", fluency: "" }]);
+    setLanguages([...languages, { id: "", language: "", fluency: "beginner" }]);
   };
 
   const handleChange = (event: any, index: number) => {
