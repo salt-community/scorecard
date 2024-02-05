@@ -27,7 +27,7 @@ const SelectSkills = ({ skillsSet, onSkillsChange }: Props) => {
     setskills([...skills, { id: "", skill: "" }]);
   };
 
-  const handleChange = (event: any, index: any) => {
+  const handleChange = (event: any, index: number) => {
     let { name, value } = event.target;
     let onChangeValue: any = [...skills];
     onChangeValue[index][name] = value;
@@ -35,7 +35,7 @@ const SelectSkills = ({ skillsSet, onSkillsChange }: Props) => {
     onSkillsChange(skills);
   };
 
-  const handleDeleteInput = (index: any) => {
+  const handleDeleteInput = (index: number) => {
     const newArray = [...skills];
     newArray.splice(index, 1);
     setskills(newArray);

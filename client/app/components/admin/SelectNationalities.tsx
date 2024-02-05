@@ -30,7 +30,7 @@ const SelectNationalities = ({
     setNationalities([...nationalities, { id: "", nationality: "" }]);
   };
 
-  const handleChange = (event: any, index: any) => {
+  const handleChange = (event: any, index: number) => {
     let { name, value } = event.target;
     let onChangeValue: any = [...nationalities];
     onChangeValue[index][name] = value;
@@ -38,7 +38,7 @@ const SelectNationalities = ({
     onNationalityChange(nationalities);
   };
 
-  const handleDeleteInput = (index: any) => {
+  const handleDeleteInput = (index: number) => {
     const newArray = [...nationalities];
     newArray.splice(index, 1);
     setNationalities(newArray);

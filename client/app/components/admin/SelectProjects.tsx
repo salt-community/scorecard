@@ -38,7 +38,7 @@ const SelectProjects = ({ projectsSet, onProjectsChange }: Props) => {
     ]);
   };
 
-  const handleChange = (event: any, index: any) => {
+  const handleChange = (event: any, index: number) => {
     let { name, value } = event.target;
     let onChangeValue: any = [...projects];
     onChangeValue[index][name] = value;
@@ -46,7 +46,7 @@ const SelectProjects = ({ projectsSet, onProjectsChange }: Props) => {
     onProjectsChange(projects);
   };
 
-  const handleDeleteInput = (index: any) => {
+  const handleDeleteInput = (index: number) => {
     const newArray = [...projects];
     newArray.splice(index, 1);
     setProjects(newArray);

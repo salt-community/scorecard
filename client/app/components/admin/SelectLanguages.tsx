@@ -28,7 +28,7 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
     setLanguages([...languages, { id: "", language: "", fluency: "" }]);
   };
 
-  const handleChange = (event: any, index: any) => {
+  const handleChange = (event: any, index: number) => {
     let { name, value } = event.target;
     let onChangeValue: any = [...languages];
     onChangeValue[index][name] = value;
@@ -36,7 +36,7 @@ const SelectLanguages = ({ languagesSet, onLanguageChange }: Props) => {
     onLanguageChange(languages);
   };
 
-  const handleDeleteInput = (index: any) => {
+  const handleDeleteInput = (index: number) => {
     const newArray = [...languages];
     newArray.splice(index, 1);
     setLanguages(newArray);
