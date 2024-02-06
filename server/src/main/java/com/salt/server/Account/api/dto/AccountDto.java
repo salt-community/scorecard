@@ -10,7 +10,7 @@ public interface AccountDto {
             String role
     ) {
     }
-    
+
     record Response(
             UUID id,
             String email,
