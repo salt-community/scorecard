@@ -1,0 +1,14 @@
+version: '0.1'
+
+name: scorecard
+
+services:
+  scorecard_db:
+    image:
+      postgres:16.1
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=scorecard_db
+      - POSTGRES_USER=scorecard_user
+      - POSTGRES_PASSWORD=mysecretpassword
