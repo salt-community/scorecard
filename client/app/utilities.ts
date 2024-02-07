@@ -38,9 +38,11 @@ export const scoreData = (scores: Score[], averages: Average[]) => {
   for (let i = 0; i < unique.length; i++) {
     const scoreName = unique[i];
     const scoreData = scores.filter((score) => score.type === scoreName);
+
     const averageScore = averages.filter(
       (avg) => avg.scoreName === scoreName
-    )[0].average;
+    )[0]?.average;
+
     const detailScore: DetailScores = {
       scoreName: scoreName,
       average: averageScore,

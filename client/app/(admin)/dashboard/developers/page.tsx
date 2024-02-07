@@ -16,15 +16,15 @@ export default function Developer() {
     setLoading(false);
   };
 
-  const checkRole = () => {
+  /*   const checkRole = () => {
     const role = Cookies.get("salt_role");
     if (role != "core") {
       router.push("/login");
     }
-  };
+  }; */
 
   useEffect(() => {
-    checkRole();
+    //checkRole();
     fetchData();
   }, []);
 
