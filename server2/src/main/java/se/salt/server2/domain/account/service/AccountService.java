@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import se.salt.server2.domain.account.controller.dto.AccountRequest;
 import se.salt.server2.domain.account.controller.dto.AccountResponse;
+import se.salt.server2.domain.account.controller.dto.AccountResponses;
 import se.salt.server2.domain.account.mapper.AccountMapper;
 import se.salt.server2.domain.account.repository.AccountRepository;
+import se.salt.server2.exception.AccountDoesNotExistException;
+
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -16,5 +20,14 @@ public class AccountService {
 
     public AccountResponse createAccount(AccountRequest accountRequest) {
         return accountMapper.mapToResponse(accountRepository.save(accountMapper.mapToEntity(accountRequest)));
+    }
+
+    public AccountResponse getAccountById(UUID accountId) {
+        return accountMapper.mapToResponse(
+                accountRepository.findById(accountId).orElseThrow(() -> new AccountDoesNotExistException(accountId)));
+    }
+
+    public AccountResponses getAllAccounts() {
+        return accountMapper.mapToAccountResponses(accountRepository.findAll());
     }
 }
