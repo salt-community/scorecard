@@ -62,6 +62,8 @@ const Page = () => {
         email: input.email,
         name: input.name,
         role: input.role,
+        phoneNumber: input.phonNumber,
+        bootcamp: input.bootcamp,
       };
       const response = await httpCreateAccount(body);
       if (response.status == 200) {

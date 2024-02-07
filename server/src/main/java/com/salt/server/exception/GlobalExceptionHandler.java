@@ -1,4 +1,4 @@
-package com.salt.server.exception;
+/*package com.salt.server.exception;
 
 import com.salt.server.exception.dto.Error;
 import com.salt.server.exception.dto.ErrorResponse;
@@ -28,4 +28,4 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(errorResponse);
     }
-}
+}*/

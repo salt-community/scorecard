@@ -26,6 +26,7 @@ const InputForm = ({ developer, assignment, updateScore }: InputFormProps) => {
 
   const inputForm = (el: any) => {
     const { name, value } = el.target;
+    console.log(value);
     setInput({
       ...input,
       [name]: value,
