@@ -9,15 +9,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import se.salt.server2.domain.account.controller.dto.AccountRequest;
+import se.salt.server2.domain.account.controller.dto.AccountResponse;
 import se.salt.server2.domain.account.controller.dto.AccountResponses;
 import se.salt.server2.domain.account.models.AccountEntity;
 import se.salt.server2.domain.account.service.AccountService;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static se.salt.server2.utils.TestData.*;
 
@@ -72,5 +72,35 @@ class AccountControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(entity.getId().toString()));
+    }
+
+    @Test
+    @SneakyThrows
+    void shouldUpdateAccountEmailAndReturn200_Ok() {
+        AccountEntity entity = createNewAccountEntity();
+        AccountRequest request = updateAccountRequest();
+        AccountResponse response = updateAccountResponse(entity.getId());
+
+        when(accountService.updateAccountById(entity.getId(), request)).thenReturn(response);
+
+        mockMvc.perform(put(BASE_URL_ACCOUNT + "/{accountId}", entity.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.emailAddress").value(MOCK_UPDATED_EMAIL));
+    }
+
+    @Test
+    @SneakyThrows
+    void shouldDeleteAccountAndReturn204NoContent() {
+        AccountEntity entity = createNewAccountEntity();
+
+        doNothing().when(accountService).deleteAccountById(entity.getId());
+
+        mockMvc.perform(delete(BASE_URL_ACCOUNT + "/{accountId}", entity.getId()))
+                .andExpect(status().isNoContent());
+
+        verify(accountService, times(1)).deleteAccountById(entity.getId());
     }
 }
