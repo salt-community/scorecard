@@ -12,6 +12,8 @@ public class TestData {
     public static final String BASE_URL_ACCOUNT = "/api/v2/account";
     public static final String MOCK_EMAIL = "carl@appliedtechnology.se";
 
+    public static final String MOCK_UPDATED_EMAIL = "yolo@appliedtechnology.se";
+
     public static AccountRequest createNewAccountRequest() {
         return AccountRequest.builder().emailAddress(MOCK_EMAIL).build();
     }
@@ -32,5 +34,13 @@ public class TestData {
                 .id(UUID.randomUUID())
                 .emailAddress(MOCK_EMAIL)
                 .build();
+    }
+
+    public static AccountRequest updateAccountRequest() {
+        return AccountRequest.builder().emailAddress(MOCK_UPDATED_EMAIL).build();
+    }
+
+    public static AccountResponse updateAccountResponse(UUID accountId) {
+        return AccountResponse.builder().id(accountId).emailAddress(MOCK_UPDATED_EMAIL).build();
     }
 }
