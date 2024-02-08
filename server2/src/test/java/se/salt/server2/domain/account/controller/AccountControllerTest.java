@@ -16,7 +16,7 @@ import se.salt.server2.domain.account.service.AccountService;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static se.salt.server2.utils.TestData.*;
@@ -76,7 +76,7 @@ class AccountControllerTest {
 
     @Test
     @SneakyThrows
-    void shouldUpdateAccountEmailAndReturn200Ok() {
+    void shouldUpdateAccountEmailAndReturn200_Ok() {
         AccountEntity entity = createNewAccountEntity();
         AccountRequest request = updateAccountRequest();
         AccountResponse response = updateAccountResponse(entity.getId());
@@ -91,4 +91,16 @@ class AccountControllerTest {
                 .andExpect(jsonPath("$.emailAddress").value(MOCK_UPDATED_EMAIL));
     }
 
+    @Test
+    @SneakyThrows
+    void shouldDeleteAccountAndReturn204NoContent() {
+        AccountEntity entity = createNewAccountEntity();
+
+        doNothing().when(accountService).deleteAccountById(entity.getId());
+
+        mockMvc.perform(delete(BASE_URL_ACCOUNT + "/{accountId}", entity.getId()))
+                .andExpect(status().isNoContent());
+
+        verify(accountService, times(1)).deleteAccountById(entity.getId());
+    }
 }
