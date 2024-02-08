@@ -39,9 +39,7 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    @PutMapping(
-            path = "/{accountId}",
-            produces ={MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(path = "/{accountId}")
     public AccountResponse updateAccount(@PathVariable("accountId") UUID id, @RequestBody AccountRequest accountRequest) {
         return accountService.updateAccountById(id, accountRequest);
     }
