@@ -6,6 +6,7 @@ import se.salt.server2.domain.account.controller.dto.AccountRequest;
 import se.salt.server2.domain.account.controller.dto.AccountResponse;
 import se.salt.server2.domain.account.controller.dto.AccountResponses;
 import se.salt.server2.domain.account.mapper.AccountMapper;
+import se.salt.server2.domain.account.models.AccountEntity;
 import se.salt.server2.domain.account.repository.AccountRepository;
 import se.salt.server2.exception.AccountDoesNotExistException;
 
@@ -29,5 +30,15 @@ public class AccountService {
 
     public AccountResponses getAllAccounts() {
         return accountMapper.mapToAccountResponses(accountRepository.findAll());
+    }
+
+    public AccountResponse updateAccountById(UUID accountId, AccountRequest accountRequest) {
+        AccountEntity account = accountRepository.findById(accountId).orElseThrow(() -> new AccountDoesNotExistException(accountId));
+        account.setEmailAddress(accountRequest.emailAddress());
+        return accountMapper.mapToResponse(accountRepository.save(account));
+    }
+
+    public void deleteAccountById(UUID accountId) {
+        accountRepository.deleteById(accountId);
     }
 }
