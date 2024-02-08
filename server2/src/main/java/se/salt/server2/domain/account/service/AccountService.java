@@ -30,4 +30,8 @@ public class AccountService {
     public AccountResponses getAllAccounts() {
         return accountMapper.mapToAccountResponses(accountRepository.findAll());
     }
+
+    public void deleteAccountById(UUID accountId) {
+        accountRepository.deleteById(accountId);
+    }
 }
