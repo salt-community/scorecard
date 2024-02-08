@@ -40,9 +40,9 @@ class AccountMapperTest {
         AccountResponses responses = accountMapper.mapToAccountResponses(entities);
 
         assertThat(responses.accountResponseList()).hasSize(2);
-        assertThat(responses.accountResponseList().getFirst()).isInstanceOf(AccountResponse.class);
+        assertThat(responses.accountResponseList().get(0)).isInstanceOf(AccountResponse.class);
         assertEquals(
-                entities.getFirst().getId(),
-                responses.accountResponseList().getFirst().id());
+                entities.get(0).getId(),
+                responses.accountResponseList().get(0).id());
     }
 }

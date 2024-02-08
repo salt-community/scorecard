@@ -18,13 +18,8 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static se.salt.server2.utils.TestData.BASE_URL_ACCOUNT;
-import static se.salt.server2.utils.TestData.createNewAccountEntity;
-import static se.salt.server2.utils.TestData.createNewAccountRequest;
-import static se.salt.server2.utils.TestData.createNewAccountResponse;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static se.salt.server2.utils.TestData.*;
 
 @WebMvcTest(AccountController.class)
 class AccountControllerTest {
@@ -64,7 +59,7 @@ class AccountControllerTest {
         mockMvc.perform(get(BASE_URL_ACCOUNT))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accountResponseList[0].emailAddress")
-                        .value(responses.accountResponseList().getFirst().emailAddress()));
+                        .value(responses.accountResponseList().get(0).emailAddress()));
     }
 
     @Test
