@@ -1,5 +1,6 @@
 package se.salt.server2.domain.account.controller;
 
+import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,13 @@ public class AccountController {
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public AccountResponses getAccounts() {
         return accountService.getAllAccounts();
+    }
+
+    @PutMapping(
+            path = "/{accountId}",
+            produces ={MediaType.APPLICATION_JSON_VALUE})
+    public AccountResponse updateAccount(@PathVariable("accountId") UUID id, @RequestBody AccountRequest accountRequest) {
+        return accountService.updateAccountById(id, accountRequest);
     }
 
     @DeleteMapping(path = "/{accountId}")
