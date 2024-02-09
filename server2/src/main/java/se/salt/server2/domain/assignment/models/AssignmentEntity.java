@@ -17,13 +17,10 @@ public class AssignmentEntity {
     @Id
     @GeneratedValue
     UUID id;
+    UUID accountId;
     String title;
     int score;
     String description;
     @Enumerated(EnumType.STRING)
     AssignmentCategory category;
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    AccountEntity accountEntity;
-
 }
