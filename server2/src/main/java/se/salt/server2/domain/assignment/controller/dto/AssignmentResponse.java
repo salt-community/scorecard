@@ -1,6 +1,8 @@
 package se.salt.server2.domain.assignment.controller.dto;
 
-import java.util.UUID;
+import lombok.Builder;
 
-public record AssignmentResponse(UUID assignmentId, String title, int score, String description, String category) {
+
+@Builder(toBuilder = true)
+public record AssignmentResponse(String title, int score, String description, String category) {
 }
