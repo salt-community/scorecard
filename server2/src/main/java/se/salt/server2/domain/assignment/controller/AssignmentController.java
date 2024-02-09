@@ -1,9 +1,11 @@
 package se.salt.server2.domain.assignment.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
+import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.service.AssignmentService;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -18,5 +20,10 @@ public class AssignmentController {
     @ResponseStatus(CREATED)
     public AssignmentResponse createAssignment(@RequestBody AssignmentRequest assignmentRequest) {
         return assignmentService.createAssignment(assignmentRequest);
+    }
+
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AssignmentResponses getAssignments() {
+        return assignmentService.getAllAssignments();
     }
 }
