@@ -10,6 +10,7 @@ import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import se.salt.server2.domain.assignment.repository.AssignmentRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class AssignmentService {
         AssignmentEntity savedAssignmentEntity = assignmentRepository.save(assignmentEntity);
 
         return AssignmentResponse.builder()
+                .assignmentId(savedAssignmentEntity.getId())
                 .title(savedAssignmentEntity.getTitle())
                 .score(savedAssignmentEntity.getScore())
                 .description(savedAssignmentEntity.getDescription())
@@ -37,6 +39,7 @@ public class AssignmentService {
 
     public AssignmentResponses getAllAssignments() {
         List<AssignmentResponse> assignmentResponseList = assignmentRepository.findAll().stream().map(a -> AssignmentResponse.builder()
+                .assignmentId(a.getId())
                 .title(a.getTitle())
                 .score(a.getScore())
                 .description(a.getDescription())
@@ -44,6 +47,17 @@ public class AssignmentService {
                 .build()).toList();
         return AssignmentResponses.builder()
                 .assignmentResponseList(assignmentResponseList)
+                .build();
+    }
+
+    public AssignmentResponse getAssignmentById(UUID assignmentId) {
+        AssignmentEntity assignmentEntity = assignmentRepository.findById(assignmentId).orElseThrow();
+        return AssignmentResponse.builder()
+                .assignmentId(assignmentEntity.getId())
+                .title(assignmentEntity.getTitle())
+                .score(assignmentEntity.getScore())
+                .description(assignmentEntity.getDescription())
+                .category(String.valueOf(assignmentEntity.getCategory()))
                 .build();
     }
 }

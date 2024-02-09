@@ -8,6 +8,8 @@ import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.service.AssignmentService;
 
+import java.util.UUID;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
@@ -25,5 +27,12 @@ public class AssignmentController {
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public AssignmentResponses getAssignments() {
         return assignmentService.getAllAssignments();
+    }
+
+    @GetMapping(
+            path = "/{assignmentId}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AssignmentResponse getAssignment(@PathVariable("assignmentId") UUID id) {
+        return assignmentService.getAssignmentById(id);
     }
 }
