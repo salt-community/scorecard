@@ -21,14 +21,15 @@ export default function RegisterAccountForm() {
         "Content-Type": "application/json",
       },
     });
-const data = await response.json();
-setId(data.id)
+    const data = await response.json();
+    setId(data.id);
+    console.log(id);
   };
 
-  const submitEmailChange = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitEmailChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submitEmail();
-    router.push(`assignments/${id}`)
+    await submitEmail();
+    router.push(`/assignments/${id}`);
   };
 
   return (
