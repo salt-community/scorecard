@@ -23,13 +23,12 @@ export default function RegisterAccountForm() {
     });
     const data = await response.json();
     setId(data.id);
-    console.log(id);
+    router.push(`/assignments/${data.id}`);
   };
 
   const submitEmailChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await submitEmail();
-    router.push(`/assignments/${id}`);
   };
 
   return (
