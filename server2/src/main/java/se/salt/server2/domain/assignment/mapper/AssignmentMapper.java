@@ -25,6 +25,7 @@ public class AssignmentMapper {
     public AssignmentResponse mapToAssignmentResponse(AssignmentEntity assignmentEntity) {
         return AssignmentResponse.builder()
                 .assignmentId(assignmentEntity.getId())
+                .accountID(assignmentEntity.getAccountId())
                 .title(assignmentEntity.getTitle())
                 .score(assignmentEntity.getScore())
                 .description(assignmentEntity.getDescription())
