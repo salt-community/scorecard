@@ -59,8 +59,8 @@ export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNod
     <input type="text" id="description" value={description} onChange={handleDescriptionChange}></input>
     <label htmlFor="category">Category:</label>
     <select onChange={handleSelectCategory}>
-      <option value={"BACKEND"}>Backend</option>
-      <option value={"FRONTEND"}>Frontend</option>
+      <option value={"Backend"}>Backend</option>
+      <option value={"Frontend"}>Frontend</option>
     </select>
     <button type="submit">Submit</button>
   </form>
