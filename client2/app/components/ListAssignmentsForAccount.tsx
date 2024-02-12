@@ -33,6 +33,7 @@ const filtered =listOfAssignments
             <p>{a.category}</p>
             <p>{a.title}</p>
             <p>{a.score}</p>
+            <p>{a.description}</p>
             </div>
         ))
       }
