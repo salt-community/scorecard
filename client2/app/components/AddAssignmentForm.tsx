@@ -25,6 +25,7 @@ export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNod
       const handleSelectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault();
         setCategory(e.target.value)
+        console.log(category)
         }
 
   const submitAssignment = async (e: React.FormEvent<HTMLFormElement>) => {
