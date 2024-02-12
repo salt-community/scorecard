@@ -12,25 +12,17 @@ export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNod
   setTitle(e.target.value)
   }
 
-  // const handleScoreChange = (e: HTMLFormElement) => {
-  //   e.preventDefault();
-  //   const value: number = parseInt(String.valueOf(e.target.value), 10)
-  //   setScore(value)
-  //   }
-
     const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setScore(Number(e.target.value))
     }
-
-    console.log(score)
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       setDescription(e.target.value)
       }
 
-      const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const handleSelectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault();
         setCategory(e.target.value)
         }
@@ -65,7 +57,10 @@ export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNod
     <label htmlFor="description">Description:</label>
     <input type="text" id="description" value={description} onChange={handleDescriptionChange}></input>
     <label htmlFor="category">Category:</label>
-    <input type="text" id="category" value={category} onChange={handleCategoryChange}></input>
+    <select onChange={handleSelectCategory}>
+      <option value={"BACKEND"}>Backend</option>
+      <option value={"FRONTEND"}>Frontend</option>
+    </select>
     <button type="submit">Submit</button>
   </form>
   </>
