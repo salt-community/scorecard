@@ -3,11 +3,40 @@ import React, { ReactNode, useState } from "react";
 
 export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNode => {
   const [title, setTitle] = useState("");
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState<number>(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
-  const submitAssignment = async () => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  e.preventDefault();
+  setTitle(e.target.value)
+  }
+
+  // const handleScoreChange = (e: HTMLFormElement) => {
+  //   e.preventDefault();
+  //   const value: number = parseInt(String.valueOf(e.target.value), 10)
+  //   setScore(value)
+  //   }
+
+    const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setScore(Number(e.target.value))
+    }
+
+    console.log(score)
+
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      setDescription(e.target.value)
+      }
+
+      const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setCategory(e.target.value)
+        }
+
+  const submitAssignment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const payload = JSON.stringify({
       accountId,
       title,
@@ -24,24 +53,20 @@ export const AddAssignmentForm = ({ accountId }: { accountId: string }):ReactNod
       },
     });
     const data = await response.json();
+    console.log(data)
   };
-  //do post to create assignment -> form
-  //do get to recceive list of all assignments for this account
-  //if we add this component to slug page we have the account id
 
-  return
-  <div>
-  <h1 className=" text-red-500">RENDERING</h1>
-  </div>
-/*   <form onSubmit={submitAssignment}>
-    <label htmlFor="assignmentTitle">Assignment title:</label>
-    <input type="text" id="assignmentTitle"></input>
-    <label htmlFor="assignmentScore">Assignment score:</label>
-    <input type="number" id="assignmentScore"></input>
-    <label htmlFor="assignmentDescription">Assignment description:</label>
-    <input type="text" id="assignmentDescription"></input>
-    <label htmlFor="assignmentCategory">Assignment category:</label>
-    <input type="text" id="assignmentCategory"></input>
+  return <>
+  <form onSubmit={submitAssignment}>
+    <label htmlFor="title">Title:</label>
+    <input type="text" id="title" value={title} onChange={handleTitleChange}></input>
+    <label htmlFor="score">Score:</label>
+    <input type="number" id="score" value={score} onChange={handleScoreChange}></input>
+    <label htmlFor="description">Description:</label>
+    <input type="text" id="description" value={description} onChange={handleDescriptionChange}></input>
+    <label htmlFor="category">Category:</label>
+    <input type="text" id="category" value={category} onChange={handleCategoryChange}></input>
     <button type="submit">Submit</button>
-  </form>; */
+  </form>
+  </>
 };
