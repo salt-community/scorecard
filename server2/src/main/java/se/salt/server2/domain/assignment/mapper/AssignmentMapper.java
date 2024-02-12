@@ -18,7 +18,7 @@ public class AssignmentMapper {
                 .title(assignmentRequest.title())
                 .score(assignmentRequest.score())
                 .description(assignmentRequest.description())
-                .category(AssignmentCategory.valueOf(assignmentRequest.category()))
+                .category(AssignmentCategory.fromString(assignmentRequest.category()))
                 .build();
     }
 
