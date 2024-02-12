@@ -13,7 +13,6 @@ public enum AssignmentCategory {
         return value;
     }
 
-
     public static AssignmentCategory fromString(String text) {
         for (AssignmentCategory category : AssignmentCategory.values()) {
             if (category.value.equalsIgnoreCase(text)) {
