@@ -12,4 +12,14 @@ public enum AssignmentCategory {
     public String getValue() {
         return value;
     }
+
+
+    public static AssignmentCategory fromString(String text) {
+        for (AssignmentCategory category : AssignmentCategory.values()) {
+            if (category.value.equalsIgnoreCase(text)) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException("No constant with text " + text + " found");
+    }
 }
