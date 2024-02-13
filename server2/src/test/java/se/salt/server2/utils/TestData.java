@@ -5,6 +5,7 @@ import se.salt.server2.domain.account.controller.dto.AccountRequest;
 import se.salt.server2.domain.account.controller.dto.AccountResponse;
 import se.salt.server2.domain.account.models.AccountEntity;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
+import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 
@@ -55,6 +56,17 @@ public class TestData {
                 .score(8)
                 .description("Description")
                 .category(AssignmentCategory.FRONTEND)
+                .build();
+    }
+
+    public static AssignmentResponse createnewAssignmentResponse() {
+        return AssignmentResponse.builder()
+                .assignmentId(UUID.randomUUID())
+                .accountID(UUID.randomUUID())
+                .category("Backend")
+                .description("Build api")
+                .score(10)
+                .title("Weekend test 1")
                 .build();
     }
 
