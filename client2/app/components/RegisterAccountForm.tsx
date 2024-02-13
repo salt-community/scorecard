@@ -26,8 +26,8 @@ export default function RegisterAccountForm() {
     router.push(`/assignments/${data.id}`);
   };
 
-  const submitEmailChange = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitEmailChange = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await submitEmail();
   };
 
