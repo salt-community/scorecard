@@ -6,6 +6,8 @@ import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.mapper.AssignmentMapper;
+import se.salt.server2.domain.assignment.models.AssignmentCategory;
+import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import se.salt.server2.domain.assignment.repository.AssignmentRepository;
 
 import java.util.UUID;
@@ -26,5 +28,15 @@ public class AssignmentService {
 
     public AssignmentResponse getAssignmentById(UUID assignmentId) {
         return assignmentMapper.mapToAssignmentResponse(assignmentRepository.findById(assignmentId).orElseThrow());
+    }
+
+    public AssignmentResponse updateAssignmentById(UUID assignmentId, AssignmentRequest assignmentRequest) {
+        AssignmentEntity assignment = assignmentRepository.findById(assignmentId).orElseThrow();
+        assignment.setTitle(assignmentRequest.title());
+        assignment.setScore(assignmentRequest.score());
+        assignment.setDescription(assignmentRequest.description());
+        assignment.setCategory(AssignmentCategory.valueOf(assignmentRequest.category()));
+
+        return assignmentMapper.mapToAssignmentResponse(assignment);
     }
 }

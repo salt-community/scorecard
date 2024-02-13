@@ -36,4 +36,9 @@ public class AssignmentController {
     public AssignmentResponse getAssignment(@PathVariable("assignmentId") UUID id) {
         return assignmentService.getAssignmentById(id);
     }
+
+    @PutMapping(path = "/{assignmentId}")
+    public AssignmentResponse updateAssignment(@PathVariable("assignmentId") UUID id, AssignmentRequest assignmentRequest) {
+        return assignmentService.updateAssignmentById(id, assignmentRequest);
+    }
 }
