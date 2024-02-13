@@ -14,6 +14,8 @@ import java.util.UUID;
 @UtilityClass
 public class TestData {
     public static final String BASE_URL_ACCOUNT = "/api/v2/account";
+
+    public static final String BASE_URL_ASSIGNMENT = "/api/v2/assignments";
     public static final String MOCK_EMAIL = "carl@appliedtechnology.se";
 
     public static AccountRequest createNewAccountRequest() {

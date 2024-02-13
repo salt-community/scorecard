@@ -28,12 +28,14 @@ public class AssignmentServiceTest {
 
     @Mock
     private AssignmentMapper assignmentMapper;
+
     @InjectMocks
     private AssignmentService assignmentService;
 
 
     @Test
     void shouldCreateAssignment() {
+
         AssignmentEntity assignmentEntity = TestData.createNewAssignmentEntity();
         AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
         AssignmentResponse expectedResponse = TestData.createnewAssignmentResponse();
@@ -69,6 +71,7 @@ public class AssignmentServiceTest {
 
     @Test
     void shouldFindAssignmentbyId() {
+
         UUID assignmentId = UUID.randomUUID();
         AssignmentEntity assignmentEntity = TestData.createNewAssignmentEntity();
         assignmentEntity.setId(assignmentId);
