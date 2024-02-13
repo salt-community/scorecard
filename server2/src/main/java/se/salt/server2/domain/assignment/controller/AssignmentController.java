@@ -11,10 +11,12 @@ import se.salt.server2.domain.assignment.service.AssignmentService;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v2/assignments")
+@CrossOrigin("*")
 public class AssignmentController {
     private final AssignmentService assignmentService;
 
@@ -34,5 +36,16 @@ public class AssignmentController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public AssignmentResponse getAssignment(@PathVariable("assignmentId") UUID id) {
         return assignmentService.getAssignmentById(id);
+    }
+
+    @PutMapping(path = "/{assignmentId}")
+    public AssignmentResponse updateAssignment(@PathVariable("assignmentId") UUID id, AssignmentRequest assignmentRequest) {
+        return assignmentService.updateAssignmentById(id, assignmentRequest);
+    }
+
+    @DeleteMapping(path = "/{assignmentId}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteAssignment(@PathVariable("assignmentId") UUID id) {
+        assignmentService.deleteAssignmentById(id);
     }
 }

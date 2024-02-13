@@ -1,6 +1,5 @@
 package se.salt.server2.domain.account.controller;
 
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +16,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RestController
 @RequestMapping("api/v2/accounts")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AccountController {
 
     private final AccountService accountService;

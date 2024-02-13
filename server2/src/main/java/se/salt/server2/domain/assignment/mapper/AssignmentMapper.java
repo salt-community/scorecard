@@ -18,13 +18,14 @@ public class AssignmentMapper {
                 .title(assignmentRequest.title())
                 .score(assignmentRequest.score())
                 .description(assignmentRequest.description())
-                .category(AssignmentCategory.valueOf(assignmentRequest.category()))
+                .category(AssignmentCategory.fromString(assignmentRequest.category()))
                 .build();
     }
 
     public AssignmentResponse mapToAssignmentResponse(AssignmentEntity assignmentEntity) {
         return AssignmentResponse.builder()
                 .assignmentId(assignmentEntity.getId())
+                .accountID(assignmentEntity.getAccountId())
                 .title(assignmentEntity.getTitle())
                 .score(assignmentEntity.getScore())
                 .description(assignmentEntity.getDescription())
