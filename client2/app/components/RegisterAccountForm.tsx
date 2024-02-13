@@ -5,9 +5,10 @@ import { useState } from "react";
 export default function RegisterAccountForm() {
   const [emailAddress, setEmailAddress] = useState("");
   const [id, setId] = useState("");
-  const handleEmailChange = (e: any) => {
-    e.preventDefault();
-    setEmailAddress(e.target.value);
+  
+  const handleEmailChange = (event: any) => {
+    event.preventDefault();
+    setEmailAddress(event.target.value);
   };
   const router = useRouter();
 
@@ -26,8 +27,8 @@ export default function RegisterAccountForm() {
     router.push(`/assignments/${data.id}`);
   };
 
-  const submitEmailChange = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitEmailChange = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await submitEmail();
   };
 

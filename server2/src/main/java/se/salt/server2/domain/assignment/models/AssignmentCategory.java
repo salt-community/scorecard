@@ -1,5 +1,9 @@
 package se.salt.server2.domain.assignment.models;
 
+import se.salt.server2.exception.EnumDoesNotExist;
+
+import java.util.EnumSet;
+
 public enum AssignmentCategory {
     BACKEND("Backend"),
     FRONTEND("Frontend");
@@ -9,16 +13,15 @@ public enum AssignmentCategory {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
+    public static AssignmentCategory fromString(String text) {
+        return EnumSet.allOf(AssignmentCategory.class)
+                .stream()
+                .filter(assignmentCategory -> assignmentCategory.value.equalsIgnoreCase(text))
+                .findFirst()
+                .orElseThrow(() -> new EnumDoesNotExist(text));
     }
 
-    public static AssignmentCategory fromString(String text) {
-        for (AssignmentCategory category : AssignmentCategory.values()) {
-            if (category.value.equalsIgnoreCase(text)) {
-                return category;
-            }
-        }
-        throw new IllegalArgumentException("No constant with text " + text + " found");
+    public String getValue() {
+        return value;
     }
 }
