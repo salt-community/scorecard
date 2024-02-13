@@ -4,6 +4,9 @@ import lombok.experimental.UtilityClass;
 import se.salt.server2.domain.account.controller.dto.AccountRequest;
 import se.salt.server2.domain.account.controller.dto.AccountResponse;
 import se.salt.server2.domain.account.models.AccountEntity;
+import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
+import se.salt.server2.domain.assignment.models.AssignmentCategory;
+import se.salt.server2.domain.assignment.models.AssignmentEntity;
 
 import java.util.UUID;
 
@@ -33,4 +36,27 @@ public class TestData {
                 .emailAddress(MOCK_EMAIL)
                 .build();
     }
+
+    public static AssignmentRequest createNewAssignmentRequest() {
+        return AssignmentRequest.builder()
+                .accountId(UUID.randomUUID())
+                .category("Backend")
+                .description("Build api")
+                .score(10)
+                .title("Weekend test 1")
+                .build();
+    }
+
+    public static AssignmentEntity createNewAssignmentEntity() {
+        return AssignmentEntity.builder()
+                .id(UUID.randomUUID())
+                .accountId(UUID.randomUUID())
+                .title("Title")
+                .score(8)
+                .description("Description")
+                .category(AssignmentCategory.FRONTEND)
+                .build();
+    }
+
+
 }
