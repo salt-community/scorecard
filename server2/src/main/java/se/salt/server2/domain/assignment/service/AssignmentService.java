@@ -42,4 +42,8 @@ public class AssignmentService {
 
         return assignmentMapper.mapToAssignmentResponse(assignment);
     }
+
+    public void deleteAssignmentById(UUID assignmentId) {
+        assignmentRepository.deleteById(assignmentId);
+    }
 }

@@ -11,6 +11,7 @@ import se.salt.server2.domain.assignment.service.AssignmentService;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,5 +41,11 @@ public class AssignmentController {
     @PutMapping(path = "/{assignmentId}")
     public AssignmentResponse updateAssignment(@PathVariable("assignmentId") UUID id, AssignmentRequest assignmentRequest) {
         return assignmentService.updateAssignmentById(id, assignmentRequest);
+    }
+
+    @DeleteMapping(path = "/{assignmentId}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteAssignment(@PathVariable("assignmentId") UUID id) {
+        assignmentService.deleteAssignmentById(id);
     }
 }
