@@ -1,6 +1,5 @@
 package se.salt.server2.domain.developer.models;
 
-import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.exception.EnumDoesNotExist;
 
 import java.util.EnumSet;
