@@ -39,7 +39,7 @@ public class DeveloperController {
     }
 
     @PutMapping(path = "/{developerId}")
-    public DeveloperResponse updateDeveloper(@PathVariable("developerId") UUID id, DeveloperRequest developerRequest) {
+    public DeveloperResponse updateDeveloper(@PathVariable("developerId") UUID id, @RequestBody DeveloperRequest developerRequest) {
         return developerService.updateDeveloperById(id, developerRequest);
     }
 

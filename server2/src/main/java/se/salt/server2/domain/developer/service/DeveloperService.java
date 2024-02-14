@@ -40,7 +40,7 @@ public class DeveloperService {
         developer.setFirstName(developerRequest.firstName());
         developer.setLastName(developerRequest.lastName());
         developer.setEmailAddress(developerRequest.emailAddress());
-//        developer.setBootcampCourse(BootcampCourse.valueOf(developerRequest.bootcampCourse()));
+        developer.setBootcampCourse(BootcampCourse.valueOf(developerRequest.bootcampCourse()));
 
         return developerMapper.mapToDeveloperResponse(developer);
     }
