@@ -5,7 +5,6 @@ import { ListAssignmentsForAccount } from "@/app/components/ListAssignmentsForAc
 export default function AssignmentPage({ params }: { params: { id: string } }) {
   return (
     <>
-      <h1>Hello {params.id}</h1>
       <AddAssignmentForm accountId={params.id} />
       <ListAssignmentsForAccount accountId={params.id} />
     </>
