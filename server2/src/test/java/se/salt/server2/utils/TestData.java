@@ -18,6 +18,8 @@ public class TestData {
     public static final String BASE_URL_ASSIGNMENT = "/api/v2/assignments";
     public static final String MOCK_EMAIL = "carl@appliedtechnology.se";
 
+    public static final String MOCK_UPDATED_EMAIL = "yolo@appliedtechnology.se";
+
     public static AccountRequest createNewAccountRequest() {
         return AccountRequest.builder().emailAddress(MOCK_EMAIL).build();
     }
@@ -39,6 +41,7 @@ public class TestData {
                 .emailAddress(MOCK_EMAIL)
                 .build();
     }
+
 
     public static AssignmentRequest createNewAssignmentRequest() {
         return AssignmentRequest.builder()
@@ -74,3 +77,13 @@ public class TestData {
 
 
 }
+
+    public static AccountRequest updateAccountRequest() {
+        return AccountRequest.builder().emailAddress(MOCK_UPDATED_EMAIL).build();
+    }
+
+    public static AccountResponse updateAccountResponse(UUID accountId) {
+        return AccountResponse.builder().id(accountId).emailAddress(MOCK_UPDATED_EMAIL).build();
+    }
+}
+
