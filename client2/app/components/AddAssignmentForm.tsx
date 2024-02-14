@@ -9,6 +9,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
+import { PostAssignmentFunction } from "@/server";
 
 type AssignmentFormInfo = {
   title: string;
@@ -17,10 +18,16 @@ type AssignmentFormInfo = {
   category: string;
 };
 
+type SubmitAssignmentFunction = (
+  asignment: AssignmentFormInfo
+) => Promise<void>;
+
 export const AddAssignmentForm = ({
   accountId,
+  postAssignment,
 }: {
   accountId: string;
+  postAssignment: PostAssignmentFunction;
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     title: "",
@@ -39,36 +46,23 @@ export const AddAssignmentForm = ({
     });
   };
 
-  const submitAssignment = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload = JSON.stringify({
-      accountId,
-      ...assignment,
-    });
-    const response = await fetch("http://localhost:8080/api/v2/assignments", {
-      method: "POST",
-      body: payload,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = response.json();
+    await postAssignment({ accountId, assignment });
   };
 
   return (
     <div className="h-full">
-      <Card>
+      <Card className="flex mx-10 my-5 px-10">
         <CardHeader>
           <h4 className="font-bold text-large">Input Assignment</h4>
         </CardHeader>
         <form
           id="form"
-          onSubmit={submitAssignment}
+          onSubmit={handleSubmit}
           className="flex flex-col h-full justify-start gap-4"
         >
-          <div className=" w-full p-4 flex flex-col gap-4">
-            <div className="flex flex-row gap-4 w-full">
+          <div className=" w-full p-4 flex flex-row gap-4">
               <Input
                 type="text"
                 id="title"
@@ -99,23 +93,29 @@ export const AddAssignmentForm = ({
               label="Description :"
               labelPlacement="outside"
               placeholder="Enter description"
+              className="w-72"
               value={assignment.description}
               onChange={handleInputChange}
             />
-          </div>
-          <Select 
-          id="category" 
-          name="category"
-          label="Category :"
-          labelPlacement="outside"
-          placeholder="Please choose a category..." 
-          onChange={handleInputChange}>
-            <SelectItem key="category-backend" value={"Backend"}>Backend</SelectItem>
-            <SelectItem key="category-frontend" value={"Frontend"}>Frontend</SelectItem>
+          <Select
+            id="category"
+            name="category"
+            label="Category :"
+            labelPlacement="outside"
+            placeholder="Please choose a category..."
+            className="w-72"
+            onChange={handleInputChange}
+          >
+            <SelectItem key="Backend" value={"Backend"}>
+              Backend
+            </SelectItem>
+            <SelectItem key="Frontend" value={"Frontend"}>
+              Frontend
+            </SelectItem>
           </Select>
           <div className="flex flex-row justify-center">
             <Button
-              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded mb-5"
               placeholder={undefined}
               type="submit"
             >
