@@ -2,7 +2,6 @@ package se.salt.server2.domain.assignment.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import se.salt.server2.domain.account.models.AccountEntity;
 
 import java.util.UUID;
 
