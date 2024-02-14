@@ -17,7 +17,7 @@ public class DeveloperMapper {
                 .firstName(developerRequest.firstName())
                 .LastName(developerRequest.lastName())
                 .emailAddress(developerRequest.emailAddress())
-                .bootcampCourse(BootcampCourse.valueOf(developerRequest.bootcampCourse()))
+                .bootcampCourse(BootcampCourse.fromString(developerRequest.bootcampCourse()))
                 .build();
     }
 
