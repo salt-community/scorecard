@@ -1,8 +1,18 @@
 import React, { ReactNode, useState } from "react";
 
+import {
+  Card,
+  CardHeader,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+} from "@nextui-org/react";
+import { Button } from "@material-tailwind/react";
+
 type AssignmentFormInfo = {
   title: string;
-  score: number;
+  score: string;
   description: string;
   category: string;
 };
@@ -14,7 +24,7 @@ export const AddAssignmentForm = ({
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     title: "",
-    score: 0,
+    score: "",
     description: "",
     category: "",
   });
@@ -47,40 +57,73 @@ export const AddAssignmentForm = ({
   };
 
   return (
-    <>
-      <form onSubmit={submitAssignment}>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={assignment.title}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="score">Score:</label>
-        <input
-          type="number"
-          id="score"
-          name="score"
-          value={assignment.score}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="description">Description:</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          value={assignment.description}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="category">Category:</label>
-        <select id="category" name="category" onChange={handleInputChange}>
-          <option>Select...</option>
-          <option value={"Backend"}>Backend</option>
-          <option value={"Frontend"}>Frontend</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <div className="h-full">
+      <Card>
+        <CardHeader>
+          <h4 className="font-bold text-large">Input Assignment</h4>
+        </CardHeader>
+        <form
+          id="form"
+          onSubmit={submitAssignment}
+          className="flex flex-col h-full justify-start gap-4"
+        >
+          <div className=" w-full p-4 flex flex-col gap-4">
+            <div className="flex flex-row gap-4 w-full">
+              <Input
+                type="text"
+                id="title"
+                name="title"
+                label="Title :"
+                labelPlacement="outside-left"
+                placeholder="Enter title"
+                value={assignment.title}
+                onChange={handleInputChange}
+                className="w-72"
+              />
+              <Input
+                type="text"
+                id="score"
+                name="score"
+                label="Score :"
+                labelPlacement="outside-left"
+                placeholder="Enter score"
+                value={assignment.score}
+                onChange={handleInputChange}
+                className="w-72"
+              />
+            </div>
+            <Textarea
+              type="text"
+              id="description"
+              name="description"
+              label="Description :"
+              labelPlacement="outside"
+              placeholder="Enter description"
+              value={assignment.description}
+              onChange={handleInputChange}
+            />
+          </div>
+          <Select 
+          id="category" 
+          name="category"
+          label="Category :"
+          labelPlacement="outside"
+          placeholder="Please choose a category..." 
+          onChange={handleInputChange}>
+            <SelectItem key="category-backend" value={"Backend"}>Backend</SelectItem>
+            <SelectItem key="category-frontend" value={"Frontend"}>Frontend</SelectItem>
+          </Select>
+          <div className="flex flex-row justify-center">
+            <Button
+              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded"
+              placeholder={undefined}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 };
