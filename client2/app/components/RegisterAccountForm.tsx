@@ -40,7 +40,7 @@ export default function RegisterAccountForm() {
         <Link href={`/`}>
           <Typography
             variant="h2"
-            className="font-bold text-5xl pb-8"
+            className="text-accent font-bold text-5xl pb-8"
             placeholder={undefined}
           >
             Scorecard
@@ -63,7 +63,7 @@ export default function RegisterAccountForm() {
             className="w-80"
           />
           <Button 
-          className="bg-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded w-24 mx-auto"
+          className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded w-24 mx-auto"
            placeholder={undefined}
           type="submit">Submit</Button>
         </form>
