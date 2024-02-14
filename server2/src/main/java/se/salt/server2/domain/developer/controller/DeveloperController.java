@@ -11,6 +11,7 @@ import se.salt.server2.domain.developer.service.DeveloperService;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,4 +38,14 @@ public class DeveloperController {
         return developerService.getDeveloperById(id);
     }
 
+    @PutMapping(path = "/{developerId}")
+    public DeveloperResponse updateDeveloper(@PathVariable("developerId") UUID id, DeveloperRequest developerRequest) {
+        return developerService.updateDeveloperById(id, developerRequest);
+    }
+
+    @DeleteMapping(path = "/{developerId}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteDeveloper(@PathVariable("developerId") UUID id) {
+        developerService.deleteDeveloperById(id);
+    }
 }

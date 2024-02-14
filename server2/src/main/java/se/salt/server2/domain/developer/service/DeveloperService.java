@@ -6,6 +6,8 @@ import se.salt.server2.domain.developer.controller.dto.DeveloperRequest;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponse;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponses;
 import se.salt.server2.domain.developer.mapper.DeveloperMapper;
+import se.salt.server2.domain.developer.models.BootcampCourse;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
 import se.salt.server2.domain.developer.repository.DeveloperRepository;
 import se.salt.server2.exception.DeveloperDoesNotExistException;
 
@@ -33,5 +35,17 @@ public class DeveloperService {
                 .orElseThrow(() -> new DeveloperDoesNotExistException(developerId)));
     }
 
+    public DeveloperResponse updateDeveloperById(UUID developerId, DeveloperRequest developerRequest) {
+        DeveloperEntity developer = developerRepository.findById(developerId).orElseThrow(() -> new DeveloperDoesNotExistException(developerId));
+        developer.setFirstName(developerRequest.firstName());
+        developer.setLastName(developerRequest.lastName());
+        developer.setEmailAddress(developerRequest.emailAddress());
+//        developer.setBootcampCourse(BootcampCourse.valueOf(developerRequest.bootcampCourse()));
 
+        return developerMapper.mapToDeveloperResponse(developer);
+    }
+
+    public void deleteDeveloperById(UUID developerId) {
+        developerRepository.deleteById(developerId);
+    }
 }
