@@ -1,9 +1,6 @@
 package se.salt.server2.domain.developer.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -26,4 +23,7 @@ public class DeveloperEntity {
     String LastName;
 
     String emailAddress;
+
+    @Enumerated(EnumType.STRING)
+    BootcampCourse bootcampCourse;
 }
