@@ -11,6 +11,11 @@ import {
 import { Button } from "@material-tailwind/react";
 import { PostAssignmentFunction } from "@/server";
 
+type AssignmentFormProps = {
+  accountId: string;
+  postAssignment: PostAssignmentFunction;
+};
+
 type AssignmentFormInfo = {
   title: string;
   score: string;
@@ -22,13 +27,10 @@ type SubmitAssignmentFunction = (
   asignment: AssignmentFormInfo
 ) => Promise<void>;
 
-export const AddAssignmentForm = ({
+export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
   accountId,
   postAssignment,
-}: {
-  accountId: string;
-  postAssignment: PostAssignmentFunction;
-}): ReactNode => {
+) => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     title: "",
     score: "",
@@ -63,40 +65,40 @@ export const AddAssignmentForm = ({
           className="flex flex-col h-full justify-start gap-4"
         >
           <div className=" w-full p-4 flex flex-row gap-4">
-              <Input
-                type="text"
-                id="title"
-                name="title"
-                label="Title :"
-                labelPlacement="outside-left"
-                placeholder="Enter title"
-                value={assignment.title}
-                onChange={handleInputChange}
-                className="w-72"
-              />
-              <Input
-                type="text"
-                id="score"
-                name="score"
-                label="Score :"
-                labelPlacement="outside-left"
-                placeholder="Enter score"
-                value={assignment.score}
-                onChange={handleInputChange}
-                className="w-72"
-              />
-            </div>
-            <Textarea
+            <Input
               type="text"
-              id="description"
-              name="description"
-              label="Description :"
-              labelPlacement="outside"
-              placeholder="Enter description"
-              className="w-72"
-              value={assignment.description}
+              id="title"
+              name="title"
+              label="Title :"
+              labelPlacement="outside-left"
+              placeholder="Enter title"
+              value={assignment.title}
               onChange={handleInputChange}
+              className="w-72"
             />
+            <Input
+              type="text"
+              id="score"
+              name="score"
+              label="Score :"
+              labelPlacement="outside-left"
+              placeholder="Enter score"
+              value={assignment.score}
+              onChange={handleInputChange}
+              className="w-72"
+            />
+          </div>
+          <Textarea
+            type="text"
+            id="description"
+            name="description"
+            label="Description :"
+            labelPlacement="outside"
+            placeholder="Enter description"
+            className="w-72"
+            value={assignment.description}
+            onChange={handleInputChange}
+          />
           <Select
             id="category"
             name="category"
