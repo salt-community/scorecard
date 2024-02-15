@@ -1,1 +1,1 @@
-export * from "./postAssignment";
+export * from "./route";
