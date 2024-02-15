@@ -1,20 +1,37 @@
 import React, { ReactNode, useState } from "react";
 
+import {
+  Card,
+  CardHeader,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+} from "@nextui-org/react";
+import { Button } from "@material-tailwind/react";
+import { PostAssignmentFunction } from "@/server";
+
 type AssignmentFormInfo = {
   title: string;
-  score: number;
+  score: string;
   description: string;
   category: string;
 };
 
+type SubmitAssignmentFunction = (
+  asignment: AssignmentFormInfo
+) => Promise<void>;
+
 export const AddAssignmentForm = ({
   accountId,
+  postAssignment,
 }: {
   accountId: string;
+  postAssignment: PostAssignmentFunction;
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     title: "",
-    score: 0,
+    score: "",
     description: "",
     category: "",
   });
@@ -29,58 +46,84 @@ export const AddAssignmentForm = ({
     });
   };
 
-  const submitAssignment = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload = JSON.stringify({
-      accountId,
-      ...assignment,
-    });
-    const response = await fetch("http://localhost:8080/api/v2/assignments", {
-      method: "POST",
-      body: payload,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = response.json();
+    await postAssignment({ accountId, assignment });
   };
 
   return (
-    <>
-      <form onSubmit={submitAssignment}>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={assignment.title}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="score">Score:</label>
-        <input
-          type="number"
-          id="score"
-          name="score"
-          value={assignment.score}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="description">Description:</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          value={assignment.description}
-          onChange={handleInputChange}
-        ></input>
-        <label htmlFor="category">Category:</label>
-        <select id="category" name="category" onChange={handleInputChange}>
-          <option>Select...</option>
-          <option value={"Backend"}>Backend</option>
-          <option value={"Frontend"}>Frontend</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <div className="h-full">
+      <Card className="flex mx-10 my-5 px-10">
+        <CardHeader>
+          <h4 className="font-bold text-large">Input Assignment</h4>
+        </CardHeader>
+        <form
+          id="form"
+          onSubmit={handleSubmit}
+          className="flex flex-col h-full justify-start gap-4"
+        >
+          <div className=" w-full p-4 flex flex-row gap-4">
+              <Input
+                type="text"
+                id="title"
+                name="title"
+                label="Title :"
+                labelPlacement="outside-left"
+                placeholder="Enter title"
+                value={assignment.title}
+                onChange={handleInputChange}
+                className="w-72"
+              />
+              <Input
+                type="text"
+                id="score"
+                name="score"
+                label="Score :"
+                labelPlacement="outside-left"
+                placeholder="Enter score"
+                value={assignment.score}
+                onChange={handleInputChange}
+                className="w-72"
+              />
+            </div>
+            <Textarea
+              type="text"
+              id="description"
+              name="description"
+              label="Description :"
+              labelPlacement="outside"
+              placeholder="Enter description"
+              className="w-72"
+              value={assignment.description}
+              onChange={handleInputChange}
+            />
+          <Select
+            id="category"
+            name="category"
+            label="Category :"
+            labelPlacement="outside"
+            placeholder="Please choose a category..."
+            className="w-72"
+            onChange={handleInputChange}
+          >
+            <SelectItem key="Backend" value={"Backend"}>
+              Backend
+            </SelectItem>
+            <SelectItem key="Frontend" value={"Frontend"}>
+              Frontend
+            </SelectItem>
+          </Select>
+          <div className="flex flex-row justify-center">
+            <Button
+              className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded mb-5"
+              placeholder={undefined}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 };
