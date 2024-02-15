@@ -1,4 +1,4 @@
-package se.salt.server2.domain.assignment.models;
+package se.salt.server2.domain.developer.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,15 +11,19 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "assignment")
-public class AssignmentEntity {
+@Table(name = "developer")
+public class DeveloperEntity {
+
     @Id
     @GeneratedValue
     UUID id;
-    UUID accountId;
-    String title;
-    int score;
-    String description;
+
+    String firstName;
+
+    String LastName;
+
+    String emailAddress;
+
     @Enumerated(EnumType.STRING)
-    AssignmentCategory category;
+    BootcampCourse bootcampCourse;
 }
