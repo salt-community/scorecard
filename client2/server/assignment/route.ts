@@ -1,30 +1,28 @@
+import { AssignmentFormInfo } from "@/app/components/AddAssignmentForm";
 import axios from "axios";
 
 export type PostAssignmentFunction = ({
-  accountId,
   assignment,
 }: {
-  accountId: string;
   assignment: AssignmentFormInfo;
 }) => Promise<void>;
 
-type AssignmentFormInfo = {
+export type AssignmentToSubmit = {
+  developerId: string;
   title: string;
-  score: string;
+  score: number;
   description: string;
   category: string;
 };
 
 export const postAssignment: PostAssignmentFunction = async ({
-  accountId,
   assignment,
 }) => {
   try {
     const payload = {
-      accountId,
       ...assignment,
     };
-    await axios.post("http://localhost:8080/api/v2/assignments", payload, {
+    await axios.post(`http://localhost:8080/api/v2/assignments`, payload, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
