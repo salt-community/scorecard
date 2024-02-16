@@ -1,39 +1,27 @@
 import React, { ReactNode, useState } from "react";
-
-import {
-  Card,
-  CardHeader,
-  Input,
-  Select,
-  SelectItem,
-  Textarea,
-} from "@nextui-org/react";
+import { Card, CardHeader, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
 import { PostAssignmentFunction } from "@/server";
 
-type AssignmentFormProps = {
-  accountId: string;
-  postAssignment: PostAssignmentFunction;
-};
-
-type AssignmentFormInfo = {
+export type AssignmentFormInfo = {
+  developerId: string;
   title: string;
-  score: string;
+  score: number;
   description: string;
   category: string;
 };
 
-type SubmitAssignmentFunction = (
-  asignment: AssignmentFormInfo
-) => Promise<void>;
-
-export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
-  accountId,
+export const AddAssignmentForm = ({
+  developerId,
   postAssignment,
-) => {
+}: {
+  developerId: string;
+  postAssignment: PostAssignmentFunction;
+}): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
+    developerId: developerId,
     title: "",
-    score: "",
+    score: 0,
     description: "",
     category: "",
   });
@@ -50,8 +38,11 @@ export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await postAssignment({ accountId, assignment });
+    await postAssignment({assignment});
+    console.log("here dumbass");
   };
+
+  console.log(assignment);
 
   return (
     <div className="h-full">
@@ -83,7 +74,7 @@ export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
               label="Score :"
               labelPlacement="outside-left"
               placeholder="Enter score"
-              value={assignment.score}
+              value={assignment.score.toString()}
               onChange={handleInputChange}
               className="w-72"
             />
