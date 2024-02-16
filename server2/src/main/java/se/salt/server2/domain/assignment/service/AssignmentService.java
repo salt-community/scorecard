@@ -33,6 +33,12 @@ public class AssignmentService {
                 .orElseThrow(() -> new AssignmentDoesNotExistException(assignmentId)));
     }
 
+    public AssignmentResponses getAssignmentsByDeveloperId(UUID developerId) {
+        return assignmentMapper.mapToAssignmentResponses(
+                assignmentRepository.findByDeveloperId(developerId)
+        );
+    }
+
     public AssignmentResponse updateAssignmentById(UUID assignmentId, AssignmentRequest assignmentRequest) {
         AssignmentEntity assignment = assignmentRepository.findById(assignmentId).orElseThrow(() -> new AssignmentDoesNotExistException(assignmentId));
         assignment.setTitle(assignmentRequest.title());
