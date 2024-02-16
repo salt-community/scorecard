@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Card } from "@material-tailwind/react";
+import {Card } from "@material-tailwind/react";
 
 type Assignment = {
   assignmentId: string;
@@ -12,12 +12,12 @@ type Assignment = {
 };
 
 export const ListAssignmentsForAccount = async ({
-  accountId,
+  developerId,
 }: {
-  accountId: string;
+  developerId: string;
 }) => {
   const response = await fetch(
-    `http://localhost:8080/api/v2/assignments?accountId=${accountId}`,
+    `http://localhost:8080/api/v2/assignments/developer/${developerId}`,
     {
       cache: "no-cache",
       method: "GET",
