@@ -9,55 +9,46 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
-import { PostAssignmentFunction } from "@/server";
+import {
+  DeveloperFormInfo,
+  PostDeveloperFunction,
+  postDeveloper,
+} from "@/server";
 
-type AssignmentFormProps = {
-  accountId: string;
-  postAssignment: PostAssignmentFunction;
-};
+type SubmitAssignmentFunction = (developer: DeveloperFormInfo) => Promise<void>;
 
-type AssignmentFormInfo = {
-  title: string;
-  score: string;
-  description: string;
-  category: string;
-};
-
-type SubmitAssignmentFunction = (
-  asignment: AssignmentFormInfo
-) => Promise<void>;
-
-export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
-  accountId,
-  postAssignment,
-) => {
-  const [assignment, setAssignment] = useState<AssignmentFormInfo>({
-    title: "",
-    score: "",
-    description: "",
-    category: "",
+export const AddDeveloperForm = ({
+  postDeveloper,
+}: {
+  postDeveloper: PostDeveloperFunction;
+}): ReactNode => {
+  const [developer, setDeveloper] = useState<DeveloperFormInfo>({
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    bootcampCourse: "",
   });
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setAssignment({
-      ...assignment,
-      [name]: name === "score" ? Number(value) : value,
+    setDeveloper({
+      ...developer,
+      [name]: value
     });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await postAssignment({ accountId, assignment });
+    await postDeveloper({ developer });
   };
 
   return (
     <div className="h-full">
       <Card className="flex mx-10 my-5 px-10">
         <CardHeader>
-          <h4 className="font-bold text-large">Input Assignment</h4>
+          <h4 className="font-bold text-large">Add new Developer</h4>
         </CardHeader>
         <form
           id="form"
@@ -67,52 +58,55 @@ export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
           <div className=" w-full p-4 flex flex-row gap-4">
             <Input
               type="text"
-              id="title"
-              name="title"
-              label="Title :"
+              id="firstName"
+              name="firstName"
+              label="First Name :"
               labelPlacement="outside-left"
               placeholder="Enter title"
-              value={assignment.title}
+              value={developer.firstName}
               onChange={handleInputChange}
               className="w-72"
             />
             <Input
               type="text"
-              id="score"
-              name="score"
-              label="Score :"
+              id="lastName"
+              name="lastName"
+              label="Last Name :"
               labelPlacement="outside-left"
               placeholder="Enter score"
-              value={assignment.score}
+              value={developer.lastName}
+              onChange={handleInputChange}
+              className="w-72"
+            />
+            <Input
+              type="text"
+              id="emailAddress"
+              name="emailAddress"
+              label="Email :"
+              labelPlacement="outside-left"
+              placeholder="Enter score"
+              value={developer.emailAddress}
               onChange={handleInputChange}
               className="w-72"
             />
           </div>
-          <Textarea
-            type="text"
-            id="description"
-            name="description"
-            label="Description :"
-            labelPlacement="outside"
-            placeholder="Enter description"
-            className="w-72"
-            value={assignment.description}
-            onChange={handleInputChange}
-          />
           <Select
-            id="category"
-            name="category"
-            label="Category :"
+            id="bootcampCourse"
+            name="bootcampCourse"
+            label="Bootcamp :"
             labelPlacement="outside"
-            placeholder="Please choose a category..."
+            placeholder="Please choose a bootcamp..."
             className="w-72"
             onChange={handleInputChange}
           >
-            <SelectItem key="Backend" value={"Backend"}>
-              Backend
+            <SelectItem key="Javascript" value={"Javascript"}>
+              Javascript
             </SelectItem>
-            <SelectItem key="Frontend" value={"Frontend"}>
-              Frontend
+            <SelectItem key="Java" value={"Java"}>
+              Java
+            </SelectItem>
+            <SelectItem key=".Net" value={".Net"}>
+              .Net
             </SelectItem>
           </Select>
           <div className="flex flex-row justify-center">
@@ -121,7 +115,7 @@ export const AddAssignmentForm: React.FC<AssignmentFormProps> = (
               placeholder={undefined}
               type="submit"
             >
-              Submit
+              ADD
             </Button>
           </div>
         </form>
