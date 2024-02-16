@@ -6,16 +6,12 @@ import {
   Input,
   Select,
   SelectItem,
-  Textarea,
 } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
 import {
   DeveloperFormInfo,
   PostDeveloperFunction,
-  postDeveloper,
 } from "@/server";
-
-type SubmitAssignmentFunction = (developer: DeveloperFormInfo) => Promise<void>;
 
 export const AddDeveloperForm = ({
   postDeveloper,
