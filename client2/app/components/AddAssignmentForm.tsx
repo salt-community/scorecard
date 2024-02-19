@@ -1,5 +1,12 @@
 import React, { ReactNode, useState } from "react";
-import { Card, CardHeader, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+} from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
 import { PostAssignmentFunction } from "@/server";
 
@@ -38,7 +45,7 @@ export const AddAssignmentForm = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await postAssignment({assignment});
+    await postAssignment({ assignment });
     console.log("here dumbass");
   };
 
