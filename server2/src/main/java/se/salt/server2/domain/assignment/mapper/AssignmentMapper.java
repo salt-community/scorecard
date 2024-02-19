@@ -1,20 +1,31 @@
 package se.salt.server2.domain.assignment.mapper;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
+import se.salt.server2.domain.developer.repository.DeveloperRepository;
 
 import java.util.List;
 
 @Component
 public class AssignmentMapper {
 
-    public AssignmentEntity mapToAssignmentEntity(AssignmentRequest assignmentRequest) {
+
+
+
+
+    public AssignmentEntity mapToAssignmentEntity(AssignmentRequest assignmentRequest, DeveloperEntity developer) {
+
         return AssignmentEntity.builder()
-                .accountId(assignmentRequest.accountId())
+                .developer(developer)
                 .title(assignmentRequest.title())
                 .score(assignmentRequest.score())
                 .description(assignmentRequest.description())
@@ -25,7 +36,7 @@ public class AssignmentMapper {
     public AssignmentResponse mapToAssignmentResponse(AssignmentEntity assignmentEntity) {
         return AssignmentResponse.builder()
                 .assignmentId(assignmentEntity.getId())
-                .accountID(assignmentEntity.getAccountId())
+                .developerId(assignmentEntity.getDeveloper().getId())
                 .title(assignmentEntity.getTitle())
                 .score(assignmentEntity.getScore())
                 .description(assignmentEntity.getDescription())

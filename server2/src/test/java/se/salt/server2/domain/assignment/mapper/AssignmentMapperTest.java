@@ -11,6 +11,8 @@ import se.salt.server2.utils.TestData;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static se.salt.server2.utils.TestData.createNewDeveloperEntity;
+
 import java.util.List;
 
 public class AssignmentMapperTest {
@@ -26,9 +28,9 @@ public class AssignmentMapperTest {
     public void testMapToAssignmentEntity() {
 
         AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
-        AssignmentEntity assignmentEntity = assignmentMapper.mapToAssignmentEntity(assignmentRequest);
+        AssignmentEntity assignmentEntity = assignmentMapper.mapToAssignmentEntity(assignmentRequest, createNewDeveloperEntity());
 
-        assertEquals(assignmentRequest.accountId(), assignmentEntity.getAccountId());
+        assertEquals(assignmentRequest.developerId(), assignmentEntity.getDeveloper().getId());
         assertEquals("Weekend test 1", assignmentEntity.getTitle());
         assertEquals(10, assignmentEntity.getScore());
         assertEquals("Build api", assignmentEntity.getDescription());
@@ -41,7 +43,7 @@ public class AssignmentMapperTest {
         AssignmentEntity assignmentEntity = TestData.createNewAssignmentEntity();
         AssignmentResponse assignmentResponse = assignmentMapper.mapToAssignmentResponse(assignmentEntity);
 
-        assertEquals(assignmentEntity.getAccountId(), assignmentResponse.accountID());
+        assertEquals(assignmentEntity.getDeveloper().getId(), assignmentResponse.developerId());
         assertEquals(assignmentEntity.getId(), assignmentResponse.assignmentId());
         assertEquals(assignmentEntity.getTitle(), assignmentResponse.title());
         assertEquals(assignmentEntity.getScore(), assignmentResponse.score());
@@ -61,7 +63,7 @@ public class AssignmentMapperTest {
         assertThat(assignmentResponses.assignmentResponseList()).hasSize(2);
         assertThat(assignmentResponses.assignmentResponseList().get(0)).isInstanceOf(AssignmentResponse.class);
         assertEquals(assignmentResponse.assignmentId(), assignmentEntity.getId());
-        assertEquals(assignmentResponse.accountID(), assignmentEntity.getAccountId());
+        assertEquals(assignmentResponse.developerId(), assignmentEntity.getDeveloper().getId());
         assertEquals(assignmentResponse.title(), assignmentEntity.getTitle());
         assertEquals(assignmentResponse.score(), assignmentEntity.getScore());
         assertEquals(assignmentResponse.description(), assignmentEntity.getDescription());
