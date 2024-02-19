@@ -14,6 +14,7 @@ public class DeveloperMapper {
 
     public DeveloperEntity mapToDeveloperEntity(DeveloperRequest developerRequest) {
         return DeveloperEntity.builder()
+                .accountId(developerRequest.accountId())
                 .firstName(developerRequest.firstName())
                 .LastName(developerRequest.lastName())
                 .emailAddress(developerRequest.emailAddress())
