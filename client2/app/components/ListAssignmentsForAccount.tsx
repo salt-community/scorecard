@@ -27,7 +27,6 @@ export const ListAssignmentsForAccount = ({
 
   const fetchAllAssignments = () => {
     fetch(`http://localhost:8080/api/v2/assignments/developer/${developerId}`, {
-      //cache: "no-cache",
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*",
