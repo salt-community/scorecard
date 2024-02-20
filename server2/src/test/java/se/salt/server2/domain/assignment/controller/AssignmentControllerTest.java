@@ -39,7 +39,7 @@ public class AssignmentControllerTest {
     @SneakyThrows
     void shouldReturnCreatedAssignmentAndReturn201Created() {
 
-        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
+        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest(UUID.randomUUID());
 
         when(assignmentService.createAssignment(assignmentRequest)).thenReturn(TestData.createnewAssignmentResponse());
 

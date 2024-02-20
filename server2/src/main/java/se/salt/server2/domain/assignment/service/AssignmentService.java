@@ -22,6 +22,7 @@ public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
     private final AssignmentMapper assignmentMapper;
     private final DeveloperRepository developerRepository;
+
     public AssignmentResponse createAssignment(AssignmentRequest assignmentRequest) {
         DeveloperEntity developer = developerRepository.findById(assignmentRequest.developerId())
                 .orElseThrow(() -> new DeveloperDoesNotExistException(assignmentRequest.developerId()));

@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @UtilityClass
 public class TestData {
-    public static final String BASE_URL_ACCOUNT = "/api/v2/account";
+    public static final String BASE_URL_ACCOUNT = "/api/v2/accounts";
 
     public static final String BASE_URL_ASSIGNMENT = "/api/v2/assignments";
     public static final String MOCK_EMAIL = "carl@appliedtechnology.se";
@@ -44,9 +44,9 @@ public class TestData {
     }
 
 
-    public static AssignmentRequest createNewAssignmentRequest() {
+    public static AssignmentRequest createNewAssignmentRequest(UUID developerId) {
         return AssignmentRequest.builder()
-                .developerId(UUID.randomUUID())
+                .developerId(developerId)
                 .category("Backend")
                 .description("Build api")
                 .score(10)
@@ -90,6 +90,13 @@ public class TestData {
     public static DeveloperEntity createNewDeveloperEntity() {
         return DeveloperEntity.builder()
                 .id(UUID.randomUUID())
+                .emailAddress(MOCK_EMAIL)
+                .build();
+    }
+
+    public static DeveloperEntity createNewDeveloperEntity(UUID developerId) {
+        return DeveloperEntity.builder()
+                .id(developerId)
                 .emailAddress(MOCK_EMAIL)
                 .build();
     }
