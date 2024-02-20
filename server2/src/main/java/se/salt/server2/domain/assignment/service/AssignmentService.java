@@ -9,7 +9,10 @@ import se.salt.server2.domain.assignment.mapper.AssignmentMapper;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import se.salt.server2.domain.assignment.repository.AssignmentRepository;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
+import se.salt.server2.domain.developer.repository.DeveloperRepository;
 import se.salt.server2.exception.AssignmentDoesNotExistException;
+import se.salt.server2.exception.DeveloperDoesNotExistException;
 
 import java.util.UUID;
 
@@ -18,9 +21,11 @@ import java.util.UUID;
 public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
     private final AssignmentMapper assignmentMapper;
-
+    private final DeveloperRepository developerRepository;
     public AssignmentResponse createAssignment(AssignmentRequest assignmentRequest) {
-        return assignmentMapper.mapToAssignmentResponse(assignmentRepository.save(assignmentMapper.mapToAssignmentEntity(assignmentRequest)));
+        DeveloperEntity developer = developerRepository.findById(assignmentRequest.developerId())
+                .orElseThrow(() -> new DeveloperDoesNotExistException(assignmentRequest.developerId()));
+        return assignmentMapper.mapToAssignmentResponse(assignmentRepository.save(assignmentMapper.mapToAssignmentEntity(assignmentRequest, developer)));
     }
 
     public AssignmentResponses getAllAssignments() {
@@ -35,16 +40,19 @@ public class AssignmentService {
 
     public AssignmentResponses getAssignmentsByDeveloperId(UUID developerId) {
         return assignmentMapper.mapToAssignmentResponses(
-                assignmentRepository.findByDeveloperId(developerId)
+                assignmentRepository.findAllByDeveloperId(developerId)
         );
     }
 
     public AssignmentResponse updateAssignmentById(UUID assignmentId, AssignmentRequest assignmentRequest) {
+        DeveloperEntity developer = developerRepository.findById(assignmentRequest.developerId())
+                .orElseThrow(() -> new DeveloperDoesNotExistException(assignmentRequest.developerId()));
         AssignmentEntity assignment = assignmentRepository.findById(assignmentId).orElseThrow(() -> new AssignmentDoesNotExistException(assignmentId));
         assignment.setTitle(assignmentRequest.title());
         assignment.setScore(assignmentRequest.score());
         assignment.setDescription(assignmentRequest.description());
         assignment.setCategory(AssignmentCategory.valueOf(assignmentRequest.category()));
+        assignment.setDeveloper(developer);
 
         return assignmentMapper.mapToAssignmentResponse(assignment);
     }

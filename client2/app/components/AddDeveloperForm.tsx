@@ -1,28 +1,21 @@
 import React, { ReactNode, useState } from "react";
-
-import {
-  Card,
-  CardHeader,
-  Input,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Card, CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
-import {
-  DeveloperFormInfo,
-  PostDeveloperFunction,
-} from "@/server";
+import { DeveloperFormInfo, PostDeveloperFunction } from "@/server";
 
 export const AddDeveloperForm = ({
   postDeveloper,
+  accountId,
 }: {
   postDeveloper: PostDeveloperFunction;
+  accountId: string;
 }): ReactNode => {
   const [developer, setDeveloper] = useState<DeveloperFormInfo>({
     firstName: "",
     lastName: "",
     emailAddress: "",
     bootcampCourse: "",
+    accountId: accountId,
   });
 
   const handleInputChange = (
@@ -31,7 +24,7 @@ export const AddDeveloperForm = ({
     const { name, value } = event.target;
     setDeveloper({
       ...developer,
-      [name]: value
+      [name]: value,
     });
   };
 

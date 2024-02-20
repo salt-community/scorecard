@@ -1,6 +1,5 @@
-import React from "react";
-
-import {Card } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import { Card } from "@material-tailwind/react";
 
 type Assignment = {
   assignmentId: string;
@@ -8,28 +7,36 @@ type Assignment = {
   score: number;
   description: string;
   category: string;
-  accountID: string;
+  developerId: string;
 };
 
-export const ListAssignmentsForAccount = async ({
+export const ListAssignmentsForAccount = ({
   developerId,
 }: {
   developerId: string;
 }) => {
-  const response = await fetch(
-    `http://localhost:8080/api/v2/assignments/developer/${developerId}`,
-    {
-      cache: "no-cache",
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+
+  useEffect(() => {
+    fetchAllAssignments();
+  }, []);
+
+  useEffect(() => {
+    fetchAllAssignments();
+  }, [assignments]);
+
+  const fetchAllAssignments = () => {
+    fetch(`http://localhost:8080/api/v2/assignments/developer/${developerId}`, {
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-    }
-  ).then((res) => res.json());
-
-  const listOfAssignments = response.assignmentResponseList as Assignment[];
-  const filtered = listOfAssignments;
+    })
+      .then((res) => res.json())
+      .then((data) => setAssignments(data.assignmentResponseList))
+      .catch(Error);
+  };
 
   return (
     <>
@@ -58,7 +65,7 @@ export const ListAssignmentsForAccount = async ({
                 </th>
               </tr>
 
-              {filtered.map((a) => (
+              {assignments.map((a) => (
                 <tr
                   key={a.assignmentId}
                   className="even:bg-white odd:bg-gray-100"

@@ -8,6 +8,7 @@ import se.salt.server2.domain.assignment.controller.dto.AssignmentRequest;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class TestData {
 
     public static AssignmentRequest createNewAssignmentRequest() {
         return AssignmentRequest.builder()
-                .accountId(UUID.randomUUID())
+                .developerId(UUID.randomUUID())
                 .category("Backend")
                 .description("Build api")
                 .score(10)
@@ -56,7 +57,7 @@ public class TestData {
     public static AssignmentEntity createNewAssignmentEntity() {
         return AssignmentEntity.builder()
                 .id(UUID.randomUUID())
-                .accountId(UUID.randomUUID())
+                .developer(createNewDeveloperEntity())
                 .title("Title")
                 .score(8)
                 .description("Description")
@@ -67,7 +68,7 @@ public class TestData {
     public static AssignmentResponse createnewAssignmentResponse() {
         return AssignmentResponse.builder()
                 .assignmentId(UUID.randomUUID())
-                .accountID(UUID.randomUUID())
+                .developerId(UUID.randomUUID())
                 .category("Backend")
                 .description("Build api")
                 .score(10)
@@ -76,7 +77,7 @@ public class TestData {
     }
 
 
-}
+
 
     public static AccountRequest updateAccountRequest() {
         return AccountRequest.builder().emailAddress(MOCK_UPDATED_EMAIL).build();
@@ -85,5 +86,13 @@ public class TestData {
     public static AccountResponse updateAccountResponse(UUID accountId) {
         return AccountResponse.builder().id(accountId).emailAddress(MOCK_UPDATED_EMAIL).build();
     }
+
+    public static DeveloperEntity createNewDeveloperEntity() {
+        return DeveloperEntity.builder()
+                .id(UUID.randomUUID())
+                .emailAddress(MOCK_EMAIL)
+                .build();
+    }
+
 }
 

@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
-public record AssignmentRequest(UUID accountId, String title, int score, String description, String category) {
+public record AssignmentRequest(UUID developerId, String title, int score, String description, String category) {
 }

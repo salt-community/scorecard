@@ -8,7 +8,7 @@ export type PostAssignmentFunction = ({
 }) => Promise<void>;
 
 export type AssignmentToSubmit = {
-  developerId: string;
+  accountId: string;
   title: string;
   score: number;
   description: string;
