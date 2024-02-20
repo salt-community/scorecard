@@ -11,6 +11,7 @@ import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static se.salt.server2.utils.TestData.createNewAssignmentEntity;
 
 @DataJpaTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -23,8 +24,7 @@ class AssignmentRepositoryIntegrationTest {
     @SneakyThrows
     void shouldFindByIdAndReturnAssignment() {
 
-        var assignment = new AssignmentEntity(
-                UUID.randomUUID(), UUID.randomUUID(), "Weekend test 1", 86, "Well done!", AssignmentCategory.BACKEND);
+        var assignment = createNewAssignmentEntity();
 
         var assignmentRes = assignmentRepository.save(assignment);
 
