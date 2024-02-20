@@ -11,6 +11,7 @@ import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.mapper.AssignmentMapper;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import se.salt.server2.domain.assignment.repository.AssignmentRepository;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
 import se.salt.server2.utils.TestData;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static se.salt.server2.utils.TestData.createNewDeveloperEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class AssignmentServiceTest {
@@ -39,15 +41,15 @@ public class AssignmentServiceTest {
         AssignmentEntity assignmentEntity = TestData.createNewAssignmentEntity();
         AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
         AssignmentResponse expectedResponse = TestData.createnewAssignmentResponse();
-
-        when(assignmentMapper.mapToAssignmentEntity(assignmentRequest)).thenReturn(assignmentEntity);
+        DeveloperEntity developer = createNewDeveloperEntity();
+        when(assignmentMapper.mapToAssignmentEntity(assignmentRequest, developer)).thenReturn(assignmentEntity);
         when(assignmentRepository.save(assignmentEntity)).thenReturn(assignmentEntity);
         when(assignmentMapper.mapToAssignmentResponse(assignmentEntity)).thenReturn(expectedResponse);
 
         AssignmentResponse actualResponse = assignmentService.createAssignment(assignmentRequest);
 
         assertEquals(expectedResponse, actualResponse);
-        verify(assignmentMapper).mapToAssignmentEntity(assignmentRequest);
+        verify(assignmentMapper).mapToAssignmentEntity(assignmentRequest, developer);
         verify(assignmentRepository).save(assignmentEntity);
         verify(assignmentMapper).mapToAssignmentResponse(assignmentEntity);
     }

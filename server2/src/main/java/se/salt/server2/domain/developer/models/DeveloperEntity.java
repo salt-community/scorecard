@@ -20,6 +20,8 @@ public class DeveloperEntity {
     @GeneratedValue
     UUID id;
 
+    UUID accountId;
+
     String firstName;
 
     String LastName;

@@ -2,6 +2,8 @@ package se.salt.server2.domain.developer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import se.salt.server2.domain.account.models.AccountEntity;
+import se.salt.server2.domain.account.repository.AccountRepository;
 import se.salt.server2.domain.developer.controller.dto.DeveloperRequest;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponse;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponses;
@@ -21,6 +23,7 @@ public class DeveloperService {
 
     private final DeveloperMapper developerMapper;
 
+    private final AccountRepository accountRepository;
     public DeveloperResponses getAllDevelopers() {
         return developerMapper.mapToDeveloperResponses(developerRepository.findAll());
     }
