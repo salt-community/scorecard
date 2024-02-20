@@ -23,7 +23,6 @@ public class DeveloperService {
 
     private final DeveloperMapper developerMapper;
 
-    private final AccountRepository accountRepository;
     public DeveloperResponses getAllDevelopers() {
         return developerMapper.mapToDeveloperResponses(developerRepository.findAll());
     }

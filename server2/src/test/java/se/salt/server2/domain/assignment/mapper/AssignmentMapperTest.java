@@ -7,6 +7,7 @@ import se.salt.server2.domain.assignment.controller.dto.AssignmentResponse;
 import se.salt.server2.domain.assignment.controller.dto.AssignmentResponses;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
+import se.salt.server2.domain.developer.models.DeveloperEntity;
 import se.salt.server2.utils.TestData;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static se.salt.server2.utils.TestData.createNewDeveloperEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class AssignmentMapperTest {
 
@@ -27,8 +29,11 @@ public class AssignmentMapperTest {
     @Test
     public void testMapToAssignmentEntity() {
 
-        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
-        AssignmentEntity assignmentEntity = assignmentMapper.mapToAssignmentEntity(assignmentRequest, createNewDeveloperEntity());
+        UUID developerId = UUID.randomUUID();
+
+        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest(developerId);
+
+        AssignmentEntity assignmentEntity = assignmentMapper.mapToAssignmentEntity(assignmentRequest, createNewDeveloperEntity(developerId));
 
         assertEquals(assignmentRequest.developerId(), assignmentEntity.getDeveloper().getId());
         assertEquals("Weekend test 1", assignmentEntity.getTitle());

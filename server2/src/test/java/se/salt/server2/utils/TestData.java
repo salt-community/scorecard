@@ -44,9 +44,9 @@ public class TestData {
     }
 
 
-    public static AssignmentRequest createNewAssignmentRequest() {
+    public static AssignmentRequest createNewAssignmentRequest(UUID developerId) {
         return AssignmentRequest.builder()
-                .developerId(UUID.randomUUID())
+                .developerId(developerId)
                 .category("Backend")
                 .description("Build api")
                 .score(10)
@@ -90,6 +90,13 @@ public class TestData {
     public static DeveloperEntity createNewDeveloperEntity() {
         return DeveloperEntity.builder()
                 .id(UUID.randomUUID())
+                .emailAddress(MOCK_EMAIL)
+                .build();
+    }
+
+    public static DeveloperEntity createNewDeveloperEntity(UUID developerId) {
+        return DeveloperEntity.builder()
+                .id(developerId)
                 .emailAddress(MOCK_EMAIL)
                 .build();
     }

@@ -12,6 +12,7 @@ import se.salt.server2.domain.assignment.mapper.AssignmentMapper;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 import se.salt.server2.domain.assignment.repository.AssignmentRepository;
 import se.salt.server2.domain.developer.models.DeveloperEntity;
+import se.salt.server2.domain.developer.repository.DeveloperRepository;
 import se.salt.server2.utils.TestData;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class AssignmentServiceTest {
     @Mock
     private AssignmentMapper assignmentMapper;
 
+    @Mock
+    private DeveloperRepository developerRepository;
     @InjectMocks
     private AssignmentService assignmentService;
 
@@ -39,9 +42,10 @@ public class AssignmentServiceTest {
     void shouldCreateAssignment() {
 
         AssignmentEntity assignmentEntity = TestData.createNewAssignmentEntity();
-        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest();
+        AssignmentRequest assignmentRequest = TestData.createNewAssignmentRequest(UUID.randomUUID());
         AssignmentResponse expectedResponse = TestData.createnewAssignmentResponse();
         DeveloperEntity developer = createNewDeveloperEntity();
+        when(developerRepository.findById(assignmentRequest.developerId())).thenReturn(Optional.of(developer));
         when(assignmentMapper.mapToAssignmentEntity(assignmentRequest, developer)).thenReturn(assignmentEntity);
         when(assignmentRepository.save(assignmentEntity)).thenReturn(assignmentEntity);
         when(assignmentMapper.mapToAssignmentResponse(assignmentEntity)).thenReturn(expectedResponse);
