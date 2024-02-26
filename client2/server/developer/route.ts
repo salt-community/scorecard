@@ -26,6 +26,8 @@ export type Developer = {
   lastName: string;
   emailAddress: string;
   bootcampCourse: string;
+  averageBackendScore: number;
+  averageFrontendScore: number
 };
 
 export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
