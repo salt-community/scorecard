@@ -5,6 +5,7 @@ import lombok.*;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,9 +33,9 @@ public class DeveloperEntity {
     @Enumerated(EnumType.STRING)
     BootcampCourse bootcampCourse;
 
-    double averageBackendScore;
+    int averageBackendScore;
 
-    double averageFrontendScore;
+    int averageFrontendScore;
 
     @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;
@@ -43,7 +44,7 @@ public class DeveloperEntity {
         if (assignments == null || assignments.isEmpty()) {
             averageBackendScore = 0;
         } else {
-            averageBackendScore = assignments.stream()
+            averageBackendScore = (int) assignments.stream()
                     .filter(assignmentEntity -> assignmentEntity.getCategory() == AssignmentCategory.BACKEND)
                     .mapToDouble(AssignmentEntity::getScore)
                     .average()
@@ -55,7 +56,7 @@ public class DeveloperEntity {
         if (assignments == null || assignments.isEmpty()) {
             averageFrontendScore = 0;
         } else {
-            averageFrontendScore = assignments.stream()
+            averageFrontendScore = (int) assignments.stream()
                     .filter(assignmentEntity -> assignmentEntity.getCategory() == AssignmentCategory.FRONTEND)
                     .mapToDouble(AssignmentEntity::getScore)
                     .average()
