@@ -40,7 +40,7 @@ public class DeveloperEntity {
     private List<AssignmentEntity> assignments;
 
     public void calculateBackendAverageScore() {
-        if (assignments.isEmpty()) {
+        if (assignments == null || assignments.isEmpty()) {
             averageBackendScore = 0;
         } else {
             averageBackendScore = assignments.stream()
@@ -52,7 +52,7 @@ public class DeveloperEntity {
     }
 
     public void calculateFrontendAverageScore() {
-        if (assignments.isEmpty()) {
+        if (assignments == null || assignments.isEmpty()) {
             averageFrontendScore = 0;
         } else {
             averageFrontendScore = assignments.stream()

@@ -31,8 +31,8 @@ public class DeveloperMapper {
                 .lastName(developerEntity.getLastName())
                 .emailAddress(developerEntity.getEmailAddress())
                 .bootcampCourse(String.valueOf(developerEntity.getBootcampCourse()))
-                .backendScore(developerEntity.getAverageBackendScore())
-                .frontendScore(developerEntity.getAverageFrontendScore())
+                .averageBackendScore(developerEntity.getAverageBackendScore())
+                .averageFrontendScore(developerEntity.getAverageFrontendScore())
                 .build();
     }
 
