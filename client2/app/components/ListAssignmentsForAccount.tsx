@@ -13,13 +13,12 @@ type Assignment = {
 export const ListAssignmentsForAccount = ({
   developerId,
   setAssignments,
-  assignments
+  assignments,
 }: {
   developerId: string;
   setAssignments: Function;
   assignments: Assignment[];
 }) => {
-
   useEffect(() => {
     fetchAllAssignments();
   }, []);
@@ -64,7 +63,7 @@ export const ListAssignmentsForAccount = ({
                 </th>
               </tr>
 
-              {assignments.map((a) => (
+              {assignments?.map((a) => (
                 <tr
                   key={a.assignmentId}
                   className="even:bg-white odd:bg-gray-100"
