@@ -12,18 +12,17 @@ type Assignment = {
 
 export const ListAssignmentsForAccount = ({
   developerId,
+  setAssignments,
+  assignments
 }: {
   developerId: string;
+  setAssignments: Function;
+  assignments: Assignment[];
 }) => {
-  const [assignments, setAssignments] = useState<Assignment[]>([]);
 
   useEffect(() => {
     fetchAllAssignments();
   }, []);
-
-  useEffect(() => {
-    fetchAllAssignments();
-  }, [assignments]);
 
   const fetchAllAssignments = () => {
     fetch(`http://localhost:8080/api/v2/assignments/developer/${developerId}`, {

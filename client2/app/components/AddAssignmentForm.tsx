@@ -10,6 +10,15 @@ import {
 import { Button } from "@material-tailwind/react";
 import { PostAssignmentFunction } from "@/server";
 
+type Assignment = {
+  assignmentId: string;
+  title: string;
+  score: number;
+  description: string;
+  category: string;
+  developerId: string;
+};
+
 export type AssignmentFormInfo = {
   developerId: string;
   title: string;
@@ -21,9 +30,11 @@ export type AssignmentFormInfo = {
 export const AddAssignmentForm = ({
   developerId,
   postAssignment,
+  setAssignments
 }: {
   developerId: string;
   postAssignment: PostAssignmentFunction;
+  setAssignments: Function
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     developerId: developerId,
@@ -46,7 +57,7 @@ export const AddAssignmentForm = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await postAssignment({ assignment });
-    console.log("here dumbass");
+    setAssignments((assignments: Assignment[]) => [...assignments, assignment]);
   };
 
   console.log(assignment);

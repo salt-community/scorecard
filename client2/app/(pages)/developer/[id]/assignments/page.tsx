@@ -2,15 +2,26 @@
 import { AddAssignmentForm } from "@/app/components/AddAssignmentForm";
 import { ListAssignmentsForAccount } from "@/app/components/ListAssignmentsForAccount";
 import { postAssignment } from "@/server";
-import React from "react";
+import React, { useState } from "react";
+
+type Assignment = {
+  assignmentId: string;
+  title: string;
+  score: number;
+  description: string;
+  category: string;
+  developerId: string;
+};
 
 const AddAssignments = ({ params }: { params: { id: string } }) => {
   const id = params.id as string;
 
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+
   return (
     <>
-      <AddAssignmentForm developerId={id} postAssignment={postAssignment} />
-      <ListAssignmentsForAccount developerId={params.id} />
+      <AddAssignmentForm developerId={id} postAssignment={postAssignment} setAssignments={setAssignments} />
+      <ListAssignmentsForAccount developerId={params.id} setAssignments={setAssignments} assignments={assignments} />
     </>
   );
 };
