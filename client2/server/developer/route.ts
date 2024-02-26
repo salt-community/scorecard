@@ -21,6 +21,7 @@ export type GetADeveloperFunction = ({
 }) => Promise<Developer>;
 
 export type Developer = {
+  developerId: string;
   firstName: string;
   lastName: string;
   emailAddress: string;
