@@ -1,14 +1,16 @@
 import React, { ReactNode, useState } from "react";
 import { Card, CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
-import { DeveloperFormInfo, PostDeveloperFunction } from "@/server";
+import { Developer, DeveloperFormInfo, PostDeveloperFunction } from "@/server";
 
 export const AddDeveloperForm = ({
   postDeveloper,
   accountId,
+  setDevelopers,
 }: {
   postDeveloper: PostDeveloperFunction;
   accountId: string;
+  setDevelopers: Function;
 }): ReactNode => {
   const [developer, setDeveloper] = useState<DeveloperFormInfo>({
     firstName: "",
@@ -31,6 +33,7 @@ export const AddDeveloperForm = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await postDeveloper({ developer });
+    setDevelopers((developers: Developer[]) => [...developers, developer]);
   };
 
   return (
