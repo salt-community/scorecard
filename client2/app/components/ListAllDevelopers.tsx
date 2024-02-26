@@ -11,9 +11,7 @@ type Developer = {
   bootcampCourse: string;
 };
 
-export const ListAllDevelopers = () => {
-  const [developers, setDevelopers] = useState<Developer[]>([]);
-
+export const ListAllDevelopers = ({setDevelopers, developers}: {setDevelopers: Function, developers: Developer[]}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
