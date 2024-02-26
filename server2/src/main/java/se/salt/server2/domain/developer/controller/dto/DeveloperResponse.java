@@ -5,5 +5,6 @@ import lombok.Builder;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
-public record DeveloperResponse(UUID developerId, String firstName, String lastName, String emailAddress, String bootcampCourse) {
+public record DeveloperResponse(UUID developerId, String firstName, String lastName, String emailAddress,
+                                String bootcampCourse, double backendScore, double frontendScore) {
 }

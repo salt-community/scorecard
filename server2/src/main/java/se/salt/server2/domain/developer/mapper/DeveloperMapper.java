@@ -23,12 +23,16 @@ public class DeveloperMapper {
     }
 
     public DeveloperResponse mapToDeveloperResponse(DeveloperEntity developerEntity) {
+        developerEntity.calculateBackendAverageScore();
+        developerEntity.calculateFrontendAverageScore();
         return DeveloperResponse.builder()
                 .developerId(developerEntity.getId())
                 .firstName(developerEntity.getFirstName())
                 .lastName(developerEntity.getLastName())
                 .emailAddress(developerEntity.getEmailAddress())
                 .bootcampCourse(String.valueOf(developerEntity.getBootcampCourse()))
+                .backendScore(developerEntity.getAverageBackendScore())
+                .frontendScore(developerEntity.getAverageFrontendScore())
                 .build();
     }
 
