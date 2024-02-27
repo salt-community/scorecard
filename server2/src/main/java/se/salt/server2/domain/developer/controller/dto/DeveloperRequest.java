@@ -5,5 +5,6 @@ import lombok.Builder;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
-public record DeveloperRequest(String firstName, String lastName, String emailAddress, String bootcampCourse, UUID accountId) {
+public record DeveloperRequest(String firstName, String lastName, String emailAddress, String bootcampCourse,
+                               String githubUsername, UUID accountId) {
 }

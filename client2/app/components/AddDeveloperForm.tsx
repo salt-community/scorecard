@@ -17,6 +17,7 @@ export const AddDeveloperForm = ({
     lastName: "",
     emailAddress: "",
     bootcampCourse: "",
+    githubUsername: "",
     accountId: accountId,
   });
 
@@ -78,6 +79,17 @@ export const AddDeveloperForm = ({
               labelPlacement="outside-left"
               placeholder="Enter score"
               value={developer.emailAddress}
+              onChange={handleInputChange}
+              className="w-72"
+            />
+            <Input
+              type="text"
+              id="githubUsername"
+              name="githubUsername"
+              label="Github Username:"
+              labelPlacement="outside-left"
+              placeholder="Enter github username"
+              value={developer.githubUsername}
               onChange={handleInputChange}
               className="w-72"
             />
