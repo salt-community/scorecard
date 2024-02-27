@@ -32,3 +32,20 @@ export const postAssignment: PostAssignmentFunction = async ({
     throw new Error(`Error submiting assignment:${String(error)}`);
   }
 };
+
+export const getAssignmentsByDeveloperId = async (developerId: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/v2/assignments/developer/${developerId}`
+    );
+    if (response.status === 200) {
+      return response.data.assignmentResponseList;
+    } else {
+      throw new Error(
+        `Failed to fetch assignments. Status code: ${response.status}`
+      );
+    }
+  } catch (error) {
+    throw new Error(`Error getting assignments for developer:${String(error)}`);
+  }
+};
