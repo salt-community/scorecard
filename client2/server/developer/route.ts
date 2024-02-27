@@ -29,6 +29,7 @@ export type Developer = {
   bootcampCourse: string;
   averageBackendScore: number;
   averageFrontendScore: number;
+  githubImage: string;
 };
 
 export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
