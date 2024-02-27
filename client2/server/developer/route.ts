@@ -37,7 +37,6 @@ export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
     };
     await axios.post("http://localhost:8080/api/v2/developers", payload, {
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -52,7 +51,6 @@ export const getADeveloper: GetADeveloperFunction = async ({ developerId }) => {
       `http://localhost:8080/api/v2/developers/${developerId}`,
       {
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }
