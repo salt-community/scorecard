@@ -20,7 +20,6 @@ export default function RegisterAccountForm() {
       method: "POST",
       body: payload,
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
