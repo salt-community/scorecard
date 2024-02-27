@@ -94,7 +94,7 @@ const SaltScore = ({
       }
     };
     fetchAssignments();
-  });
+  },[]);
 
   const backendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
     (assignment) => assignment.category === "BACKEND"
