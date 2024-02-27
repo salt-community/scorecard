@@ -7,11 +7,10 @@ interface ScoreCardHeaderProps {
 }
 
 const ScoreCardHeader = ({ developer }: ScoreCardHeaderProps) => {
-  //const avatarUrl = developerData.githubProfilePictureUrl;
+  const avatarUrl = developer.githubImage;
   const developerName = developer.firstName + " " + developer.lastName;
   const programmingLanguage = developer.bootcampCourse;
   const email = developer.emailAddress;
-  //const linkedin = developerData.linkedinUrl;
   return (
     <>
     {developer &&
@@ -19,8 +18,8 @@ const ScoreCardHeader = ({ developer }: ScoreCardHeaderProps) => {
       <Avatar
         isBordered
         color="default"
-        //src={avatarUrl}
-        className="w-20 h-20 text-large bg-slate-950"
+        src={avatarUrl}
+        className="w-17 h-17 text-large"
         name={developerName}
       />
       <div className="flex flex-col my-auto w-[310px] md:w-72">
@@ -29,7 +28,7 @@ const ScoreCardHeader = ({ developer }: ScoreCardHeaderProps) => {
         </p>
         <div className="flex flex-row justify-between">
           <h4 className="font-bold text-large">{developerName}</h4>
-           <ContactsBar email={email}/> 
+           <ContactsBar email={email} githubUrl={avatarUrl}/> 
         </div>
         <small className="text-default-500">Amazing developer</small>
       </div>
