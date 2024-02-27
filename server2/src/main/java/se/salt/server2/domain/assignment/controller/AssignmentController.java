@@ -16,7 +16,6 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v2/assignments")
-@CrossOrigin("*")
 public class AssignmentController {
     private final AssignmentService assignmentService;
 
