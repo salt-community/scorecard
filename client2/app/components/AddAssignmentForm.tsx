@@ -30,11 +30,11 @@ export type AssignmentFormInfo = {
 export const AddAssignmentForm = ({
   developerId,
   postAssignment,
-  setAssignments
+  setAssignments,
 }: {
   developerId: string;
   postAssignment: PostAssignmentFunction;
-  setAssignments: Function
+  setAssignments: Function;
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
     developerId: developerId,

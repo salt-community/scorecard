@@ -11,6 +11,7 @@ export type DeveloperFormInfo = {
   lastName: string;
   emailAddress: string;
   bootcampCourse: string;
+  githubUsername: string;
   accountId: string;
 };
 
@@ -27,7 +28,7 @@ export type Developer = {
   emailAddress: string;
   bootcampCourse: string;
   averageBackendScore: number;
-  averageFrontendScore: number
+  averageFrontendScore: number;
 };
 
 export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
