@@ -11,6 +11,7 @@ import {
 } from "@nextui-org/react";
 import ScoreEntry from "./ScoreEntry";
 import { useEffect, useState } from "react";
+import { RadarGraphic } from "./RadarGraphic";
 /* import { Average, RadarGraphicData, Score } from "../../types"; */
 /* import { RadarGraphic } from "./RadarGraphic"; */
 /* import ScoreEntry from "./ScoreEntry";
@@ -29,6 +30,11 @@ export type Average = {
   developerId: string;
   averageBackendScore: number;
   averageFrontendScore: number;
+};
+
+export type RadarGraphicData = {
+  subject: string;
+  score: number;
 };
 
 export function capitalizeEveryWord(inputString: string): string {
@@ -63,6 +69,9 @@ const SaltScore = ({
   const [assignmentsPerDeveloper, setAssignmentsPerDeveloper] = useState<
     Assignment[]
   >([]);
+  const [radarGraphicData, setRadarGraphicData] = useState<RadarGraphicData[]>(
+    []
+  );
   const totalScoreAverage = Math.round(
     (averageBackendScore + averageFrontendScore) / 2
   );
@@ -74,13 +83,18 @@ const SaltScore = ({
       try {
         const response = await getAssignmentsByDeveloperId(developerId);
         setAssignmentsPerDeveloper(response);
+        setRadarGraphicData(
+          assignmentsPerDeveloper.map((assignment) => ({
+            subject: assignment.category,
+            score: assignment.score,
+          }))
+        );
       } catch (error) {
         console.error("Error fetching assignments:", error);
       }
     };
-
     fetchAssignments();
-  }, [developerId]);
+  },[]);
 
   const backendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
     (assignment) => assignment.category === "BACKEND"
@@ -118,7 +132,7 @@ const SaltScore = ({
           </Chip>
         </CardHeader>
         <CardBody className="text-small">
-          {/* <RadarGraphic data={radarGraphicData} /> */}
+          <RadarGraphic data={radarGraphicData} />
 
           <Accordion>
             <AccordionItem
@@ -156,11 +170,6 @@ const SaltScore = ({
                 <ScoreEntry key={index} data={assignment} />
               ))}
             </AccordionItem>
-            {/* </AccordionItem>
-                 {/*  {data.map((data, index) => (
-                    <ScoreEntry data={data} key={index} />
-                  ))} */}
-            {/* </AccordionItem>  */}
           </Accordion>
         </CardBody>
       </Card>
