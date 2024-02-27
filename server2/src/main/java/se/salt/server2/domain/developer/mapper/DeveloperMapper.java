@@ -19,6 +19,7 @@ public class DeveloperMapper {
                 .LastName(developerRequest.lastName())
                 .emailAddress(developerRequest.emailAddress())
                 .bootcampCourse(BootcampCourse.fromString(developerRequest.bootcampCourse()))
+                .githubImage(String.format("https://github.com/%s.png", developerRequest.githubUsername()))
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class DeveloperMapper {
                 .bootcampCourse(String.valueOf(developerEntity.getBootcampCourse()))
                 .averageBackendScore(developerEntity.getAverageBackendScore())
                 .averageFrontendScore(developerEntity.getAverageFrontendScore())
+                .githubImage(developerEntity.getGithubImage())
                 .build();
     }
 

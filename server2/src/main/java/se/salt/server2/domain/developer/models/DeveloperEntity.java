@@ -37,6 +37,8 @@ public class DeveloperEntity {
 
     int averageFrontendScore;
 
+    String githubImage;
+
     @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;
 
