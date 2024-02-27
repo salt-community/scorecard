@@ -21,7 +21,6 @@ export const ListAllDevelopers = ({setDevelopers, developers}: {setDevelopers: F
             cache: "no-cache",
             method: "GET",
             headers: {
-              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
           }

@@ -24,7 +24,6 @@ export const postAssignment: PostAssignmentFunction = async ({
     };
     await axios.post(`http://localhost:8080/api/v2/assignments`, payload, {
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
