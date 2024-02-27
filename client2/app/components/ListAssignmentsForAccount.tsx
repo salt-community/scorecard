@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "@material-tailwind/react";
 
-type Assignment = {
+export type Assignment = {
   assignmentId: string;
   title: string;
   score: number;

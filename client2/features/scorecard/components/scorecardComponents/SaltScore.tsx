@@ -1,3 +1,5 @@
+import { Assignment } from "@/app/components/ListAssignmentsForAccount";
+import { getAssignmentsByDeveloperId } from "@/server";
 import {
   Card,
   CardHeader,
@@ -7,6 +9,8 @@ import {
   CircularProgress,
   Chip,
 } from "@nextui-org/react";
+import ScoreEntry from "./ScoreEntry";
+import { useEffect, useState } from "react";
 /* import { Average, RadarGraphicData, Score } from "../../types"; */
 /* import { RadarGraphic } from "./RadarGraphic"; */
 /* import ScoreEntry from "./ScoreEntry";
@@ -17,13 +21,12 @@ import {
   scoreData,
 } from "@/app/utilities"; */
 
-type SaltScoreProps = {
-  /*   scores: Score[];
-  radarGraphicData: RadarGraphicData[]; */
-  averages: Average[];
+type DeveloperId = {
+  developerId: string;
 };
 
 export type Average = {
+  developerId: string;
   averageBackendScore: number;
   averageFrontendScore: number;
 };
@@ -52,11 +55,41 @@ export const levelVariant = (value: number) => {
   }
 };
 
-const SaltScore = ({ averageBackendScore, averageFrontendScore }: Average) => {
-  const totalScoreAverage = Math.round((averageBackendScore+averageFrontendScore)/2)
-  //const detailScores = scoreData(averages);
+const SaltScore = ({
+  averageBackendScore,
+  averageFrontendScore,
+  developerId,
+}: Average) => {
+  const [assignmentsPerDeveloper, setAssignmentsPerDeveloper] = useState<
+    Assignment[]
+  >([]);
+  const totalScoreAverage = Math.round(
+    (averageBackendScore + averageFrontendScore) / 2
+  );
   var allScores: number[] = [];
   allScores.push(averageBackendScore, averageFrontendScore);
+
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      try {
+        const response = await getAssignmentsByDeveloperId(developerId);
+        setAssignmentsPerDeveloper(response);
+      } catch (error) {
+        console.error("Error fetching assignments:", error);
+      }
+    };
+
+    fetchAssignments();
+  }, [developerId]);
+
+  const backendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
+    (assignment) => assignment.category === "BACKEND"
+  );
+
+  const frontendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
+    (assignment) => assignment.category === "FRONTEND"
+  );
+
   return (
     <>
       <h4 className="font-bold text-large">Salt Scoring</h4>
@@ -86,38 +119,48 @@ const SaltScore = ({ averageBackendScore, averageFrontendScore }: Average) => {
         </CardHeader>
         <CardBody className="text-small">
           {/* <RadarGraphic data={radarGraphicData} /> */}
+
           <Accordion>
-                <AccordionItem
-                  key={averageBackendScore}
-                  title={capitalizeEveryWord('Backend')}
-                  startContent={
-                    <CircularProgress
-                      size="md"
-                      value={averageBackendScore}
-                      color={colorVariant(averageBackendScore)}
-                      showValueLabel={true}
-                      aria-label="score value"
-                    />
-                  }
+            <AccordionItem
+              key={averageBackendScore}
+              title={capitalizeEveryWord("Backend")}
+              startContent={
+                <CircularProgress
+                  size="md"
+                  value={averageBackendScore}
+                  color={colorVariant(averageBackendScore)}
+                  showValueLabel={true}
+                  aria-label="score value"
                 />
-                   <AccordionItem
-                  key={averageFrontendScore}
-                  title={capitalizeEveryWord('Frontend')}
-                  startContent={
-                    <CircularProgress
-                      size="md"
-                      value={averageFrontendScore}
-                      color={colorVariant(averageFrontendScore)}
-                      showValueLabel={true}
-                      aria-label="score value"
-                    />
-                  }
-                  />
-                {/* </AccordionItem>
+              }
+            >
+              {frontendAssignments.map((assignment, index) => (
+                <ScoreEntry key={index} data={assignment} />
+              ))}
+            </AccordionItem>
+
+            <AccordionItem
+              key={averageFrontendScore}
+              title={capitalizeEveryWord("Frontend")}
+              startContent={
+                <CircularProgress
+                  size="md"
+                  value={averageFrontendScore}
+                  color={colorVariant(averageFrontendScore)}
+                  showValueLabel={true}
+                  aria-label="score value"
+                />
+              }
+            >
+              {backendAssignments.map((assignment, index) => (
+                <ScoreEntry key={index} data={assignment} />
+              ))}
+            </AccordionItem>
+            {/* </AccordionItem>
                  {/*  {data.map((data, index) => (
                     <ScoreEntry data={data} key={index} />
                   ))} */}
-                {/* </AccordionItem>  */}
+            {/* </AccordionItem>  */}
           </Accordion>
         </CardBody>
       </Card>
