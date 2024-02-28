@@ -4,7 +4,7 @@ export type PostDeveloperFunction = ({
   developer,
 }: {
   developer: DeveloperFormInfo;
-}) => Promise<void>;
+}) => Promise<any>;
 
 export type DeveloperFormInfo = {
   firstName: string;
@@ -35,7 +35,7 @@ export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
     const payload = {
       ...developer,
     };
-    await axios.post("http://localhost:8080/api/v2/developers", payload, {
+    return await axios.post("http://localhost:8080/api/v2/developers", payload, {
       headers: {
         "Content-Type": "application/json",
       },
