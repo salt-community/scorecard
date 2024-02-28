@@ -15,11 +15,7 @@ export type DeveloperFormInfo = {
   accountId: string;
 };
 
-export type GetADeveloperFunction = ({
-  developerId,
-}: {
-  developerId: string;
-}) => Promise<Developer>;
+
 
 export type Developer = {
   developerId: string;
@@ -47,7 +43,7 @@ export const postDeveloper: PostDeveloperFunction = async ({ developer }) => {
   }
 };
 
-export const getADeveloper: GetADeveloperFunction = async ({ developerId }) => {
+export const getADeveloper = async (developerId:string ) => {
   try {
     const response = await axios.get(
       `http://localhost:8080/api/v2/developers/${developerId}`,
@@ -59,6 +55,24 @@ export const getADeveloper: GetADeveloperFunction = async ({ developerId }) => {
     );
 
     const developerData = response.data as Developer;
+    return developerData;
+  } catch (error) {
+    throw new Error(`Error getting the developer:${String(error)}`);
+  }
+};
+
+export const getAllDevelopers = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/v2/developers`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const developerData = response.data as Developer[];
     return developerData;
   } catch (error) {
     throw new Error(`Error getting the developer:${String(error)}`);

@@ -7,7 +7,6 @@ import React from "react";
 const DeveloperPage = ({ params }: { params: { id: string } }) => {
   return (
     <div>
-      <h1> Developer with th id: {params.id}</h1>
       <Link href={`/developer/${params.id}/assignments`}>Add asignment</Link>
       <ScoreCard developerId={params.id} />
     </div>

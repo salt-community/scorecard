@@ -1,7 +1,8 @@
 import React, { ReactNode, useState } from "react";
 import { Card, CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@material-tailwind/react";
-import { Developer, DeveloperFormInfo, PostDeveloperFunction } from "@/server";
+import { Developer,  PostDeveloperFunction } from "@/server";
+import { DeveloperFormInfo } from "./types";
 
 export const AddDeveloperForm = ({
   postDeveloper,
@@ -33,8 +34,8 @@ export const AddDeveloperForm = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-   const response =  await postDeveloper({ developer });
-    setDevelopers((developers: Developer[]) => [...developers, response.data]);
+    await postDeveloper({ developer });
+    setDevelopers((developers: Developer[]) => [...developers, developer]);
   };
 
   return (
@@ -53,7 +54,7 @@ export const AddDeveloperForm = ({
               type="text"
               id="firstName"
               name="firstName"
-              label="First Name:"
+              label="First Name :"
               labelPlacement="outside-left"
               placeholder="Enter title"
               value={developer.firstName}
@@ -64,7 +65,7 @@ export const AddDeveloperForm = ({
               type="text"
               id="lastName"
               name="lastName"
-              label="Last Name:"
+              label="Last Name :"
               labelPlacement="outside-left"
               placeholder="Enter score"
               value={developer.lastName}
@@ -75,9 +76,9 @@ export const AddDeveloperForm = ({
               type="text"
               id="emailAddress"
               name="emailAddress"
-              label="Email:"
+              label="Email :"
               labelPlacement="outside-left"
-              placeholder="Enter email"
+              placeholder="Enter score"
               value={developer.emailAddress}
               onChange={handleInputChange}
               className="w-72"
@@ -91,16 +92,16 @@ export const AddDeveloperForm = ({
               placeholder="Enter github username"
               value={developer.githubUsername}
               onChange={handleInputChange}
-              className="w-80"
+              className="w-72"
             />
           </div>
           <Select
             id="bootcampCourse"
             name="bootcampCourse"
-            label="Bootcamp:"
-            labelPlacement="outside-left"
+            label="Bootcamp :"
+            labelPlacement="outside"
             placeholder="Please choose a bootcamp..."
-            className="w-96"
+            className="w-72"
             onChange={handleInputChange}
           >
             <SelectItem key="Javascript" value={"Javascript"}>
