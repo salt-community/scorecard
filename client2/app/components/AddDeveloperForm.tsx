@@ -32,8 +32,8 @@ export const AddDeveloperForm = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await postDeveloper({ developer });
-    setDevelopers((developers: Developer[]) => [...developers, developer]);
+   const response =  await postDeveloper({ developer });
+    setDevelopers((developers: Developer[]) => [...developers, response.data]);
   };
 
   return (
