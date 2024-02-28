@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Card } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 import Link from "next/link";
 
 type Developer = {
