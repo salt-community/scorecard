@@ -53,7 +53,7 @@ export const AddDeveloperForm = ({
               type="text"
               id="firstName"
               name="firstName"
-              label="First Name :"
+              label="First Name:"
               labelPlacement="outside-left"
               placeholder="Enter title"
               value={developer.firstName}
@@ -64,7 +64,7 @@ export const AddDeveloperForm = ({
               type="text"
               id="lastName"
               name="lastName"
-              label="Last Name :"
+              label="Last Name:"
               labelPlacement="outside-left"
               placeholder="Enter score"
               value={developer.lastName}
@@ -75,9 +75,9 @@ export const AddDeveloperForm = ({
               type="text"
               id="emailAddress"
               name="emailAddress"
-              label="Email :"
+              label="Email:"
               labelPlacement="outside-left"
-              placeholder="Enter score"
+              placeholder="Enter email"
               value={developer.emailAddress}
               onChange={handleInputChange}
               className="w-72"
@@ -91,16 +91,16 @@ export const AddDeveloperForm = ({
               placeholder="Enter github username"
               value={developer.githubUsername}
               onChange={handleInputChange}
-              className="w-72"
+              className="w-80"
             />
           </div>
           <Select
             id="bootcampCourse"
             name="bootcampCourse"
-            label="Bootcamp :"
-            labelPlacement="outside"
+            label="Bootcamp:"
+            labelPlacement="outside-left"
             placeholder="Please choose a bootcamp..."
-            className="w-72"
+            className="w-96"
             onChange={handleInputChange}
           >
             <SelectItem key="Javascript" value={"Javascript"}>
