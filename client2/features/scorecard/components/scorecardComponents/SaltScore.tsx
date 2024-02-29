@@ -1,5 +1,8 @@
 import { Assignment } from "@/app/components/ListAssignmentsForAccount";
-import { getAssignmentsByDeveloperId } from "@/server";
+import {
+  getAssignmentsByDeveloperId,
+  getScorecardByDeveloperId,
+} from "@/server";
 import {
   Card,
   CardHeader,
@@ -94,7 +97,7 @@ const SaltScore = ({
       }
     };
     fetchAssignments();
-  },[]);
+  }, []);
 
   const backendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
     (assignment) => assignment.category === "BACKEND"
@@ -136,7 +139,7 @@ const SaltScore = ({
 
           <Accordion>
             <AccordionItem
-              key={averageBackendScore}
+              key={101}
               title={capitalizeEveryWord("Backend")}
               startContent={
                 <CircularProgress
@@ -148,7 +151,7 @@ const SaltScore = ({
                 />
               }
             >
-              {frontendAssignments.map((assignment, index) => (
+              {backendAssignments.map((assignment, index) => (
                 <ScoreEntry key={index} data={assignment} />
               ))}
             </AccordionItem>
@@ -166,7 +169,7 @@ const SaltScore = ({
                 />
               }
             >
-              {backendAssignments.map((assignment, index) => (
+              {frontendAssignments.map((assignment, index) => (
                 <ScoreEntry key={index} data={assignment} />
               ))}
             </AccordionItem>

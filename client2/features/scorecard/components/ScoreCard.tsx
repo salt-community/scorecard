@@ -17,7 +17,7 @@ const ScoreCard = ({ developerId }: { developerId: string }) => {
   useEffect(() => {
     const fetchDeveloper = async () => {
       try {
-        const response = await getADeveloper({ developerId });
+        const response = await getADeveloper(developerId);
         setDeveloper(response);
       } catch (error) {
         console.error(`Error getting the developer: ${error}`);
