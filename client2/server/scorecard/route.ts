@@ -48,3 +48,20 @@ export const getAssignmentsByDeveloperId = async (developerId: string) => {
     throw new Error(`Error getting assignments for developer:${String(error)}`);
   }
 };
+
+export const getScorecardByDeveloperId = async (developerId: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/v2/scorecard/${developerId}`
+    );
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(
+        `Failed to fetch scorecard. Status code: ${response.status}`
+      );
+    }
+  } catch (error) {
+    throw new Error(`Error getting scorecard for developer:${String(error)}`);
+  }
+};

@@ -1,2 +1,2 @@
-export * from "./assignment";
+export * from "./scorecard";
 export * from "./developer";

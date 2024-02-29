@@ -10,24 +10,15 @@ import {
   Chip,
 } from "@nextui-org/react";
 import ScoreEntry from "./ScoreEntry";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RadarGraphic } from "./RadarGraphic";
-/* import { Average, RadarGraphicData, Score } from "../../types"; */
-/* import { RadarGraphic } from "./RadarGraphic"; */
-/* import ScoreEntry from "./ScoreEntry";
-import {
-  capitalizeEveryWord,
-  colorVariant,
-  levelVariant,
-  scoreData,
-} from "@/app/utilities"; */
 
 type DeveloperId = {
   developerId: string;
 };
 
 export type Average = {
-  developerId: string;
+  saltScores: Assignment[];
   averageBackendScore: number;
   averageFrontendScore: number;
 };
@@ -62,45 +53,28 @@ export const levelVariant = (value: number) => {
 };
 
 const SaltScore = ({
+  saltScores,
   averageBackendScore,
   averageFrontendScore,
-  developerId,
 }: Average) => {
-  const [assignmentsPerDeveloper, setAssignmentsPerDeveloper] = useState<
-    Assignment[]
-  >([]);
+  
   const [radarGraphicData, setRadarGraphicData] = useState<RadarGraphicData[]>(
     []
   );
+
+  //TODO: weight the number of assignments
   const totalScoreAverage = Math.round(
     (averageBackendScore + averageFrontendScore) / 2
   );
   var allScores: number[] = [];
   allScores.push(averageBackendScore, averageFrontendScore);
 
-  useEffect(() => {
-    const fetchAssignments = async () => {
-      try {
-        const response = await getAssignmentsByDeveloperId(developerId);
-        setAssignmentsPerDeveloper(response);
-        setRadarGraphicData(
-          assignmentsPerDeveloper.map((assignment) => ({
-            subject: assignment.category,
-            score: assignment.score,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching assignments:", error);
-      }
-    };
-    fetchAssignments();
-  },[]);
 
-  const backendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
+  const backendAssignments: Assignment[] = saltScores.filter(
     (assignment) => assignment.category === "BACKEND"
   );
 
-  const frontendAssignments: Assignment[] = assignmentsPerDeveloper.filter(
+  const frontendAssignments: Assignment[] = saltScores.filter(
     (assignment) => assignment.category === "FRONTEND"
   );
 
@@ -136,7 +110,7 @@ const SaltScore = ({
 
           <Accordion>
             <AccordionItem
-              key={averageBackendScore}
+              key={101}
               title={capitalizeEveryWord("Backend")}
               startContent={
                 <CircularProgress
@@ -148,7 +122,7 @@ const SaltScore = ({
                 />
               }
             >
-              {frontendAssignments.map((assignment, index) => (
+              {backendAssignments.map((assignment, index) => (
                 <ScoreEntry key={index} data={assignment} />
               ))}
             </AccordionItem>
@@ -166,7 +140,7 @@ const SaltScore = ({
                 />
               }
             >
-              {backendAssignments.map((assignment, index) => (
+              {frontendAssignments.map((assignment, index) => (
                 <ScoreEntry key={index} data={assignment} />
               ))}
             </AccordionItem>
