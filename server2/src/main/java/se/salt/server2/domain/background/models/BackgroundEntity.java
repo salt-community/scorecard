@@ -28,4 +28,5 @@ public class BackgroundEntity {
 
     @Enumerated(EnumType.STRING)
     BootcampCourse bootcampCourse;
+
 }
