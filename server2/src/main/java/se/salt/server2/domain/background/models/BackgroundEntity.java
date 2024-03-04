@@ -24,6 +24,8 @@ public class BackgroundEntity {
 
     String githubUser;
 
+    String emailAddress;
+
     @Enumerated(EnumType.STRING)
     BootcampCourse bootcampCourse;
 }
