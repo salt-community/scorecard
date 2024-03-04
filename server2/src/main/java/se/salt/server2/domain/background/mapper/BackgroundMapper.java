@@ -14,7 +14,7 @@ public class BackgroundMapper {
                 .id(backgroundRequest.accountId())
                 .emailAddress(backgroundRequest.emailAddress())
                 .firstName(backgroundRequest.firstName())
-                .LastName(backgroundRequest.lastName())
+                .lastName(backgroundRequest.lastName())
                 .githubUser(String.format("https://github.com/%s.png", backgroundRequest.githubUser()))
                 .bootcampCourse(BootcampCourse.valueOf(backgroundRequest.bootcampCourse()))
                 .build();
