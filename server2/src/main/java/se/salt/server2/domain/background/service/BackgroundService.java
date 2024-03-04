@@ -32,10 +32,27 @@ public class BackgroundService {
 
     public BackgroundResponse updateBackgroundById(UUID backgroundId, BackgroundRequest backgroundRequest) {
         BackgroundEntity background = backgroundRepository.findById(backgroundId).orElseThrow(() -> new BackgroundDoesNotExistException(backgroundId));
-        background.setFirstName(backgroundRequest.firstName());
-        background.setLastName(backgroundRequest.lastName());
-        background.setEmailAddress(backgroundRequest.emailAddress());
-        background.setBootcampCourse(BootcampCourse.valueOf(backgroundRequest.bootcampCourse()));
+
+        if(backgroundRequest.firstName() != null ) {
+            background.setFirstName(backgroundRequest.firstName());
+        }
+
+        if(backgroundRequest.lastName() != null ) {
+            background.setLastName(backgroundRequest.lastName());
+        }
+
+        if(backgroundRequest.emailAddress() != null ) {
+            background.setEmailAddress(backgroundRequest.emailAddress());
+        }
+
+        if(backgroundRequest.bootcampCourse() != null ) {
+            background.setBootcampCourse(BootcampCourse.valueOf(backgroundRequest.bootcampCourse()));
+        }
+
+        if(backgroundRequest.githubUser() != null ) {
+            background.setGithubUser(backgroundRequest.githubUser());
+        }
+        backgroundRepository.save(background);
 
         return backgroundMapper.mapToBackgroundResponse(background);
     }
