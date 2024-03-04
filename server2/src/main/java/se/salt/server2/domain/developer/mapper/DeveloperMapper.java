@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import se.salt.server2.domain.developer.controller.dto.DeveloperRequest;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponse;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponses;
-import se.salt.server2.domain.developer.models.BootcampCourse;
+import se.salt.server2.domain.developer.models.Bootcamp;
 import se.salt.server2.domain.developer.models.DeveloperEntity;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class DeveloperMapper {
                 .firstName(developerRequest.firstName())
                 .LastName(developerRequest.lastName())
                 .emailAddress(developerRequest.emailAddress())
-                .bootcampCourse(BootcampCourse.fromString(developerRequest.bootcampCourse()))
+                .bootcampCourse(Bootcamp.fromString(developerRequest.bootcampCourse()))
                 .githubImage(String.format("https://github.com/%s.png", developerRequest.githubUsername()))
                 .build();
     }

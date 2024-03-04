@@ -5,7 +5,6 @@ import lombok.*;
 import se.salt.server2.domain.assignment.models.AssignmentCategory;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
 
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ public class DeveloperEntity {
     String emailAddress;
 
     @Enumerated(EnumType.STRING)
-    BootcampCourse bootcampCourse;
+    Bootcamp bootcampCourse;
 
     int averageBackendScore;
 

@@ -1,4 +1,4 @@
-package se.salt.server2.domain.developer.models;
+package se.salt.server2.domain.background.models;
 
 import se.salt.server2.exception.EnumDoesNotExist;
 
