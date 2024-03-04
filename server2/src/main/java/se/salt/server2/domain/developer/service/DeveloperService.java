@@ -2,13 +2,11 @@ package se.salt.server2.domain.developer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import se.salt.server2.domain.account.models.AccountEntity;
-import se.salt.server2.domain.account.repository.AccountRepository;
 import se.salt.server2.domain.developer.controller.dto.DeveloperRequest;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponse;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponses;
 import se.salt.server2.domain.developer.mapper.DeveloperMapper;
-import se.salt.server2.domain.developer.models.BootcampCourse;
+import se.salt.server2.domain.developer.models.Bootcamp;
 import se.salt.server2.domain.developer.models.DeveloperEntity;
 import se.salt.server2.domain.developer.repository.DeveloperRepository;
 import se.salt.server2.exception.DeveloperDoesNotExistException;
@@ -42,7 +40,7 @@ public class DeveloperService {
         developer.setFirstName(developerRequest.firstName());
         developer.setLastName(developerRequest.lastName());
         developer.setEmailAddress(developerRequest.emailAddress());
-        developer.setBootcampCourse(BootcampCourse.valueOf(developerRequest.bootcampCourse()));
+        developer.setBootcampCourse(Bootcamp.valueOf(developerRequest.bootcampCourse()));
 
         return developerMapper.mapToDeveloperResponse(developer);
     }
