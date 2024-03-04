@@ -4,7 +4,7 @@ import se.salt.server2.exception.EnumDoesNotExist;
 
 import java.util.EnumSet;
 
-public enum BootcampCourse {
+public enum Bootcamp {
 
     JAVASCRIPT("Javascript"),
     JAVA("Java"),
@@ -12,12 +12,12 @@ public enum BootcampCourse {
 
     private final String value;
 
-    BootcampCourse(String value) {
+    Bootcamp(String value) {
         this.value = value;
     }
 
-    public static BootcampCourse fromString(String text) {
-        return EnumSet.allOf(BootcampCourse.class)
+    public static Bootcamp fromString(String text) {
+        return EnumSet.allOf(Bootcamp.class)
                 .stream()
                 .filter(bootcampCourse -> bootcampCourse.value.equalsIgnoreCase(text))
                 .findFirst()

@@ -20,7 +20,7 @@ public class BackgroundEntity {
 
     String firstName;
 
-    String LastName;
+    String lastName;
 
     String githubUser;
 
