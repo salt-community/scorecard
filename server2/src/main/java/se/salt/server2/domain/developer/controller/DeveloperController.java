@@ -37,11 +37,6 @@ public class DeveloperController {
         return developerService.getDeveloperById(id);
     }
 
-    @PutMapping(path = "/{developerId}")
-    public DeveloperResponse updateDeveloper(@PathVariable("developerId") UUID id, @RequestBody DeveloperRequest developerRequest) {
-        return developerService.updateDeveloperById(id, developerRequest);
-    }
-
     @DeleteMapping(path = "/{developerId}")
     @ResponseStatus(NO_CONTENT)
     public void deleteDeveloper(@PathVariable("developerId") UUID id) {
