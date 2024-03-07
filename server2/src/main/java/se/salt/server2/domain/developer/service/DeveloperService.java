@@ -2,50 +2,72 @@ package se.salt.server2.domain.developer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import se.salt.server2.domain.account.models.AccountEntity;
+import se.salt.server2.domain.associations.account_role.AccountRoleMapping;
+import se.salt.server2.domain.associations.account_role.AccountRoleRepository;
+import se.salt.server2.domain.background.models.BackgroundEntity;
 import se.salt.server2.domain.developer.controller.dto.DeveloperRequest;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponse;
 import se.salt.server2.domain.developer.controller.dto.DeveloperResponses;
-import se.salt.server2.domain.developer.mapper.DeveloperMapper;
 import se.salt.server2.domain.developer.models.Bootcamp;
-import se.salt.server2.domain.developer.models.DeveloperEntity;
-import se.salt.server2.domain.developer.repository.DeveloperRepository;
-import se.salt.server2.exception.DeveloperDoesNotExistException;
+import se.salt.server2.domain.role.repository.RoleRepository;
 
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class DeveloperService {
-
-    private final DeveloperRepository developerRepository;
-
-    private final DeveloperMapper developerMapper;
+    private final AccountRoleRepository accountRoleRepository;
+    private final RoleRepository roleRepository;
 
     public DeveloperResponses getAllDevelopers() {
-        return developerMapper.mapToDeveloperResponses(developerRepository.findAll());
+        var developerRole = roleRepository.findByName("developer");
+       return  DeveloperResponses.builder().developerResponseList(
+               accountRoleRepository.findAllByRoleId(developerRole.getId()).stream()
+                       .map(this::mapToResponse).toList()
+       ).build();
     }
 
     public DeveloperResponse createDeveloper(DeveloperRequest developerRequest) {
-        return developerMapper.mapToDeveloperResponse(developerRepository.save(developerMapper.mapToDeveloperEntity(developerRequest)));
+        var background = BackgroundEntity.builder()
+                .firstName(developerRequest.firstName())
+                .lastName(developerRequest.lastName())
+                .githubUser(developerRequest.githubUsername())
+                .bootcamp(Bootcamp.fromString(developerRequest.bootcamp()))
+                .build();
+
+        var account = AccountEntity.builder()
+                .emailAddress(developerRequest.emailAddress())
+                .background(background)
+                .build();
+
+        var developerRole = roleRepository.findByName("developer");
+
+        var mapping = AccountRoleMapping.builder().account(account).role(developerRole).build();
+
+
+        return mapToResponse(mapping);
     }
 
     public DeveloperResponse getDeveloperById(UUID developerId) {
-        return developerMapper.mapToDeveloperResponse(developerRepository
-                .findById(developerId)
-                .orElseThrow(() -> new DeveloperDoesNotExistException(developerId)));
+        var developerRole = roleRepository.findByName("developer");
+
+        return mapToResponse(accountRoleRepository.findByRoleIdAndAccountId(developerRole.getId(), developerId));
     }
 
-    public DeveloperResponse updateDeveloperById(UUID developerId, DeveloperRequest developerRequest) {
-        DeveloperEntity developer = developerRepository.findById(developerId).orElseThrow(() -> new DeveloperDoesNotExistException(developerId));
-        developer.setFirstName(developerRequest.firstName());
-        developer.setLastName(developerRequest.lastName());
-        developer.setEmailAddress(developerRequest.emailAddress());
-        developer.setBootcampCourse(Bootcamp.valueOf(developerRequest.bootcampCourse()));
+    private DeveloperResponse mapToResponse(AccountRoleMapping mapping) {
+        return DeveloperResponse.builder()
+                .developerId(mapping.getAccount().getId())
+                .emailAddress(mapping.getAccount().getEmailAddress())
+                .firstName(mapping.getAccount().getBackground().getFirstName())
+                .lastName(mapping.getAccount().getBackground().getLastName())
+                .githubUser(mapping.getAccount().getBackground().getGithubUser())
+                .bootcampCourse(mapping.getAccount().getBackground().getBootcamp().getValue())
 
-        return developerMapper.mapToDeveloperResponse(developer);
+                .build();
     }
 
     public void deleteDeveloperById(UUID developerId) {
-        developerRepository.deleteById(developerId);
+        accountRoleRepository.deleteById(developerId);
     }
 }
