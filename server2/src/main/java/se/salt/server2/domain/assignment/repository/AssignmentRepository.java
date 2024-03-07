@@ -9,5 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface AssignmentRepository extends JpaRepository<AssignmentEntity, UUID> {
-    List<AssignmentEntity> findAllByDeveloperId(UUID developerId);
 }
