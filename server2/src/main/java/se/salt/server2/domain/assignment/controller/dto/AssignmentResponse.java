@@ -6,6 +6,6 @@ import java.util.UUID;
 
 
 @Builder(toBuilder = true)
-public record AssignmentResponse(UUID assignmentId, UUID developerId, String title, int score, String description,
+public record AssignmentResponse(UUID assignmentId, String title, int score, String description,
                                  String category) {
 }
