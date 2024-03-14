@@ -22,7 +22,7 @@ public class AssignmentController {
     @PostMapping
     @ResponseStatus(CREATED)
     public AssignmentResponse createAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.createAssignment(assignmentRequest);
+        return assignmentService.addAssignmentToDeveloper(assignmentRequest);
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
