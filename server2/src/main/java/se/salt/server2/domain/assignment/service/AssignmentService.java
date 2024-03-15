@@ -48,15 +48,9 @@ public class AssignmentService {
         return assignmentMapper.mapToAssignmentResponses(assignmentRepository.findAll());
     }
 
-    public AssignmentResponse getAssignmentById(UUID assignmentId) {
-        return assignmentMapper.mapToAssignmentResponse(assignmentRepository
-                .findById(assignmentId)
-                .orElseThrow(() -> new AssignmentDoesNotExistException(assignmentId)));
-    }
-
-    public AssignmentResponses getAssignmentsByDeveloperId(UUID developerId) {
+    public AssignmentResponses getAssignmentsByAccountId(UUID accountId) {
         return AssignmentResponses.builder()
-                .assignmentResponseList(accountAssignmentRepository.findAllByAccountId(developerId).stream().map(
+                .assignmentResponseList(accountAssignmentRepository.findAllByAccountId(accountId).stream().map(
                   this::mapToResponse
                 ).toList())
                 .build();
