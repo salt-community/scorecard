@@ -30,20 +30,6 @@ public class AssignmentController {
         return assignmentService.getAllAssignments();
     }
 
-    @GetMapping(
-            path = "/{assignmentId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AssignmentResponse getAssignment(@PathVariable("assignmentId") UUID id) {
-        return assignmentService.getAssignmentById(id);
-    }
-
-    @GetMapping(
-            path = "/developer/{developerId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AssignmentResponses getAssignmentsByDeveloperId(@PathVariable("developerId") UUID id) {
-        return assignmentService.getAssignmentsByDeveloperId(id);
-    }
-
     @PutMapping(path = "/{assignmentId}")
     public AssignmentResponse updateAssignment(@PathVariable("assignmentId") UUID id, AssignmentRequest assignmentRequest) {
         return assignmentService.updateAssignmentById(id, assignmentRequest);
