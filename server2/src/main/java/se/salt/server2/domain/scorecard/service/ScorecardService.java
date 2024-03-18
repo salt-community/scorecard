@@ -26,7 +26,7 @@ public class ScorecardService {
 
     public ScorecardResponse getScorecardByAccountId(UUID id) {
         return ScorecardResponse.builder()
-                .assignmentResponses(assignmentService.getAssignmentsByAccountId(id))
+                .assignmentResponseList(new ArrayList<>(assignmentService.getAssignmentsByAccountId(id)))
                 .build();
     }
 }
