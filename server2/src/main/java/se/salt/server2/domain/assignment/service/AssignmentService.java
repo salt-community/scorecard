@@ -16,7 +16,9 @@ import se.salt.server2.domain.associations.account_assignment.AccountAssignmentR
 import se.salt.server2.exception.AssignmentDoesNotExistException;
 import se.salt.server2.exception.DeveloperDoesNotExistException;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,12 +50,11 @@ public class AssignmentService {
         return assignmentMapper.mapToAssignmentResponses(assignmentRepository.findAll());
     }
 
-    public AssignmentResponses getAssignmentsByAccountId(UUID accountId) {
-        return AssignmentResponses.builder()
-                .assignmentResponseList(accountAssignmentRepository.findAllByAccountId(accountId).stream().map(
-                  this::mapToResponse
-                ).toList())
-                .build();
+    public List<AssignmentResponse> getAssignmentsByAccountId(UUID accountId) {
+        return accountAssignmentRepository.findAllByAccountId(accountId)
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 
     public AssignmentResponse updateAssignmentById(UUID assignmentId, AssignmentRequest assignmentRequest) {
