@@ -19,11 +19,6 @@ public class ScorecardController {
 
     private final ScorecardService scorecardService;
 
-    @GetMapping
-    public List<ScorecardResponse> getAllScorecards() {
-        return scorecardService.getAllScorecards();
-    }
-
     @GetMapping(
             path = "/{accountId}",
             produces = {MediaType.APPLICATION_JSON_VALUE})

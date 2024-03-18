@@ -14,16 +14,6 @@ public class ScorecardService {
 
     private final AssignmentService assignmentService;
 
-    public List<ScorecardResponse> getAllScorecards() {
-        List<ScorecardResponse> wallets = new ArrayList<>();
-
-        ScorecardResponse.builder()
-                .assignmentResponses(assignmentService.getAllAssignments())
-                .build();
-
-        return wallets;
-    }
-
     public ScorecardResponse getScorecardByAccountId(UUID id) {
         return ScorecardResponse.builder()
                 .assignmentResponseList(new ArrayList<>(assignmentService.getAssignmentsByAccountId(id)))
