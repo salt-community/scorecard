@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Card } from "@material-tailwind/react";
+import { Card } from "@nextui-org/react";
+import React, { useEffect } from "react";
 
 export type Assignment = {
   assignmentId: string;
@@ -7,15 +7,15 @@ export type Assignment = {
   score: number;
   description: string;
   category: string;
-  developerId: string;
+  accountId: string;
 };
 
 export const ListAssignmentsForAccount = ({
-  developerId,
+  accountId,
   setAssignments,
   assignments,
 }: {
-  developerId: string;
+  accountId: string;
   setAssignments: Function;
   assignments: Assignment[];
 }) => {
@@ -24,7 +24,7 @@ export const ListAssignmentsForAccount = ({
   }, []);
 
   const fetchAllAssignments = () => {
-    fetch(`http://localhost:8080/api/v2/assignments/developer/${developerId}`, {
+    fetch(`http://localhost:8080/api/v2/scorecard/${accountId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const ListAssignmentsForAccount = ({
 
   return (
     <>
-      <Card className="p-4 shadow-none" placeholder={undefined}>
+      <Card className="p-4 shadow-none">
         <div className="overflow-y-auto">
           <table className="w-full text-sm text-left text-black">
             <thead className="border text-xs text-black uppercase bg-slate-300">
