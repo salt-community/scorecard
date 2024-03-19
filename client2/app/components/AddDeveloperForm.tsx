@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { Card, CardHeader, Input, Select, SelectItem } from "@nextui-org/react";
-import { Button } from "@material-tailwind/react";
+import { Card, CardHeader, Input, Select, SelectItem, Button } from "@nextui-org/react";
 import { Developer, DeveloperFormInfo, PostDeveloperFunction } from "@/server";
 
 export const AddDeveloperForm = ({
@@ -116,7 +115,6 @@ export const AddDeveloperForm = ({
           <div className="flex flex-row justify-center">
             <Button
               className="bg-accent2 hover:bg-accent text-white font-bold py-2 px-4 rounded mb-5"
-              placeholder={undefined}
               type="submit"
             >
               ADD
