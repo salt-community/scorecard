@@ -10,7 +10,7 @@ type Assignment = {
   score: number;
   description: string;
   category: string;
-  developerId: string;
+  accountId: string;
 };
 
 const AddAssignments = ({ params }: { params: { id: string } }) => {
@@ -21,7 +21,7 @@ const AddAssignments = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <AddAssignmentForm developerId={id} postAssignment={postAssignment} setAssignments={setAssignments} />
-      <ListAssignmentsForAccount developerId={params.id} setAssignments={setAssignments} assignments={assignments} />
+      <ListAssignmentsForAccount accountId={params.id} setAssignments={setAssignments} assignments={assignments} />
     </>
   );
 };
