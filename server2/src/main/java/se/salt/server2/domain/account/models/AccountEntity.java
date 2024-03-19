@@ -20,6 +20,7 @@ public class AccountEntity {
     @Setter
     String emailAddress;
 
-    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    @Setter
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private BackgroundEntity background;
 }
