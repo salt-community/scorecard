@@ -24,8 +24,7 @@ export default function RegisterAccountForm() {
       },
     });
     const data = await response.json();
-    setId(data.id);
-    router.push(`/${data.id}`);
+    router.push(`/developers`);
   };
 
   const submitEmailChange = async (event: React.FormEvent<HTMLFormElement>) => {
