@@ -65,12 +65,13 @@ export default function AddDeveloper() {
       }),
     });
     router.push("/developers");
-  };
+  };    
 
-  return (
-    <>
-      <p>Add dev here!</p>
-      <div className="flex flex-col w-full">
+return (
+  <>
+        <p className="text-center p-8 font-bold">Add a Developer</p>
+    <div className="flex justify-center p-2"> 
+      <div className="flex flex-col">
         <Card className="max-w-full w-[340px] h-[400px]">
           <CardBody className="overflow-hidden">
             <form
@@ -78,7 +79,7 @@ export default function AddDeveloper() {
               onSubmit={handleAddDeveloper}
             >
               <select
-              required
+                required
                 value={accountId}
                 onChange={(e) => setaccountId(e.target.value)}
               >
@@ -139,6 +140,7 @@ export default function AddDeveloper() {
           </CardBody>
         </Card>
       </div>
-    </>
-  );
-}
+    </div>
+  </>
+);
+                }

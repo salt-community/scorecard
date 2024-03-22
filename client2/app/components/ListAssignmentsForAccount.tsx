@@ -54,12 +54,6 @@ export const ListAssignmentsForAccount = ({
                 <th scope="col" className="border px-6 py-3 w-2/5">
                   Description
                 </th>
-                <th scope="col" className="border px-6 py-3 ">
-                  Edit
-                </th>
-                <th scope="col" className="border px-6 py-3 ">
-                  Delete
-                </th>
               </tr>
 
               {assignments?.map((a) => (

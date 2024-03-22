@@ -12,9 +12,9 @@ export const ListAllDevelopers = ({
   return (
     <>
       <Card className="relative p-4 shadow-none">
-        <div className="text-center mb-4 font-extrabold	">
+        <div className="mb-4 font-extrabold">
           <CardHeader>
-            <h2>List of Developers</h2>{" "}
+            <h2 className="text-center w-full">List of Developers</h2>{" "}
           </CardHeader>
         </div>
         <CardBody>
