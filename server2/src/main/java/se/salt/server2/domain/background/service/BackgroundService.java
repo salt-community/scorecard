@@ -6,8 +6,8 @@ import se.salt.server2.domain.background.controller.dto.BackgroundRequest;
 import se.salt.server2.domain.background.controller.dto.BackgroundResponse;
 import se.salt.server2.domain.background.mapper.BackgroundMapper;
 import se.salt.server2.domain.background.models.BackgroundEntity;
-import se.salt.server2.domain.background.models.BootcampCourse;
 import se.salt.server2.domain.background.repository.BackgroundRepository;
+import se.salt.server2.domain.developer.models.Bootcamp;
 import se.salt.server2.exception.BackgroundDoesNotExistException;
 
 import java.util.UUID;
@@ -41,12 +41,8 @@ public class BackgroundService {
             background.setLastName(backgroundRequest.lastName());
         }
 
-        if(backgroundRequest.emailAddress() != null ) {
-            background.setEmailAddress(backgroundRequest.emailAddress());
-        }
-
         if(backgroundRequest.bootcampCourse() != null ) {
-            background.setBootcampCourse(BootcampCourse.valueOf(backgroundRequest.bootcampCourse()));
+            background.setBootcamp(Bootcamp.valueOf(backgroundRequest.bootcampCourse()));
         }
 
         if(backgroundRequest.githubUser() != null ) {

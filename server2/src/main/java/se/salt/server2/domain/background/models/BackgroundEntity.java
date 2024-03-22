@@ -2,6 +2,8 @@ package se.salt.server2.domain.background.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import se.salt.server2.domain.account.models.AccountEntity;
+import se.salt.server2.domain.developer.models.Bootcamp;
 
 import java.util.UUID;
 
@@ -24,9 +26,10 @@ public class BackgroundEntity {
 
     String githubUser;
 
-    String emailAddress;
-
     @Enumerated(EnumType.STRING)
-    BootcampCourse bootcampCourse;
+    Bootcamp bootcamp;
 
+    @OneToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private AccountEntity account;
 }

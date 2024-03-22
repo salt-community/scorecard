@@ -2,7 +2,6 @@ package se.salt.server2.domain.assignment.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import se.salt.server2.domain.developer.models.DeveloperEntity;
 
 import java.util.UUID;
 
@@ -22,8 +21,4 @@ public class AssignmentEntity {
     String description;
     @Enumerated(EnumType.STRING)
     AssignmentCategory category;
-
-    @ManyToOne
-    @JoinColumn(name = "developer_id")
-    private DeveloperEntity developer;
 }

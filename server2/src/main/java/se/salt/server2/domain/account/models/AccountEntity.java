@@ -1,10 +1,8 @@
 package se.salt.server2.domain.account.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import se.salt.server2.domain.background.models.BackgroundEntity;
 
 import java.util.UUID;
 
@@ -21,4 +19,8 @@ public class AccountEntity {
 
     @Setter
     String emailAddress;
+
+    @Setter
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private BackgroundEntity background;
 }

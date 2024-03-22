@@ -19,29 +19,15 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 public class AssignmentController {
     private final AssignmentService assignmentService;
 
-    @PostMapping
+    @PostMapping("/{accountId}")
     @ResponseStatus(CREATED)
-    public AssignmentResponse createAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.createAssignment(assignmentRequest);
+    public AssignmentResponse createAssignment(@PathVariable UUID accountId, @RequestBody AssignmentRequest assignmentRequest) {
+        return assignmentService.createAssignment(accountId, assignmentRequest);
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public AssignmentResponses getAssignments() {
         return assignmentService.getAllAssignments();
-    }
-
-    @GetMapping(
-            path = "/{assignmentId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AssignmentResponse getAssignment(@PathVariable("assignmentId") UUID id) {
-        return assignmentService.getAssignmentById(id);
-    }
-
-    @GetMapping(
-            path = "/developer/{developerId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AssignmentResponses getAssignmentsByDeveloperId(@PathVariable("developerId") UUID id) {
-        return assignmentService.getAssignmentsByDeveloperId(id);
     }
 
     @PutMapping(path = "/{assignmentId}")

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import se.salt.server2.domain.scorecard.controller.dto.ScorecardResponse;
 import se.salt.server2.domain.scorecard.service.ScorecardService;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,9 +20,9 @@ public class ScorecardController {
     private final ScorecardService scorecardService;
 
     @GetMapping(
-            path = "/{developerId}",
+            path = "/{accountId}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ScorecardResponse getScorecardByDeveloperId(@PathVariable("developerId") UUID id) {
-        return scorecardService.getScorecardByDeveloperId(id);
+    public ScorecardResponse getScorecardByAccountId(@PathVariable("accountId") UUID id) {
+        return scorecardService.getScorecardByAccountId(id);
     }
 }

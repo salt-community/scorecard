@@ -1,6 +1,6 @@
 "use client";
 import { Divider } from "@nextui-org/react";
-import { Developer, getScorecardByDeveloperId } from "@/server";
+import { Developer, getScorecardByAccountId } from "@/server";
 import SaltScore from "./SaltScore";
 import { useEffect, useState } from "react";
 import { Assignment } from "@/app/components/ListAssignmentsForAccount";
@@ -14,8 +14,8 @@ const ScoreCardBody = ({ developer }: ScoreCardBodyProps) => {
 
   useEffect(() => {
     const fetchScoreCard = async () => {
-      const response = await getScorecardByDeveloperId(developer.developerId);
-      setSaltScores(response.assignmentResponses.assignmentResponseList);
+      const response = await getScorecardByAccountId(developer.developerId);
+      setSaltScores(response.assignmentResponseList);
     };
     fetchScoreCard();
   }, []);

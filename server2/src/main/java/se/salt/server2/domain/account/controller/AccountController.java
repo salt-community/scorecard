@@ -38,6 +38,13 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
+    @GetMapping(
+            path = "/non-dev",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AccountResponses getAllNonDeveloperAccounts() {
+        return accountService.getAllNonDeveloperAccounts();
+    }
+
     @PutMapping(path = "/{accountId}")
     public AccountResponse updateAccount(@PathVariable("accountId") UUID id, @RequestBody AccountRequest accountRequest) {
         return accountService.updateAccountById(id, accountRequest);

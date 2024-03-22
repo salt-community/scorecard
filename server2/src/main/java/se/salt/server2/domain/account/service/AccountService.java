@@ -32,6 +32,10 @@ public class AccountService {
         return accountMapper.mapToAccountResponses(accountRepository.findAll());
     }
 
+    public AccountResponses getAllNonDeveloperAccounts() {
+        return accountMapper.mapToAccountResponses(accountRepository.findAllNonDevelopers());
+    }
+
     public AccountResponse updateAccountById(UUID accountId, AccountRequest accountRequest) {
         AccountEntity account = accountRepository.findById(accountId).orElseThrow(() -> new AccountDoesNotExistException(accountId));
         account.setEmailAddress(accountRequest.emailAddress());
