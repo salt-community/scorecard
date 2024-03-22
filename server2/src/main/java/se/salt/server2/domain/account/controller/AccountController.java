@@ -41,8 +41,8 @@ public class AccountController {
     @GetMapping(
             path = "/non-dev",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AccountResponses getAllAccountsExceptDevelopers() {
-        return accountService.getAllAccountsExceptDevelopers();
+    public AccountResponses getAllNonDeveloperAccounts() {
+        return accountService.getAllNonDeveloperAccounts();
     }
 
     @PutMapping(path = "/{accountId}")

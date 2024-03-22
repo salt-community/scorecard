@@ -32,9 +32,8 @@ public class AccountService {
         return accountMapper.mapToAccountResponses(accountRepository.findAll());
     }
 
-    // TODO: To implement
-    public AccountResponses getAllAccountsExceptDevelopers() {
-        return getAllAccounts();
+    public AccountResponses getAllNonDeveloperAccounts() {
+        return accountMapper.mapToAccountResponses(accountRepository.findAllNonDevelopers());
     }
 
     public AccountResponse updateAccountById(UUID accountId, AccountRequest accountRequest) {
