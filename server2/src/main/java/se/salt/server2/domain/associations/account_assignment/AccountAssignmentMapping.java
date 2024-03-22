@@ -1,10 +1,7 @@
 package se.salt.server2.domain.associations.account_assignment;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 import se.salt.server2.domain.account.models.AccountEntity;
 import se.salt.server2.domain.assignment.models.AssignmentEntity;
@@ -15,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "account_assignment")
 public class AccountAssignmentMapping {

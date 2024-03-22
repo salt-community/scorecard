@@ -29,8 +29,17 @@ public class AssignmentService {
     private final AccountRepository accountRepository;
     private final AccountAssignmentRepository accountAssignmentRepository;
 
-    public AssignmentEntity createAssignment(AssignmentRequest assignmentRequest) {
-        return assignmentRepository.save(assignmentMapper.mapToAssignmentEntity(assignmentRequest));
+    public AssignmentResponse createAssignment(UUID accountId, AssignmentRequest assignmentRequest) {
+        AssignmentEntity assignment = assignmentRepository.save(assignmentMapper.mapToAssignmentEntity(assignmentRequest));
+        AccountEntity account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
+
+        AccountAssignmentMapping mapping = new AccountAssignmentMapping();
+        mapping.setAccount(account);
+        mapping.setAssignment(assignment);
+        mapping.setScore(assignmentRequest.score());
+        mapping = accountAssignmentRepository.save(mapping);
+
+        return mapToResponse(mapping);
     }
 
     public AssignmentResponse addAssignmentToDeveloper(AssignmentRequest assignmentRequest) {

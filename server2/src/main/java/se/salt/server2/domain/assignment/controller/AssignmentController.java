@@ -19,10 +19,10 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 public class AssignmentController {
     private final AssignmentService assignmentService;
 
-    @PostMapping
+    @PostMapping("/{accountId}")
     @ResponseStatus(CREATED)
-    public AssignmentResponse createAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.addAssignmentToDeveloper(assignmentRequest);
+    public AssignmentResponse createAssignment(@PathVariable UUID accountId, @RequestBody AssignmentRequest assignmentRequest) {
+        return assignmentService.createAssignment(accountId, assignmentRequest);
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
