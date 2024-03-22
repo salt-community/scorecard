@@ -20,7 +20,7 @@ type Assignment = {
 };
 
 export type AssignmentFormInfo = {
-  developerId: string;
+  accountId: string,
   title: string;
   score: number;
   description: string;
@@ -37,7 +37,7 @@ export const AddAssignmentForm = ({
   setAssignments: Function;
 }): ReactNode => {
   const [assignment, setAssignment] = useState<AssignmentFormInfo>({
-    developerId: developerId,
+    accountId: developerId,
     title: "",
     score: 0,
     description: "",
